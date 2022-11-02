@@ -5,7 +5,7 @@ import 'models.dart';
 
 final authInstance = FirebaseAuth.instance;
 String? userId = authInstance.currentUser?.uid;
-final userInfo = userCollection.doc(userId);
+DocumentReference userInfo = userCollection.doc(userId);
 
 class AuthService {
   // to check if the User is New

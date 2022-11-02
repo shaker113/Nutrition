@@ -73,9 +73,16 @@ class _SginUpState extends State<SginUp> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "SGIN UP",
-                                style: customTextStyle.labelMedium,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "SGIN UP",
+                                    style: customTextStyle.labelMedium,
+                                  ),
+                                  backButton(context),
+                                ],
                               ),
                               addVerticalSpace(10),
                               CustomTextfield(

@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
           "sgin up": (context) => const SginUp(),
           "welcome": (context) => const Welcome(),
           "homepage": (context) => const Homepage(),
+          "password reset": (context) => const PasswordResetPage(),
         },
         theme: ThemeData(
             // fontFamily:

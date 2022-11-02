@@ -59,8 +59,8 @@ class _CustomTextfieldState extends State<CustomTextfield> {
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+        errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: customRed),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
