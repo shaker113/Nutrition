@@ -29,7 +29,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: widget.myFocusNode,
-      style: customTextStyle.labelMedium,
+      style: customTextStyle.labelSmall,
       controller: widget.theController,
       textInputAction: TextInputAction.next,
       validator: widget.validator,

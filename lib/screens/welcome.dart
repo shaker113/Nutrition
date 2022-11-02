@@ -27,9 +27,9 @@ class Welcome extends StatelessWidget {
             Text("Sign in to continue", style: customTextStyle.labelMedium),
             GradientButton(
                 theFunction: () {
-                  Navigator.popAndPushNamed(
+                  Navigator.pushNamed(
                     context,
-                    "log in",
+                    "sgin in",
                   );
                 },
                 theText: "log in"),
