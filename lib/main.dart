@@ -14,14 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           "log in": (context) => const LogIn(),
           "welcome": (context) => const Welcome(),
         },
-        theme: ThemeData(
-            // fontFamily:
-            // primarySwatch: Colors.blue,
-            ),
         home: const Welcome());
   }
 }
