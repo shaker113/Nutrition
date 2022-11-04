@@ -4,7 +4,8 @@ import 'package:page_transition/page_transition.dart';
 import '../data/data.dart';
 import '../widgets/widgets.dart';
 import 'package:lottie/lottie.dart';
-import 'screens.dart';import 'package:lottie/lottie.dart';
+import 'screens.dart';
+import 'package:lottie/lottie.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -81,10 +82,6 @@ class Welcome extends StatelessWidget {
           ],
         ),
       ),
-    )
-
-        // Column(
-
-        );
+    );
   }
 }

@@ -76,7 +76,7 @@ class _LogInState extends State<LogIn> {
                                 style: customTextStyle.labelMedium,
                               ),
                               backButton(context),
-                            ], 
+                            ],
                           ),
                           addVerticalSpace(5),
                           CustomTextfield(
@@ -140,8 +140,8 @@ class _LogInState extends State<LogIn> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
