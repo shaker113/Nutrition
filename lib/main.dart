@@ -7,7 +7,6 @@ import 'models/models.dart';
 import 'screens/screens.dart';
 
 bool? isLogin;
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
@@ -25,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           "sgin in": (context) => const LogIn(),
           "sgin up": (context) => const SginUp(),
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             // fontFamily:
             // primarySwatch: Colors.blue,
             ),
-        home: Welcome()
+        home: const Welcome()
         // isLogin == true ? const Homepage() : const Welcome()
         );
   }

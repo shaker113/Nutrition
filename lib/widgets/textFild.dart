@@ -38,7 +38,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         label: Text(widget.label),
-        errorStyle: TextStyle(color: customRed),
+        errorStyle: TextStyle(color: customRed, fontSize: 13),
         labelStyle: customTextStyle.labelSmall,
         suffixIcon: widget.visbleText ?? false
             ? IconButton(

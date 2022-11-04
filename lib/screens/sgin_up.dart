@@ -1,7 +1,9 @@
 import 'dart:ui';
 import 'package:fina/models/models.dart';
+import 'package:fina/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import '../data/data.dart';
 import '../widgets/widgets.dart';
 
@@ -26,133 +28,124 @@ class _SginUpState extends State<SginUp> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image(
-              image: const AssetImage(backGroundImage),
-              alignment: Alignment.center,
-              width: screenWidth,
+            Container(
+              alignment: Alignment.bottomCenter,
               height: screenHeigth,
-              fit: BoxFit.cover,
+              width: screenWidth,
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  colors: [backgrounColor, backgrounColor2],
+                  center: Alignment.bottomLeft,
+                  radius: 2,
+                ),
+              ),
+              // child: Lottie.asset(cleanVegetable, width: screenWidth),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth! * 0.07),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  color: Colors.transparent,
-                  child: Stack(
-                    children: [
-                      BackdropFilter(
-                        filter: ImageFilter.blur(
-                          sigmaX: 4.0,
-                          sigmaY: 4.0,
-                        ),
-                        child: Container(),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 4.0,
+                    sigmaY: 4.0,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.black.withOpacity(0.15),
+                          Colors.black.withOpacity(0.05),
+                        ],
                       ),
-                      FittedBox(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                                color: Colors.black.withOpacity(0.13)),
-                            gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Colors.black.withOpacity(0.15),
-                                  Colors.black.withOpacity(0.05),
-                                ]),
-                          ),
-                        ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 15,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 15),
-                        child: Form(
-                          key: myFormKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "SGIN UP",
-                                    style: customTextStyle.labelMedium,
-                                  ),
-                                  backButton(context),
-                                ],
-                              ),
-                              addVerticalSpace(10),
-                              CustomTextfield(
-                                inputType: TextInputType.name,
-                                theController: name,
-                                label: "Name",
-                                validator: (p0) => nameValidator(p0),
-                              ),
-                              addVerticalSpace(5),
-                              CustomTextfield(
-                                theController: email,
-                                label: "Email",
-                                inputType: TextInputType.emailAddress,
-                                validator: (p0) => emailValidator(p0),
-                              ),
-                              addVerticalSpace(10),
-                              CustomTextfield(
-                                theController: password,
-                                label: "Password",
-                                visbleText: true,
-                                validator: (p0) => passwordValidator(p0),
-                              ),
-                              addVerticalSpace(10),
-                              CustomTextfield(
-                                theController: confirmPassword,
-                                label: "Confirm password",
-                                visbleText: true,
-                                validator: (p0) =>
-                                    confirmPasswordValidator(p0, password.text),
-                              ),
-                              addVerticalSpace(10),
-                              GradientButton(
-                                  theFunction: () {
-                                    if (myFormKey.currentState!.validate()) {
-                                      sginUpWithEmail();
-                                    }
-                                  },
-                                  theText: "Sgin up"),
-                              addVerticalSpace(15),
-                              const OrRow(),
-                              addVerticalSpace(15),
-                              const GoogleButton(),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "already have an account?",
-                                    style: customTextStyle.labelSmall,
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.popAndPushNamed(
-                                          context, "sgin in");
-                                    },
-                                    child: Text(
-                                      "SIGN IN",
-                                      style: TextStyle(
-                                        color: customBlue,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                      child: Form(
+                        key: myFormKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "SGIN UP",
+                                  style: customTextStyle.labelMedium,
+                                ),
+                                backButton(context),
+                              ],
+                            ),
+                            addVerticalSpace(10),
+                            CustomTextfield(
+                              inputType: TextInputType.name,
+                              theController: name,
+                              label: "Name",
+                              validator: (p0) => nameValidator(p0),
+                            ),
+                            addVerticalSpace(5),
+                            CustomTextfield(
+                              theController: email,
+                              label: "Email",
+                              inputType: TextInputType.emailAddress,
+                              validator: (p0) => emailValidator(p0),
+                            ),
+                            addVerticalSpace(10),
+                            CustomTextfield(
+                              theController: password,
+                              label: "Password",
+                              visbleText: true,
+                              validator: (p0) => passwordValidator(p0),
+                            ),
+                            addVerticalSpace(10),
+                            CustomTextfield(
+                              theController: confirmPassword,
+                              label: "Confirm password",
+                              visbleText: true,
+                              validator: (p0) =>
+                                  confirmPasswordValidator(p0, password.text),
+                            ),
+                            addVerticalSpace(10),
+                            LongButton(
+                                theFunction: () {
+                                  if (myFormKey.currentState!.validate()) {
+                                    sginUpWithEmail();
+                                  }
+                                },
+                                theText: "Sgin up"),
+                            addVerticalSpace(15),
+                            const OrRow(),
+                            addVerticalSpace(15),
+                            const GoogleButton(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "already have an account?",
+                                  style: customTextStyle.labelSmall,
+                                ),
+                                CustomTextButton(
+                                  theText: "SIGN IN",
+                                  theFunction: () => Navigator.pushReplacement(
+                                    context,
+                                    PageTransition(
+                                      child: const LogIn(),
+                                      type: PageTransitionType.bottomToTop,
                                     ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),

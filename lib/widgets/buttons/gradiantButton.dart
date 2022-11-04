@@ -15,10 +15,17 @@ class GradientButton extends StatelessWidget {
       height: 40,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(9),
+        // border: Border.all(
+        //   color: backgrounColor2.withOpacity(0.1),
+        // ),
         gradient: RadialGradient(
           radius: 6,
           center: Alignment.center,
-          colors: [buttonsColor, backgrounColor2.withOpacity(0.4)],
+          colors: [
+            buttonsColor,
+            backgrounColor2.withOpacity(0.1),
+            Colors.transparent
+          ],
         ),
       ),
       child: ElevatedButton(

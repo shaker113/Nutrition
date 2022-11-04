@@ -23,78 +23,72 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image(
-              image: const AssetImage(backGroundImage),
-              alignment: Alignment.center,
-              width: screenWidth,
+            Container(
+              alignment: Alignment.bottomCenter,
               height: screenHeigth,
-              fit: BoxFit.cover,
+              width: screenWidth,
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  colors: [backgrounColor, backgrounColor2],
+                  center: Alignment.bottomRight,
+                  radius: 2,
+                ),
+              ),
+              // child: Lottie.asset(cleanVegetable, width: screenWidth),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth! * 0.07),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  color: Colors.transparent,
-                  child: Stack(
-                    children: [
-                      BackdropFilter(
-                        filter: ImageFilter.blur(
-                          sigmaX: 4.0,
-                          sigmaY: 4.0,
-                        ),
-                        child: Container(),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 4.0,
+                    sigmaY: 4.0,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.black.withOpacity(0.15),
+                          Colors.black.withOpacity(0.05),
+                        ],
                       ),
-                      FittedBox(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                                color: Colors.black.withOpacity(0.13)),
-                            gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Colors.black.withOpacity(0.15),
-                                  Colors.black.withOpacity(0.05),
-                                ]),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Reset you password",
+                                style: customTextStyle.labelMedium,
+                              ),
+                              backButton(context),
+                            ],
                           ),
-                        ),
+                          addVerticalSpace(5),
+                          CustomTextfield(
+                            theController: email,
+                            label: "Email",
+                            inputType: TextInputType.emailAddress,
+                          ),
+                          addVerticalSpace(10),
+                          LongButton(
+                              theFunction: () {
+                                passwordReset();
+                              },
+                              theText: "Password reset"),
+                          addVerticalSpace(15),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Reset you password",
-                                  style: customTextStyle.labelMedium,
-                                ),
-                                backButton(context),
-                              ],
-                            ),
-                            addVerticalSpace(5),
-                            CustomTextfield(
-                              theController: email,
-                              label: "Email",
-                              inputType: TextInputType.emailAddress,
-                            ),
-                            addVerticalSpace(10),
-                            GradientButton(
-                                theFunction: () {
-                                  passwordReset();
-                                },
-                                theText: "Password reset"),
-                            addVerticalSpace(15),
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),

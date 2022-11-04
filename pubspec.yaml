@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: ^4.0.3
   firebase_storage: ^11.0.3
   google_sign_in: ^5.4.2
+  lottie: ^1.4.3
+  page_transition: ^2.0.9
 
 dev_dependencies:
   flutter_test:
