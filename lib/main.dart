@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           "sgin in": (context) => const LogIn(),
           "sgin up": (context) => const SginUp(),
           "welcome": (context) => const Welcome(),
-          "homepage": (context) => const Homepage(),
+          // "homepage": (context) => const Homepage(),
           "password reset": (context) => const PasswordResetPage(),
         },
         theme: ThemeData(

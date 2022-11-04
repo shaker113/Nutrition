@@ -58,14 +58,14 @@ class Welcome extends StatelessWidget {
             addVerticalSpace(10),
             CustomTextButton(
               theText: "CREATE ACCOUNT",
-             theFunction: () =>  Navigator.push(
+              theFunction: () => Navigator.push(
                 context,
                 PageTransition(
                   child: const SginUp(),
                   type: PageTransitionType.rightToLeft,
                 ),
               ),
-            )
+            ),
             IconButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
