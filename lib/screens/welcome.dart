@@ -1,15 +1,10 @@
-import 'package:fina/screens/login.dart';
 import 'package:fina/screens/sgin_up.dart';
-import 'package:fina/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../data/data.dart';
 import '../widgets/widgets.dart';
 import 'package:lottie/lottie.dart';
-
 import 'screens.dart';
-import 'sgin_up.dart';
-
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
 
