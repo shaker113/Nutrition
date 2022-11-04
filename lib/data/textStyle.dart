@@ -21,4 +21,8 @@ TextTheme customTextStyle = const TextTheme(
     color: Colors.white,
     fontWeight: FontWeight.w600,
   ),
+  bodySmall: TextStyle(
+    fontSize: 17,
+    fontWeight: FontWeight.bold,
+  ),
 );

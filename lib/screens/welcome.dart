@@ -74,7 +74,14 @@ class Welcome extends StatelessWidget {
                     },
                   ));
                 },
-                icon: Icon(Icons.skip_next))
+                icon: Icon(Icons.skip_next)),
+            GlassButton(
+              isSelected: true,
+              theText: "theText",
+              height: 111,
+              width: 222,
+              theFunction: () {},
+            )
           ],
         ),
       ),
