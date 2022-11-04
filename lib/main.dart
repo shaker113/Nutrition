@@ -19,10 +19,6 @@ class MyApp extends StatelessWidget {
           "log in": (context) => const LogIn(),
           "welcome": (context) => const Welcome(),
         },
-        theme: ThemeData(
-            // fontFamily:
-            // primarySwatch: Colors.blue,
-            ),
         home: const Welcome());
   }
 }

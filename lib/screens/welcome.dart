@@ -2,6 +2,7 @@ import 'package:fina/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import '../data/data.dart';
 import '../widgets/widgets.dart';
+import 'package:lottie/lottie.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -34,15 +35,6 @@ class Welcome extends StatelessWidget {
                   );
                 },
                 theText: "log in"),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return Home_Page();
-                    },
-                  ));
-                },
-                icon: Icon(Icons.skip_next))
           ],
         ),
       ),
