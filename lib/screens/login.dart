@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:lottie/lottie.dart';
 import '../data/data.dart';
 import '../widgets/widgets.dart';
 import 'sgin_up.dart';
@@ -139,8 +140,8 @@ class _LogInState extends State<LogIn> {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

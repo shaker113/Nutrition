@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         routes: {
           "sgin in": (context) => const LogIn(),
           "sgin up": (context) => const SginUp(),
@@ -32,10 +33,6 @@ class MyApp extends StatelessWidget {
           "homepage": (context) => const Home_Page(),
           "password reset": (context) => const PasswordResetPage(),
         },
-        theme: ThemeData(
-            // fontFamily:
-            // primarySwatch: Colors.blue,
-            ),
         home: const Welcome()
         // isLogin == true ? const Homepage() : const Welcome()
         );
