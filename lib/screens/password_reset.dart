@@ -1,26 +1,21 @@
 import 'dart:ui';
 
-import 'package:fina/models/models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:lottie/lottie.dart';
+
 import '../data/data.dart';
 import '../widgets/widgets.dart';
-import 'sgin_up.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({super.key});
+class PasswordResetPage extends StatefulWidget {
+  const PasswordResetPage({super.key});
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<PasswordResetPage> createState() => _PasswordResetPageState();
 }
 
-TextEditingController password = TextEditingController();
-TextEditingController email = TextEditingController();
+class _PasswordResetPageState extends State<PasswordResetPage> {
+  TextEditingController email = TextEditingController();
 
-class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +34,7 @@ class _LogInState extends State<LogIn> {
                   radius: 2,
                 ),
               ),
-              child: Lottie.asset(cleanVegetable, width: screenWidth),
+              // child: Lottie.asset(cleanVegetable, width: screenWidth),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth! * 0.07),
@@ -72,7 +67,7 @@ class _LogInState extends State<LogIn> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "LOGIN",
+                                "Reset you password",
                                 style: customTextStyle.labelMedium,
                               ),
                               backButton(context),
@@ -85,54 +80,12 @@ class _LogInState extends State<LogIn> {
                             inputType: TextInputType.emailAddress,
                           ),
                           addVerticalSpace(10),
-                          CustomTextfield(
-                            theController: password,
-                            label: "Password",
-                            visbleText: true,
-                          ),
-                          addVerticalSpace(10),
                           LongButton(
                               theFunction: () {
-                                sginInWithEmail();
+                                passwordReset();
                               },
-                              theText: "Login"),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, "password reset");
-                            },
-                            child: Text(
-                              "Forget password?",
-                              textAlign: TextAlign.end,
-                              style: TextStyle(
-                                color: customRed,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
+                              theText: "Password reset"),
                           addVerticalSpace(15),
-                          const OrRow(),
-                          addVerticalSpace(15),
-                          const GoogleButton(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "dont have an account?",
-                                style: customTextStyle.labelSmall,
-                              ),
-                              CustomTextButton(
-                                theText: "SIGN UP",
-                                theFunction: () => Navigator.pushReplacement(
-                                  context,
-                                  PageTransition(
-                                    child: const SginUp(),
-                                    type: PageTransitionType.bottomToTop,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
                         ],
                       ),
                     ),
@@ -146,16 +99,17 @@ class _LogInState extends State<LogIn> {
     );
   }
 
-  Future sginInWithEmail() async {
+  Future passwordReset() async {
     try {
-      await authInstance.signInWithEmailAndPassword(
-          email: email.text, password: password.text);
-
-      Navigator.pushNamed(context, "homepage");
-
-      CustomSnakBar("signed in successfully", context);
-    } on FirebaseAuthException catch (e) {
-      CustomSnakBar(e.message, context);
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
+      CustomSnakBar(
+          "a password reset email has been sent to ${email.text}", context);
+      Navigator.pushNamed(context, "sgin in");
+    } catch (e) {
+      CustomSnakBar(
+          "Something went wrong! please make sure you entered the correct email",
+          context);
+      print(e);
     }
   }
 }

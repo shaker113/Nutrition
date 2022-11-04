@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-var selectedCard = '';
+bool selectedCard = true;
 
-Widget buildInfoCard(String cardTiltle, String info, String unit) {
+Widget buildInfoCard(
+    String cardTiltle, String info, String unit, IconData iconData) {
   return InkWell(
     onTap: () {
       selectedCard;
@@ -12,53 +13,47 @@ Widget buildInfoCard(String cardTiltle, String info, String unit) {
       curve: Curves.easeIn,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: cardTiltle == selectedCard ? Color(0xFFA9BEE) : Colors.white,
+          color: selectedCard ? Color(0xFFA9BEE) : Colors.white,
           border: Border.all(
-              color: cardTiltle == selectedCard
+              color: selectedCard
                   ? Colors.transparent
-                  : Colors.grey.withOpacity(0.3),
+                  : Colors.grey.withOpacity(0.9),
               width: 0.75)),
       height: 100,
       width: 100,
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 8, left: 15),
-              child: Text(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
                 cardTiltle,
                 style: TextStyle(
                     fontSize: 12,
-                    color: cardTiltle == selectedCard
-                        ? Colors.white
-                        : Colors.grey.withOpacity(0.7)),
+                    color: selectedCard ? Colors.white : Colors.black),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 15, bottom: 8),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      info,
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: cardTiltle == selectedCard
-                              ? Colors.white
-                              : Colors.black),
-                    ),
-                    Text(
-                      unit,
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: cardTiltle == selectedCard
-                              ? Colors.white
-                              : Colors.black),
-                    )
-                  ]),
-            )
-          ]),
+              Icon(iconData),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(
+                  info,
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: cardTiltle == selectedCard
+                          ? Colors.white
+                          : Colors.black),
+                ),
+                Text(
+                  unit,
+                  style: TextStyle(
+                      fontSize: 12,
+                      color: cardTiltle == selectedCard
+                          ? Colors.white
+                          : Colors.black),
+                )
+              ])
+            ]),
+      ),
     ),
   );
 }

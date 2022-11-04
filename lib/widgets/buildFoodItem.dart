@@ -1,3 +1,4 @@
+import 'package:fina/data/data.dart';
 import 'package:fina/screens/details_Page.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 Widget buildFoodItem(
     String imgPath, String foodName, String foodCalories, context) {
   return Padding(
-    padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
     child: InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
@@ -33,31 +34,25 @@ Widget buildFoodItem(
                   children: [
                     Text(
                       foodName,
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                      style: customTextStyle.bodySmall,
                     ),
                     Text(
                       foodCalories,
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey),
+                      style: customTextStyle.bodySmall,
                     )
                   ],
                 )
               ],
             ),
           ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 90),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.add,
-                    color: Colors.black,
-                  )),
-            ),
+          Padding(
+            padding: const EdgeInsets.only(left: 90),
+            child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.add,
+                  color: Colors.black,
+                )),
           ),
         ],
       ),

@@ -15,36 +15,39 @@ class _Home_PageState extends State<Home_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF21BFBD),
+      backgroundColor: const Color(0xFF21BFBD),
       body: ListView(children: [
         Padding(
-          padding: EdgeInsets.only(top: 15, left: 10),
+          padding: const EdgeInsets.only(top: 15, left: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  )),
-              Container(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
                 width: 125,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.filter_list,
-                          color: Colors.white,
-                        )),
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.filter_list,
+                        color: Colors.white,
+                      ),
+                    ),
                     IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.menu,
-                          color: Colors.white,
-                        )),
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.menu,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -52,10 +55,10 @@ class _Home_PageState extends State<Home_Page> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 40),
+          padding: const EdgeInsets.only(left: 40),
           child: Row(
             children: [
-              Text(
+              const Text(
                 "Healthy",
                 style: TextStyle(
                     fontSize: 25,
@@ -63,7 +66,7 @@ class _Home_PageState extends State<Home_Page> {
                     color: Colors.white),
               ),
               addHorizantalSpace(10),
-              Text(
+              const Text(
                 "Food",
                 style: TextStyle(fontSize: 25, color: Colors.white),
               )
@@ -73,16 +76,16 @@ class _Home_PageState extends State<Home_Page> {
         addVerticalSpace(40),
         Container(
           height: screenHeigth! - 150,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(75))),
           child: ListView(
             primary: false,
-            padding: EdgeInsets.only(left: 25, right: 20),
+            padding: const EdgeInsets.only(left: 25, right: 20),
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 45),
-                child: Container(
+                padding: const EdgeInsets.only(top: 45),
+                child: SizedBox(
                   height: screenHeigth! - 300,
                   child: ListView(children: [
                     buildFoodItem(

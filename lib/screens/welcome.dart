@@ -1,7 +1,10 @@
-import 'package:fina/screens/homepage.dart';
+import 'package:fina/screens/sgin_up.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import '../data/data.dart';
 import '../widgets/widgets.dart';
+import 'package:lottie/lottie.dart';
+import 'screens.dart';
 import 'package:lottie/lottie.dart';
 
 class Welcome extends StatelessWidget {
@@ -13,28 +16,69 @@ class Welcome extends StatelessWidget {
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
+        alignment: Alignment.center,
         width: screenWidth,
         height: screenHeigth,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(backGroundImage), fit: BoxFit.cover),
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            colors: [backgrounColor, backgrounColor2],
+            center: Alignment.bottomLeft,
+            radius: 2,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Welcome to this app",
-              style: customTextStyle.labelMedium,
+            Text("Welcome \n To Nutution Application",
+                textAlign: TextAlign.center,
+                style: customTextStyle.headlineLarge),
+            addVerticalSpace(10),
+            Lottie.asset(dietImage, fit: BoxFit.cover, width: screenWidth),
+            addVerticalSpace(10),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                  "The Application will help you to make best diet that you want",
+                  textAlign: TextAlign.center,
+                  style: customTextStyle.headlineMedium),
             ),
-            Text("Sign in to continue", style: customTextStyle.labelMedium),
-            GradientButton(
-                theFunction: () {
-                  Navigator.popAndPushNamed(
-                    context,
-                    "log in",
-                  );
+            addVerticalSpace(40),
+            LongButton(
+                theFunction: () => Navigator.push(
+                      context,
+                      PageTransition(
+                        child: const LogIn(),
+                        type: PageTransitionType.rightToLeft,
+                      ),
+                    ),
+                theText: "LOG IN"),
+            addVerticalSpace(10),
+            CustomTextButton(
+              theText: "CREATE ACCOUNT",
+              theFunction: () => Navigator.push(
+                context,
+                PageTransition(
+                  child: const SginUp(),
+                  type: PageTransitionType.rightToLeft,
+                ),
+              ),
+            ),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return Home_Page();
+                    },
+                  ));
                 },
-                theText: "log in"),
+                icon: Icon(Icons.skip_next)),
+            GlassButton(
+              isSelected: true,
+              theText: "theText",
+              height: 111,
+              width: 222,
+              theFunction: () {},
+            )
           ],
         ),
       ),

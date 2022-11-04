@@ -29,7 +29,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: widget.myFocusNode,
-      style: customTextStyle.labelMedium,
+      style: customTextStyle.labelSmall,
       controller: widget.theController,
       textInputAction: TextInputAction.next,
       validator: widget.validator,
@@ -38,7 +38,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         label: Text(widget.label),
-        errorStyle: TextStyle(color: customRed),
+        errorStyle: TextStyle(color: customRed, fontSize: 13),
         labelStyle: customTextStyle.labelSmall,
         suffixIcon: widget.visbleText ?? false
             ? IconButton(
@@ -59,8 +59,8 @@ class _CustomTextfieldState extends State<CustomTextfield> {
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+        errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: customRed),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
