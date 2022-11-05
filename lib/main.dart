@@ -1,3 +1,4 @@
+import 'package:fina/screens/info_screen.dart';
 import 'package:fina/screens/sgin_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           "sgin up": (context) => const SginUp(),
           "welcome": (context) => const Welcome(),
           "homepage": (context) => const Homepage(),
+          "infoscreen": (context) => const InfoScreen(),
         },
         theme: ThemeData(
             // fontFamily:
