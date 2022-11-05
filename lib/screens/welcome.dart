@@ -2,10 +2,10 @@ import 'package:fina/screens/sgin_up.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../data/data.dart';
+import '../models/models.dart';
 import '../widgets/widgets.dart';
 import 'package:lottie/lottie.dart';
 import 'screens.dart';
-import 'package:lottie/lottie.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -77,7 +77,11 @@ class Welcome extends StatelessWidget {
               theText: "theText",
               height: 111,
               width: 222,
-              theFunction: () {},
+              theFunction: () async {
+                healthyCategoryCollection
+                    .doc("EbRWZs8E7hW43jXWlhSO")
+                    .update({'name': 'Salmon bowl'});
+              },
             )
           ],
         ),

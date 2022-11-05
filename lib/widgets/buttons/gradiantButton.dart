@@ -21,11 +21,7 @@ class GradientButton extends StatelessWidget {
         gradient: RadialGradient(
           radius: 6,
           center: Alignment.center,
-          colors: [
-            buttonsColor,
-            backgrounColor2.withOpacity(0.1),
-            Colors.transparent
-          ],
+          colors: [buttonsColor, backgrounColor],
         ),
       ),
       child: ElevatedButton(

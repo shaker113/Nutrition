@@ -1,10 +1,7 @@
-import 'package:fina/data/data.dart';
+import 'package:fina/data/colors.dart';
 import 'package:fina/widgets/ListView.dart';
-import 'package:fina/widgets/buildFoodItem.dart';
-import 'package:fina/widgets/spacing.dart';
-import 'package:flutter/material.dart';
 
-import '../widgets/buildInfoCard.dart';
+import 'package:flutter/material.dart';
 
 class Details_Page extends StatefulWidget {
   // const Details_Page({super.key});
@@ -32,30 +29,32 @@ class _Details_PageState extends State<Details_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFF7A9BEE),
+        backgroundColor: backgrounColor2,
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-              )),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+            ),
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Text(
+          title: const Text(
             "Details",
             style: TextStyle(fontSize: 18, color: Colors.white),
           ),
           centerTitle: true,
           actions: [
             IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.more_horiz,
-                  color: Colors.white,
-                ))
+              onPressed: () {},
+              icon: const Icon(
+                Icons.more_horiz,
+                color: Colors.white,
+              ),
+            )
           ],
         ),
         body: List_View(
@@ -65,5 +64,3 @@ class _Details_PageState extends State<Details_Page> {
         ));
   }
 }
-
-void selectCard(String cardTiltle) {}

@@ -25,4 +25,27 @@ TextTheme customTextStyle = const TextTheme(
     fontSize: 17,
     fontWeight: FontWeight.bold,
   ),
+  bodyMedium: TextStyle(
+    fontSize: 14,
+    color: Colors.black,
+  ),
+  bodyLarge: TextStyle(
+    fontSize: 12,
+    color: Colors.black,
+  ),
+  displaySmall: TextStyle(
+    fontSize: 15,
+    color: Colors.black,
+    fontWeight: FontWeight.w400,
+  ),
+  titleLarge: TextStyle(
+    fontSize: 25,
+    color: Colors.white,
+    fontWeight: FontWeight.w500,
+  ),
+  titleMedium: TextStyle(
+    color: Colors.black,
+    fontSize: 17,
+    fontWeight: FontWeight.w300,
+  ),
 );

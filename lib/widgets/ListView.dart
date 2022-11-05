@@ -24,11 +24,13 @@ class _List_ViewState extends State<List_View> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgrounColor2,
       body: ListView(
         children: [
           Stack(
             children: [
               Container(
+                alignment: Alignment.bottomCenter,
                 height: screenHeigth! - 82,
                 width: screenWidth!,
                 color: Colors.transparent,
@@ -53,6 +55,7 @@ class _List_ViewState extends State<List_View> {
                   tag: widget.heroTag,
                   child: Container(
                     decoration: BoxDecoration(
+                        shape: BoxShape.circle,
                         image: DecorationImage(
                             image: NetworkImage(widget.heroTag),
                             fit: BoxFit.cover)),
@@ -79,9 +82,7 @@ class _List_ViewState extends State<List_View> {
                       children: [
                         Text(
                           widget.foodCalories,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              color: Color.fromARGB(255, 199, 68, 68)),
+                          style: TextStyle(fontSize: 20, color: customRed),
                         ),
                         Container(
                           height: 25,
@@ -104,7 +105,7 @@ class _List_ViewState extends State<List_View> {
                                   width: 25,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(7),
-                                      color: const Color(0xFF7A9BEE)),
+                                      color: backgrounColor2),
                                   child: const Center(
                                     child: Icon(
                                       Icons.remove,
@@ -127,10 +128,10 @@ class _List_ViewState extends State<List_View> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(7),
                                       color: Colors.white),
-                                  child: const Center(
+                                  child: Center(
                                     child: Icon(
                                       Icons.add,
-                                      color: Color(0xFF7A9BEE),
+                                      color: backgrounColor2,
                                       size: 20,
                                     ),
                                   ),
@@ -147,16 +148,20 @@ class _List_ViewState extends State<List_View> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          buildInfoCard('WEIGHT', '300', 'G', Icons.abc),
-                          addHorizantalSpace(15),
-                          buildInfoCard('CALORIES', '344', "CAL",
-                              Icons.fire_extinguisher),
-                          addHorizantalSpace(15),
                           buildInfoCard(
-                              'VITAMINS', 'A, B6', "VIT", Icons.vibration),
-                          addHorizantalSpace(15),
-                          buildInfoCard(
-                              'AVAIL', 'NO', "AV", Icons.access_alarm_outlined),
+                              cardTiltle: 'WEIGHT',
+                              info: '300',
+                              unit: 'G',
+                              iconData: Icons.abc),
+                          // addHorizantalSpace(15),
+                          // buildInfoCard('CALORIES', '344', "CAL",
+                          //     Icons.fire_extinguisher),
+                          // addHorizantalSpace(15),
+                          // buildInfoCard(
+                          //     'VITAMINS', 'A, B6', "VIT", Icons.vibration),
+                          // addHorizantalSpace(15),
+                          // buildInfoCard(
+                          //     'AVAIL', 'NO', "AV", Icons.access_alarm_outlined),
                         ],
                       ),
                     ),
@@ -180,7 +185,6 @@ class _List_ViewState extends State<List_View> {
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
               )
