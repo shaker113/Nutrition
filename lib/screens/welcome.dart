@@ -1,3 +1,4 @@
+import 'package:fina/screens/dailyNeedCalculator.dart';
 import 'package:fina/screens/sgin_up.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -67,7 +68,7 @@ class Welcome extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return Home_Page();
+                      return DailyNeedCalculator();
                     },
                   ));
                 },
