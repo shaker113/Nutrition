@@ -1,3 +1,4 @@
+import 'package:fina/screens/info_screen.dart';
 import 'package:fina/screens/sgin_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           "welcome": (context) => const Welcome(),
           "homepage": (context) => const Home_Page(),
           "password reset": (context) => const PasswordResetPage(),
+          "infoscreen": (context) => const InfoScreen(),
         },
         home: const Welcome()
         // isLogin == true ? const Homepage() : const Welcome()

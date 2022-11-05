@@ -151,7 +151,7 @@ class _LogInState extends State<LogIn> {
       await authInstance.signInWithEmailAndPassword(
           email: email.text, password: password.text);
 
-      Navigator.pushNamed(context, "homepage");
+      Navigator.pushNamed(context, "infoscreen");
 
       CustomSnakBar("signed in successfully", context);
     } on FirebaseAuthException catch (e) {
