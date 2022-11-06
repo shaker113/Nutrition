@@ -38,7 +38,9 @@ class _Category_PageState extends State<Category_Page> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     icon: const Icon(
                       Icons.arrow_back_ios,
                       color: Colors.white,
@@ -73,7 +75,7 @@ class _Category_PageState extends State<Category_Page> {
               children: [
                 RichText(
                   text: TextSpan(
-                    text: widget.theTitle, //should be a variable
+                    text: widget.theTitle,
                     style: customTextStyle.headlineLarge,
                     children: [
                       TextSpan(
@@ -82,10 +84,12 @@ class _Category_PageState extends State<Category_Page> {
                       )
                     ],
                   ),
-                ), //healthyCategoryCollection shoull be a variable
-                AddButton(
-                  theCollectionReference: widget.theCollectionReference,
-                )
+                ),
+                isAdmin ?? false
+                    ? AddButton(
+                        theCollectionReference: widget.theCollectionReference,
+                      )
+                    : const SizedBox()
               ],
             ),
           ),

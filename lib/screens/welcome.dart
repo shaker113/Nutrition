@@ -64,37 +64,37 @@ class Welcome extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return DailyNeedCalculator();
-                    },
-                  ));
-                },
-                icon: Icon(Icons.skip_next)),
             // IconButton(
             //     onPressed: () {
             //       Navigator.push(context, MaterialPageRoute(
             //         builder: (context) {
-            //           return Home_Page();
+            //           return DailyNeedCalculator();
             //         },
             //       ));
             //     },
             //     icon: Icon(Icons.skip_next)),
-            GlassButton(
-              // isSelected: true,
-              theText: "Git started",
-              height: 50,
-              width: 222,
-              theFunction: () async {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const InfoScreen(),
-                    ));
-              },
-            )
+            // // IconButton(
+            // //     onPressed: () {
+            // //       Navigator.push(context, MaterialPageRoute(
+            // //         builder: (context) {
+            // //           return Home_Page();
+            // //         },
+            // //       ));
+            // //     },
+            // //     icon: Icon(Icons.skip_next)),
+            // GlassButton(
+            //   // isSelected: true,
+            //   theText: "Git started",
+            //   height: 50,
+            //   width: 222,
+            //   theFunction: () async {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => const InfoScreen(),
+            //         ));
+            //   },
+            // )
           ],
         ),
       ),
