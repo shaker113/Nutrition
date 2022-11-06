@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../data/data.dart';
 import '../widgets/widgets.dart';
@@ -34,7 +35,7 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                   radius: 2,
                 ),
               ),
-              // child: Lottie.asset(cleanVegetable, width: screenWidth),
+              child: Lottie.asset(lottieImage, width: screenWidth),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth! * 0.07),

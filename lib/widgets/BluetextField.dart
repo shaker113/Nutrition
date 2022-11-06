@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fina/data/data.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextfieldBlue extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextEditingController? theController;
-  final TextInputType? inputType;
+  final List<TextInputFormatter>? theFormater;
   final String label;
   final FocusNode? myFocusNode;
   final int? maxLines;
@@ -12,7 +13,7 @@ class CustomTextfieldBlue extends StatefulWidget {
   CustomTextfieldBlue(
       {super.key,
       this.validator,
-      this.inputType,
+      this.theFormater,
       this.maxLines,
       this.myFocusNode,
       required this.label,
@@ -35,6 +36,7 @@ class _CustomTextfieldBlueState extends State<CustomTextfieldBlue> {
       controller: widget.theController,
       textInputAction: TextInputAction.newline,
       validator: widget.validator,
+      inputFormatters: widget.theFormater,
       cursorColor: Colors.black,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),

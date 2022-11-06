@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:ui';
 
 import 'package:fina/models/models.dart';
@@ -5,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:lottie/lottie.dart';
 import '../data/data.dart';
 import '../widgets/widgets.dart';
 import 'sgin_up.dart';
