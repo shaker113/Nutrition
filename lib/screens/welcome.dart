@@ -39,7 +39,7 @@ class Welcome extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                  "The Application will help you to make best diet that you want",
+                  "The Application   hiii  will help you to make best diet that you want",
                   textAlign: TextAlign.center,
                   style: customTextStyle.headlineMedium),
             ),
