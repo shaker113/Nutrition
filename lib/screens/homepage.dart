@@ -1,6 +1,8 @@
 import 'package:fina/models/firestore_refrences.dart';
+import 'package:fina/models/is_admin.dart';
 import 'package:fina/widgets/drawer.dart';
 import 'package:fina/widgets/homePageWidget.dart';
+import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +20,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 127, 162, 245),
         title: const Text("Meals"),
+        actions: [isAdmin ?? false ? AddButton() : SizedBox()],
       ),
       drawer: const Drawer(
         child: MyDrawer(),
@@ -25,20 +28,27 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // CategoryBox(
-            //     imagURL:
-            //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLtwJW7HaHUS5Pgw7I69NUnDst5Qia_fTHMw&usqp=CAU",
-            //     title: "Vegan",
-            //     subtitle: "This category contains all the vegan food"),
             CategoryBox(
                 imagURL:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQSFia2nGN0UHvJvMhZBJQaJkxyp391IYfrQ&usqp=CAU",
+                    "https://www.healthyeating.org/images/default-source/home-0.0/nutrition-topics-2.0/general-nutrition-wellness/2-2-2-2foodgroups_vegetables_detailfeature.jpg?sfvrsn=226f1bc7_6",
+                title: "vegetables",
+                subtitle: "This category contains all the vegan food",
+                theCollectionReference: vegetablesCollection),
+            CategoryBox(
+                imagURL:
+                    "https://cdn-prod.medicalnewstoday.com/content/images/articles/315/315449/a-variety-of-red-meats.jpg",
                 title: "Meat",
                 subtitle: "This category contains all the meat food",
-                theCollectionReference: healthyCategoryCollection),
+                theCollectionReference: meatCollection),
             CategoryBox(
                 imagURL:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzh5LSN6dk17RIhp1NKFP8zZ_XC7zulFcIUtg38MYQJg&s",
+                    "https://www.eatforhealth.gov.au/sites/default/files/images/the_guidelines/lean_meats_food_group_75650673_8_web.jpg",
+                title: "White meat",
+                subtitle: "This category contains all the White meat food",
+                theCollectionReference: whiteMeatCollection),
+            CategoryBox(
+                imagURL:
+                    "https://www.healthyeating.org/images/default-source/home-0.0/nutrition-topics-2.0/general-nutrition-wellness/2-2-2-3foodgroups_fruits_detailfeature.jpg?sfvrsn=64942d53_4",
                 title: "Fruits",
                 subtitle: "This category contains all the fruits food",
                 theCollectionReference: fruitsCollecton),
@@ -49,6 +59,19 @@ class _HomePageState extends State<HomePage> {
               subtitle: "This category contains all the dairy products food",
               theCollectionReference: dairyCollection,
             ),
+            CategoryBox(
+              imagURL:
+                  "https://info.ehl.edu/hubfs/Blog-EHL-Insights/Blog-Header-EHL-Insights/trends%20drinks.jpg",
+              title: "Drinks",
+              subtitle: "This category contains all the Drinks food",
+              theCollectionReference: drinksCollection,
+            ),
+            CategoryBox(
+                imagURL:
+                    "https://foodtolive.com/healthy-blog/wp-content/uploads/sites/3/2017/11/Fast-Food-and-Junk-Food-4-1.jpg",
+                title: "Junk food",
+                subtitle: "This category contains all the Junk food",
+                theCollectionReference: junkFoodCollection)
           ],
         ),
       ),

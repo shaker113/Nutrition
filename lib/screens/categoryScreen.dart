@@ -85,11 +85,7 @@ class _Category_PageState extends State<Category_Page> {
                     ],
                   ),
                 ),
-                isAdmin ?? false
-                    ? AddButton(
-                        theCollectionReference: widget.theCollectionReference,
-                      )
-                    : const SizedBox()
+                isAdmin ?? false ? const AddButton() : const SizedBox()
               ],
             ),
           ),
@@ -105,7 +101,9 @@ class _Category_PageState extends State<Category_Page> {
                   AsyncSnapshot<QuerySnapshot> streamSnapShot) {
                 return ListView.builder(
                   padding: const EdgeInsets.only(left: 25, top: 45, right: 0),
-                  itemCount: streamSnapShot.data!.docs.length,
+                  itemCount: streamSnapShot.data == null
+                      ? 0
+                      : streamSnapShot.data!.docs.length,
                   itemBuilder: (BuildContext context, int index) {
                     final DocumentSnapshot documentSnapshot =
                         streamSnapShot.data!.docs[index];
@@ -114,28 +112,20 @@ class _Category_PageState extends State<Category_Page> {
                       imageLink: documentSnapshot['imageLink'],
                       name: documentSnapshot['name'],
                       calories: documentSnapshot['calories'],
-                      caloriesUnit: documentSnapshot['caloriesUnit'],
                       carbs: documentSnapshot['carbs'],
-                      carbsUnit: documentSnapshot['carbsUnit'],
                       fibers: documentSnapshot['fibers'],
-                      fibersUnit: documentSnapshot['fibersUnit'],
                       protein: documentSnapshot['protein'],
-                      proteinUnit: documentSnapshot['proteinUnit'],
                       vitamins: documentSnapshot['vitamins'],
-                      vitaminsUnit: documentSnapshot['vitaminsUnit'],
                       weight: documentSnapshot['weight'],
-                      weightUnit: documentSnapshot['weightUnit'],
                       fat: documentSnapshot['fat'],
-                      fatUnit: documentSnapshot['fatUnit'],
                       suger: documentSnapshot['suger'],
-                      sugerUnit: documentSnapshot['sugerUnit'],
                       description: documentSnapshot['description'],
                       category: documentSnapshot['category'],
                       isHighCrbs: documentSnapshot['isHighcarbs'],
                       isHighIron: documentSnapshot['isHighIron'],
                       isHighProtein: documentSnapshot['isHighprotine'],
                       isSugerFree: documentSnapshot['isSugerFree'],
-                      theCollectionReference: healthyCategoryCollection,
+                      theCollectionReference: widget.theCollectionReference,
                     );
                   },
                 );

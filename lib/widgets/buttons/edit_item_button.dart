@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:math';
 import 'dart:io';
 import 'package:path/path.dart';
@@ -14,21 +15,13 @@ class editItemButtonFunction extends StatefulWidget {
   String imageLink,
       name,
       calories,
-      caloriesUnit,
       protein,
-      proteinUnit,
       carbs,
-      carbsUnit,
       fibers,
-      fibersUnit,
       weight,
       suger,
-      sugerUnit,
       fat,
-      fatUnit,
-      weightUnit,
       vitamins,
-      vitaminsUnit,
       description,
       id,
       category;
@@ -38,21 +31,13 @@ class editItemButtonFunction extends StatefulWidget {
       required this.calories,
       required this.imageLink,
       required this.name,
-      required this.caloriesUnit,
       required this.carbs,
-      required this.carbsUnit,
       required this.fibers,
-      required this.fibersUnit,
       required this.protein,
-      required this.proteinUnit,
       required this.vitamins,
-      required this.vitaminsUnit,
       required this.weight,
-      required this.weightUnit,
       required this.fat,
-      required this.fatUnit,
       required this.suger,
-      required this.sugerUnit,
       required this.description,
       required this.id,
       required this.isHighCrbs,
@@ -69,11 +54,12 @@ class editItemButtonFunction extends StatefulWidget {
 class _editItemButtonFunctionState extends State<editItemButtonFunction> {
   List category = [
     "Drinks",
-    "Fruits ",
+    "Fruits",
     "Vegetables",
     "Dairy",
-    "Meat ",
-    "Healty Food"
+    "Meat",
+    "junk Food",
+    "White meat"
   ];
   String chosenCategory = "Drinks";
 
@@ -93,36 +79,21 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
     description.text = widget.description;
     TextEditingController calories = TextEditingController();
     calories.text = widget.calories;
-    TextEditingController caloriesUnit = TextEditingController();
-    caloriesUnit.text = widget.caloriesUnit;
     TextEditingController protein = TextEditingController();
     protein.text = widget.protein;
-    TextEditingController proteinUnit = TextEditingController();
-    proteinUnit.text = widget.proteinUnit;
     TextEditingController carbs = TextEditingController();
     carbs.text = widget.carbs;
-    TextEditingController carbsUnit = TextEditingController();
-    carbsUnit.text = widget.carbsUnit;
     TextEditingController fibers = TextEditingController();
     fibers.text = widget.fibers;
-    TextEditingController fibersUnit = TextEditingController();
-    fibersUnit.text = widget.fibersUnit;
     TextEditingController weight = TextEditingController();
     weight.text = widget.weight;
-    TextEditingController weightUnit = TextEditingController();
-    weightUnit.text = widget.weightUnit;
     TextEditingController vitamins = TextEditingController();
     vitamins.text = widget.vitamins;
-    TextEditingController vitaminsUnit = TextEditingController();
-    vitaminsUnit.text = widget.vitaminsUnit;
     TextEditingController fat = TextEditingController();
     fat.text = widget.fat;
-    TextEditingController fatUnit = TextEditingController();
-    fatUnit.text = widget.fatUnit;
     TextEditingController suger = TextEditingController();
     suger.text = widget.suger;
-    TextEditingController sugerUnit = TextEditingController();
-    sugerUnit.text = widget.sugerUnit;
+
     chosenCategory = widget.category;
     return Scaffold(
       appBar: AppBar(
@@ -145,9 +116,13 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
         actions: [
           IconButton(
             onPressed: () {
-              widget.theCollectionReference.doc(widget.id).delete();
-              FirebaseStorage.instance.refFromURL(widget.imageLink).delete();
-              Navigator.pop(context);
+              try {
+                widget.theCollectionReference.doc(widget.id).delete();
+                FirebaseStorage.instance.refFromURL(widget.imageLink).delete();
+                Navigator.pop(context);
+              } catch (e) {
+                print(e);
+              }
             },
             icon: const Icon(Icons.delete_outline),
           )
@@ -238,56 +213,49 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
               Row(
                 children: [
                   ItemInfoRow(
-                      theItemController: calories,
-                      theUnitController: caloriesUnit,
-                      theItemName: "calories"),
+                      theItemController: calories, theItemName: "calories"),
                   addHorizantalSpace(5),
                   ItemInfoRow(
-                      theItemController: protein,
-                      theUnitController: proteinUnit,
-                      theItemName: "protein"),
+                      theItemController: protein, theItemName: "protein"),
+                ],
+              ),
+              addVerticalSpace(10),
+              Row(
+                children: [
+                  ItemInfoRow(theItemController: carbs, theItemName: "carbs"),
+                  addHorizantalSpace(5),
+                  ItemInfoRow(
+                    theItemName: "fibers",
+                    theItemController: fibers,
+                  )
                 ],
               ),
               addVerticalSpace(10),
               Row(
                 children: [
                   ItemInfoRow(
-                      theItemController: carbs,
-                      theUnitController: carbsUnit,
-                      theItemName: "carbs"),
+                    theItemName: "Weight",
+                    theItemController: weight,
+                  ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
-                      theItemName: "fibers",
-                      theItemController: fibers,
-                      theUnitController: fibersUnit)
+                    theItemName: "Vitamins",
+                    theItemController: vitamins,
+                  ),
                 ],
               ),
               addVerticalSpace(10),
               Row(
                 children: [
                   ItemInfoRow(
-                      theItemName: "Weight",
-                      theItemController: weight,
-                      theUnitController: weightUnit),
+                    theItemName: "Suger",
+                    theItemController: suger,
+                  ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
-                      theItemName: "Vitamins",
-                      theItemController: vitamins,
-                      theUnitController: vitaminsUnit),
-                ],
-              ),
-              addVerticalSpace(10),
-              Row(
-                children: [
-                  ItemInfoRow(
-                      theItemName: "Suger",
-                      theItemController: suger,
-                      theUnitController: sugerUnit),
-                  addHorizantalSpace(5),
-                  ItemInfoRow(
-                      theItemName: "fat",
-                      theItemController: fat,
-                      theUnitController: fatUnit),
+                    theItemName: "fat",
+                    theItemController: fat,
+                  ),
                 ],
               ),
               categoryRow(setState),
@@ -364,21 +332,13 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
                         id: widget.id,
                         description: description.text,
                         calories: calories.text,
-                        caloriesUnit: caloriesUnit.text,
                         protein: protein.text,
-                        proteinUnit: proteinUnit.text,
                         carbs: carbs.text,
-                        carbsUnit: carbsUnit.text,
                         fibers: fibers.text,
-                        fibersUnit: fibersUnit.text,
                         weight: weight.text,
-                        weightUnit: weightUnit.text,
                         vitamins: vitamins.text,
                         fat: fat.text,
-                        fatUnit: fatUnit.text,
                         suger: suger.text,
-                        sugerUnit: sugerUnit.text,
-                        vitaminsUnit: vitaminsUnit.text,
                         category: chosenCategory,
                         imageLink: image != null ? imageUrl : widget.imageLink,
                         isSugerFree: isSugerFree,
@@ -413,21 +373,13 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
       required String? id,
       required String description,
       required String calories,
-      required String caloriesUnit,
       required String protein,
-      required String proteinUnit,
       required String carbs,
-      required String carbsUnit,
       required String fibers,
-      required String fibersUnit,
       required String weight,
-      required String weightUnit,
       required String vitamins,
       required String suger,
-      required String sugerUnit,
       required String fat,
-      required String fatUnit,
-      required String vitaminsUnit,
       required String category,
       required String? imageLink,
       required bool isSugerFree,
@@ -440,21 +392,13 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
       'name': name,
       'description': description,
       'calories': calories,
-      'caloriesUnit': caloriesUnit,
       'protein': protein,
-      'proteinUnit': proteinUnit,
       'carbs': carbs,
-      'carbsUnit': carbsUnit,
       'fibers': fibers,
-      'fibersUnit': fibersUnit,
       'weight': weight,
-      'weightUnit': weightUnit,
       'vitamins': vitamins,
-      'vitaminsUnit': vitaminsUnit,
       'suger': suger,
-      'sugerUnit': sugerUnit,
       'fat': fat,
-      'fatUnit': fatUnit,
       'category': category,
       'imageLink': imageLink,
       'isSugerFree': isSugerFree,
@@ -514,14 +458,10 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
 
 class ItemInfoRow extends StatelessWidget {
   const ItemInfoRow(
-      {Key? key,
-      required this.theItemController,
-      required this.theUnitController,
-      required this.theItemName})
+      {Key? key, required this.theItemController, required this.theItemName})
       : super(key: key);
   final String theItemName;
   final TextEditingController theItemController;
-  final TextEditingController theUnitController;
 
   @override
   Widget build(
@@ -538,13 +478,12 @@ class ItemInfoRow extends StatelessWidget {
           addVerticalSpace(10),
           CustomTextfieldBlue(
             label: theItemName,
+            theFormater: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+            ],
             theController: theItemController,
           ),
           addVerticalSpace(5),
-          CustomTextfieldBlue(
-            label: "unit ",
-            theController: theUnitController,
-          ),
         ],
       ),
     );
