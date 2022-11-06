@@ -20,11 +20,7 @@ class Category_Page extends StatefulWidget {
 }
 
 class _Category_PageState extends State<Category_Page> {
-  @override
-  void initState() {
-    checkRole();
-    super.initState();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,10 @@
-import 'package:fina/data/colors.dart';
+import 'package:fina/data/data.dart';
+import 'package:fina/widgets/BluetextField.dart';
+import 'package:fina/widgets/buttons/back_button.dart';
+import 'package:fina/widgets/buttons/gradiantButton.dart';
+import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
-import 'package:circular_indicator/circular_indicator.dart';
-import 'package:fina/widgets/text_field.dart';
-import 'package:fina/widgets/text.dart';
 import 'package:fina/widgets/circular_indicator.dart';
-import 'package:fina/widgets/buttons/rounded_button.dart';
 
 class DailyNeedCalculator extends StatefulWidget {
   @override
@@ -12,22 +12,23 @@ class DailyNeedCalculator extends StatefulWidget {
 }
 
 class _DailyNeedCalculator extends State<DailyNeedCalculator> {
-  TextEditingController controller1 = TextEditingController();
+  TextEditingController weightController = TextEditingController();
 
-  TextEditingController controller2 = TextEditingController();
+  TextEditingController heightController = TextEditingController();
 
-  double calorieCal = 0;
-  double calHeight = 0;
-  double proteinCalcul = 0;
-  String putYourRealHeight = 'Put your Real Height Please';
+  double calorieCal = 0,
+      calHeight = 0,
+      proteinCalcul = 0,
+      calUsingRadio = 0,
+      calFat = 0,
+      fat = 0,
+      calProtienplusscalFat = 0,
+      calProtien = 0,
+      calCarb = 0,
+      carbCalcul = 0;
+
   int groupValue = 1;
-  double calUsingRadio = 0;
-  double calFat = 0;
-  double fat = 0;
-  double calProtienplusscalFat = 0;
-  double calProtien = 0;
-  double calCarb = 0;
-  double carbCalcul = 0;
+
   List<String> lst = [
     'wanna lose some weight',
     'keep your weight',
@@ -37,8 +38,8 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
   bool animationtrue = false;
 
   void plussMethod() {
-    double weight = double.parse(controller1.text);
-    double height = double.parse(controller2.text);
+    double weight = double.parse(weightController.text);
+    double height = double.parse(heightController.text);
     calorieCal = (weight * 24 * 1.5);
     proteinCalcul = weight * 2.2;
 
@@ -98,8 +99,8 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
   }
 
   void clearEverything() {
-    controller1.clear();
-    controller2.clear();
+    weightController.clear();
+    heightController.clear();
 
     setState(() {
       calUsingRadio = 0;
@@ -118,11 +119,6 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
   Widget customRadio(String txt, int index) {
     return OutlinedButton(
       onPressed: () => changeIndex(index),
-      // shape: RoundedRectangleBorder(
-      //   borderRadius: BorderRadius.circular(10.0),
-      // ),
-      // borderSide: BorderSide(
-      //     color: selectedIndex == index ? Colors.amber : Colors.grey),
       child: Align(
         alignment: Alignment.center,
         child: Text(
@@ -134,41 +130,37 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ConstrainedBox(
-        constraints:
-            BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+        constraints: BoxConstraints(maxHeight: screenHeigth!),
         child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
+          height: screenHeigth,
+          width: screenWidth,
           color: backgrounColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 100,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(
-                  top: 0,
-                  bottom: 0,
+              addVerticalSpace(20),
+              backButton(context),
+              addVerticalSpace(20),
+              Padding(
+                padding: const EdgeInsets.only(
                   left: 22,
                   right: 0,
                 ),
                 child: Text(
                   'Calculator',
-                  style: TextStyle(color: Colors.white, fontSize: 28),
+                  style: customTextStyle.headlineLarge,
                 ),
               ),
-              const SizedBox(
-                height: 40,
-              ),
+              addVerticalSpace(20),
               Expanded(
                 child: Container(
-                  height: MediaQuery.of(context).size.height / 1.5,
-                  width: MediaQuery.of(context).size.width,
+                  height: screenHeigth! / 1.5,
+                  width: screenWidth,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -177,29 +169,35 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
+                          addVerticalSpace(10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              TextWidget(
-                                text: 'Weight',
-                                fontsize: 18,
-                                fontWieght: FontWeight.w300,
+                              Text(
+                                'Weight',
+                                style: customTextStyle.headlineSmall,
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: TextFieldWidget(controller: controller1),
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: SizedBox(
+                                  width: 150,
+                                  height: 40,
+                                  child: CustomTextfieldBlue(
+                                      theController: weightController,
+                                      label: ""),
+                                ),
                               ),
-                              TextWidget(
-                                  text: 'KG',
-                                  fontsize: 15,
-                                  fontWieght: FontWeight.w400),
+                              Text(
+                                'Kg',
+                                style: customTextStyle.titleSmall,
+                              ),
                             ],
                           ),
                           const SizedBox(
@@ -210,19 +208,24 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 10, left: 15),
-                                child: TextWidget(
-                                    text: 'Height',
-                                    fontsize: 18,
-                                    fontWieght: FontWeight.w300),
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  'Height',
+                                  style: customTextStyle.headlineSmall,
+                                ),
                               ),
-                              TextFieldWidget(controller: controller2),
+                              SizedBox(
+                                width: 150,
+                                height: 40,
+                                child: CustomTextfieldBlue(
+                                    theController: heightController, label: ""),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
-                                child: TextWidget(
-                                    text: 'CM',
-                                    fontsize: 15,
-                                    fontWieght: FontWeight.w400),
+                                child: Text(
+                                  'cm',
+                                  style: customTextStyle.titleSmall,
+                                ),
                               ),
                             ],
                           ),
@@ -236,35 +239,22 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RoundedButtonWidget(
-                                  title: 'Calculate',
-                                  onPress: plussMethod,
-                                  color: Colors.amber,
-                                  left: 50,
-                                  right: 50),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              // RoundedButtonWidget(
-                              //     title: 'Clear',
-                              //     onPress: clearEverything,
-                              //     color: Colors.yellow.shade300,
-                              //     left: 25,
-                              //     right: 25),
-                            ],
+                          GradientButton(
+                            theText: 'Calculate',
+                            theFunction: plussMethod,
                           ),
+                          addVerticalSpace(10),
+                          GradientButton(
+                              theFunction: clearEverything, theText: "Clear"),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Column(
                                 children: [
-                                  TextWidget(
-                                      text: 'Protein',
-                                      fontsize: 15,
-                                      fontWieght: FontWeight.bold),
+                                  Text(
+                                    'Protein',
+                                    style: customTextStyle.headlineSmall,
+                                  ),
                                   Circularindicator(
                                       animationTrue: animationtrue,
                                       backGroundColor:
@@ -279,10 +269,10 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                               ),
                               Column(
                                 children: [
-                                  TextWidget(
-                                      text: 'Calories',
-                                      fontsize: 15,
-                                      fontWieght: FontWeight.bold),
+                                  Text(
+                                    'Calories',
+                                    style: customTextStyle.headlineSmall,
+                                  ),
                                   Circularindicator(
                                       animationTrue: animationtrue,
                                       backGroundColor: Colors.yellow.shade200,
@@ -301,10 +291,10 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                             children: [
                               Column(
                                 children: [
-                                  TextWidget(
-                                      text: 'Grams of Carbs',
-                                      fontsize: 15,
-                                      fontWieght: FontWeight.bold),
+                                  Text(
+                                    style: customTextStyle.headlineSmall,
+                                    'Grams of Carbs',
+                                  ),
                                   Circularindicator(
                                       animationTrue: animationtrue,
                                       backGroundColor: Colors.green.shade200,
@@ -318,10 +308,10 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                               ),
                               Column(
                                 children: [
-                                  TextWidget(
-                                      text: 'Fat',
-                                      fontsize: 15,
-                                      fontWieght: FontWeight.bold),
+                                  Text(
+                                    'Fat',
+                                    style: customTextStyle.headlineSmall,
+                                  ),
                                   Circularindicator(
                                       animationTrue: animationtrue,
                                       backGroundColor: Colors.red.shade200,

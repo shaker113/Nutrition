@@ -436,56 +436,5 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
     );
   }
 
-  SwitchListTile CustomSwitchList(
-      StateSetter setState, bool theValue, String theText) {
-    return SwitchListTile(
-      activeColor: backgrounColor,
-      value: theValue,
-      onChanged: (value) {
-        setState(
-          () {
-            theValue = value;
-          },
-        );
-      },
-      title: Text(
-        theText,
-        style: customTextStyle.bodyMedium,
-      ),
-    );
-  }
-}
 
-class ItemInfoRow extends StatelessWidget {
-  const ItemInfoRow(
-      {Key? key, required this.theItemController, required this.theItemName})
-      : super(key: key);
-  final String theItemName;
-  final TextEditingController theItemController;
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return Expanded(
-      flex: 1,
-      child: Column(
-        children: [
-          Text(
-            "Item $theItemName",
-            style: customTextStyle.bodyMedium,
-          ),
-          addVerticalSpace(10),
-          CustomTextfieldBlue(
-            label: theItemName,
-            theFormater: [
-              FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
-            ],
-            theController: theItemController,
-          ),
-          addVerticalSpace(5),
-        ],
-      ),
-    );
-  }
 }

@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'dart:io';
 import 'package:fina/models/firestore_refrences.dart';
-import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
@@ -390,12 +389,15 @@ class _AddingPageState extends State<AddingPage> {
         DropdownButton(
           value: chosenCategory,
           items: category
-              .map((e) => DropdownMenuItem(
+              .map(
+                (e) => DropdownMenuItem(
                   value: e,
                   child: Text(
                     "$e",
                     style: const TextStyle(color: Colors.black, fontSize: 14),
-                  )))
+                  ),
+                ),
+              )
               .toList(),
           onChanged: (value) {
             setState(() {
@@ -404,39 +406,6 @@ class _AddingPageState extends State<AddingPage> {
           },
         )
       ],
-    );
-  }
-}
-
-class ItemInfoRow extends StatelessWidget {
-  const ItemInfoRow(
-      {Key? key, required this.theItemController, required this.theItemName})
-      : super(key: key);
-  final String theItemName;
-  final TextEditingController theItemController;
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return Expanded(
-      flex: 1,
-      child: Column(
-        children: [
-          Text(
-            "Item $theItemName",
-            style: customTextStyle.bodyMedium,
-          ),
-          addVerticalSpace(10),
-          CustomTextfieldBlue(
-            label: theItemName,
-            theFormater: [
-              FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
-            ],
-            theController: theItemController,
-          ),
-        ],
-      ),
     );
   }
 }
