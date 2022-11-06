@@ -3,14 +3,12 @@ import 'package:fina/data/data.dart';
 import 'package:flutter/material.dart';
 
 class buildInfoCard extends StatefulWidget {
-  String cardTiltle;
-  String info;
-  String unit;
-  IconData iconData;
+  String cardTiltle, info, unit, imagePath;
+
   buildInfoCard(
       {super.key,
       required this.cardTiltle,
-      required this.iconData,
+      required this.imagePath,
       required this.info,
       required this.unit});
 
@@ -19,7 +17,7 @@ class buildInfoCard extends StatefulWidget {
 }
 
 class _buildInfoCardState extends State<buildInfoCard> {
-  bool selectedCard = true;
+  bool selectedCard = false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +51,10 @@ class _buildInfoCardState extends State<buildInfoCard> {
                 widget.cardTiltle,
                 style: customTextStyle.bodyMedium,
               ),
-              Icon(widget.iconData),
+              Image(
+                image: AssetImage(widget.imagePath),
+                height: 40,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

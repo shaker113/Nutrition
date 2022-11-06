@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/models.dart';
+
 class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
 
@@ -8,129 +10,6 @@ class InfoScreen extends StatefulWidget {
 }
 
 class _InfoScreenState extends State<InfoScreen> {
-  List questions = [
-    {
-      'q': '1?',
-      'a': [
-        {
-          'title': 'safsdf',
-          'subtitle': '',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'dsadasd',
-          'subtitle': '',
-          'icon': const Icon(Icons.account_box),
-        },
-        {
-          'title': 'uiouio',
-          'subtitle': '',
-          'icon': const Icon(Icons.ac_unit),
-        },
-      ],
-    },
-    {
-      'q': '2?',
-      'a': [
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-      ],
-    },
-    {
-      'q': '3?',
-      'a': [
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-      ],
-    },
-    {
-      'q': '4?',
-      'a': [
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-      ],
-    },
-    {
-      'q': '5?',
-      'a': [
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-      ],
-    },
-    {
-      'q': '6?',
-      'a': [
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-        {
-          'title': 'safsdf',
-          'subtitle': 'sadasd',
-          'icon': const Icon(Icons.add),
-        },
-      ],
-    },
-  ];
-
   PageController pageController = PageController();
 
   int currentIndex = 0;
@@ -158,11 +37,12 @@ class _InfoScreenState extends State<InfoScreen> {
                       title: Text(item['title']),
                       subtitle: Text(item['subtitle']),
                       leading: item['icon'],
-                      onTap: (){
+                      onTap: () {
                         userAnswers.add(item['title']);
-                        if(currentIndex == questions.length - 1){
+                        if (currentIndex == questions.length - 1) {
                           /// TODO: write your code
                           print(userAnswers);
+
                           /// TODO: Navigator to another page
                           return;
                         }
