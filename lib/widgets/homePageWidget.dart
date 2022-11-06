@@ -16,11 +16,7 @@ class MyWidget extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(5),
-                  bottomLeft: Radius.circular(5),
-                  bottomRight: Radius.circular(30)),
+              borderRadius:  BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -30,16 +26,16 @@ class MyWidget extends StatelessWidget {
                 ),
               ],
             ),
-            height: 250,
-            width: 350,
+            height: 260,
+            width: 220,
             child: Column(
               children: [
                 Container(
                   height: 160,
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(5),
-                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20),
                       ),
                       image: DecorationImage(
                           fit: BoxFit.fill, image: NetworkImage(ImagURL))),
@@ -50,22 +46,28 @@ class MyWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
+                    
                     children: [
                       Container(
                           width: 400,
                           alignment: Alignment.topLeft,
-                          child: Text(
-                            title,
-                            style: const TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
+                          child: Center(
+                            child: Text(
+                              title,
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
                           )),
+                          SizedBox(height: 10,),
                       Container(
                           width: 400,
                           alignment: Alignment.topLeft,
-                          child: Text(
-                            subtitle,
-                            style: const TextStyle(
-                              fontSize: 15,
+                          child: Center(
+                            child: Text(
+                              subtitle,
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
                             ),
                           )),
                     ],
