@@ -1,3 +1,4 @@
+import 'package:fina/models/models.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/dailyNeedCalculator.dart';
@@ -117,7 +118,13 @@ class _MyDrawerState extends State<MyDrawer> {
         ListTile(
           leading: const Icon(Icons.logout),
           title: const Text("Log Out"),
-          onTap: () {},
+          onTap: () {
+            AuthService().signOut();
+            Navigator.popUntil(
+              context,
+              ModalRoute.withName(Navigator.defaultRouteName),
+            );
+          },
         ),
       ],
     );
