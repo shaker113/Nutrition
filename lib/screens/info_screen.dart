@@ -10,7 +10,7 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   List questions = [
     {
-      'q': '1?',
+      'q': 'What\'s your gender?',
       'a': [
         {
           'title': 'safsdf',

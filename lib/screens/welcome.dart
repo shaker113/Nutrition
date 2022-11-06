@@ -1,3 +1,4 @@
+import 'package:fina/screens/info_screen.dart';
 import 'package:fina/screens/sgin_up.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -77,11 +78,11 @@ class Welcome extends StatelessWidget {
               theText: "theText",
               height: 111,
               width: 222,
-              theFunction: () async {
-                healthyCategoryCollection
-                    .doc("EbRWZs8E7hW43jXWlhSO")
-                    .update({'name': 'Salmon bowl'});
-              },
+              theFunction: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return InfoScreen();
+                },));
+              }, 
             )
           ],
         ),
