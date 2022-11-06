@@ -170,7 +170,7 @@ class _SginUpState extends State<SginUp> {
 
       CustomSnakBar(
           "a verification email has been sent to ${email.text}", context);
-      Navigator.pushNamed(context, "homepage");
+      Navigator.pushNamed(context, "infoscreen");
     } on FirebaseAuthException catch (e) {
       CustomSnakBar(e.message, context);
     }

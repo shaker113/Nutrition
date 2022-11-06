@@ -43,7 +43,10 @@ dependencies:
   google_sign_in: ^5.4.2
   lottie: ^1.4.3
   page_transition: ^2.0.9
- 
+  image_picker: ^0.8.6
+  circular_indicator: ^1.0.6
+  percent_indicator: ^4.2.2
+  
 
 dev_dependencies:
   flutter_test:
