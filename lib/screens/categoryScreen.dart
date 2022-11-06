@@ -75,7 +75,7 @@ class _Category_PageState extends State<Category_Page> {
               children: [
                 RichText(
                   text: TextSpan(
-                    text: widget.theTitle, //should be a variable
+                    text: widget.theTitle,
                     style: customTextStyle.headlineLarge,
                     children: [
                       TextSpan(
@@ -84,7 +84,7 @@ class _Category_PageState extends State<Category_Page> {
                       )
                     ],
                   ),
-                ), //healthyCategoryCollection shoull be a variable
+                ),
                 isAdmin ?? false
                     ? AddButton(
                         theCollectionReference: widget.theCollectionReference,

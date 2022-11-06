@@ -211,6 +211,20 @@ class _AddingPageState extends State<AddingPage> {
               Row(
                 children: [
                   ItemInfoRow(
+                      theItemName: "Weight",
+                      theItemController: weight,
+                      theUnitController: weightUnit),
+                  addHorizantalSpace(5),
+                  ItemInfoRow(
+                      theItemName: "Vitamins",
+                      theItemController: vitamins,
+                      theUnitController: vitaminsUnit),
+                ],
+              ),
+              addVerticalSpace(10),
+              Row(
+                children: [
+                  ItemInfoRow(
                       theItemName: "Suger",
                       theItemController: suger,
                       theUnitController: sugerUnit),
