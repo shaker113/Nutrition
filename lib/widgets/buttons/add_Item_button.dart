@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'dart:io';
+import 'package:fina/models/firestore_refrences.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
@@ -10,11 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AddButton extends StatelessWidget {
-  CollectionReference theCollectionReference;
-  AddButton({
-    super.key,
-    required this.theCollectionReference,
-  });
+  const AddButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,7 @@ class AddButton extends StatelessWidget {
         Navigator.push(
           context,
           PageTransition(
-            child: AddingPage(theCollectionReference: theCollectionReference),
+            child: const AddingPage(),
             type: PageTransitionType.bottomToTop,
           ),
         );
@@ -37,8 +35,9 @@ class AddButton extends StatelessWidget {
 }
 
 class AddingPage extends StatefulWidget {
-  CollectionReference theCollectionReference;
-  AddingPage({super.key, required this.theCollectionReference});
+  const AddingPage({
+    super.key,
+  });
 
   @override
   State<AddingPage> createState() => _AddingPageState();
@@ -56,28 +55,21 @@ class _AddingPageState extends State<AddingPage> {
   TextEditingController name = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController calories = TextEditingController();
-  TextEditingController caloriesUnit = TextEditingController();
   TextEditingController protein = TextEditingController();
-  TextEditingController proteinUnit = TextEditingController();
   TextEditingController carbs = TextEditingController();
-  TextEditingController carbsUnit = TextEditingController();
   TextEditingController fibers = TextEditingController();
-  TextEditingController fibersUnit = TextEditingController();
   TextEditingController weight = TextEditingController();
-  TextEditingController weightUnit = TextEditingController();
   TextEditingController vitamins = TextEditingController();
-  TextEditingController vitaminsUnit = TextEditingController();
   TextEditingController fat = TextEditingController();
-  TextEditingController fatUnit = TextEditingController();
   TextEditingController suger = TextEditingController();
-  TextEditingController sugerUnit = TextEditingController();
   List category = [
     "Drinks",
-    "Fruits ",
+    "Fruits",
     "Vegetables",
     "Dairy",
-    "Meat ",
-    "Healty Food"
+    "Meat",
+    "junk Food",
+    "White meat"
   ];
   String chosenCategory = "Drinks";
   @override
@@ -183,56 +175,49 @@ class _AddingPageState extends State<AddingPage> {
               Row(
                 children: [
                   ItemInfoRow(
-                      theItemController: calories,
-                      theUnitController: caloriesUnit,
-                      theItemName: "calories"),
+                      theItemController: calories, theItemName: "calories"),
                   addHorizantalSpace(5),
                   ItemInfoRow(
-                      theItemController: protein,
-                      theUnitController: proteinUnit,
-                      theItemName: "protein"),
+                      theItemController: protein, theItemName: "protein"),
+                ],
+              ),
+              addVerticalSpace(10),
+              Row(
+                children: [
+                  ItemInfoRow(theItemController: carbs, theItemName: "carbs"),
+                  addHorizantalSpace(5),
+                  ItemInfoRow(
+                    theItemName: "fibers",
+                    theItemController: fibers,
+                  )
                 ],
               ),
               addVerticalSpace(10),
               Row(
                 children: [
                   ItemInfoRow(
-                      theItemController: carbs,
-                      theUnitController: carbsUnit,
-                      theItemName: "carbs"),
+                    theItemName: "Weight",
+                    theItemController: weight,
+                  ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
-                      theItemName: "fibers",
-                      theItemController: fibers,
-                      theUnitController: fibersUnit)
+                    theItemName: "Vitamins",
+                    theItemController: vitamins,
+                  ),
                 ],
               ),
               addVerticalSpace(10),
               Row(
                 children: [
                   ItemInfoRow(
-                      theItemName: "Weight",
-                      theItemController: weight,
-                      theUnitController: weightUnit),
+                    theItemName: "Suger",
+                    theItemController: suger,
+                  ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
-                      theItemName: "Vitamins",
-                      theItemController: vitamins,
-                      theUnitController: vitaminsUnit),
-                ],
-              ),
-              addVerticalSpace(10),
-              Row(
-                children: [
-                  ItemInfoRow(
-                      theItemName: "Suger",
-                      theItemController: suger,
-                      theUnitController: sugerUnit),
-                  addHorizantalSpace(5),
-                  ItemInfoRow(
-                      theItemName: "fat",
-                      theItemController: fat,
-                      theUnitController: fatUnit),
+                    theItemName: "fat",
+                    theItemController: fat,
+                  ),
                 ],
               ),
               categoryRow(setState),
@@ -306,28 +291,19 @@ class _AddingPageState extends State<AddingPage> {
                         id: "s",
                         description: description.text,
                         calories: calories.text,
-                        caloriesUnit: caloriesUnit.text,
                         protein: protein.text,
-                        proteinUnit: proteinUnit.text,
                         carbs: carbs.text,
-                        carbsUnit: carbsUnit.text,
                         fibers: fibers.text,
-                        fibersUnit: fibersUnit.text,
                         weight: weight.text,
-                        weightUnit: weightUnit.text,
                         vitamins: vitamins.text,
-                        vitaminsUnit: vitaminsUnit.text,
                         fat: fat.text,
-                        fatUnit: fatUnit.text,
                         suger: suger.text,
-                        sugerUnit: sugerUnit.text,
                         category: chosenCategory,
                         imageLink: imageUrl,
                         isSugerFree: isSugerFree,
                         isHighprotine: isHighProtein,
                         isHighcarbs: isHighCrbs,
                         isHighIron: isHighIron,
-                        collection: widget.theCollectionReference,
                       );
                       Navigator.pop(context);
                     } catch (e) {
@@ -344,53 +320,55 @@ class _AddingPageState extends State<AddingPage> {
     );
   }
 
-  Future createItem(
-      {required String name,
-      required String? id,
-      required String description,
-      required String calories,
-      required String caloriesUnit,
-      required String protein,
-      required String proteinUnit,
-      required String carbs,
-      required String carbsUnit,
-      required String fibers,
-      required String fibersUnit,
-      required String weight,
-      required String weightUnit,
-      required String suger,
-      required String sugerUnit,
-      required String fat,
-      required String fatUnit,
-      required String vitamins,
-      required String vitaminsUnit,
-      required String category,
-      required String imageLink,
-      required bool isSugerFree,
-      required bool isHighprotine,
-      required bool isHighcarbs,
-      required bool isHighIron,
-      required CollectionReference collection}) async {
+  Future createItem({
+    required String name,
+    required String? id,
+    required String description,
+    required String calories,
+    required String protein,
+    required String carbs,
+    required String fibers,
+    required String weight,
+    required String suger,
+    required String fat,
+    required String vitamins,
+    required String category,
+    required String imageLink,
+    required bool isSugerFree,
+    required bool isHighprotine,
+    required bool isHighcarbs,
+    required bool isHighIron,
+  }) async {
+    CollectionReference? theCollectionReference;
+
+    if (category == "Meat") {
+      theCollectionReference = meatCollection;
+    } else if (category == "Fruits") {
+      theCollectionReference = fruitsCollecton;
+    } else if (category == "Vegetables") {
+      theCollectionReference = vegetablesCollection;
+    } else if (category == "Dairy") {
+      theCollectionReference = dairyCollection;
+    } else if (category == "junk Food") {
+      theCollectionReference = junkFoodCollection;
+    } else if (category == "White meat") {
+      theCollectionReference = whiteMeatCollection;
+    } else if (category == "Drinks") {
+      theCollectionReference = drinksCollection;
+    }
+
     final json = {
       'id': id,
       'name': name,
       'description': description,
       'calories': calories,
-      'caloriesUnit': caloriesUnit,
       'protein': protein,
-      'proteinUnit': proteinUnit,
       'carbs': carbs,
-      'carbsUnit': carbsUnit,
       'fibers': fibers,
-      'fibersUnit': fibersUnit,
       'weight': weight,
-      'weightUnit': weightUnit,
       'vitamins': vitamins,
-      'vitaminsUnit': vitaminsUnit,
       'suger': suger,
-      'sugerUnit': sugerUnit,
       'fat': fat,
-      'fatUnit': fatUnit,
       'category': category,
       'imageLink': imageLink,
       'isSugerFree': isSugerFree,
@@ -398,7 +376,7 @@ class _AddingPageState extends State<AddingPage> {
       'isHighcarbs': isHighcarbs,
       'isHighIron': isHighIron,
     }; //to Create doucumant
-    await collection.doc().set(json);
+    await theCollectionReference!.doc().set(json);
   }
 
   Row categoryRow(StateSetter setState) {
@@ -428,37 +406,14 @@ class _AddingPageState extends State<AddingPage> {
       ],
     );
   }
-
-  SwitchListTile CustomSwitchList(
-      StateSetter setState, bool theValue, String theText) {
-    return SwitchListTile(
-      activeColor: backgrounColor,
-      value: theValue,
-      onChanged: (value) {
-        setState(
-          () {
-            theValue = value;
-          },
-        );
-      },
-      title: Text(
-        theText,
-        style: customTextStyle.bodyMedium,
-      ),
-    );
-  }
 }
 
 class ItemInfoRow extends StatelessWidget {
   const ItemInfoRow(
-      {Key? key,
-      required this.theItemController,
-      required this.theUnitController,
-      required this.theItemName})
+      {Key? key, required this.theItemController, required this.theItemName})
       : super(key: key);
   final String theItemName;
   final TextEditingController theItemController;
-  final TextEditingController theUnitController;
 
   @override
   Widget build(
@@ -475,12 +430,10 @@ class ItemInfoRow extends StatelessWidget {
           addVerticalSpace(10),
           CustomTextfieldBlue(
             label: theItemName,
+            theFormater: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+            ],
             theController: theItemController,
-          ),
-          addVerticalSpace(5),
-          CustomTextfieldBlue(
-            label: "unit ",
-            theController: theUnitController,
           ),
         ],
       ),
