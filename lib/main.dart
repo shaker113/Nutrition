@@ -1,5 +1,3 @@
-import 'package:fina/screens/info_screen.dart';
-import 'package:fina/screens/sgin_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

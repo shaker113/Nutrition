@@ -1,76 +1,72 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:io';
 import 'package:path/path.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fina/data/data.dart';
-import 'package:fina/widgets/widgets.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
+import '../../data/data.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:page_transition/page_transition.dart';
 
-class AddButton extends StatelessWidget {
+import '../widgets.dart';
+
+class editItemButtonFunction extends StatefulWidget {
+  bool? isSugerFree, isHighProtein, isHighIron, isHighCrbs;
+  String imageLink,
+      name,
+      calories,
+      caloriesUnit,
+      protein,
+      proteinUnit,
+      carbs,
+      carbsUnit,
+      fibers,
+      fibersUnit,
+      weight,
+      suger,
+      sugerUnit,
+      fat,
+      fatUnit,
+      weightUnit,
+      vitamins,
+      vitaminsUnit,
+      description,
+      id,
+      category;
   CollectionReference theCollectionReference;
-  AddButton({
-    super.key,
-    required this.theCollectionReference,
-  });
+  editItemButtonFunction(
+      {super.key,
+      required this.calories,
+      required this.imageLink,
+      required this.name,
+      required this.caloriesUnit,
+      required this.carbs,
+      required this.carbsUnit,
+      required this.fibers,
+      required this.fibersUnit,
+      required this.protein,
+      required this.proteinUnit,
+      required this.vitamins,
+      required this.vitaminsUnit,
+      required this.weight,
+      required this.weightUnit,
+      required this.fat,
+      required this.fatUnit,
+      required this.suger,
+      required this.sugerUnit,
+      required this.description,
+      required this.id,
+      required this.isHighCrbs,
+      required this.isHighIron,
+      required this.isHighProtein,
+      required this.isSugerFree,
+      required this.category,
+      required this.theCollectionReference});
 
   @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          PageTransition(
-            child: AddingPage(theCollectionReference: theCollectionReference),
-            type: PageTransitionType.bottomToTop,
-          ),
-        );
-      },
-      icon: const Icon(
-        Icons.add,
-        color: Colors.white,
-      ),
-    );
-  }
+  State<editItemButtonFunction> createState() => _editItemButtonFunctionState();
 }
 
-class AddingPage extends StatefulWidget {
-  CollectionReference theCollectionReference;
-  AddingPage({super.key, required this.theCollectionReference});
-
-  @override
-  State<AddingPage> createState() => _AddingPageState();
-}
-
-class _AddingPageState extends State<AddingPage> {
-  bool isSugerFree = false,
-      isHighProtein = false,
-      isHighIron = false,
-      isHighCrbs = false;
-  File? image;
-  var imagepiker = ImagePicker();
-  var storgeRef;
-
-  TextEditingController name = TextEditingController();
-  TextEditingController description = TextEditingController();
-  TextEditingController calories = TextEditingController();
-  TextEditingController caloriesUnit = TextEditingController();
-  TextEditingController protein = TextEditingController();
-  TextEditingController proteinUnit = TextEditingController();
-  TextEditingController carbs = TextEditingController();
-  TextEditingController carbsUnit = TextEditingController();
-  TextEditingController fibers = TextEditingController();
-  TextEditingController fibersUnit = TextEditingController();
-  TextEditingController weight = TextEditingController();
-  TextEditingController weightUnit = TextEditingController();
-  TextEditingController vitamins = TextEditingController();
-  TextEditingController vitaminsUnit = TextEditingController();
-  TextEditingController fat = TextEditingController();
-  TextEditingController fatUnit = TextEditingController();
-  TextEditingController suger = TextEditingController();
-  TextEditingController sugerUnit = TextEditingController();
+class _editItemButtonFunctionState extends State<editItemButtonFunction> {
   List category = [
     "Drinks",
     "Fruits ",
@@ -80,8 +76,54 @@ class _AddingPageState extends State<AddingPage> {
     "Healty Food"
   ];
   String chosenCategory = "Drinks";
+
   @override
   Widget build(BuildContext context) {
+    bool isSugerFree = widget.isSugerFree ?? false,
+        isHighProtein = widget.isHighProtein ?? false,
+        isHighIron = widget.isHighIron ?? false,
+        isHighCrbs = widget.isHighCrbs ?? false;
+    File? image;
+    var imagepiker = ImagePicker();
+    var storgeRef;
+
+    TextEditingController name = TextEditingController();
+    name.text = widget.name;
+    TextEditingController description = TextEditingController();
+    description.text = widget.description;
+    TextEditingController calories = TextEditingController();
+    calories.text = widget.calories;
+    TextEditingController caloriesUnit = TextEditingController();
+    caloriesUnit.text = widget.caloriesUnit;
+    TextEditingController protein = TextEditingController();
+    protein.text = widget.protein;
+    TextEditingController proteinUnit = TextEditingController();
+    proteinUnit.text = widget.proteinUnit;
+    TextEditingController carbs = TextEditingController();
+    carbs.text = widget.carbs;
+    TextEditingController carbsUnit = TextEditingController();
+    carbsUnit.text = widget.carbsUnit;
+    TextEditingController fibers = TextEditingController();
+    fibers.text = widget.fibers;
+    TextEditingController fibersUnit = TextEditingController();
+    fibersUnit.text = widget.fibersUnit;
+    TextEditingController weight = TextEditingController();
+    weight.text = widget.weight;
+    TextEditingController weightUnit = TextEditingController();
+    weightUnit.text = widget.weightUnit;
+    TextEditingController vitamins = TextEditingController();
+    vitamins.text = widget.vitamins;
+    TextEditingController vitaminsUnit = TextEditingController();
+    vitaminsUnit.text = widget.vitaminsUnit;
+    TextEditingController fat = TextEditingController();
+    fat.text = widget.fat;
+    TextEditingController fatUnit = TextEditingController();
+    fatUnit.text = widget.fatUnit;
+    TextEditingController suger = TextEditingController();
+    suger.text = widget.suger;
+    TextEditingController sugerUnit = TextEditingController();
+    sugerUnit.text = widget.sugerUnit;
+    chosenCategory = widget.category;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -96,10 +138,20 @@ class _AddingPageState extends State<AddingPage> {
         backgroundColor: backgrounColor2,
         elevation: 0,
         title: const Text(
-          "Adding Item",
+          "Updating Item",
           style: TextStyle(fontSize: 18, color: Colors.white),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              widget.theCollectionReference.doc(widget.id).delete();
+              FirebaseStorage.instance.refFromURL(widget.imageLink).delete();
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.delete_outline),
+          )
+        ],
       ),
       body: StatefulBuilder(
         builder: (context, setState) {
@@ -165,8 +217,11 @@ class _AddingPageState extends State<AddingPage> {
                       width: double.infinity,
                       fit: BoxFit.cover,
                     )
-                  : const Center(
-                      child: Text("No image has uploaded yet"),
+                  : Image(
+                      image: NetworkImage(widget.imageLink),
+                      height: 190,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
                     ),
               addVerticalSpace(10),
               Text(
@@ -205,6 +260,20 @@ class _AddingPageState extends State<AddingPage> {
                       theItemName: "fibers",
                       theItemController: fibers,
                       theUnitController: fibersUnit)
+                ],
+              ),
+              addVerticalSpace(10),
+              Row(
+                children: [
+                  ItemInfoRow(
+                      theItemName: "Weight",
+                      theItemController: weight,
+                      theUnitController: weightUnit),
+                  addHorizantalSpace(5),
+                  ItemInfoRow(
+                      theItemName: "Vitamins",
+                      theItemController: vitamins,
+                      theUnitController: vitaminsUnit),
                 ],
               ),
               addVerticalSpace(10),
@@ -284,12 +353,15 @@ class _AddingPageState extends State<AddingPage> {
               ),
               GradientButton(
                   theFunction: () async {
+                    String? imageUrl;
                     try {
-                      await storgeRef.putFile(image!);
-                      String imageUrl = await storgeRef.getDownloadURL();
-                      createItem(
+                      if (image != null) {
+                        await storgeRef.putFile(image!);
+                        imageUrl = await storgeRef.getDownloadURL();
+                      }
+                      updateItem(
                         name: name.text,
-                        id: "s",
+                        id: widget.id,
                         description: description.text,
                         calories: calories.text,
                         caloriesUnit: caloriesUnit.text,
@@ -302,19 +374,25 @@ class _AddingPageState extends State<AddingPage> {
                         weight: weight.text,
                         weightUnit: weightUnit.text,
                         vitamins: vitamins.text,
-                        vitaminsUnit: vitaminsUnit.text,
                         fat: fat.text,
                         fatUnit: fatUnit.text,
                         suger: suger.text,
                         sugerUnit: sugerUnit.text,
+                        vitaminsUnit: vitaminsUnit.text,
                         category: chosenCategory,
-                        imageLink: imageUrl,
+                        imageLink: image != null ? imageUrl : widget.imageLink,
                         isSugerFree: isSugerFree,
                         isHighprotine: isHighProtein,
                         isHighcarbs: isHighCrbs,
                         isHighIron: isHighIron,
                         collection: widget.theCollectionReference,
                       );
+                      if (image != null) {
+                        FirebaseStorage.instance
+                            .refFromURL(widget.imageLink)
+                            .delete();
+                      }
+
                       Navigator.pop(context);
                     } catch (e) {
                       CustomSnakBar(
@@ -322,7 +400,7 @@ class _AddingPageState extends State<AddingPage> {
                           context);
                     }
                   },
-                  theText: "Add Item")
+                  theText: "Update Item")
             ],
           );
         },
@@ -330,7 +408,7 @@ class _AddingPageState extends State<AddingPage> {
     );
   }
 
-  Future createItem(
+  Future updateItem(
       {required String name,
       required String? id,
       required String description,
@@ -344,20 +422,20 @@ class _AddingPageState extends State<AddingPage> {
       required String fibersUnit,
       required String weight,
       required String weightUnit,
+      required String vitamins,
       required String suger,
       required String sugerUnit,
       required String fat,
       required String fatUnit,
-      required String vitamins,
       required String vitaminsUnit,
       required String category,
-      required String imageLink,
+      required String? imageLink,
       required bool isSugerFree,
       required bool isHighprotine,
       required bool isHighcarbs,
       required bool isHighIron,
       required CollectionReference collection}) async {
-    final json = {
+    collection.doc(id).update({
       'id': id,
       'name': name,
       'description': description,
@@ -383,8 +461,7 @@ class _AddingPageState extends State<AddingPage> {
       'isHighprotine': isHighprotine,
       'isHighcarbs': isHighcarbs,
       'isHighIron': isHighIron,
-    }; //to Create doucumant
-    await collection.doc().set(json);
+    });
   }
 
   Row categoryRow(StateSetter setState) {

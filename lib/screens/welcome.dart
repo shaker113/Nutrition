@@ -1,4 +1,3 @@
-import 'package:fina/screens/sgin_up.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../data/data.dart';
@@ -29,7 +28,7 @@ class Welcome extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Welcome \n To Nutution Application",
+            Text("Welcome \n To Nutrition Application",
                 textAlign: TextAlign.center,
                 style: customTextStyle.headlineLarge),
             addVerticalSpace(10),
@@ -63,24 +62,26 @@ class Welcome extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return Home_Page();
-                    },
-                  ));
-                },
-                icon: Icon(Icons.skip_next)),
+            // IconButton(
+            //     onPressed: () {
+            //       Navigator.push(context, MaterialPageRoute(
+            //         builder: (context) {
+            //           return Home_Page();
+            //         },
+            //       ));
+            //     },
+            //     icon: Icon(Icons.skip_next)),
             GlassButton(
-              isSelected: true,
-              theText: "theText",
-              height: 111,
+              // isSelected: true,
+              theText: "Git started",
+              height: 50,
               width: 222,
               theFunction: () async {
-                healthyCategoryCollection
-                    .doc("EbRWZs8E7hW43jXWlhSO")
-                    .update({'name': 'Salmon bowl'});
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const InfoScreen(),
+                    ));
               },
             )
           ],
