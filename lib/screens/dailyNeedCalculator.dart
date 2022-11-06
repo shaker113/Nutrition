@@ -147,11 +147,11 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
-              Padding(
-                padding: const EdgeInsets.only(
+              const Padding(
+                padding: EdgeInsets.only(
                   top: 0,
                   bottom: 0,
                   left: 22,
@@ -162,14 +162,14 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                   style: TextStyle(color: Colors.white, fontSize: 28),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Expanded(
                 child: Container(
                   height: MediaQuery.of(context).size.height / 1.5,
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(35),
@@ -202,7 +202,7 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                                   fontWieght: FontWeight.w400),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Row(
@@ -245,7 +245,7 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                                   color: Colors.amber,
                                   left: 50,
                                   right: 50),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               // RoundedButtonWidget(
@@ -272,7 +272,7 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                                       progressColors: Colors.deepPurple,
                                       textInside:
                                           proteinCalcul.toStringAsFixed(1)),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                 ],
@@ -289,7 +289,7 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                                       progressColors: Colors.yellow.shade900,
                                       textInside:
                                           calUsingRadio.toStringAsFixed(1)),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                 ],
@@ -311,7 +311,7 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                                       progressColors: Colors.green,
                                       textInside:
                                           carbCalcul.toStringAsFixed(1)),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                 ],
@@ -327,7 +327,7 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                                       backGroundColor: Colors.red.shade200,
                                       progressColors: Colors.red.shade800,
                                       textInside: fat.toStringAsFixed(1)),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                 ],

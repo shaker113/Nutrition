@@ -12,4 +12,6 @@ export 'buildFoodItem.dart';
 export 'buildInfoCard.dart';
 export 'buttons/add_Item_button.dart';
 export 'BluetextField.dart';
+export 'homePageWidget.dart';
+export 'drawer.dart';
 // export 'buttons/edit_item_button.dart';

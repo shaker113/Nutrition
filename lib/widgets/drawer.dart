@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/dailyNeedCalculator.dart';
+
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
 
@@ -30,7 +32,8 @@ class _MyDrawerState extends State<MyDrawer> {
                   children: [
                     Container(
                       alignment: Alignment.topLeft,
-                      padding: const EdgeInsets.only(left: 15, top: 15, right: 15),
+                      padding:
+                          const EdgeInsets.only(left: 15, top: 15, right: 15),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
@@ -42,7 +45,10 @@ class _MyDrawerState extends State<MyDrawer> {
                               size: 20,
                               color: Colors.grey,
                             ),
-                            Text("Back",style: TextStyle(fontSize: 15),)
+                            Text(
+                              "Back",
+                              style: TextStyle(fontSize: 15),
+                            )
                           ],
                         ),
                       ),
@@ -55,7 +61,8 @@ class _MyDrawerState extends State<MyDrawer> {
                             backgroundColor: Color.fromARGB(255, 127, 162, 245),
                             child: Text(
                               "R",
-                              style: TextStyle(fontSize: 40.0,color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 40.0, color: Colors.white),
                             ),
                           ),
                           SizedBox(
@@ -89,7 +96,13 @@ class _MyDrawerState extends State<MyDrawer> {
         ListTile(
           leading: const Icon(Icons.calculate),
           title: const Text("Daily Need Calculator"),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DailyNeedCalculator(),
+                ));
+          },
         ),
         ListTile(
           leading: const Icon(Icons.file_open),

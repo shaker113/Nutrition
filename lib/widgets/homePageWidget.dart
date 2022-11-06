@@ -1,17 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fina/models/firestore_refrences.dart';
+import 'package:fina/screens/screens.dart';
 import 'package:flutter/material.dart';
 
-class MyWidget extends StatelessWidget {
-  MyWidget(
-      {required this.ImagURL, required this.title, required this.subtitle});
-  String ImagURL;
-  String title;
-  String subtitle;
+class CategoryBox extends StatelessWidget {
+  String imagURL, title, subtitle;
+  CollectionReference theCollectionReference;
+
+  CategoryBox(
+      {super.key,
+      required this.imagURL,
+      required this.title,
+      required this.subtitle,
+      required this.theCollectionReference});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Category_Page(
+                    theTitle: title,
+                    theCollectionReference: theCollectionReference),
+              ));
+        },
         child: Center(
           child: Container(
             decoration: BoxDecoration(
@@ -42,7 +58,7 @@ class MyWidget extends StatelessWidget {
                         topLeft: Radius.circular(30),
                       ),
                       image: DecorationImage(
-                          fit: BoxFit.fill, image: NetworkImage(ImagURL))),
+                          fit: BoxFit.fill, image: NetworkImage(imagURL))),
                 ),
                 const SizedBox(
                   height: 10,
