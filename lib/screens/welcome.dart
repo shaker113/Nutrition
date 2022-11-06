@@ -1,3 +1,5 @@
+import 'package:fina/screens/dailyNeedCalculator.dart';
+import 'package:fina/screens/sgin_up.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../data/data.dart';
@@ -62,6 +64,15 @@ class Welcome extends StatelessWidget {
                 ),
               ),
             ),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return DailyNeedCalculator();
+                    },
+                  ));
+                },
+                icon: Icon(Icons.skip_next)),
             // IconButton(
             //     onPressed: () {
             //       Navigator.push(context, MaterialPageRoute(
