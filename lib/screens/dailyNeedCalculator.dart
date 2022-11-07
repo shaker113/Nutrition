@@ -1,10 +1,15 @@
+import 'dart:ffi';
+
 import 'package:fina/data/data.dart';
+import 'package:fina/models/validation.dart';
 import 'package:fina/widgets/BluetextField.dart';
 import 'package:fina/widgets/buttons/back_button.dart';
 import 'package:fina/widgets/buttons/gradiantButton.dart';
 import 'package:fina/widgets/spacing.dart';
+import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:fina/widgets/circular_indicator.dart';
+import 'package:flutter/services.dart';
 
 class DailyNeedCalculator extends StatefulWidget {
   @override
@@ -29,11 +34,7 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
 
   int groupValue = 1;
 
-  List<String> lst = [
-    'wanna lose some weight',
-    'keep your weight',
-    'tryin to put on some weight'
-  ];
+  List<String> lst = ['To lose weight', 'Maintain my weight', 'To gain weight'];
   int selectedIndex = 0;
   bool animationtrue = false;
 
@@ -67,7 +68,6 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
     if (184 < height && 189 >= height) {
       calHeight = calorieCal;
     }
-
     if (selectedIndex == 0) {
       calUsingRadio = calHeight - 737;
     }
@@ -88,7 +88,6 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
     calCarb = calUsingRadio - calProtienplusscalFat;
 
     carbCalcul = calCarb / 4;
-    animationtrue = true;
     setState(() {
       calUsingRadio;
       proteinCalcul;
@@ -117,18 +116,16 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
   }
 
   Widget customRadio(String txt, int index) {
-    return OutlinedButton(
-      onPressed: () => changeIndex(index),
-      child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          txt,
-          style: TextStyle(
-              color: selectedIndex == index ? customRed : Colors.grey),
-        ),
-      ),
+    return GlassButton(
+      isSelected: selectedIndex == index,
+      height: 40,
+      width: screenWidth! - 100,
+      theText: txt,
+      theFunction: () => changeIndex(index),
     );
   }
+
+  GlobalKey<FormState> myFormKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -164,167 +161,188 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(35),
-                      topRight: Radius.circular(100),
+                      topLeft: Radius.circular(45),
+                      topRight: Radius.circular(45),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          addVerticalSpace(10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Weight',
-                                style: customTextStyle.headlineSmall,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 40,
-                                  child: CustomTextfieldBlue(
-                                      theController: weightController,
-                                      label: ""),
-                                ),
-                              ),
-                              Text(
-                                'Kg',
-                                style: customTextStyle.titleSmall,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Text(
-                                  'Height',
+                  child: Form(
+                    key: myFormKey,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            addVerticalSpace(10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Weight',
                                   style: customTextStyle.headlineSmall,
                                 ),
-                              ),
-                              SizedBox(
-                                width: 150,
-                                height: 40,
-                                child: CustomTextfieldBlue(
-                                    theController: heightController, label: ""),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text(
-                                  'cm',
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: SizedBox(
+                                    width: 150,
+                                    child: CustomTextfieldBlue(
+                                      theController: weightController,
+                                      label: "",
+                                      validator: (p0) => WightValidator(p0),
+                                      theFormater: [
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(r'^\d+\.?\d{0,2}'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  'Kg',
                                   style: customTextStyle.titleSmall,
                                 ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: <Widget>[
-                                customRadio(lst[0], 0),
-                                customRadio(lst[1], 1),
-                                customRadio(lst[2], 2)
                               ],
                             ),
-                          ),
-                          GradientButton(
-                            theText: 'Calculate',
-                            theFunction: plussMethod,
-                          ),
-                          addVerticalSpace(10),
-                          GradientButton(
-                              theFunction: clearEverything, theText: "Clear"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    'Protein',
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Text(
+                                    'Height',
                                     style: customTextStyle.headlineSmall,
                                   ),
-                                  Circularindicator(
-                                      animationTrue: animationtrue,
-                                      backGroundColor:
-                                          Colors.deepPurple.shade200,
-                                      progressColors: Colors.deepPurple,
-                                      textInside:
-                                          proteinCalcul.toStringAsFixed(1)),
-                                  const SizedBox(
-                                    height: 10,
+                                ),
+                                SizedBox(
+                                  width: 150,
+                                  child: CustomTextfieldBlue(
+                                    theController: heightController,
+                                    label: "",
+                                    validator: (p0) => WightValidator(p0),
+                                    theFormater: [
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r'^\d+\.?\d{0,2}'),
+                                      ),
+                                    ],
                                   ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    'cm',
+                                    style: customTextStyle.titleSmall,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: <Widget>[
+                                  customRadio(lst[0], 0),
+                                  addVerticalSpace(10),
+                                  customRadio(lst[1], 1),
+                                  addVerticalSpace(10),
+                                  customRadio(lst[2], 2)
                                 ],
                               ),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Calories',
-                                    style: customTextStyle.headlineSmall,
-                                  ),
-                                  Circularindicator(
-                                      animationTrue: animationtrue,
-                                      backGroundColor: Colors.yellow.shade200,
-                                      progressColors: Colors.yellow.shade900,
-                                      textInside:
-                                          calUsingRadio.toStringAsFixed(1)),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    style: customTextStyle.headlineSmall,
-                                    'Grams of Carbs',
-                                  ),
-                                  Circularindicator(
-                                      animationTrue: animationtrue,
-                                      backGroundColor: Colors.green.shade200,
-                                      progressColors: Colors.green,
-                                      textInside:
-                                          carbCalcul.toStringAsFixed(1)),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Fat',
-                                    style: customTextStyle.headlineSmall,
-                                  ),
-                                  Circularindicator(
-                                      animationTrue: animationtrue,
+                            ),
+                            addVerticalSpace(10),
+                            GradientButton(
+                              theText: 'Calculate',
+                              theFunction: () {
+                                if (myFormKey.currentState!.validate()) {
+                                  plussMethod();
+                                }
+                              },
+                            ),
+                            addVerticalSpace(10),
+                            calUsingRadio != 0
+                                ? GradientButton(
+                                    theFunction: clearEverything,
+                                    theText: "Clear")
+                                : const SizedBox(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Protein',
+                                      style: customTextStyle.headlineSmall,
+                                    ),
+                                    Circularindicator(
+                                        isUsed:
+                                            proteinCalcul != 0 ? true : false,
+                                        backGroundColor:
+                                            Colors.deepPurple.shade200,
+                                        progressColors: Colors.deepPurple,
+                                        textInside:
+                                            "${proteinCalcul.toStringAsFixed(1)} g"),
+                                    addVerticalSpace(5),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Calories',
+                                      style: customTextStyle.headlineSmall,
+                                    ),
+                                    Circularindicator(
+                                        isUsed:
+                                            calUsingRadio != 0 ? true : false,
+                                        backGroundColor: Colors.yellow.shade200,
+                                        progressColors: Colors.yellow.shade900,
+                                        textInside:
+                                            "${calUsingRadio.toStringAsFixed(1)} Cal"),
+                                    addVerticalSpace(5),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      style: customTextStyle.headlineSmall,
+                                      'Carbs',
+                                    ),
+                                    Circularindicator(
+                                        isUsed: carbCalcul != 0 ? true : false,
+                                        backGroundColor: Colors.green.shade200,
+                                        progressColors: Colors.green,
+                                        textInside:
+                                            "${carbCalcul.toStringAsFixed(1)} g"),
+                                    addVerticalSpace(5),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Fat',
+                                      style: customTextStyle.headlineSmall,
+                                    ),
+                                    Circularindicator(
+                                      isUsed: fat != 0 ? true : false,
                                       backGroundColor: Colors.red.shade200,
                                       progressColors: Colors.red.shade800,
-                                      textInside: fat.toStringAsFixed(1)),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
+                                      textInside: "${fat.toStringAsFixed(1)} g",
+                                    ),
+                                    addVerticalSpace(5),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

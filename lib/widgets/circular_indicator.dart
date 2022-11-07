@@ -1,3 +1,4 @@
+import 'package:fina/data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -5,28 +6,31 @@ class Circularindicator extends StatelessWidget {
   final String textInside;
   final Color progressColors;
   final Color backGroundColor;
-  final bool animationTrue;
+  final bool isUsed;
 
   Circularindicator(
       {required this.progressColors,
       required this.textInside,
       required this.backGroundColor,
-      required this.animationTrue});
+      required this.isUsed});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CircularPercentIndicator(
-        animation: animationTrue,
+        animation: true,
         animationDuration: 500,
-        radius: 70,
-        lineWidth: 15,
-        percent: .99,
+        radius: 60,
+        lineWidth: 10,
+        percent: isUsed ? 1 : 0,
         progressColor: progressColors,
         backgroundColor: backGroundColor,
         circularStrokeCap: CircularStrokeCap.round,
-        center: Text(textInside),
+        center: Text(
+          textInside,
+          style: customTextStyle.displaySmall,
+        ),
       ),
     );
   }
