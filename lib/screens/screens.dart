@@ -6,3 +6,4 @@ export 'details_Page.dart';
 export 'info_screen.dart';
 export 'sgin_up.dart';
 export 'dailyNeedCalculator.dart';
+export 'homepage.dart';
