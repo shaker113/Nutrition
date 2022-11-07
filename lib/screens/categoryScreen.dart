@@ -89,7 +89,7 @@ class _Category_PageState extends State<Category_Page> {
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(75),
+                topLeft: Radius.circular(45),
               ),
             ),
             child: StreamBuilder(
@@ -98,7 +98,7 @@ class _Category_PageState extends State<Category_Page> {
                   AsyncSnapshot<QuerySnapshot> streamSnapShot) {
                 return ListView.builder(
                   padding: const EdgeInsets.only(
-                      left: 25, top: 20, bottom: 20, right: 0),
+                      left: 30, top: 20, bottom: 20, right: 0),
                   itemCount: streamSnapShot.data == null
                       ? 0
                       : streamSnapShot.data!.docs.length,
