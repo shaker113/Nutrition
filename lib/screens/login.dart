@@ -155,6 +155,7 @@ class _LogInState extends State<LogIn> {
       Navigator.pushNamed(context, "homepage");
 
       CustomSnakBar("signed in successfully", context);
+      checkRole();
     } on FirebaseAuthException catch (e) {
       CustomSnakBar(e.message, context);
     }

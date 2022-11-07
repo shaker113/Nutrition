@@ -1,7 +1,6 @@
 import 'package:fina/models/firestore_refrences.dart';
 import 'package:fina/models/is_admin.dart';
-import 'package:fina/widgets/drawer.dart';
-import 'package:fina/widgets/homePageWidget.dart';
+
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +19,14 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 127, 162, 245),
         title: const Text("Meals"),
-        actions: [isAdmin ?? false ? AddButton() : SizedBox()],
+        actions: [
+          isAdmin ?? false ? const AddButton() : const SizedBox(),
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "cartpage");
+              },
+              icon: const Icon(Icons.shopping_cart_outlined))
+        ],
       ),
       drawer: const Drawer(
         child: MyDrawer(),

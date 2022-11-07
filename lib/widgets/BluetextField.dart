@@ -10,7 +10,7 @@ class CustomTextfieldBlue extends StatefulWidget {
   final FocusNode? myFocusNode;
   final int? maxLines;
 
-  CustomTextfieldBlue(
+  const CustomTextfieldBlue(
       {super.key,
       this.validator,
       this.theFormater,
@@ -47,6 +47,14 @@ class _CustomTextfieldBlueState extends State<CustomTextfieldBlue> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: backgrounColor, width: 2),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: customRed, width: 2),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: customRed, width: 2),
           borderRadius: BorderRadius.circular(10),
         ),
       ),

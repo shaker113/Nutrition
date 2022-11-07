@@ -128,9 +128,9 @@ class _Details_PageState extends State<Details_Page> {
                               "${double.parse(widget.calories) * itemCount} ",
                               style: TextStyle(fontSize: 20, color: customRed),
                             ),
-                            Text(
+                            const Text(
                               "Cal",
-                              style: const TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 20),
                             ),
                           ],
                         ),
@@ -223,33 +223,36 @@ class _Details_PageState extends State<Details_Page> {
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'PROTEIN',
-                              info:
-                                  "${double.parse(widget.protein) * itemCount}",
-                              unit:"g",
+                              info: (double.parse(widget.protein) * itemCount)
+                                  .toStringAsFixed(1),
+                              unit: "g",
                               imagePath: proteinIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'FIBERS',
-                              info:
-                                  "${double.parse(widget.fibers) * itemCount}",
+                              info: (double.parse(widget.fibers) * itemCount)
+                                  .toStringAsFixed(1),
                               unit: "g",
                               imagePath: fibersIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'CARBS',
-                              info: "${double.parse(widget.carbs) * itemCount}",
+                              info: (double.parse(widget.carbs) * itemCount)
+                                  .toStringAsFixed(1),
                               unit: "g",
                               imagePath: carbsIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'FATS',
-                              info: "${double.parse(widget.fat) * itemCount}",
+                              info: (double.parse(widget.fat) * itemCount)
+                                  .toStringAsFixed(1),
                               unit: "g",
                               imagePath: fatsIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'SUGER',
-                              info: "${double.parse(widget.suger) * itemCount}",
+                              info: (double.parse(widget.suger) * itemCount)
+                                  .toStringAsFixed(1),
                               unit: "g",
                               imagePath: sugarIcon),
                         ],

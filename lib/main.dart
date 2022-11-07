@@ -1,4 +1,3 @@
-import 'package:fina/screens/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
           "sgin up": (context) => const SginUp(),
           "welcome": (context) => const Welcome(),
           "homepage": (context) => const HomePage(),
-          // "categorypage": (context) =>  Category_Page(),
+          "cartpage": (context) => const CartPage(),
           "password reset": (context) => const PasswordResetPage(),
           "infoscreen": (context) => const InfoScreen(),
         },
