@@ -213,20 +213,45 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
               Row(
                 children: [
                   ItemInfoRow(
-                      theItemController: calories, theItemName: "calories"),
+                    theItemController: calories,
+                    theItemName: "calories",
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
+                  ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
-                      theItemController: protein, theItemName: "protein"),
+                      theItemController: protein,
+                      theItemName: "protein",
+                      theFormater: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp('[0-9.]'),
+                        ),
+                      ]),
                 ],
               ),
               addVerticalSpace(10),
               Row(
                 children: [
-                  ItemInfoRow(theItemController: carbs, theItemName: "carbs"),
+                  ItemInfoRow(
+                      theItemController: carbs,
+                      theItemName: "carbs",
+                      theFormater: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp('[0-9.]'),
+                        ),
+                      ]),
                   addHorizantalSpace(5),
                   ItemInfoRow(
                     theItemName: "fibers",
                     theItemController: fibers,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   )
                 ],
               ),
@@ -236,6 +261,11 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
                   ItemInfoRow(
                     theItemName: "Weight",
                     theItemController: weight,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
@@ -250,11 +280,21 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
                   ItemInfoRow(
                     theItemName: "Suger",
                     theItemController: suger,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
                     theItemName: "fat",
                     theItemController: fat,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -435,6 +475,4 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
       ],
     );
   }
-
-
 }
