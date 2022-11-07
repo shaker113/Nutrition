@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:io';
 import 'package:fina/models/firestore_refrences.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
@@ -174,20 +175,44 @@ class _AddingPageState extends State<AddingPage> {
               Row(
                 children: [
                   ItemInfoRow(
-                      theItemController: calories, theItemName: "calories"),
+                      theItemController: calories,
+                      theItemName: "calories",
+                      theFormater: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp('[0-9.]'),
+                        ),
+                      ]),
                   addHorizantalSpace(5),
                   ItemInfoRow(
-                      theItemController: protein, theItemName: "protein"),
+                      theItemController: protein,
+                      theItemName: "protein",
+                      theFormater: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp('[0-9.]'),
+                        ),
+                      ]),
                 ],
               ),
               addVerticalSpace(10),
               Row(
                 children: [
-                  ItemInfoRow(theItemController: carbs, theItemName: "carbs"),
+                  ItemInfoRow(
+                      theItemController: carbs,
+                      theItemName: "carbs",
+                      theFormater: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp('[0-9.]'),
+                        ),
+                      ]),
                   addHorizantalSpace(5),
                   ItemInfoRow(
                     theItemName: "fibers",
                     theItemController: fibers,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   )
                 ],
               ),
@@ -197,6 +222,11 @@ class _AddingPageState extends State<AddingPage> {
                   ItemInfoRow(
                     theItemName: "Weight",
                     theItemController: weight,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
@@ -211,11 +241,21 @@ class _AddingPageState extends State<AddingPage> {
                   ItemInfoRow(
                     theItemName: "Suger",
                     theItemController: suger,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
                     theItemName: "fat",
                     theItemController: fat,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   ),
                 ],
               ),

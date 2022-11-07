@@ -5,9 +5,13 @@ import 'package:flutter/services.dart';
 import '../data/data.dart';
 
 class ItemInfoRow extends StatelessWidget {
-  const ItemInfoRow(
-      {Key? key, required this.theItemController, required this.theItemName})
+  ItemInfoRow(
+      {Key? key,
+      required this.theItemController,
+      required this.theItemName,
+      this.theFormater})
       : super(key: key);
+  List<TextInputFormatter>? theFormater;
   final String theItemName;
   final TextEditingController theItemController;
 
@@ -26,9 +30,7 @@ class ItemInfoRow extends StatelessWidget {
           addVerticalSpace(10),
           CustomTextfieldBlue(
             label: theItemName,
-            theFormater: [
-              FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
-            ],
+            theFormater: theFormater,
             theController: theItemController,
           ),
         ],

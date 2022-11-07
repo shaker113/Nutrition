@@ -20,8 +20,6 @@ class Category_Page extends StatefulWidget {
 }
 
 class _Category_PageState extends State<Category_Page> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,14 +87,18 @@ class _Category_PageState extends State<Category_Page> {
           Container(
             height: screenHeigth! - 150,
             decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(75))),
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(75),
+              ),
+            ),
             child: StreamBuilder(
               stream: widget.theCollectionReference.snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> streamSnapShot) {
                 return ListView.builder(
-                  padding: const EdgeInsets.only(left: 25, top: 45, right: 0),
+                  padding: const EdgeInsets.only(
+                      left: 25, top: 20, bottom: 20, right: 0),
                   itemCount: streamSnapShot.data == null
                       ? 0
                       : streamSnapShot.data!.docs.length,

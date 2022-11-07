@@ -23,7 +23,7 @@ class Circularindicator extends StatelessWidget {
         animationDuration: 500,
         radius: 60,
         lineWidth: 10,
-        percent: isUsed ? 1 : 0,
+        percent: isUsed ? 1 : 1 / 2,
         progressColor: progressColors,
         backgroundColor: backGroundColor,
         circularStrokeCap: CircularStrokeCap.round,
