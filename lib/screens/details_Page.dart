@@ -1,25 +1,15 @@
+// import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fina/data/colors.dart';
 import 'package:flutter/material.dart';
 import '../data/data.dart';
 import '../models/models.dart';
 import '../widgets/widgets.dart';
 
 class Details_Page extends StatefulWidget {
-  final String heroTag,
-      name,
-      calories,
-      protein,
-      carbs,
-      fibers,
-      weight,
-      vitamins,
-      suger,
-      fat,
-      description,
-      id;
+  final String heroTag, name, vitamins, description, id;
+  double calories, protein, carbs, fibers, weight, suger, fat;
   int itemCount;
-
+  bool isInCart;
   Details_Page(
       {super.key,
       required this.heroTag,
@@ -34,7 +24,8 @@ class Details_Page extends StatefulWidget {
       required this.suger,
       required this.id,
       required this.itemCount,
-      required this.description});
+      required this.description,
+      required this.isInCart});
 
   @override
   State<Details_Page> createState() => _Details_PageState();
@@ -134,7 +125,12 @@ class _Details_PageState extends State<Details_Page> {
                         Row(
                           children: [
                             Text(
-                              "${double.parse(widget.calories) * itemCount} ",
+                              widget.isInCart
+                                  ? (widget.calories *
+                                          widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.calories * itemCount)
+                                      .toStringAsFixed(1),
                               style: TextStyle(fontSize: 20, color: customRed),
                             ),
                             const Text(
@@ -159,9 +155,15 @@ class _Details_PageState extends State<Details_Page> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  isZero
-                                      ? deleteFromCart()
-                                      : changeItemCount(false);
+                                  if (widget.isInCart) {
+                                    isZero
+                                        ? deleteFromCart()
+                                        : changeItemCount(false);
+                                  } else {
+                                    setState(() {
+                                      itemCount > 1 ? itemCount-- : null;
+                                    });
+                                  }
                                 },
                                 child: Container(
                                   height: 25,
@@ -179,13 +181,21 @@ class _Details_PageState extends State<Details_Page> {
                                 ),
                               ),
                               Text(
-                                "${widget.itemCount}",
+                                widget.isInCart
+                                    ? "${widget.itemCount}"
+                                    : "$itemCount",
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.white),
                               ),
                               InkWell(
                                 onTap: () {
-                                  changeItemCount(true);
+                                  if (widget.isInCart) {
+                                    changeItemCount(true);
+                                  } else {
+                                    setState(() {
+                                      itemCount++;
+                                    });
+                                  }
                                 },
                                 child: Container(
                                   height: 25,
@@ -215,8 +225,12 @@ class _Details_PageState extends State<Details_Page> {
                         children: [
                           buildInfoCard(
                               cardTiltle: 'WEIGHT',
-                              info:
-                                  "${double.parse(widget.weight) * itemCount}",
+                              info: widget.isInCart
+                                  ? (widget.weight *
+                                          widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.weight * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: weightIcon),
                           addHorizantalSpace(15),
@@ -228,36 +242,56 @@ class _Details_PageState extends State<Details_Page> {
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'PROTEIN',
-                              info: (double.parse(widget.protein) * itemCount)
-                                  .toStringAsFixed(1),
+                              info: widget.isInCart
+                                  ? (widget.protein *
+                                          widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.protein * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: proteinIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'FIBERS',
-                              info: (double.parse(widget.fibers) * itemCount)
-                                  .toStringAsFixed(1),
+                              info: widget.isInCart
+                                  ? (widget.fibers *
+                                          widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.fibers * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: fibersIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'CARBS',
-                              info: (double.parse(widget.carbs) * itemCount)
-                                  .toStringAsFixed(1),
+                              info: widget.isInCart
+                                  ? (widget.carbs *
+                                          widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.carbs * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: carbsIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'FATS',
-                              info: (double.parse(widget.fat) * itemCount)
-                                  .toStringAsFixed(1),
+                              info: widget.isInCart
+                                  ? (widget.fat *
+                                          widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.fat * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: fatsIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'SUGER',
-                              info: (double.parse(widget.suger) * itemCount)
-                                  .toStringAsFixed(1),
+                              info: widget.isInCart
+                                  ? (widget.suger *
+                                          widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.suger * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: sugarIcon),
                         ],

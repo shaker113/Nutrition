@@ -28,16 +28,8 @@ class _CartFoodItemState extends State<CartFoodItem> {
     super.initState();
   }
 
-  late String name = "",
-      calories = "0",
-      carbs,
-      fibers,
-      protein,
-      vitamins,
-      weight,
-      fat,
-      suger,
-      description;
+  late String name = "", description, vitamins;
+  late double calories = 0, carbs, fibers, protein, weight, fat, suger;
   String? imageLink;
   bool isZero = false;
 
@@ -51,10 +43,11 @@ class _CartFoodItemState extends State<CartFoodItem> {
           context,
           MaterialPageRoute(
             builder: (context) => Details_Page(
+              isInCart: true,
               heroTag: imageLink ??
                   "https://academy.hsoub.com/uploads/monthly_2020_08/MIT-Web-Loading.jpg.165b6feae43884b14338238f0a703f99.jpg",
               name: name,
-              calories: calories.toString(),
+              calories: calories,
               carbs: carbs,
               fibers: fibers,
               protein: protein,
@@ -97,7 +90,7 @@ class _CartFoodItemState extends State<CartFoodItem> {
                       style: customTextStyle.bodySmall,
                     ),
                     Text(
-                      "${(double.parse(calories) * widget.itemCount).toStringAsFixed(1)} Cal",
+                      "${(calories * widget.itemCount).toStringAsFixed(1)} Cal",
                       style: customTextStyle.displaySmall,
                     )
                   ],
