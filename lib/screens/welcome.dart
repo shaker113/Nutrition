@@ -16,7 +16,7 @@ class Welcome extends StatefulWidget {
 class _WelcomeState extends State<Welcome> {
   @override
   void initState() {
-    checkRole();
+    userId = null;
     super.initState();
   }
 

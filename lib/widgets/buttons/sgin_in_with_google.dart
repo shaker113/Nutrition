@@ -13,11 +13,14 @@ class GoogleButton extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         await signInWithGoogle();
+        userId = authInstance.currentUser?.uid;
+        userInfo = userCollection.doc(userId);
         AuthService().saveAcount(
             id: userId,
             name: authInstance.currentUser?.displayName,
             email: authInstance.currentUser?.email);
 
+        checkRole();
         Navigator.pushNamed(context, "homepage");
         CustomSnakBar("signed in successfully", context);
       },

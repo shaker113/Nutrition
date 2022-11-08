@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../models/models.dart';
 
-class buildFoodItem extends StatelessWidget {
+class buildFoodItem extends StatefulWidget {
   String imageLink,
       name,
       calories,
@@ -46,6 +46,28 @@ class buildFoodItem extends StatelessWidget {
       required this.theCollectionReference});
 
   @override
+  State<buildFoodItem> createState() => _buildFoodItemState();
+}
+
+class _buildFoodItemState extends State<buildFoodItem>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  bool isAdd = true;
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
@@ -53,17 +75,19 @@ class buildFoodItem extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => Details_Page(
-              heroTag: imageLink,
-              name: name,
-              calories: calories,
-              carbs: carbs,
-              description: description,
-              fibers: fibers,
-              protein: protein,
-              vitamins: vitamins,
-              weight: weight,
-              fat: fat,
-              suger: suger,
+              id: widget.id,
+              itemCount: 1,
+              heroTag: widget.imageLink,
+              name: widget.name,
+              calories: widget.calories,
+              carbs: widget.carbs,
+              description: widget.description,
+              fibers: widget.fibers,
+              protein: widget.protein,
+              vitamins: widget.vitamins,
+              weight: widget.weight,
+              fat: widget.fat,
+              suger: widget.suger,
             ),
           ));
         },
@@ -73,9 +97,9 @@ class buildFoodItem extends StatelessWidget {
             Row(
               children: [
                 Hero(
-                    tag: imageLink,
+                    tag: widget.imageLink,
                     child: CircleAvatar(
-                      foregroundImage: NetworkImage(imageLink),
+                      foregroundImage: NetworkImage(widget.imageLink),
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.white,
                       radius: 40,
@@ -85,11 +109,11 @@ class buildFoodItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      widget.name,
                       style: customTextStyle.bodySmall,
                     ),
                     Text(
-                      "$calories Cal",
+                      "${widget.calories} Cal",
                       style: customTextStyle.displaySmall,
                     )
                   ],
@@ -105,25 +129,25 @@ class buildFoodItem extends StatelessWidget {
                             context,
                             PageTransition(
                               child: editItemButtonFunction(
-                                  calories: calories,
-                                  imageLink: imageLink,
-                                  name: name,
-                                  carbs: carbs,
-                                  fibers: fibers,
-                                  protein: protein,
-                                  vitamins: vitamins,
-                                  weight: weight,
-                                  fat: fat,
-                                  suger: suger,
-                                  description: description,
-                                  id: id,
-                                  isHighCrbs: isHighCrbs,
-                                  isHighIron: isHighIron,
-                                  isHighProtein: isHighProtein,
-                                  isSugerFree: isSugerFree,
-                                  category: category,
+                                  calories: widget.calories,
+                                  imageLink: widget.imageLink,
+                                  name: widget.name,
+                                  carbs: widget.carbs,
+                                  fibers: widget.fibers,
+                                  protein: widget.protein,
+                                  vitamins: widget.vitamins,
+                                  weight: widget.weight,
+                                  fat: widget.fat,
+                                  suger: widget.suger,
+                                  description: widget.description,
+                                  id: widget.id,
+                                  isHighCrbs: widget.isHighCrbs,
+                                  isHighIron: widget.isHighIron,
+                                  isHighProtein: widget.isHighProtein,
+                                  isSugerFree: widget.isSugerFree,
+                                  category: widget.category,
                                   theCollectionReference:
-                                      theCollectionReference),
+                                      widget.theCollectionReference),
                               type: PageTransitionType.bottomToTop,
                             ),
                           );
@@ -135,10 +159,31 @@ class buildFoodItem extends StatelessWidget {
                       )
                     : const SizedBox(),
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite_border_outlined,
+                  iconSize: 30,
+                  onPressed: () {
+                    if (isAdd) {
+                      isAdd = !isAdd;
+
+                      try {
+                        saveItemt();
+                        controller.forward().then((value) async {
+                          await Future.delayed(Duration(microseconds: 333));
+                          controller.reverse();
+                          isAdd = !isAdd;
+                        });
+                      } on Exception catch (e) {
+                        print("======================");
+                        print(e);
+                      }
+                    }
+                  },
+                  icon: AnimatedIcon(
+                    progress: controller,
+
+                    icon: AnimatedIcons.add_event,
+                    // Icons.add_shopping_cart_outlined,
                     color: Colors.black,
+                    // ),
                   ),
                 ),
               ],
@@ -147,5 +192,24 @@ class buildFoodItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future saveItemt() async {
+    QuerySnapshot mydoc =
+        await userCartCollection.where('id', isEqualTo: widget.id).get();
+
+    if (mydoc.docs.isEmpty) {
+      final json = {
+        'category': widget.category,
+        'id': widget.id,
+        'itemId': '',
+        'itemCount': 1,
+      }; //to Create doucuman
+      await userCartCollection.add(json);
+    } else {
+      userCartCollection
+          .doc(mydoc.docs[0].id)
+          .update({'itemCount': mydoc.docs[0]['itemCount'] + 1});
+    }
   }
 }

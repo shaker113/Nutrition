@@ -1,8 +1,7 @@
-import 'package:fina/models/firestore_refrences.dart';
-import 'package:fina/models/is_admin.dart';
-
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import '../data/data.dart';
+import '../models/models.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,7 +12,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    checkRole();
+    userId = authInstance.currentUser?.uid;
+    userInfo = userCollection.doc(userId);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    screenHeigth = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

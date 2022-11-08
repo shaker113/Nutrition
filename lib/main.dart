@@ -33,8 +33,6 @@ class MyApp extends StatelessWidget {
           "password reset": (context) => const PasswordResetPage(),
           "infoscreen": (context) => const InfoScreen(),
         },
-        home: const Welcome()
-        // isLogin == true ? const Homepage() : const Welcome()
-        );
+        home: isLogin == true ? const HomePage() : const Welcome());
   }
 }

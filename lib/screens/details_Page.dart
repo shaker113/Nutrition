@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/colors.dart';
 import 'package:flutter/material.dart';
 import '../data/data.dart';
+import '../models/models.dart';
 import '../widgets/widgets.dart';
 
 class Details_Page extends StatefulWidget {
@@ -14,9 +16,11 @@ class Details_Page extends StatefulWidget {
       vitamins,
       suger,
       fat,
-      description;
+      description,
+      id;
+  int itemCount;
 
-  const Details_Page(
+  Details_Page(
       {super.key,
       required this.heroTag,
       required this.name,
@@ -28,6 +32,8 @@ class Details_Page extends StatefulWidget {
       required this.weight,
       required this.fat,
       required this.suger,
+      required this.id,
+      required this.itemCount,
       required this.description});
 
   @override
@@ -35,9 +41,12 @@ class Details_Page extends StatefulWidget {
 }
 
 class _Details_PageState extends State<Details_Page> {
+  bool isZero = false;
+
   int itemCount = 1;
   @override
   Widget build(BuildContext context) {
+    widget.itemCount == 0 ? isZero = true : isZero = false;
     return Scaffold(
       backgroundColor: backgrounColor2,
       appBar: AppBar(
@@ -140,7 +149,7 @@ class _Details_PageState extends State<Details_Page> {
                           width: 1,
                         ),
                         Container(
-                          width: 125,
+                          width: 105,
                           height: 40,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(17),
@@ -150,11 +159,9 @@ class _Details_PageState extends State<Details_Page> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  setState(() {
-                                    if (itemCount > 1) {
-                                      itemCount--;
-                                    }
-                                  });
+                                  isZero
+                                      ? deleteFromCart()
+                                      : changeItemCount(false);
                                 },
                                 child: Container(
                                   height: 25,
@@ -162,9 +169,9 @@ class _Details_PageState extends State<Details_Page> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(7),
                                       color: backgrounColor2),
-                                  child: const Center(
+                                  child: Center(
                                     child: Icon(
-                                      Icons.remove,
+                                      isZero ? Icons.delete : Icons.remove,
                                       color: Colors.white,
                                       size: 20,
                                     ),
@@ -172,15 +179,13 @@ class _Details_PageState extends State<Details_Page> {
                                 ),
                               ),
                               Text(
-                                "$itemCount",
+                                "${widget.itemCount}",
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.white),
                               ),
                               InkWell(
                                 onTap: () {
-                                  setState(() {
-                                    itemCount++;
-                                  });
+                                  changeItemCount(true);
                                 },
                                 child: Container(
                                   height: 25,
@@ -328,5 +333,37 @@ class _Details_PageState extends State<Details_Page> {
         );
       },
     );
+  }
+
+  Future deleteFromCart() async {
+    QuerySnapshot mydoc =
+        await userCartCollection.where('id', isEqualTo: widget.id).get();
+    String itemId = mydoc.docs[0].id;
+    print(itemId);
+
+    userCartCollection.doc(itemId).delete();
+    Navigator.pop(context);
+  }
+
+  Future changeItemCount(bool theSign) async {
+    QuerySnapshot mydoc =
+        await userCartCollection.where('id', isEqualTo: widget.id).get();
+    int savedItemCount = mydoc.docs[0]['itemCount'];
+    String itemId = mydoc.docs[0].id;
+    setState(() {
+      if (theSign) {
+        userCartCollection
+            .doc(itemId)
+            .update({'itemCount': savedItemCount + 1});
+        widget.itemCount++;
+      } else {
+        userCartCollection
+            .doc(itemId)
+            .update({'itemCount': savedItemCount - 1});
+        widget.itemCount--;
+      }
+    });
+
+    print(itemId);
   }
 }
