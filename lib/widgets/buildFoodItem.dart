@@ -101,7 +101,8 @@ class _buildFoodItemState extends State<buildFoodItem>
                     child: CircleAvatar(
                       foregroundImage: NetworkImage(widget.imageLink),
                       backgroundImage: const NetworkImage(
-                          "https://academy.hsoub.com/uploads/monthly_2020_08/MIT-Web-Loading.jpg.165b6feae43884b14338238f0a703f99.jpg"),
+                        "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921",
+                      ),
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.white,
                       radius: 40,
