@@ -1,14 +1,7 @@
-import 'dart:ffi';
-
 import 'package:fina/data/data.dart';
 import 'package:fina/models/validation.dart';
-import 'package:fina/widgets/BluetextField.dart';
-import 'package:fina/widgets/buttons/back_button.dart';
-import 'package:fina/widgets/buttons/gradiantButton.dart';
-import 'package:fina/widgets/spacing.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:fina/widgets/circular_indicator.dart';
 import 'package:flutter/services.dart';
 
 class DailyNeedCalculator extends StatefulWidget {

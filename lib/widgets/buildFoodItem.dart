@@ -8,19 +8,8 @@ import 'package:page_transition/page_transition.dart';
 import '../models/models.dart';
 
 class buildFoodItem extends StatefulWidget {
-  String imageLink,
-      name,
-      calories,
-      protein,
-      carbs,
-      fibers,
-      weight,
-      vitamins,
-      suger,
-      fat,
-      description,
-      id,
-      category;
+  String imageLink, name, vitamins, description, id, category;
+  double calories, protein, carbs, fibers, weight, suger, fat;
   bool isSugerFree, isHighProtein, isHighIron, isHighCrbs;
   CollectionReference theCollectionReference;
 
@@ -75,6 +64,7 @@ class _buildFoodItemState extends State<buildFoodItem>
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => Details_Page(
+              isInCart: false,
               id: widget.id,
               itemCount: 1,
               heroTag: widget.imageLink,
@@ -101,7 +91,8 @@ class _buildFoodItemState extends State<buildFoodItem>
                     child: CircleAvatar(
                       foregroundImage: NetworkImage(widget.imageLink),
                       backgroundImage: const NetworkImage(
-                          "https://academy.hsoub.com/uploads/monthly_2020_08/MIT-Web-Loading.jpg.165b6feae43884b14338238f0a703f99.jpg"),
+                        "https://cdn.dribbble.com/users/3337757/screenshots/6825268/076_-loading_animated_dribbble_copy.gif",
+                      ),
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.white,
                       radius: 40,

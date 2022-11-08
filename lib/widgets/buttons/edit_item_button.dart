@@ -12,19 +12,8 @@ import '../widgets.dart';
 
 class editItemButtonFunction extends StatefulWidget {
   bool? isSugerFree, isHighProtein, isHighIron, isHighCrbs;
-  String imageLink,
-      name,
-      calories,
-      protein,
-      carbs,
-      fibers,
-      weight,
-      suger,
-      fat,
-      vitamins,
-      description,
-      id,
-      category;
+  String imageLink, name, vitamins, description, id, category;
+  double calories, protein, carbs, fibers, weight, suger, fat;
   CollectionReference theCollectionReference;
   editItemButtonFunction(
       {super.key,
@@ -78,21 +67,21 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
     TextEditingController description = TextEditingController();
     description.text = widget.description;
     TextEditingController calories = TextEditingController();
-    calories.text = widget.calories;
+    calories.text = widget.calories.toString();
     TextEditingController protein = TextEditingController();
-    protein.text = widget.protein;
+    protein.text = widget.protein.toString();
     TextEditingController carbs = TextEditingController();
-    carbs.text = widget.carbs;
+    carbs.text = widget.carbs.toString();
     TextEditingController fibers = TextEditingController();
-    fibers.text = widget.fibers;
+    fibers.text = widget.fibers.toString();
     TextEditingController weight = TextEditingController();
-    weight.text = widget.weight;
+    weight.text = widget.weight.toString();
     TextEditingController vitamins = TextEditingController();
     vitamins.text = widget.vitamins;
     TextEditingController fat = TextEditingController();
-    fat.text = widget.fat;
+    fat.text = widget.fat.toString();
     TextEditingController suger = TextEditingController();
-    suger.text = widget.suger;
+    suger.text = widget.suger.toString();
 
     chosenCategory = widget.category;
     return Scaffold(
@@ -371,14 +360,14 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
                         name: name.text,
                         id: widget.id,
                         description: description.text,
-                        calories: calories.text,
-                        protein: protein.text,
-                        carbs: carbs.text,
-                        fibers: fibers.text,
-                        weight: weight.text,
+                        calories: double.parse(calories.text),
+                        protein: double.parse(protein.text),
+                        carbs: double.parse(carbs.text),
+                        fibers: double.parse(fibers.text),
+                        weight: double.parse(weight.text),
                         vitamins: vitamins.text,
-                        fat: fat.text,
-                        suger: suger.text,
+                        fat: double.parse(fat.text),
+                        suger: double.parse(suger.text),
                         category: chosenCategory,
                         imageLink: image != null ? imageUrl : widget.imageLink,
                         isSugerFree: isSugerFree,
@@ -412,14 +401,14 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
       {required String name,
       required String? id,
       required String description,
-      required String calories,
-      required String protein,
-      required String carbs,
-      required String fibers,
-      required String weight,
+      required double calories,
+      required double protein,
+      required double carbs,
+      required double fibers,
+      required double weight,
       required String vitamins,
-      required String suger,
-      required String fat,
+      required double suger,
+      required double fat,
       required String category,
       required String? imageLink,
       required bool isSugerFree,
