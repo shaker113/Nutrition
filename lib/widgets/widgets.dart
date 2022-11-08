@@ -17,3 +17,4 @@ export 'drawer.dart';
 // export 'buttons/edit_item_button.dart';
 export 'circular_indicator.dart';
 export 'item_info_Coloumn.dart';
+export 'cartFoodItem.dart';

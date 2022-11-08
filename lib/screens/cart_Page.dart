@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
+import 'package:fina/models/firestore_refrences.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +65,29 @@ class _CartPageState extends State<CartPage> {
                     topLeft: Radius.circular(45),
                     topRight: Radius.circular(45)),
               ),
-              child: Text("Sd"))
+              child: StreamBuilder(
+                stream: userCartCollection.snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> streamSnapShot) {
+                  return ListView.builder(
+                    padding: const EdgeInsets.only(
+                        left: 15, top: 20, bottom: 20, right: 5),
+                    itemCount: streamSnapShot.data == null
+                        ? 0
+                        : streamSnapShot.data!.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final DocumentSnapshot documentSnapshot =
+                          streamSnapShot.data!.docs[index];
+                      return CartFoodItem(
+                        itemId: documentSnapshot['itemId'],
+                        category: documentSnapshot['category'],
+                        id: documentSnapshot['id'],
+                        itemCount: documentSnapshot['itemCount'],
+                      );
+                    },
+                  );
+                },
+              ))
         ],
       ),
     );

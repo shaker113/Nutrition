@@ -162,7 +162,10 @@ class _SginUpState extends State<SginUp> {
         email: email.text,
         password: password.text,
       );
+      userId = authInstance.currentUser?.uid;
+      userInfo = userCollection.doc(userId);
       AuthService().saveAcount(name: name.text, id: userId, email: email.text);
+      checkRole();
 
       if (myUser.user?.emailVerified == false) {
         await authInstance.currentUser!.sendEmailVerification();
