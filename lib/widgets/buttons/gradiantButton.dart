@@ -9,9 +9,10 @@ class GradientButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       alignment: Alignment.center,
-      width: screenWidth! * 0.8,
+      width: screenWidth * 0.8,
       height: 40,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(9),
@@ -19,18 +20,14 @@ class GradientButton extends StatelessWidget {
         //   color: backgrounColor2.withOpacity(0.1),
         // ),
         gradient: RadialGradient(
-          radius: 6,
+          radius: 4,
           center: Alignment.center,
-          colors: [
-            buttonsColor,
-            backgrounColor2.withOpacity(0.1),
-            Colors.transparent
-          ],
+          colors: [buttonsColor, backgrounColor],
         ),
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          fixedSize: Size(screenWidth! * 0.8, 50),
+          fixedSize: Size(screenWidth * 0.8, 50),
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),

@@ -1,4 +1,3 @@
-import 'package:fina/screens/sgin_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +28,11 @@ class MyApp extends StatelessWidget {
           "sgin in": (context) => const LogIn(),
           "sgin up": (context) => const SginUp(),
           "welcome": (context) => const Welcome(),
-          "homepage": (context) => const Home_Page(),
+          "homepage": (context) => const HomePage(),
+          "cartpage": (context) => const CartPage(),
           "password reset": (context) => const PasswordResetPage(),
+          "infoscreen": (context) => const InfoScreen(),
         },
-        home: const Welcome()
-        // isLogin == true ? const Homepage() : const Welcome()
-        );
+        home: isLogin == true ? const HomePage() : const Welcome());
   }
 }
