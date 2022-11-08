@@ -197,6 +197,7 @@ class _buildFoodItemState extends State<buildFoodItem>
         'id': widget.id,
         'itemId': '',
         'itemCount': 1,
+        'calories': widget.calories
       }; //to Create doucuman
       await userCartCollection.add(json);
     } else {

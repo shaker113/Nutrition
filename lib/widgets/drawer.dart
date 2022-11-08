@@ -123,10 +123,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: const Text("Log Out"),
             onTap: () {
               AuthService().signOut();
-              Navigator.popUntil(
-                context,
-                ModalRoute.withName(Navigator.defaultRouteName),
-              );
+              Navigator.popAndPushNamed(context, "welcome");
             },
           ),
         ],
