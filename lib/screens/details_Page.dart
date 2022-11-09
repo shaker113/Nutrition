@@ -95,14 +95,14 @@ class _Details_PageState extends State<Details_Page> {
                 left: screenWidth! / 2 - 100,
                 child: Hero(
                   tag: widget.heroTag,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: NetworkImage(widget.heroTag),
-                            fit: BoxFit.cover)),
-                    height: 200,
-                    width: 200,
+                  child: CircleAvatar(
+                    foregroundImage: NetworkImage(widget.heroTag),
+                    backgroundImage: const AssetImage(
+                      loadingIcon,
+                    ),
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.white,
+                    radius: 100,
                   ),
                 ),
               ),
@@ -126,8 +126,7 @@ class _Details_PageState extends State<Details_Page> {
                           children: [
                             Text(
                               widget.isInCart
-                                  ? (widget.calories *
-                                          widget.itemCount)
+                                  ? (widget.calories * widget.itemCount)
                                       .toStringAsFixed(1)
                                   : (widget.calories * itemCount)
                                       .toStringAsFixed(1),
@@ -220,14 +219,15 @@ class _Details_PageState extends State<Details_Page> {
                     addVerticalSpace(20),
                     SizedBox(
                       height: 140,
+                      width: screenWidth,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
                         children: [
                           buildInfoCard(
                               cardTiltle: 'WEIGHT',
                               info: widget.isInCart
-                                  ? (widget.weight *
-                                          widget.itemCount)
+                                  ? (widget.weight * widget.itemCount)
                                       .toStringAsFixed(1)
                                   : (widget.weight * itemCount)
                                       .toStringAsFixed(1),
@@ -243,8 +243,7 @@ class _Details_PageState extends State<Details_Page> {
                           buildInfoCard(
                               cardTiltle: 'PROTEIN',
                               info: widget.isInCart
-                                  ? (widget.protein *
-                                          widget.itemCount)
+                                  ? (widget.protein * widget.itemCount)
                                       .toStringAsFixed(1)
                                   : (widget.protein * itemCount)
                                       .toStringAsFixed(1),
@@ -254,8 +253,7 @@ class _Details_PageState extends State<Details_Page> {
                           buildInfoCard(
                               cardTiltle: 'FIBERS',
                               info: widget.isInCart
-                                  ? (widget.fibers *
-                                          widget.itemCount)
+                                  ? (widget.fibers * widget.itemCount)
                                       .toStringAsFixed(1)
                                   : (widget.fibers * itemCount)
                                       .toStringAsFixed(1),
@@ -265,8 +263,7 @@ class _Details_PageState extends State<Details_Page> {
                           buildInfoCard(
                               cardTiltle: 'CARBS',
                               info: widget.isInCart
-                                  ? (widget.carbs *
-                                          widget.itemCount)
+                                  ? (widget.carbs * widget.itemCount)
                                       .toStringAsFixed(1)
                                   : (widget.carbs * itemCount)
                                       .toStringAsFixed(1),
@@ -276,19 +273,16 @@ class _Details_PageState extends State<Details_Page> {
                           buildInfoCard(
                               cardTiltle: 'FATS',
                               info: widget.isInCart
-                                  ? (widget.fat *
-                                          widget.itemCount)
+                                  ? (widget.fat * widget.itemCount)
                                       .toStringAsFixed(1)
-                                  : (widget.fat * itemCount)
-                                      .toStringAsFixed(1),
+                                  : (widget.fat * itemCount).toStringAsFixed(1),
                               unit: "g",
                               imagePath: fatsIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'SUGER',
                               info: widget.isInCart
-                                  ? (widget.suger *
-                                          widget.itemCount)
+                                  ? (widget.suger * widget.itemCount)
                                       .toStringAsFixed(1)
                                   : (widget.suger * itemCount)
                                       .toStringAsFixed(1),

@@ -5,6 +5,16 @@ import 'firebase_options.dart';
 import 'models/models.dart';
 import 'screens/screens.dart';
 
+// profile pic
+// user info qustions
+// profile page shows user info
+// calculating base goal calories for users atomaticlly
+// fat percentage calcuator ((if we have time))
+// sorting system
+// recommandation system
+// clear all button in cart screen
+// making details page scrollable
+
 bool? isLogin;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

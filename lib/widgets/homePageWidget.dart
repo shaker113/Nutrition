@@ -60,20 +60,13 @@ class CategoryBox extends StatelessWidget {
                     topRight: Radius.circular(20),
                   ),
                   image: DecorationImage(
-                      fit: BoxFit.cover, image: NetworkImage(imagURL))),
+                      fit: BoxFit.cover, image: AssetImage(imagURL))),
             ),
             addVerticalSpace(10),
             Text(
               title,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(15.0),
-            //   child: Text(
-            //     subtitle,
-            //     style: const TextStyle(fontSize: 15),
-            //   ),
-            // ),
           ],
         ),
       ),
