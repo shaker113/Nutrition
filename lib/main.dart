@@ -6,14 +6,23 @@ import 'models/models.dart';
 import 'screens/screens.dart';
 
 // profile pic
-// user info qustions
-// profile page shows user info
+// user info qustions                                      {{salh}}
+// profile page shows user info                            {{malek}}
 // calculating base goal calories for users atomaticlly
-// fat percentage calcuator ((if we have time))
-// sorting system
+// fat percentage calcuator ((if we have time))            {{rami}}
+// sorting system                                          {{shaker}}
 // recommandation system
-// clear all button in cart screen
+// clear all button in cart screen                         {{shaker}}  Done
 // making details page scrollable
+// splash screen
+// app icon
+// app name
+// show dialog for sgin out
+// show dialog when the user add item to his cart
+// send notifications                                      {{mohammad}}
+// show info about nutritions
+// show healht rleated news with api ((IF we have time))
+// water animation for water counter
 
 bool? isLogin;
 Future<void> main() async {
