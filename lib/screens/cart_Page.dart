@@ -59,7 +59,7 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                 ),
-                Clear_All(),
+                clearAll(),
               ],
             ),
           ),
@@ -131,7 +131,7 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  ElevatedButton Clear_All() {
+  ElevatedButton clearAll() {
     if (myCartItems == null || myCartItems! < 1) {
       isEmpty = false;
     } else {

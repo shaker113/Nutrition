@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/screens/details_Page.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class CartFoodItem extends StatefulWidget {
 }
 
 class _CartFoodItemState extends State<CartFoodItem> {
+  static final cus = CacheManagerLogLevel;
   @override
   void initState() {
     getItemData();
@@ -44,8 +46,7 @@ class _CartFoodItemState extends State<CartFoodItem> {
           MaterialPageRoute(
             builder: (context) => Details_Page(
               isInCart: true,
-              heroTag: imageLink ??
-                  "https://academy.hsoub.com/uploads/monthly_2020_08/MIT-Web-Loading.jpg.165b6feae43884b14338238f0a703f99.jpg",
+              heroTag: imageLink != null ? imageLink! : loadingIcon,
               name: name,
               calories: calories,
               carbs: carbs,
@@ -70,12 +71,13 @@ class _CartFoodItemState extends State<CartFoodItem> {
             Row(
               children: [
                 Hero(
-                    tag: imageLink ??
-                        "https://academy.hsoub.com/uploads/monthly_2020_08/MIT-Web-Loading.jpg.165b6feae43884b14338238f0a703f99.jpg",
+                    tag: imageLink != null ? imageLink! : loadingIcon,
                     child: CircleAvatar(
-                      foregroundImage: NetworkImage(
-                        imageLink ??
-                            "https://academy.hsoub.com/uploads/monthly_2020_08/MIT-Web-Loading.jpg.165b6feae43884b14338238f0a703f99.jpg",
+                      foregroundImage: imageLink != null
+                          ? CachedNetworkImageProvider(imageLink!)
+                          : null,
+                      backgroundImage: const AssetImage(
+                        loadingIcon,
                       ),
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.white,
@@ -161,7 +163,6 @@ class _CartFoodItemState extends State<CartFoodItem> {
     QuerySnapshot mydoc =
         await userCartCollection.where('id', isEqualTo: widget.id).get();
     String itemId = mydoc.docs[0].id;
-    print(itemId);
 
     userCartCollection.doc(itemId).delete();
   }
@@ -179,7 +180,6 @@ class _CartFoodItemState extends State<CartFoodItem> {
         : userCartCollection
             .doc(itemId)
             .update({'itemCount': savedItemCount - 1});
-    print(itemId);
   }
 
   Future getItemData() async {

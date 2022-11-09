@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
-import 'package:fina/widgets/buttons/add_Item_button.dart';
-import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
-
 import '../models/models.dart';
-import '../widgets/buildFoodItem.dart';
+import '../widgets/widgets.dart';
 
 class Category_Page extends StatefulWidget {
   CollectionReference theCollectionReference;
@@ -20,6 +17,8 @@ class Category_Page extends StatefulWidget {
 }
 
 class _Category_PageState extends State<Category_Page> {
+  String sortBy = 'name';
+  bool descending = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,18 +43,14 @@ class _Category_PageState extends State<Category_Page> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      CustomPopUpMenu(),
                       IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.filter_list,
-                            color: Colors.white,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.menu,
-                            color: Colors.white,
-                          )),
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.menu,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -93,7 +88,9 @@ class _Category_PageState extends State<Category_Page> {
               ),
             ),
             child: StreamBuilder(
-              stream: widget.theCollectionReference.snapshots(),
+              stream: widget.theCollectionReference
+                  .orderBy(sortBy, descending: descending)
+                  .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> streamSnapShot) {
                 return ListView.builder(
@@ -133,5 +130,95 @@ class _Category_PageState extends State<Category_Page> {
         ],
       ),
     );
+  }
+
+  PopupMenuButton CustomPopUpMenu() {
+    return PopupMenuButton(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      onSelected: (value) => onSelected(context, value),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: Text(
+            "Sort by:",
+            style: customTextStyle.displayLarge,
+          ),
+        ),
+        const PopupMenuDivider(),
+        ...MenuItems.menuItemList
+            .map(
+              (e) => PopupMenuItem(
+                value: e,
+                child: SizedBox(
+                  width: 105,
+                  child: Row(
+                    children: [
+                      Image(
+                        image: AssetImage(e.imagURL),
+                        height: 30,
+                      ),
+                      addHorizantalSpace(13),
+                      Text(
+                        e.title,
+                        style: customTextStyle.headlineSmall,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            )
+            .toList(),
+      ],
+      icon: const Icon(
+        Icons.filter_list,
+        color: Colors.white,
+      ),
+    );
+  }
+
+  void onSelected(BuildContext context, item) {
+    switch (item) {
+      case MenuItems.name:
+        setState(() {
+          sortBy = 'name';
+          descending = !descending;
+        });
+        break;
+      case MenuItems.calories:
+        setState(() {
+          sortBy = 'calories';
+          descending = !descending;
+        });
+        break;
+      case MenuItems.suger:
+        setState(() {
+          sortBy = 'suger';
+          descending = !descending;
+        });
+        break;
+      case MenuItems.protein:
+        setState(() {
+          sortBy = 'protein';
+          descending = !descending;
+        });
+        break;
+      case MenuItems.fibers:
+        setState(() {
+          sortBy = 'fibers';
+          descending = !descending;
+        });
+        break;
+      case MenuItems.carbs:
+        setState(() {
+          sortBy = 'carbs';
+          descending = !descending;
+        });
+        break;
+      case MenuItems.fat:
+        setState(() {
+          sortBy = 'fat';
+          descending = !descending;
+        });
+        break;
+    }
   }
 }

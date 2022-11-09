@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
 import 'package:fina/screens/details_Page.dart';
@@ -41,6 +42,8 @@ class buildFoodItem extends StatefulWidget {
 
 class _buildFoodItemState extends State<buildFoodItem>
     with SingleTickerProviderStateMixin {
+  // static final customCacheManager = CacheManage();
+
   late AnimationController controller;
   bool isAdd = true;
   @override
@@ -48,7 +51,7 @@ class _buildFoodItemState extends State<buildFoodItem>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(microseconds: 300),
     );
   }
 
@@ -88,16 +91,19 @@ class _buildFoodItemState extends State<buildFoodItem>
             Row(
               children: [
                 Hero(
-                    tag: widget.imageLink,
-                    child: CircleAvatar(
-                      foregroundImage: NetworkImage(widget.imageLink),
-                      backgroundImage: const AssetImage(
-                        loadingIcon,
-                      ),
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.white,
-                      radius: 40,
-                    )),
+                  tag: widget.imageLink,
+                  child: CircleAvatar(
+                    foregroundImage: CachedNetworkImageProvider(
+                      widget.imageLink
+                    ),
+                    backgroundImage: const AssetImage(
+                      loadingIcon,
+                    ),
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.white,
+                    radius: 40,
+                  ),
+                ),
                 addHorizantalSpace(10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,13 +165,15 @@ class _buildFoodItemState extends State<buildFoodItem>
 
                       try {
                         saveItemt();
-                        controller.forward().then((value) async {
-                          controller.reverse();
+                        controller.forward().then(
+                          (value) async {
+                            controller.reverse();
 
-                          await Future.delayed(
-                              const Duration(microseconds: 200));
-                          isAdd = !isAdd;
-                        });
+                            await Future.delayed(
+                                const Duration(microseconds: 200));
+                            isAdd = !isAdd;
+                          },
+                        );
                       } on Exception {
                         CustomSnakBar(
                             "Something went wrong please try again", context);

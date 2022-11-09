@@ -1,4 +1,5 @@
 // import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../data/data.dart';
@@ -91,12 +92,12 @@ class _Details_PageState extends State<Details_Page> {
                 ),
               ),
               Positioned(
-                top: 30,
+                top: 10,
                 left: screenWidth! / 2 - 100,
                 child: Hero(
                   tag: widget.heroTag,
                   child: CircleAvatar(
-                    foregroundImage: NetworkImage(widget.heroTag),
+                    foregroundImage: CachedNetworkImageProvider(widget.heroTag),
                     backgroundImage: const AssetImage(
                       loadingIcon,
                     ),
