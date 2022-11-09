@@ -4,6 +4,7 @@ import 'package:fina/screens/details_Page.dart';
 import 'package:fina/widgets/buttons/edit_item_button.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import '../models/models.dart';
 
@@ -151,34 +152,38 @@ class _buildFoodItemState extends State<buildFoodItem>
                         ),
                       )
                     : const SizedBox(),
-                IconButton(
-                  iconSize: 30,
-                  onPressed: () {
+                GestureDetector(
+                  onTap: () {
                     if (isAdd) {
                       isAdd = !isAdd;
 
                       try {
                         saveItemt();
                         controller.forward().then((value) async {
-                          await Future.delayed(Duration(microseconds: 333));
                           controller.reverse();
+
+                          await Future.delayed(
+                              const Duration(microseconds: 200));
                           isAdd = !isAdd;
                         });
-                      } on Exception catch (e) {
-                        print("======================");
-                        print(e);
+                      } on Exception {
+                        CustomSnakBar(
+                            "Something went wrong please try again", context);
                       }
                     }
                   },
-                  icon: AnimatedIcon(
-                    progress: controller,
-
-                    icon: AnimatedIcons.add_event,
-                    // Icons.add_shopping_cart_outlined,
-                    color: Colors.black,
-                    // ),
+                  child: SizedBox(
+                    height: 35,
+                    child: Lottie.asset(
+                      addIcon,
+                      repeat: false,
+                      controller: controller,
+                      onLoaded: (composition) {
+                        controller.duration = composition.duration;
+                      },
+                    ),
                   ),
-                ),
+                )
               ],
             ),
           ],

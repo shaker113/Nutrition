@@ -16,6 +16,8 @@ class _CartPageState extends State<CartPage> {
   // late String category, id;
   double calories = 0;
   int itemCount = 1;
+  int? myCartItems;
+  bool isEmpty = false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class _CartPageState extends State<CartPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 40),
+            padding: const EdgeInsets.only(left: 40, right: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -57,6 +59,7 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                 ),
+                Clear_All(),
               ],
             ),
           ),
@@ -86,14 +89,12 @@ class _CartPageState extends State<CartPage> {
                   padding: const EdgeInsets.only(
                       left: 15, top: 20, bottom: 20, right: 5),
                   itemCount: streamSnapShot.data == null
-                      ? 0
-                      : streamSnapShot.data!.docs.length,
+                      ? myCartItems = 0
+                      : myCartItems = streamSnapShot.data!.docs.length,
                   itemBuilder: (BuildContext context, int index) {
                     final DocumentSnapshot documentSnapshot =
                         streamSnapShot.data!.docs[index];
 
-                    // print("cal =${documentSnapshot['calories']}");
-                    // print("num = ${documentSnapshot['itemCount']}");
                     return CartFoodItem(
                       itemId: documentSnapshot['itemId'],
                       category: documentSnapshot['category'],
@@ -130,27 +131,35 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  // Future getItemData() async {
-  //   CollectionReference? theCollectionReference;
-
-  //   if (category == "Meat") {
-  //     theCollectionReference = meatCollection;
-  //   } else if (category == "Fruits") {
-  //     theCollectionReference = fruitsCollecton;
-  //   } else if (category == "Vegetables") {
-  //     theCollectionReference = vegetablesCollection;
-  //   } else if (category == "Dairy") {
-  //     theCollectionReference = dairyCollection;
-  //   } else if (category == "junk Food") {
-  //     theCollectionReference = junkFoodCollection;
-  //   } else if (category == "White meat") {
-  //     theCollectionReference = whiteMeatCollection;
-  //   } else if (category == "Drinks") {
-  //     theCollectionReference = drinksCollection;
-  //   }
-  //   DocumentSnapshot mydoc = await theCollectionReference!.doc(id).get();
-  //   setState(() {
-  //     calories = calories + mydoc['calories'] * itemCount;
-  //   });
-  // }
+  ElevatedButton Clear_All() {
+    if (myCartItems == null || myCartItems! < 1) {
+      isEmpty = false;
+    } else {
+      isEmpty = true;
+    }
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: buttonsColor,
+        disabledBackgroundColor: buttonsColor.withOpacity(0.5),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+      onPressed: isEmpty
+          ? () async {
+              var snapshots = await userCartCollection.get();
+              if (snapshots.docs.isEmpty) {
+                setState(() {
+                  isEmpty = true;
+                });
+              } else {
+                for (var doc in snapshots.docs) {
+                  await doc.reference.delete();
+                }
+              }
+            }
+          : null,
+      child: Text("Clear All", style: customTextStyle.labelSmall),
+    );
+  }
 }

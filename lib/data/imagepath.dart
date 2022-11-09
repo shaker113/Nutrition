@@ -11,3 +11,4 @@ const String fibersIcon = "assets/images/vegetable.png";
 const String fatsIcon = "assets/images/trans-fat.png";
 const String sugarIcon = "assets/images/sugar-cube.png";
 const String loadingIcon = "assets/images/loading.gif";
+const String addIcon = "assets/images/plusCircle.json";

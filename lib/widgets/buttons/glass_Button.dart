@@ -33,9 +33,8 @@ class _GlassButtonState extends State<GlassButton> {
         borderRadius: BorderRadius.circular(15),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
-          child: AnimatedContainer(
+          child: Container(
             alignment: Alignment.center,
-            duration: const Duration(microseconds: 200),
             height: widget.height,
             width: widget.width,
             decoration: BoxDecoration(

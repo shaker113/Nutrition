@@ -47,7 +47,7 @@ dependencies:
   circular_indicator: ^1.0.6
   percent_indicator: ^4.2.2
   firebase_messaging: ^14.0.4
-  firebase_core_platform_interface: 4.5.2
+
 
 dev_dependencies:
   flutter_test:
