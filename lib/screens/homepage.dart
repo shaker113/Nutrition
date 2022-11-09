@@ -1,5 +1,5 @@
 import 'package:fina/widgets/widgets.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import '../data/data.dart';
 import '../models/models.dart';
@@ -12,14 +12,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // var fireMessging = FirebaseMessaging.instance;
+  var fireMessging = FirebaseMessaging.instance;
   @override
   void initState() {
-    // fireMessging.getToken().then((value) {
-    //   print("@@@@@@@@@@@@@@@@@@@");
-    //   print(value);
-    //   print("@@@@@@@@@@@@@@@@@@@@@");
-    // });
+    fireMessging.getToken().then((value) {
+      print("@@@@@@@@@@@@@@@@@@@");
+      print(value);
+      print("@@@@@@@@@@@@@@@@@@@@@");
+    });
     checkRole();
     userId = authInstance.currentUser?.uid;
     userInfo = userCollection.doc(userId);
