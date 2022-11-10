@@ -5,6 +5,29 @@ import 'firebase_options.dart';
 import 'models/models.dart';
 import 'screens/screens.dart';
 
+// profile pic
+// user info qustions                                      {{salh}}
+// profile page shows user info                            {{malek}}
+// calculating base goal calories for users atomaticlly
+// fat percentage calcuator ((if we have time))            {{rami}}
+// sorting system                                          {{shaker}} almost Done {{still need fixing the descending prosses}}
+// recommandation system
+// clear all button in cart screen                         {{shaker}} almost Done {{still need fixing the disable prosses}} {{scroll physics}}
+//                                                                                {{delete button still does not working as it should be}}
+// making details page scrollable
+// splash screen
+// app icon
+// app name
+// show dialog for sgin out
+// show dialog when the user add item to his cart
+// send notifications                                      {{mohammad}} almost done
+// show info about nutritions
+// show healht rleated news with api ((IF we have time))
+// water animation for water counter
+// cached network image                                    {{shaker}}  done
+// adding more ((junk drinks)) such as pepsi
+// send email verification
+
 bool? isLogin;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

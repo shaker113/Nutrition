@@ -7,12 +7,19 @@ class Circularindicator extends StatelessWidget {
   final Color progressColors;
   final Color backGroundColor;
   final bool isUsed;
+  bool? isInCart;
+
+  double? theGoal, theFood;
 
   Circularindicator(
-      {required this.progressColors,
+      {super.key,
+      required this.progressColors,
       required this.textInside,
       required this.backGroundColor,
-      required this.isUsed});
+      required this.isUsed,
+      this.theFood,
+      this.theGoal,
+      this.isInCart});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +30,20 @@ class Circularindicator extends StatelessWidget {
         animationDuration: 500,
         radius: 60,
         lineWidth: 10,
-        percent: isUsed ? 1 : 0.00000001,
+        percent: isInCart ?? false
+            ? (theFood! > theGoal! ? 1 : theFood! / theGoal!)
+            : isUsed
+                ? 1
+                : 0.00000001,
         progressColor: progressColors,
         backgroundColor: backGroundColor,
         circularStrokeCap: CircularStrokeCap.round,
         center: Text(
           textInside,
-          style: customTextStyle.displaySmall,
+          textAlign: TextAlign.center,
+          style: isInCart ?? false
+              ? customTextStyle.labelSmall
+              : customTextStyle.displaySmall,
         ),
       ),
     );

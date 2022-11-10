@@ -18,70 +18,56 @@ class CategoryBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Category_Page(
-                  theTitle: title,
-                  theCollectionReference: theCollectionReference),
-            ),
-          );
-        },
-        child: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            height: 240,
-            width: screenWidth! * 0.8,
-            child: Column(
-              children: [
-                Container(
-                  height: 160,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20),
-                    ),
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage(imagURL),
-                    ),
-                  ),
-                ),
-                addVerticalSpace(10),
-                Column(
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    addVerticalSpace(10),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Category_Page(
+                theTitle: title,
+                theCollectionReference: theCollectionReference),
           ),
+        );
+      },
+      child: Container(
+        // padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
+            ),
+          ],
+          border: Border.all(
+            color: buttonsColor.withOpacity(0.3),
+          ),
+        ),
+
+        height: 235,
+        width: screenWidth! * 0.4,
+        child: Column(
+          children: [
+            Container(
+              height: 120,
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  image: DecorationImage(
+                      fit: BoxFit.cover, image: AssetImage(imagURL))),
+            ),
+            addVerticalSpace(10),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
       ),
     );
