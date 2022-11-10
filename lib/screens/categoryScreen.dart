@@ -76,7 +76,7 @@ class _Category_PageState extends State<Category_Page>
                           });
                         },
                         child: SizedBox(
-                          height: 45,
+                          height: 50,
                           child: Lottie.asset(
                             sortIcon,
                             repeat: true,

@@ -110,7 +110,11 @@ class _CartFoodItemState extends State<CartFoodItem> {
                 children: [
                   InkWell(
                     onTap: () {
-                      isZero ? deleteFromCart() : changeItemCount(false);
+                      isZero
+                          ? deleteFromCart()
+                          : widget.itemCount > 0
+                              ? changeItemCount(false)
+                              : null;
                     },
                     child: Container(
                       height: 25,

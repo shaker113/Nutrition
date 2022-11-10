@@ -10,7 +10,7 @@ import 'screens/screens.dart';
 // profile page shows user info                            {{malek}}
 // calculating base goal calories for users atomaticlly
 // fat percentage calcuator ((if we have time))            {{rami}}
-// sorting system                                          {{shaker}} almost Done {{still need fixing the descending prosses}}
+// sorting system                                          {{shaker}} Done
 // recommandation system
 // clear all button in cart screen                         {{shaker}} almost Done {{still need fixing the disable prosses}} {{scroll physics}}
 //                                                                                {{delete button still does not working as it should be}}
