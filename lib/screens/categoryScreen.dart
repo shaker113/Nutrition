@@ -60,34 +60,7 @@ class _Category_PageState extends State<Category_Page>
                   width: 125,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomPopUpMenu(),
-                      GestureDetector(
-                        onTap: () async {
-                          setState(() {
-                            descending
-                                ? sortController.forward(from: 0.1).timeout(
-                                      const Duration(milliseconds: 1900),
-                                      onTimeout: () => sortController.stop(),
-                                    )
-                                : sortController.forward(from: 0.7);
-
-                            descending = !descending;
-                          });
-                        },
-                        child: SizedBox(
-                          height: 50,
-                          child: Lottie.asset(
-                            sortIcon,
-                            repeat: true,
-                            controller: sortController,
-                            onLoaded: (composition) {
-                              sortController.duration = composition.duration;
-                            },
-                          ),
-                        ),
-                      )
-                    ],
+                    children: [CustomPopUpMenu(), sortButton()],
                   ),
                 ),
               ],
@@ -164,6 +137,34 @@ class _Category_PageState extends State<Category_Page>
             ),
           )
         ],
+      ),
+    );
+  }
+
+  GestureDetector sortButton() {
+    return GestureDetector(
+      onTap: () async {
+        setState(() {
+          descending
+              ? sortController.forward(from: 0.1).timeout(
+                    const Duration(milliseconds: 1900),
+                    onTimeout: () => sortController.stop(),
+                  )
+              : sortController.forward(from: 0.7);
+
+          descending = !descending;
+        });
+      },
+      child: SizedBox(
+        height: 50,
+        child: Lottie.asset(
+          sortIcon,
+          repeat: true,
+          controller: sortController,
+          onLoaded: (composition) {
+            sortController.duration = composition.duration;
+          },
+        ),
       ),
     );
   }

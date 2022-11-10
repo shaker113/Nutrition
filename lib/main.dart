@@ -11,14 +11,14 @@ import 'screens/screens.dart';
 // calculating base goal calories for users atomaticlly
 // fat percentage calcuator ((if we have time))            {{rami}}
 // sorting system                                          {{shaker}} Done
-// recommandation system
+// recommandation system (filter)
 // clear all button in cart screen                         {{shaker}} almost Done {{scroll physics}} {{delete button still does not working as it should be}}
 // making details page scrollable                          {{shaker}}             {{scroll physics}}
 // splash screen
 // app icon
 // app name
-// show dialog for sgin out
-// show dialog when the user add item to his cart
+// show dialog for sgin out                                {{rami}}
+// show dialog when the user add item to his cart 
 // send notifications                                      {{mohammad}} almost done
 // show info about nutritions
 // show healht rleated news with api ((IF we have time))
