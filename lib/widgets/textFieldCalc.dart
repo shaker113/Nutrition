@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class textField extends StatelessWidget {
   textField({required this.mycont, required this.hint});
@@ -7,6 +8,8 @@ class textField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+       inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9,.]")),
+      ],
         keyboardType: TextInputType.number,
         validator: (value) {
           if (value == null || value.isEmpty) {
