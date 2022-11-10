@@ -12,8 +12,8 @@ import 'screens/screens.dart';
 // fat percentage calcuator ((if we have time))            {{rami}}
 // sorting system                                          {{shaker}} almost Done {{still need fixing the descending prosses}}
 // recommandation system
-// clear all button in cart screen                         {{shaker}} almost Done {{still need fixing the disable prosses}}
-//                                                                          {{delete button stell not working as it should be}}
+// clear all button in cart screen                         {{shaker}} almost Done {{still need fixing the disable prosses}} {{scroll physics}}
+//                                                                                {{delete button still does not working as it should be}}
 // making details page scrollable
 // splash screen
 // app icon
@@ -24,7 +24,7 @@ import 'screens/screens.dart';
 // show info about nutritions
 // show healht rleated news with api ((IF we have time))
 // water animation for water counter
-// cached network image                                     {{shaker}}  done
+// cached network image                                    {{shaker}}  done
 // adding more ((junk drinks)) such as pepsi
 // send email verification
 

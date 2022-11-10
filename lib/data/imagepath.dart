@@ -14,3 +14,4 @@ const String loadingIcon = "assets/images/loading.gif";
 const String addIcon = "assets/images/plusCircle.json";
 const String nameIcon = "assets/images/from-a-to-z.png";
 const String caloriesIcon = "assets/images/calories.png";
+const String sortIcon = "assets/images/sort.json";

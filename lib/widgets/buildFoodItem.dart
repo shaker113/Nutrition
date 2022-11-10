@@ -42,14 +42,12 @@ class buildFoodItem extends StatefulWidget {
 
 class _buildFoodItemState extends State<buildFoodItem>
     with SingleTickerProviderStateMixin {
-  // static final customCacheManager = CacheManage();
-
-  late AnimationController controller;
+  late AnimationController addController;
   bool isAdd = true;
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
+    addController = AnimationController(
       vsync: this,
       duration: const Duration(microseconds: 300),
     );
@@ -57,7 +55,7 @@ class _buildFoodItemState extends State<buildFoodItem>
 
   @override
   void dispose() {
-    controller.dispose();
+    addController.dispose();
     super.dispose();
   }
 
@@ -93,9 +91,8 @@ class _buildFoodItemState extends State<buildFoodItem>
                 Hero(
                   tag: widget.imageLink,
                   child: CircleAvatar(
-                    foregroundImage: CachedNetworkImageProvider(
-                      widget.imageLink
-                    ),
+                    foregroundImage:
+                        CachedNetworkImageProvider(widget.imageLink),
                     backgroundImage: const AssetImage(
                       loadingIcon,
                     ),
@@ -165,13 +162,13 @@ class _buildFoodItemState extends State<buildFoodItem>
 
                       try {
                         saveItemt();
-                        controller.forward().then(
+                        addController.forward().then(
                           (value) async {
-                            controller.reverse();
+                            addController.reverse();
 
                             await Future.delayed(
-                                const Duration(microseconds: 200));
-                            isAdd = !isAdd;
+                                    const Duration(microseconds: 200))
+                                .then((value) => isAdd = !isAdd);
                           },
                         );
                       } on Exception {
@@ -184,10 +181,10 @@ class _buildFoodItemState extends State<buildFoodItem>
                     height: 35,
                     child: Lottie.asset(
                       addIcon,
-                      repeat: false,
-                      controller: controller,
+                      repeat: true,
+                      controller: addController,
                       onLoaded: (composition) {
-                        controller.duration = composition.duration;
+                        addController.duration = composition.duration;
                       },
                     ),
                   ),
