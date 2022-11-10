@@ -142,7 +142,7 @@ class _CartPageState extends State<CartPage> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: buttonsColor,
-        disabledBackgroundColor: buttonsColor.withOpacity(0.5),
+        // disabledBackgroundColor: buttonsColor.withOpacity(0.5),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),

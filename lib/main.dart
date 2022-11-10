@@ -12,9 +12,8 @@ import 'screens/screens.dart';
 // fat percentage calcuator ((if we have time))            {{rami}}
 // sorting system                                          {{shaker}} Done
 // recommandation system
-// clear all button in cart screen                         {{shaker}} almost Done {{still need fixing the disable prosses}} {{scroll physics}}
-//                                                                                {{delete button still does not working as it should be}}
-// making details page scrollable
+// clear all button in cart screen                         {{shaker}} almost Done {{scroll physics}} {{delete button still does not working as it should be}}
+// making details page scrollable                          {{shaker}}             {{scroll physics}}
 // splash screen
 // app icon
 // app name
@@ -23,10 +22,12 @@ import 'screens/screens.dart';
 // send notifications                                      {{mohammad}} almost done
 // show info about nutritions
 // show healht rleated news with api ((IF we have time))
-// water animation for water counter
+// water animation for water counter ((IF we have time))
 // cached network image                                    {{shaker}}  done
 // adding more ((junk drinks)) such as pepsi
 // send email verification
+// add new Category bakers , soft drink , sweets
+// add Home Page (image slider for categories)
 
 bool? isLogin;
 Future<void> main() async {
