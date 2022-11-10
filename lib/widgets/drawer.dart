@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../models/models.dart';
 import '../screens/screens.dart';
+import 'logoutListTile.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -127,14 +128,7 @@ class _MyDrawerState extends State<MyDrawer> {
           title: const Text("Exit"),
           onTap: () {},
         ),
-        ListTile(
-          leading: Icon(Icons.logout, color: backgrounColor),
-          title: const Text("Log Out"),
-          onTap: () {
-            AuthService().signOut();
-            Navigator.popAndPushNamed(context, "welcome");
-          },
-        ),
+       ListTileLogout()
       ],
     );
   }
