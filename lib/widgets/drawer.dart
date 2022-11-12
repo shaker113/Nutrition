@@ -1,4 +1,5 @@
 import 'package:fina/data/colors.dart';
+import 'package:fina/screens/bodyFatClaculator.dart';
 import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
@@ -120,15 +121,21 @@ class _MyDrawerState extends State<MyDrawer> {
         ),
         ListTile(
           leading: Icon(Icons.file_open, color: backgrounColor),
-          title: const Text("Policies"),
-          onTap: () {},
+          title: const Text("fat Calculator"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const bodyFatCal(),
+                ));
+          },
         ),
         ListTile(
           leading: Icon(Icons.exit_to_app, color: backgrounColor),
           title: const Text("Exit"),
           onTap: () {},
         ),
-       ListTileLogout()
+        ListTileLogout()
       ],
     );
   }

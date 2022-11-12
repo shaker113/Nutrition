@@ -25,6 +25,7 @@ TextTheme customTextStyle = TextTheme(
   bodySmall: const TextStyle(
     fontSize: 17,
     fontWeight: FontWeight.bold,
+    overflow: TextOverflow.fade,
   ),
   bodyMedium: const TextStyle(
     fontSize: 14,

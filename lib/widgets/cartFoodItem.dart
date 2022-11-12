@@ -87,9 +87,13 @@ class _CartFoodItemState extends State<CartFoodItem> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      name,
-                      style: customTextStyle.bodySmall,
+                    SizedBox(
+                      width: 150,
+                      child: Text(
+                        name,
+                        overflow: TextOverflow.ellipsis,
+                        style: customTextStyle.bodySmall,
+                      ),
                     ),
                     Text(
                       "${(calories * widget.itemCount).toStringAsFixed(1)} Cal",
