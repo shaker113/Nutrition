@@ -1,7 +1,7 @@
 import 'package:fina/data/colors.dart';
+import 'package:fina/screens/profile.dart';
 import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
-
 import '../models/models.dart';
 import '../screens/screens.dart';
 
@@ -27,7 +27,6 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           width: double.infinity,
-          alignment: Alignment.topLeft,
           child: SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -100,10 +99,14 @@ class _MyDrawerState extends State<MyDrawer> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.settings, color: backgrounColor),
-          title: const Text("Settings"),
+          leading: Icon(Icons.person, color: backgrounColor),
+          title: const Text("Profile"),
           onTap: () {
-            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return Profile_Page();
+              },
+            ));
           },
         ),
         ListTile(
@@ -131,8 +134,49 @@ class _MyDrawerState extends State<MyDrawer> {
           leading: Icon(Icons.logout, color: backgrounColor),
           title: const Text("Log Out"),
           onTap: () {
-            AuthService().signOut();
-            Navigator.popAndPushNamed(context, "welcome");
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text(" Are you Sure"),
+                  actions: [
+                    Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            AuthService().signOut();
+                            Navigator.popAndPushNamed(context, "welcome");
+                          },
+                          child: Text(
+                            "Sign out",
+                            style: TextStyle(
+                                color: backgrounColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context, MaterialPageRoute(
+                              builder: (context) {
+                                return Profile_Page();
+                              },
+                            ));
+                          },
+                          child: Text(
+                            "Cancel",
+                            style: TextStyle(
+                                color: backgrounColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                );
+              },
+            );
           },
         ),
       ],

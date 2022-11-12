@@ -7,7 +7,7 @@ import 'screens/screens.dart';
 
 // profile pic
 // user info qustions                                      {{salh}}
-// profile page shows user info                            {{malek}}
+// profile page shows user info                            {{malek}} Done
 // calculating base goal calories for users atomaticlly
 // fat percentage calcuator ((if we have time))            {{rami}}
 // sorting system                                          {{shaker}} Done
@@ -17,8 +17,8 @@ import 'screens/screens.dart';
 // splash screen
 // app icon
 // app name
-// show dialog for sgin out                                {{rami}}
-// show dialog when the user add item to his cart 
+// show dialog for sgin out                                {{rami}} done by malek
+// show dialog when the user add item to his cart
 // send notifications                                      {{mohammad}} almost done
 // show info about nutritions
 // show healht rleated news with api ((IF we have time))
