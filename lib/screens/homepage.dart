@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import '../data/data.dart';
 import '../models/models.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,13 +14,46 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var fireMessging = FirebaseMessaging.instance;
+  intialMessage() async {
+    var message = await FirebaseMessaging.instance.getInitialMessage();
+    if (message != null) {
+      return AlertDialog(
+        content: Text("welcom"),
+      );
+      // it is work when the app closed
+    }
+  }
+
   @override
   void initState() {
+    intialMessage();
     fireMessging.getToken().then((value) {
-      print("@@@@@@@@@@@@@@@@@@@");
-      print(value);
-      print("@@@@@@@@@@@@@@@@@@@@@");
+      // print("@@@@@@@@@@@@@@@@@@@");
+      // print(value);
+      // print("@@@@@@@@@@@@@@@@@@@@@");
+      //  to print the token
+      // the message will not show on forground, it will appear on background
     });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      AwesomeDialog(
+              context: context,
+              title: "title",
+              body: Text("${event.notification?.body}"))
+          .show();
+    });
+    FirebaseMessaging.onMessage.listen((event) {
+      //   // print("====================================");
+      //   // print("${event.notification}");
+      //   // print("====================================");
+      //   // to send notification on forground.
+
+      AwesomeDialog(
+              context: context,
+              title: "title",
+              body: Text("${event.notification?.body}"))
+          .show();
+    });
+
     checkRole();
     userId = authInstance.currentUser?.uid;
     userInfo = userCollection.doc(userId);
