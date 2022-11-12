@@ -1,5 +1,6 @@
 import 'package:fina/data/colors.dart';
 import 'package:fina/screens/bodyFatClaculator.dart';
+import 'package:fina/screens/profile.dart';
 import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
@@ -105,7 +106,11 @@ class _MyDrawerState extends State<MyDrawer> {
           leading: Icon(Icons.settings, color: backgrounColor),
           title: const Text("Settings"),
           onTap: () {
-            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Profile_Page(),
+                ));
           },
         ),
         ListTile(
