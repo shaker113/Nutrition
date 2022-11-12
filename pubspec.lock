@@ -99,6 +99,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  date_time_picker:
+    dependency: "direct main"
+    description:
+      name: date_time_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  emojis:
+    dependency: "direct main"
+    description:
+      name: emojis
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.9"
   fake_async:
     dependency: transitive
     description:
@@ -174,6 +188,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_emoji:
+    dependency: "direct main"
+    description:
+      name: flutter_emoji
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.4.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -366,6 +387,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  scroll_date_picker:
+    dependency: "direct main"
+    description:
+      name: scroll_date_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.6.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -420,6 +448,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.1"
+  unicons:
+    dependency: "direct main"
+    description:
+      name: unicons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   vector_math:
     dependency: transitive
     description:

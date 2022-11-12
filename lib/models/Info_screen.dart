@@ -1,123 +1,102 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:unicons/unicons.dart';
+import 'package:emojis/emojis.dart';
+
 List questions = [
   {
-    'q': 'What your gender?',
+    'q': 'What is your gender',
     'a': [
       {
         'title': 'Male',
         'subtitle': '',
-        'icon': const Icon(Icons.male),
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/man.png"),
+        )
       },
       {
         'title': 'Female',
         'subtitle': '',
-        'icon': const Icon(Icons.female),
-      },
-      // {
-      //   'title': 'Not ',
-      //   'subtitle': '',
-      //   'icon': const Icon(Icons.ac_unit),
-      // },
-    ],
-  },
-  {
-    'q': '2?',
-    'a': [
-      {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
-      },
-      {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
-      },
-      {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/weman.png"),
+        )
       },
     ],
   },
   {
-    'q': '3?',
+    'q': 'What is your main goal?',
     'a': [
       {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
+        'title': 'Lose Weight',
+        'subtitle': 'Drop extra pounds wrth ease',
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/2.webp"),
+        )
       },
       {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
+        'title': 'Build Muscle',
+        'subtitle': 'Get lean and strong',
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/muscl.jpg"),
+        )
       },
       {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
+        'title': 'Keep Fit',
+        'subtitle': 'Stay in shape and feel great',
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/fit.png"),
+        )
       },
     ],
   },
   {
-    'q': '4?',
+    'q': 'Do you have any diseases?',
     'a': [
       {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
+        'title': 'None',
+        'subtitle': '',
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/none.png"),
+        )
       },
       {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
+        'title': 'Diabetes',
+        'subtitle': '',
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/diabetes.png"),
+        )
       },
       {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
-      },
-    ],
-  },
-  {
-    'q': '5?',
-    'a': [
-      {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
+        'title': 'Hypertension',
+        'subtitle': '',
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/arm.png"),
+        )
       },
       {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
+        'title': 'Gout',
+        'subtitle': '',
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/gout.png"),
+        )
       },
       {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
-      },
-    ],
-  },
-  {
-    'q': '6?',
-    'a': [
-      {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
-      },
-      {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
-      },
-      {
-        'title': 'safsdf',
-        'subtitle': 'sadasd',
-        'icon': const Icon(Icons.add),
+        'title': 'Other',
+        'subtitle': '',
+        'image': const CircleAvatar(
+          foregroundColor: Colors.transparent,
+          foregroundImage: AssetImage("assets/images/64.png"),
+        )
       },
     ],
   },
