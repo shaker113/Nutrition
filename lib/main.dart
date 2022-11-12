@@ -1,3 +1,5 @@
+import 'package:fina/screens/H_W.dart';
+import 'package:fina/screens/birth.dart';
 import 'package:fina/screens/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,6 +35,8 @@ class MyApp extends StatelessWidget {
           // "categorypage": (context) =>  Category_Page(),
           "password reset": (context) => const PasswordResetPage(),
           "infoscreen": (context) => const InfoScreen(),
+          // "birth": (context) => const Birth(),
+          "H_W": (context) => const H_W(),
         },
         home: const Welcome()
         // isLogin == true ? const Homepage() : const Welcome()
