@@ -31,6 +31,7 @@ class _Profile_PageState extends State<Profile_Page> {
             ClipPath(
               clipper: getClipper(),
               child: Container(
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: const Alignment(0.8, 1),
@@ -41,13 +42,14 @@ class _Profile_PageState extends State<Profile_Page> {
               ),
             ),
             Positioned(
-                width: 500.0,
+                left: 10,
+                width: 400,
                 top: MediaQuery.of(context).size.height / 15,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(name,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                         )),
@@ -58,8 +60,8 @@ class _Profile_PageState extends State<Profile_Page> {
                         children: [
                           Container(
                               alignment: Alignment.center,
-                              width: 200.0,
-                              height: 200.0,
+                              width: 150.0,
+                              height: 150.0,
                               // ignore: prefer_const_constructors
                               decoration: BoxDecoration(
                                   color: Colors.red,
@@ -81,7 +83,7 @@ class _Profile_PageState extends State<Profile_Page> {
                     const SizedBox(height: 90.0),
                     Padding(
                         padding: const EdgeInsets.only(
-                          left: 70,
+                          left: 10,
                           right: 70,
                         ),
                         child: TextField(
@@ -94,11 +96,11 @@ class _Profile_PageState extends State<Profile_Page> {
                               ),
                               hintText: "Your email",
                               hintStyle:
-                                  TextStyle(fontSize: 20, color: Colors.black)),
+                                  TextStyle(fontSize: 17, color: Colors.black)),
                         )),
                     const Padding(
                         padding: EdgeInsets.only(
-                          left: 70,
+                          left: 10,
                           right: 70,
                         ),
                         child: TextField(
@@ -110,11 +112,11 @@ class _Profile_PageState extends State<Profile_Page> {
                               ),
                               hintText: "Your Weight",
                               hintStyle:
-                                  TextStyle(fontSize: 20, color: Colors.black)),
+                                  TextStyle(fontSize: 17, color: Colors.black)),
                         )),
                     const Padding(
                         padding: EdgeInsets.only(
-                          left: 70,
+                          left: 10,
                           right: 70,
                         ),
                         child: TextField(
@@ -126,17 +128,10 @@ class _Profile_PageState extends State<Profile_Page> {
                               ),
                               hintText: "Your Height",
                               hintStyle:
-                                  TextStyle(fontSize: 20, color: Colors.black)),
+                                  TextStyle(fontSize: 17, color: Colors.black)),
                         )),
                     const Padding(padding: EdgeInsets.all(10)),
                     const SizedBox(height: 15.0),
-                    const Text(
-                      'you can call us if you \n need any help \n +962......',
-                      style: TextStyle(
-                        fontSize: 17.0,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
                     const SizedBox(height: 25.0),
                     SizedBox(
                         height: 50.0,
@@ -279,7 +274,7 @@ class getClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     var path = Path();
 
-    path.lineTo(0.0, size.height / 1);
+    path.lineTo(0.0, size.height / 7);
     path.lineTo(size.width + 10, 0.0);
     path.close();
     return path;
