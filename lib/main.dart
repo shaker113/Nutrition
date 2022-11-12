@@ -10,19 +10,24 @@ import 'screens/screens.dart';
 // profile page shows user info                            {{malek}}
 // calculating base goal calories for users atomaticlly
 // fat percentage calcuator ((if we have time))            {{rami}}
-// sorting system                                          {{shaker}}
-// recommandation system
-// clear all button in cart screen                         {{shaker}}  Done
-// making details page scrollable
+// sorting system                                          {{shaker}} Done
+// recommandation system (filter)
+// clear all button in cart screen                         {{shaker}} almost Done {{scroll physics}} {{delete button still does not working as it should be}}
+// making details page scrollable                          {{shaker}}             {{scroll physics}}
 // splash screen
 // app icon
 // app name
-// show dialog for sgin out
+// show dialog for sgin out                                {{rami}}
 // show dialog when the user add item to his cart
-// send notifications                                      {{mohammad}}
+// send notifications                                      {{mohammad}} almost done
 // show info about nutritions
 // show healht rleated news with api ((IF we have time))
-// water animation for water counter
+// water animation for water counter ((IF we have time))
+// cached network image                                    {{shaker}}  done
+// adding more ((junk drinks)) such as pepsi
+// send email verification
+// add new Category bakers , soft drink , sweets
+// add Home Page (image slider for categories)
 
 bool? isLogin;
 Future<void> main() async {

@@ -1,9 +1,11 @@
 import 'package:fina/data/colors.dart';
+import 'package:fina/screens/bodyFatClaculator.dart';
 import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 import '../models/models.dart';
 import '../screens/screens.dart';
+import 'logoutListTile.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -119,22 +121,21 @@ class _MyDrawerState extends State<MyDrawer> {
         ),
         ListTile(
           leading: Icon(Icons.file_open, color: backgrounColor),
-          title: const Text("Policies"),
-          onTap: () {},
+          title: const Text("fat Calculator"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const bodyFatCal(),
+                ));
+          },
         ),
         ListTile(
           leading: Icon(Icons.exit_to_app, color: backgrounColor),
           title: const Text("Exit"),
           onTap: () {},
         ),
-        ListTile(
-          leading: Icon(Icons.logout, color: backgrounColor),
-          title: const Text("Log Out"),
-          onTap: () {
-            AuthService().signOut();
-            Navigator.popAndPushNamed(context, "welcome");
-          },
-        ),
+        ListTileLogout()
       ],
     );
   }

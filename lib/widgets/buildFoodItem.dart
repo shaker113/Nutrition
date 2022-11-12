@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
 import 'package:fina/screens/details_Page.dart';
@@ -41,20 +42,20 @@ class buildFoodItem extends StatefulWidget {
 
 class _buildFoodItemState extends State<buildFoodItem>
     with SingleTickerProviderStateMixin {
-  late AnimationController controller;
+  late AnimationController addController;
   bool isAdd = true;
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
+    addController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(microseconds: 300),
     );
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    addController.dispose();
     super.dispose();
   }
 
@@ -88,16 +89,18 @@ class _buildFoodItemState extends State<buildFoodItem>
             Row(
               children: [
                 Hero(
-                    tag: widget.imageLink,
-                    child: CircleAvatar(
-                      foregroundImage: NetworkImage(widget.imageLink),
-                      backgroundImage: const AssetImage(
-                        loadingIcon,
-                      ),
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.white,
-                      radius: 40,
-                    )),
+                  tag: widget.imageLink,
+                  child: CircleAvatar(
+                    foregroundImage:
+                        CachedNetworkImageProvider(widget.imageLink),
+                    backgroundImage: const AssetImage(
+                      loadingIcon,
+                    ),
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.white,
+                    radius: 40,
+                  ),
+                ),
                 addHorizantalSpace(10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,13 +162,15 @@ class _buildFoodItemState extends State<buildFoodItem>
 
                       try {
                         saveItemt();
-                        controller.forward().then((value) async {
-                          controller.reverse();
+                        addController.forward().then(
+                          (value) async {
+                            addController.reverse();
 
-                          await Future.delayed(
-                              const Duration(microseconds: 200));
-                          isAdd = !isAdd;
-                        });
+                            await Future.delayed(
+                                    const Duration(microseconds: 200))
+                                .then((value) => isAdd = !isAdd);
+                          },
+                        );
                       } on Exception {
                         CustomSnakBar(
                             "Something went wrong please try again", context);
@@ -176,10 +181,10 @@ class _buildFoodItemState extends State<buildFoodItem>
                     height: 35,
                     child: Lottie.asset(
                       addIcon,
-                      repeat: false,
-                      controller: controller,
+                      repeat: true,
+                      controller: addController,
                       onLoaded: (composition) {
-                        controller.duration = composition.duration;
+                        addController.duration = composition.duration;
                       },
                     ),
                   ),

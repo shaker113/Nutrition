@@ -16,7 +16,7 @@ class _CartPageState extends State<CartPage> {
   // late String category, id;
   double calories = 0;
   int itemCount = 1;
-  int? myCartItems;
+  // int? myCartItems;
   bool isEmpty = false;
 
   @override
@@ -59,7 +59,7 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                 ),
-                Clear_All(),
+                clearAll(),
               ],
             ),
           ),
@@ -89,12 +89,11 @@ class _CartPageState extends State<CartPage> {
                   padding: const EdgeInsets.only(
                       left: 15, top: 20, bottom: 20, right: 5),
                   itemCount: streamSnapShot.data == null
-                      ? myCartItems = 0
-                      : myCartItems = streamSnapShot.data!.docs.length,
+                      ? 0
+                      : streamSnapShot.data!.docs.length,
                   itemBuilder: (BuildContext context, int index) {
                     final DocumentSnapshot documentSnapshot =
                         streamSnapShot.data!.docs[index];
-
                     return CartFoodItem(
                       itemId: documentSnapshot['itemId'],
                       category: documentSnapshot['category'],
@@ -131,34 +130,39 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  ElevatedButton Clear_All() {
-    if (myCartItems == null || myCartItems! < 1) {
-      isEmpty = false;
-    } else {
-      isEmpty = true;
-    }
+  // checkItemsNumber() {
+  //   if (myCartItems == null || myCartItems! < 1) {
+  //     isEmpty = false;
+  //   } else {
+  //     isEmpty = true;
+  //   }
+  // }
+
+  ElevatedButton clearAll() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: buttonsColor,
-        disabledBackgroundColor: buttonsColor.withOpacity(0.5),
+        // disabledBackgroundColor: buttonsColor.withOpacity(0.5),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      onPressed: isEmpty
-          ? () async {
-              var snapshots = await userCartCollection.get();
-              if (snapshots.docs.isEmpty) {
-                setState(() {
-                  isEmpty = true;
-                });
-              } else {
-                for (var doc in snapshots.docs) {
-                  await doc.reference.delete();
-                }
-              }
-            }
-          : null,
+      onPressed:
+          //  isEmpty
+          //     ?
+          () async {
+        var snapshots = await userCartCollection.get();
+        if (snapshots.docs.isEmpty) {
+          setState(() {
+            isEmpty = true;
+          });
+        } else {
+          for (var doc in snapshots.docs) {
+            await doc.reference.delete();
+          }
+        }
+      },
+      // : null,
       child: Text("Clear All", style: customTextStyle.labelSmall),
     );
   }
