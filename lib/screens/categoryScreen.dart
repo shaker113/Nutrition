@@ -77,7 +77,7 @@ class _Category_PageState extends State<Category_Page>
                     style: customTextStyle.headlineLarge,
                     children: [
                       TextSpan(
-                        text: " Food",
+                        text: " ",
                         style: customTextStyle.titleLarge,
                       )
                     ],

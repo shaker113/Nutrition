@@ -32,7 +32,7 @@ import 'screens/screens.dart';
 bool? isLogin;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
   User? user = authInstance.currentUser;
   if (user == null) {
