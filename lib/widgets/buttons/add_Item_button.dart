@@ -175,20 +175,44 @@ class _AddingPageState extends State<AddingPage> {
               Row(
                 children: [
                   ItemInfoRow(
-                      theItemController: calories, theItemName: "calories"),
+                      theItemController: calories,
+                      theItemName: "calories",
+                      theFormater: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp('[0-9.]'),
+                        ),
+                      ]),
                   addHorizantalSpace(5),
                   ItemInfoRow(
-                      theItemController: protein, theItemName: "protein"),
+                      theItemController: protein,
+                      theItemName: "protein",
+                      theFormater: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp('[0-9.]'),
+                        ),
+                      ]),
                 ],
               ),
               addVerticalSpace(10),
               Row(
                 children: [
-                  ItemInfoRow(theItemController: carbs, theItemName: "carbs"),
+                  ItemInfoRow(
+                      theItemController: carbs,
+                      theItemName: "carbs",
+                      theFormater: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp('[0-9.]'),
+                        ),
+                      ]),
                   addHorizantalSpace(5),
                   ItemInfoRow(
                     theItemName: "fibers",
                     theItemController: fibers,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   )
                 ],
               ),
@@ -198,6 +222,11 @@ class _AddingPageState extends State<AddingPage> {
                   ItemInfoRow(
                     theItemName: "Weight",
                     theItemController: weight,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
@@ -212,11 +241,21 @@ class _AddingPageState extends State<AddingPage> {
                   ItemInfoRow(
                     theItemName: "Suger",
                     theItemController: suger,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   ),
                   addHorizantalSpace(5),
                   ItemInfoRow(
                     theItemName: "fat",
                     theItemController: fat,
+                    theFormater: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9.]'),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -290,14 +329,14 @@ class _AddingPageState extends State<AddingPage> {
                         name: name.text,
                         id: "s",
                         description: description.text,
-                        calories: calories.text,
-                        protein: protein.text,
-                        carbs: carbs.text,
-                        fibers: fibers.text,
-                        weight: weight.text,
+                        calories: double.parse(calories.text),
+                        protein: double.parse(protein.text),
+                        carbs: double.parse(carbs.text),
+                        fibers: double.parse(fibers.text),
+                        weight: double.parse(weight.text),
                         vitamins: vitamins.text,
-                        fat: fat.text,
-                        suger: suger.text,
+                        fat: double.parse(fat.text),
+                        suger: double.parse(suger.text),
                         category: chosenCategory,
                         imageLink: imageUrl,
                         isSugerFree: isSugerFree,
@@ -324,13 +363,13 @@ class _AddingPageState extends State<AddingPage> {
     required String name,
     required String? id,
     required String description,
-    required String calories,
-    required String protein,
-    required String carbs,
-    required String fibers,
-    required String weight,
-    required String suger,
-    required String fat,
+    required double calories,
+    required double protein,
+    required double carbs,
+    required double fibers,
+    required double weight,
+    required double suger,
+    required double fat,
     required String vitamins,
     required String category,
     required String imageLink,
@@ -390,12 +429,15 @@ class _AddingPageState extends State<AddingPage> {
         DropdownButton(
           value: chosenCategory,
           items: category
-              .map((e) => DropdownMenuItem(
+              .map(
+                (e) => DropdownMenuItem(
                   value: e,
                   child: Text(
                     "$e",
                     style: const TextStyle(color: Colors.black, fontSize: 14),
-                  )))
+                  ),
+                ),
+              )
               .toList(),
           onChanged: (value) {
             setState(() {
@@ -404,39 +446,6 @@ class _AddingPageState extends State<AddingPage> {
           },
         )
       ],
-    );
-  }
-}
-
-class ItemInfoRow extends StatelessWidget {
-  const ItemInfoRow(
-      {Key? key, required this.theItemController, required this.theItemName})
-      : super(key: key);
-  final String theItemName;
-  final TextEditingController theItemController;
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return Expanded(
-      flex: 1,
-      child: Column(
-        children: [
-          Text(
-            "Item $theItemName",
-            style: customTextStyle.bodyMedium,
-          ),
-          addVerticalSpace(10),
-          CustomTextfieldBlue(
-            label: theItemName,
-            theFormater: [
-              FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
-            ],
-            theController: theItemController,
-          ),
-        ],
-      ),
     );
   }
 }

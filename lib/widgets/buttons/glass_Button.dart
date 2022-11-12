@@ -33,9 +33,8 @@ class _GlassButtonState extends State<GlassButton> {
         borderRadius: BorderRadius.circular(15),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
-          child: AnimatedContainer(
+          child: Container(
             alignment: Alignment.center,
-            duration: const Duration(microseconds: 200),
             height: widget.height,
             width: widget.width,
             decoration: BoxDecoration(
@@ -49,6 +48,7 @@ class _GlassButtonState extends State<GlassButton> {
                 colors: [
                   Colors.white.withOpacity(isPressed ? 0.15 : 0.4),
                   Colors.white.withOpacity(isPressed ? 0.05 : 0.1),
+                  backgrounColor.withOpacity(isPressed ? 0 : 0.7),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -57,13 +57,13 @@ class _GlassButtonState extends State<GlassButton> {
               border: Border.all(
                 width: widget.isSelected ?? false ? 2 : 1.5,
                 color: widget.isSelected ?? false
-                    ? Colors.green
-                    : Colors.white.withOpacity(isPressed ? 0.15 : 0.5),
+                    ? backgrounColor
+                    : backgrounColor.withOpacity(isPressed ? 0.5 : 0.7),
               ),
             ),
             child: Text(
               widget.theText,
-              style: customTextStyle.labelSmall,
+              style: customTextStyle.headlineSmall,
             ),
           ),
         ),

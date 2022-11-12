@@ -151,7 +151,9 @@ class _LogInState extends State<LogIn> {
     try {
       await authInstance.signInWithEmailAndPassword(
           email: email.text, password: password.text);
-
+      userId = authInstance.currentUser?.uid;
+      userInfo = userCollection.doc(userId);
+      checkRole();
       Navigator.pushNamed(context, "homepage");
 
       CustomSnakBar("signed in successfully", context);

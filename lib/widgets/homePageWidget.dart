@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fina/data/data.dart';
 import 'package:fina/models/firestore_refrences.dart';
 import 'package:fina/screens/screens.dart';
+import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CategoryBox extends StatelessWidget {
@@ -16,80 +18,56 @@ class CategoryBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Category_Page(
-                    theTitle: title,
-                    theCollectionReference: theCollectionReference),
-              ));
-        },
-        child: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(5),
-                  bottomLeft: Radius.circular(5),
-                  bottomRight: Radius.circular(30)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            height: 250,
-            width: 350,
-            child: Column(
-              children: [
-                Container(
-                  height: 160,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(5),
-                        topLeft: Radius.circular(30),
-                      ),
-                      image: DecorationImage(
-                          fit: BoxFit.fill, image: NetworkImage(imagURL))),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Container(
-                          width: 400,
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            title,
-                            style: const TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          )),
-                      Container(
-                          width: 400,
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            subtitle,
-                            style: const TextStyle(
-                              fontSize: 15,
-                            ),
-                          )),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Category_Page(
+                theTitle: title,
+                theCollectionReference: theCollectionReference),
           ),
+        );
+      },
+      child: Container(
+        // padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
+            ),
+          ],
+          border: Border.all(
+            color: buttonsColor.withOpacity(0.3),
+          ),
+        ),
+
+        height: 235,
+        width: screenWidth! * 0.4,
+        child: Column(
+          children: [
+            Container(
+              height: 120,
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  image: DecorationImage(
+                      fit: BoxFit.cover, image: AssetImage(imagURL))),
+            ),
+            addVerticalSpace(10),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
       ),
     );

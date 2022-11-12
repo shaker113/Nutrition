@@ -1,22 +1,17 @@
-import 'package:fina/data/colors.dart';
+// import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../data/data.dart';
+import '../models/models.dart';
 import '../widgets/widgets.dart';
 
 class Details_Page extends StatefulWidget {
-  final String heroTag,
-      name,
-      calories,
-      protein,
-      carbs,
-      fibers,
-      weight,
-      vitamins,
-      suger,
-      fat,
-      description;
-
-  const Details_Page(
+  final String heroTag, name, vitamins, description, id;
+  double calories, protein, carbs, fibers, weight, suger, fat;
+  int itemCount;
+  bool isInCart;
+  Details_Page(
       {super.key,
       required this.heroTag,
       required this.name,
@@ -28,16 +23,22 @@ class Details_Page extends StatefulWidget {
       required this.weight,
       required this.fat,
       required this.suger,
-      required this.description});
+      required this.id,
+      required this.itemCount,
+      required this.description,
+      required this.isInCart});
 
   @override
   State<Details_Page> createState() => _Details_PageState();
 }
 
 class _Details_PageState extends State<Details_Page> {
+  bool isZero = false;
+
   int itemCount = 1;
   @override
   Widget build(BuildContext context) {
+    widget.itemCount == 0 ? isZero = true : isZero = false;
     return Scaffold(
       backgroundColor: backgrounColor2,
       appBar: AppBar(
@@ -91,18 +92,18 @@ class _Details_PageState extends State<Details_Page> {
                 ),
               ),
               Positioned(
-                top: 30,
+                top: 10,
                 left: screenWidth! / 2 - 100,
                 child: Hero(
                   tag: widget.heroTag,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: NetworkImage(widget.heroTag),
-                            fit: BoxFit.cover)),
-                    height: 200,
-                    width: 200,
+                  child: CircleAvatar(
+                    foregroundImage: CachedNetworkImageProvider(widget.heroTag),
+                    backgroundImage: const AssetImage(
+                      loadingIcon,
+                    ),
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.white,
+                    radius: 100,
                   ),
                 ),
               ),
@@ -125,12 +126,16 @@ class _Details_PageState extends State<Details_Page> {
                         Row(
                           children: [
                             Text(
-                              "${double.parse(widget.calories) * itemCount} ",
+                              widget.isInCart
+                                  ? (widget.calories * widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.calories * itemCount)
+                                      .toStringAsFixed(1),
                               style: TextStyle(fontSize: 20, color: customRed),
                             ),
-                            Text(
+                            const Text(
                               "Cal",
-                              style: const TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 20),
                             ),
                           ],
                         ),
@@ -140,7 +145,7 @@ class _Details_PageState extends State<Details_Page> {
                           width: 1,
                         ),
                         Container(
-                          width: 125,
+                          width: 105,
                           height: 40,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(17),
@@ -150,11 +155,15 @@ class _Details_PageState extends State<Details_Page> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  setState(() {
-                                    if (itemCount > 1) {
-                                      itemCount--;
-                                    }
-                                  });
+                                  if (widget.isInCart) {
+                                    isZero
+                                        ? deleteFromCart()
+                                        : changeItemCount(false);
+                                  } else {
+                                    setState(() {
+                                      itemCount > 1 ? itemCount-- : null;
+                                    });
+                                  }
                                 },
                                 child: Container(
                                   height: 25,
@@ -162,9 +171,9 @@ class _Details_PageState extends State<Details_Page> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(7),
                                       color: backgrounColor2),
-                                  child: const Center(
+                                  child: Center(
                                     child: Icon(
-                                      Icons.remove,
+                                      isZero ? Icons.delete : Icons.remove,
                                       color: Colors.white,
                                       size: 20,
                                     ),
@@ -172,15 +181,21 @@ class _Details_PageState extends State<Details_Page> {
                                 ),
                               ),
                               Text(
-                                "$itemCount",
+                                widget.isInCart
+                                    ? "${widget.itemCount}"
+                                    : "$itemCount",
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.white),
                               ),
                               InkWell(
                                 onTap: () {
-                                  setState(() {
-                                    itemCount++;
-                                  });
+                                  if (widget.isInCart) {
+                                    changeItemCount(true);
+                                  } else {
+                                    setState(() {
+                                      itemCount++;
+                                    });
+                                  }
                                 },
                                 child: Container(
                                   height: 25,
@@ -205,13 +220,18 @@ class _Details_PageState extends State<Details_Page> {
                     addVerticalSpace(20),
                     SizedBox(
                       height: 140,
+                      width: screenWidth,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
                         children: [
                           buildInfoCard(
                               cardTiltle: 'WEIGHT',
-                              info:
-                                  "${double.parse(widget.weight) * itemCount}",
+                              info: widget.isInCart
+                                  ? (widget.weight * widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.weight * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: weightIcon),
                           addHorizantalSpace(15),
@@ -223,33 +243,50 @@ class _Details_PageState extends State<Details_Page> {
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'PROTEIN',
-                              info:
-                                  "${double.parse(widget.protein) * itemCount}",
-                              unit:"g",
+                              info: widget.isInCart
+                                  ? (widget.protein * widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.protein * itemCount)
+                                      .toStringAsFixed(1),
+                              unit: "g",
                               imagePath: proteinIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'FIBERS',
-                              info:
-                                  "${double.parse(widget.fibers) * itemCount}",
+                              info: widget.isInCart
+                                  ? (widget.fibers * widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.fibers * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: fibersIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'CARBS',
-                              info: "${double.parse(widget.carbs) * itemCount}",
+                              info: widget.isInCart
+                                  ? (widget.carbs * widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.carbs * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: carbsIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'FATS',
-                              info: "${double.parse(widget.fat) * itemCount}",
+                              info: widget.isInCart
+                                  ? (widget.fat * widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.fat * itemCount).toStringAsFixed(1),
                               unit: "g",
                               imagePath: fatsIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
                               cardTiltle: 'SUGER',
-                              info: "${double.parse(widget.suger) * itemCount}",
+                              info: widget.isInCart
+                                  ? (widget.suger * widget.itemCount)
+                                      .toStringAsFixed(1)
+                                  : (widget.suger * itemCount)
+                                      .toStringAsFixed(1),
                               unit: "g",
                               imagePath: sugarIcon),
                         ],
@@ -325,5 +362,37 @@ class _Details_PageState extends State<Details_Page> {
         );
       },
     );
+  }
+
+  Future deleteFromCart() async {
+    QuerySnapshot mydoc =
+        await userCartCollection.where('id', isEqualTo: widget.id).get();
+    String itemId = mydoc.docs[0].id;
+    print(itemId);
+
+    userCartCollection.doc(itemId).delete();
+    Navigator.pop(context);
+  }
+
+  Future changeItemCount(bool theSign) async {
+    QuerySnapshot mydoc =
+        await userCartCollection.where('id', isEqualTo: widget.id).get();
+    int savedItemCount = mydoc.docs[0]['itemCount'];
+    String itemId = mydoc.docs[0].id;
+    setState(() {
+      if (theSign) {
+        userCartCollection
+            .doc(itemId)
+            .update({'itemCount': savedItemCount + 1});
+        widget.itemCount++;
+      } else {
+        userCartCollection
+            .doc(itemId)
+            .update({'itemCount': savedItemCount - 1});
+        widget.itemCount--;
+      }
+    });
+
+    print(itemId);
   }
 }

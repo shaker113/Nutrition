@@ -46,6 +46,10 @@ dependencies:
   image_picker: ^0.8.6
   circular_indicator: ^1.0.6
   percent_indicator: ^4.2.2
+  firebase_messaging: ^14.0.4
+  cached_network_image: ^3.2.2
+  awesome_dialog: ^3.0.2
+  flutter_local_notifications: ^12.0.3
   flutter_emoji: ^2.4.0
   unicons: ^2.1.0
   emojis: ^0.9.9
@@ -53,7 +57,7 @@ dependencies:
   date_time_picker: ^2.1.0
 
 
-  
+
 
 dev_dependencies:
   flutter_test:

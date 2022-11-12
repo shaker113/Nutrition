@@ -35,3 +35,10 @@ String? emailValidator(String? p0) {
   }
   return null;
 }
+
+String? WightValidator(String? p0) {
+  if (p0!.isEmpty) {
+    return "This field is required";
+  }
+  return null;
+}

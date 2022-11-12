@@ -1,6 +1,4 @@
 import 'package:fina/screens/H_W.dart';
-import 'package:fina/screens/dailyNeedCalculator.dart';
-import 'package:fina/screens/sgin_up.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../data/data.dart';
@@ -9,8 +7,19 @@ import '../widgets/widgets.dart';
 import 'package:lottie/lottie.dart';
 import 'screens.dart';
 
-class Welcome extends StatelessWidget {
+class Welcome extends StatefulWidget {
   const Welcome({super.key});
+
+  @override
+  State<Welcome> createState() => _WelcomeState();
+}
+
+class _WelcomeState extends State<Welcome> {
+  @override
+  void initState() {
+    userId = null;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +49,7 @@ class Welcome extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
-                  "The Application   hiii  will help you to make best diet that you want",
+                  "The Application will help you to make best diet that you want",
                   textAlign: TextAlign.center,
                   style: customTextStyle.headlineMedium),
             ),
