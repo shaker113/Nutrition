@@ -1,6 +1,7 @@
 import 'package:fina/data/colors.dart';
 import 'package:fina/screens/bodyFatClaculator.dart';
 import 'package:fina/screens/profile.dart';
+import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
@@ -140,7 +141,16 @@ class _MyDrawerState extends State<MyDrawer> {
           title: const Text("Exit"),
           onTap: () {},
         ),
-        ListTileLogout()
+        ListTileLogout(),
+        IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return Water_Reminder();
+                },
+              ));
+            },
+            icon: Icon(Icons.water))
       ],
     );
   }
