@@ -161,6 +161,13 @@ class TheStatOfbodyFatCalState extends State<bodyFatCal> {
       ageCont.text = (userAge ?? 0).toString();
       gender = userGender;
     });
+    testmethod(
+      double.parse(weightCont.text),
+      double.parse(heightCont.text),
+      gender ?? 'Male',
+      int.parse(ageCont.text),
+      false,
+    );
     super.initState();
   }
 
