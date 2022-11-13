@@ -83,6 +83,8 @@ class _MyDrawerState extends State<MyDrawer> {
                           userWeight = documentSnapshot['Weight'];
                           userHeight = documentSnapshot['height'];
                           accountImage = documentSnapshot['image'];
+                          userAge = documentSnapshot['age'];
+                          userGender = documentSnapshot['gender'];
                         }
 
                         return Container(

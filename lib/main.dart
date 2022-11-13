@@ -1,7 +1,3 @@
-import 'package:fina/screens/H_W.dart';
-import 'package:fina/screens/birth.dart';
-import 'package:fina/screens/homepage.dart';
-import 'package:fina/screens/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +8,7 @@ import 'screens/screens.dart';
 // profile pic                                              done
 // user info qustions                                      {{salh}} almost done
 // profile page shows user info                            {{malek}} Done
-// calculating base goal calories for users atomaticlly    almost done
+// calculating base goal calories for users atomaticlly    almost done {{main goal || gender || age}}
 // fat percentage calcuator ((if we have time))            {{rami}}
 // sorting system                                          {{shaker}} Done
 // recommandation system (filter)

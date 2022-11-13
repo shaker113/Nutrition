@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fina/screens/bodyFatClaculator.dart';
 import 'package:fina/screens/dailyNeedCalculator.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,8 +28,12 @@ class _Profile_PageState extends State<Profile_Page> {
     getAccountInfo();
     heightController.text = userHeight!.toString();
     weightController.text = userWeight!.toString();
-    TestDailyNeedCalculator().plussMethod(double.parse(weightController.text),
-        double.parse(heightController.text), true);
+    TheStatOfDailyNeedCalculator().plussMethod(
+        double.parse(weightController.text),
+        double.parse(heightController.text),
+        true);
+    TheStatOfbodyFatCalState().testmethod(double.parse(weightController.text),
+        double.parse(heightController.text), userGender!, userAge!, true);
     super.initState();
   }
 
@@ -75,8 +80,9 @@ class _Profile_PageState extends State<Profile_Page> {
             child: SizedBox(
               width: screenWidth,
               height: screenHeigth! / 2 - 140,
-              child: const Image(
-                image: AssetImage(waterImage),
+              child: Image(
+                image:
+                    AssetImage(isEdditing ? mountains2Image : mountainsImage),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -95,7 +101,15 @@ class _Profile_PageState extends State<Profile_Page> {
               ),
             ),
           ),
-          Positioned(left: 0, top: 20, child: backButton(context)),
+          Positioned(
+              left: 0,
+              right: 0,
+              top: 20,
+              child: Row(
+                children: [
+                  backButton(context),
+                ],
+              )),
           Positioned(
             left: screenWidth! / 2 - 38,
             top: 35,
@@ -155,16 +169,34 @@ class _Profile_PageState extends State<Profile_Page> {
                     ],
                   ),
                   addVerticalSpace(10),
-                  infoContainer(
-                    assetName1: caloriesIcon,
-                    title1: (userCal ?? 0).toStringAsFixed(0),
-                    subtitle1: "Cal",
-                    assetName2: proteinIcon,
-                    title2: (userProtein ?? 0).toStringAsFixed(0),
-                    subtitle2: "g",
-                    assetName3: fatsIcon,
-                    title3: (userFat ?? 0).toStringAsFixed(0),
-                    subtitle3: "g",
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      infoContainer(
+                        thepage: DailyNeedCalculator(),
+                        assetName1: caloriesIcon,
+                        title1: (userCal ?? 0).toStringAsFixed(0),
+                        subtitle1: "Cal",
+                        assetName2: proteinIcon,
+                        title2: (userProtein ?? 0).toStringAsFixed(0),
+                        subtitle2: "g",
+                        assetName3: fatsIcon,
+                        title3: (userFat ?? 0).toStringAsFixed(0),
+                        subtitle3: "g",
+                      ),
+                      infoContainer(
+                        thepage: const bodyFatCal(),
+                        assetName1: bmiIcon,
+                        title1: (userBmi ?? 0).toStringAsFixed(0),
+                        subtitle1: "BMI",
+                        assetName2: bodyFatIcon,
+                        title2: (userFatPercentage ?? 0).toStringAsFixed(0),
+                        subtitle2: "Body Fat",
+                        assetName3: bmiStatusIcon,
+                        title3: userStatus ?? "",
+                        subtitle3: "Status",
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -190,9 +222,15 @@ class _Profile_PageState extends State<Profile_Page> {
                       userWeight = double.parse(weightController.text);
                       userHeight = double.parse(heightController.text);
                     });
-                    TestDailyNeedCalculator().plussMethod(
+                    TheStatOfDailyNeedCalculator().plussMethod(
                         double.parse(weightController.text),
                         double.parse(heightController.text),
+                        true);
+                    TheStatOfbodyFatCalState().testmethod(
+                        double.parse(weightController.text),
+                        double.parse(heightController.text),
+                        userGender!,
+                        userAge!,
                         true);
                   }
                 },

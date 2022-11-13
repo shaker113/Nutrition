@@ -15,6 +15,7 @@ class infoContainer extends StatelessWidget {
       assetName3,
       title3,
       subtitle3;
+  var thepage;
   infoContainer(
       {super.key,
       required this.assetName1,
@@ -25,26 +26,27 @@ class infoContainer extends StatelessWidget {
       required this.subtitle2,
       required this.assetName3,
       required this.title3,
-      required this.subtitle3});
+      required this.subtitle3,
+      required this.thepage});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: (context) => DailyNeedCalculator())),
+      onTap: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => thepage)),
       child: Stack(
         alignment: Alignment.center,
         children: [
           Container(
             alignment: Alignment.bottomCenter,
             height: screenHeigth! / 4,
-            width: screenWidth! / 2,
+            width: screenWidth! / 2.2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: BackdropFilter(
@@ -54,7 +56,7 @@ class infoContainer extends StatelessWidget {
                 ),
                 child: Container(
                   height: screenHeigth! / 4,
-                  width: screenWidth! / 2,
+                  width: screenWidth! / 2.2,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.white.withOpacity(0.2)),
@@ -62,8 +64,8 @@ class infoContainer extends StatelessWidget {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        Colors.white.withOpacity(0.2),
-                        Colors.white.withOpacity(0.08),
+                        Colors.white.withOpacity(0.3),
+                        Colors.white.withOpacity(0.1),
                       ],
                     ),
                   ),

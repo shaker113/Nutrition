@@ -2,9 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'models.dart';
 
-String? accountImage, userName, userEmail;
-double? userWeight, userHeight, userCal, userProtein, userFat;
-
+String? accountImage, userName, userEmail, userStatus, userGender;
+double? userWeight,
+    userHeight,
+    userCal,
+    userProtein,
+    userFat,
+    userBmi,
+    userFatPercentage;
+int? userAge;
 getAccountInfo() async {
   DocumentSnapshot userInfo = await userCollection.doc(userId).get();
 
@@ -13,4 +19,6 @@ getAccountInfo() async {
   userWeight = userInfo['Weight'];
   userHeight = userInfo['height'];
   accountImage = userInfo['image'];
+  userAge = userInfo['age'];
+  userGender = userInfo['gender'];
 }

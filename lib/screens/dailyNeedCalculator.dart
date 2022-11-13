@@ -1,16 +1,15 @@
 import 'package:fina/data/data.dart';
 import 'package:fina/models/models.dart';
-import 'package:fina/models/validation.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class DailyNeedCalculator extends StatefulWidget {
   @override
-  State<DailyNeedCalculator> createState() => TestDailyNeedCalculator();
+  State<DailyNeedCalculator> createState() => TheStatOfDailyNeedCalculator();
 }
 
-class TestDailyNeedCalculator extends State<DailyNeedCalculator> {
+class TheStatOfDailyNeedCalculator extends State<DailyNeedCalculator> {
   TextEditingController weightController = TextEditingController();
   TextEditingController heightController = TextEditingController();
   @override

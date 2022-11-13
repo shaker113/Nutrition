@@ -10,3 +10,5 @@ export 'homepage.dart';
 export 'cart_Page.dart';
 export 'bodyFatClaculator.dart';
 export 'profile.dart';
+export 'splash.dart';
+export 'H_W.dart';
