@@ -51,7 +51,8 @@ class _ListTileLogoutState extends State<ListTileLogout> {
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.all(15),
-                                  backgroundColor: const Color(0xFF21BFBD)),
+                                  backgroundColor:
+                                      Color.fromARGB(255, 53, 66, 66)),
                               onPressed: () {
                                 Navigator.pop(context);
                               },

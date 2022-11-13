@@ -205,7 +205,6 @@ class _buildFoodItemState extends State<buildFoodItem>
       final json = {
         'category': widget.category,
         'id': widget.id,
-        'itemId': '',
         'itemCount': 1,
         'calories': widget.calories
       }; //to Create doucuman

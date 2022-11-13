@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import '../data/data.dart';
 import '../models/models.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,37 +25,28 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    intialMessage();
-    fireMessging.getToken().then((value) {
-      // print("@@@@@@@@@@@@@@@@@@@");
-      // print(value);
-      // print("@@@@@@@@@@@@@@@@@@@@@");
-      //  to print the token
-      // the message will not show on forground, it will appear on background
-    });
-    FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      AwesomeDialog(
-              context: context,
-              title: "title",
-              body: Text("${event.notification?.body}"))
-          .show();
-    });
-    FirebaseMessaging.onMessage.listen((event) {
-      //   // print("====================================");
-      //   // print("${event.notification}");
-      //   // print("====================================");
-      //   // to send notification on forground.
-
-      AwesomeDialog(
-              context: context,
-              title: "title",
-              body: Text("${event.notification?.body}"))
-          .show();
+    // intialMessage();
+    // fireMessging.getToken().then((value) {
+    //   // print("@@@@@@@@@@@@@@@@@@@");
+    //   // print(value);
+    //   // print("@@@@@@@@@@@@@@@@@@@@@");
+    //   //  to print the token
+    //   // the message will not show on forground, it will appear on background
+    // });
+    // FirebaseMessaging.onMessageOpenedApp.listen((event) {});
+    // FirebaseMessaging.onMessage.listen((event) {
+    //   //   // print("====================================");
+    //   //   // print("${event.notification}");
+    //   //   // print("====================================");
+    //   //   // to send notification on forground.
+    // });
+    setState(() {
+      userId = authInstance.currentUser?.uid;
+      userInfo = userCollection.doc(userId);
+      checkRole();
     });
 
-    checkRole();
-    userId = authInstance.currentUser?.uid;
-    userInfo = userCollection.doc(userId);
+    print(isAdmin);
     super.initState();
   }
 

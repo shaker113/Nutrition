@@ -1,7 +1,6 @@
 import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
-import 'package:date_time_picker/date_time_picker.dart';
 
 import '../data/colors.dart';
 
@@ -64,7 +63,9 @@ class _BirthState extends State<Birth> {
                 backgroundColor: backgrounColor,
                 shape: const StadiumBorder(),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.popAndPushNamed(context, 'homepage');
+              },
               child: const Text("Next"),
             ),
           )

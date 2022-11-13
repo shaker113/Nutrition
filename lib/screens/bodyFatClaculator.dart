@@ -163,9 +163,9 @@ class _bodyFatCalState extends State<bodyFatCal> {
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
+                                // const SizedBox(
+                                //   width: 20,
+                                // ),
                                 Radio(
                                     activeColor: Colors.black,
                                     value: "Male",
@@ -182,9 +182,9 @@ class _bodyFatCalState extends State<bodyFatCal> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
+                                // const SizedBox(
+                                //   width: 20,
+                                // ),
                                 Radio(
                                     activeColor: Colors.black,
                                     value: "Female",

@@ -74,24 +74,6 @@ class _WelcomeState extends State<Welcome> {
                 ),
               ),
             ),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return DailyNeedCalculator();
-                    },
-                  ));
-                },
-                icon: Icon(Icons.skip_next)),
-            // IconButton(
-            //     onPressed: () {
-            //       Navigator.push(context, MaterialPageRoute(
-            //         builder: (context) {
-            //           return Home_Page();
-            //         },
-            //       ));
-            //     },
-            //     icon: Icon(Icons.skip_next)),
             GlassButton(
               // isSelected: true,
               theText: "Git started",
@@ -105,20 +87,6 @@ class _WelcomeState extends State<Welcome> {
                     ));
               },
             ),
-                GlassButton(
-              // isSelected: true,
-              theText: "Git ",
-              height: 50,
-              width: 222,
-              theFunction: () async {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const H_W(),
-                    ));
-              },
-            ),
-
           ],
         ),
       ),

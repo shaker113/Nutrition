@@ -1,12 +1,10 @@
-import 'package:fina/data/colors.dart';
-import 'package:fina/screens/bodyFatClaculator.dart';
-import 'package:fina/screens/profile.dart';
-import 'package:fina/widgets/spacing.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fina/data/data.dart';
 import 'package:flutter/material.dart';
-
 import '../models/models.dart';
 import '../screens/screens.dart';
-import 'logoutListTile.dart';
+import 'widgets.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -16,6 +14,12 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+  @override
+  void initState() {
+    // getAccountInfo();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,7 +41,8 @@ class _MyDrawerState extends State<MyDrawer> {
               children: [
                 Container(
                   alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.only(left: 15, top: 15, right: 15),
+                  padding: const EdgeInsets.only(
+                      left: 15, top: 15, right: 15, bottom: 1),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
@@ -60,32 +65,67 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: 20, right: 15, left: 15, bottom: 15),
-                  child: Container(
-                    alignment: Alignment.topLeft,
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: buttonsColor,
-                          radius: 40,
-                          child: const Text(
-                            "R",
-                            style:
-                                TextStyle(fontSize: 25.0, color: Colors.white),
-                          ),
-                        ),
-                        addHorizantalSpace(15),
-                        Column(
+                      top: 20, right: 15, left: 10, bottom: 15),
+                  child: StreamBuilder<Object>(
+                    stream: userCollection
+                        .where('id', isEqualTo: userId)
+                        .snapshots(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot streamSnapShot) {
+                      final DocumentSnapshot documentSnapshot =
+                          streamSnapShot.data!.docs[0];
+                      userName = documentSnapshot['name'];
+                      userEmail = documentSnapshot['email'];
+                      userWeight = documentSnapshot['Weight'];
+                      userHeight = documentSnapshot['height'];
+                      accountImage = documentSnapshot['image'];
+
+                      return Container(
+                        height: 80,
+                        alignment: Alignment.topLeft,
+                        child: Row(
                           children: [
-                            const Text("Username",
-                                style: TextStyle(fontSize: 20.0)),
-                            addVerticalSpace(5),
-                            const Text("User Email",
-                                style: TextStyle(fontSize: 15.0)),
+                            Hero(
+                              tag: accountImage ?? "",
+                              child: CircleAvatar(
+                                foregroundImage: accountImage == null
+                                    ? null
+                                    : CachedNetworkImageProvider(accountImage!),
+                                backgroundColor: buttonsColor,
+                                radius: 40,
+                                child: Text(
+                                  userName!
+                                      .trim()
+                                      .split(' ')
+                                      .map((l) => l[0])
+                                      .take(2)
+                                      .join()
+                                      .toUpperCase()
+                                      .toString(),
+                                  style: const TextStyle(
+                                      letterSpacing: 4,
+                                      fontSize: 25.0,
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            addHorizantalSpace(15),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(userName ?? "",
+                                    style: const TextStyle(fontSize: 20.0)),
+                                addVerticalSpace(5),
+                                Text(userEmail ?? "",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(fontSize: 14.0)),
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 )
               ],
@@ -103,8 +143,8 @@ class _MyDrawerState extends State<MyDrawer> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.settings, color: backgrounColor),
-          title: const Text("Settings"),
+          leading: Icon(Icons.person, color: backgrounColor),
+          title: const Text("Profile"),
           onTap: () {
             Navigator.push(
                 context,
@@ -140,7 +180,7 @@ class _MyDrawerState extends State<MyDrawer> {
           title: const Text("Exit"),
           onTap: () {},
         ),
-        ListTileLogout()
+        const ListTileLogout()
       ],
     );
   }

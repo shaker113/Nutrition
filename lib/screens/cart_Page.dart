@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
 import 'package:fina/models/firestore_refrences.dart';
+import 'package:fina/models/get_user_info.dart';
 import 'package:fina/widgets/cart_calories_calculator.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -23,22 +24,14 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgrounColor,
-      body: ListView(
+      body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 15, left: 10),
+            padding: const EdgeInsets.only(top: 20, left: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  ),
-                ),
+                backButton(context),
               ],
             ),
           ),
@@ -63,9 +56,9 @@ class _CartPageState extends State<CartPage> {
               ],
             ),
           ),
-          addVerticalSpace(40),
+          addVerticalSpace(20),
           Container(
-            height: screenHeigth! * 0.6,
+            height: screenHeigth! - 316,
             alignment: Alignment.bottomRight,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -95,7 +88,6 @@ class _CartPageState extends State<CartPage> {
                     final DocumentSnapshot documentSnapshot =
                         streamSnapShot.data!.docs[index];
                     return CartFoodItem(
-                      itemId: documentSnapshot['itemId'],
                       category: documentSnapshot['category'],
                       id: documentSnapshot['id'],
                       itemCount: documentSnapshot['itemCount'],
@@ -122,7 +114,7 @@ class _CartPageState extends State<CartPage> {
 
                 return cartCalculator(
                   theFoodCalories: calories,
-                  theGoalCalories: 2500,
+                  theGoalCalories: userCal,
                 );
               })
         ],

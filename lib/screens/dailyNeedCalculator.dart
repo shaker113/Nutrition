@@ -1,4 +1,5 @@
 import 'package:fina/data/data.dart';
+import 'package:fina/models/models.dart';
 import 'package:fina/models/validation.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,13 @@ class DailyNeedCalculator extends StatefulWidget {
 
 class _DailyNeedCalculator extends State<DailyNeedCalculator> {
   TextEditingController weightController = TextEditingController();
-
   TextEditingController heightController = TextEditingController();
+  @override
+  void initState() {
+    weightController.text = userWeight.toString();
+    heightController.text = userHeight.toString();
+    super.initState();
+  }
 
   double calorieCal = 0,
       calHeight = 0,
@@ -83,8 +89,11 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
     carbCalcul = calCarb / 4;
     setState(() {
       calUsingRadio;
+      userCal = calUsingRadio;
       proteinCalcul;
+      userProtein = proteinCalcul;
       fat;
+      userFat = fat;
       carbCalcul;
       animationtrue;
     });

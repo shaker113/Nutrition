@@ -111,11 +111,12 @@ class _InfoScreenState extends State<InfoScreen> {
                           value = "";
 
                           if (currentIndex == questions.length - 1) {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => H_W(),));
-                            setState(() {
-                              
-                            });
-                            
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => H_W(),
+                                ));
+                            setState(() {});
 
                             return;
                           }
