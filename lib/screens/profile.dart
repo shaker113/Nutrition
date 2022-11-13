@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fina/screens/dailyNeedCalculator.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fina/data/data.dart';
@@ -24,6 +25,10 @@ class _Profile_PageState extends State<Profile_Page> {
   @override
   void initState() {
     getAccountInfo();
+    heightController.text = userHeight!.toString();
+    weightController.text = userWeight!.toString();
+    TestDailyNeedCalculator().plussMethod(double.parse(weightController.text),
+        double.parse(heightController.text), true);
     super.initState();
   }
 
@@ -185,6 +190,10 @@ class _Profile_PageState extends State<Profile_Page> {
                       userWeight = double.parse(weightController.text);
                       userHeight = double.parse(heightController.text);
                     });
+                    TestDailyNeedCalculator().plussMethod(
+                        double.parse(weightController.text),
+                        double.parse(heightController.text),
+                        true);
                   }
                 },
                 theText: isEdditing ? "Save" : "Edit"),
@@ -354,31 +363,5 @@ class _Profile_PageState extends State<Profile_Page> {
         ],
       ),
     );
-  }
-}
-
-class getClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-
-    path.lineTo(0.0, 160);
-    path.lineTo(size.width / 2, 200);
-
-    path.lineTo(size.width / 2, 200);
-    path.lineTo(size.width / 2, 240);
-    path.lineTo(size.width / 2, 200);
-    path.lineTo(size.width / 2, 200);
-
-    path.lineTo(size.width, 160);
-    path.lineTo(size.width, 0);
-
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return true;
   }
 }

@@ -64,69 +64,75 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 20, right: 15, left: 10, bottom: 15),
-                  child: StreamBuilder<Object>(
-                    stream: userCollection
-                        .where('id', isEqualTo: userId)
-                        .snapshots(),
-                    builder:
-                        (BuildContext context, AsyncSnapshot streamSnapShot) {
-                      final DocumentSnapshot documentSnapshot =
-                          streamSnapShot.data!.docs[0];
-                      userName = documentSnapshot['name'];
-                      userEmail = documentSnapshot['email'];
-                      userWeight = documentSnapshot['Weight'];
-                      userHeight = documentSnapshot['height'];
-                      accountImage = documentSnapshot['image'];
+                SizedBox(
+                  height: 115,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 20, right: 15, left: 10, bottom: 15),
+                    child: StreamBuilder<Object>(
+                      stream: userCollection
+                          .where('id', isEqualTo: userId)
+                          .snapshots(),
+                      builder:
+                          (BuildContext context, AsyncSnapshot streamSnapShot) {
+                        if (streamSnapShot.hasData) {
+                          final DocumentSnapshot documentSnapshot =
+                              streamSnapShot.data!.docs[0];
+                          userName = documentSnapshot['name'];
+                          userEmail = documentSnapshot['email'];
+                          userWeight = documentSnapshot['Weight'];
+                          userHeight = documentSnapshot['height'];
+                          accountImage = documentSnapshot['image'];
+                        }
 
-                      return Container(
-                        height: 80,
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                          children: [
-                            Hero(
-                              tag: accountImage ?? "",
-                              child: CircleAvatar(
-                                foregroundImage: accountImage == null
-                                    ? null
-                                    : CachedNetworkImageProvider(accountImage!),
-                                backgroundColor: buttonsColor,
-                                radius: 40,
-                                child: Text(
-                                  userName!
-                                      .trim()
-                                      .split(' ')
-                                      .map((l) => l[0])
-                                      .take(2)
-                                      .join()
-                                      .toUpperCase()
-                                      .toString(),
-                                  style: const TextStyle(
-                                      letterSpacing: 4,
-                                      fontSize: 25.0,
-                                      color: Colors.white),
+                        return Container(
+                          height: 80,
+                          alignment: Alignment.topLeft,
+                          child: Row(
+                            children: [
+                              Hero(
+                                tag: accountImage ?? "",
+                                child: CircleAvatar(
+                                  foregroundImage: accountImage == null
+                                      ? null
+                                      : CachedNetworkImageProvider(
+                                          accountImage!),
+                                  backgroundColor: buttonsColor,
+                                  radius: 40,
+                                  child: Text(
+                                    userName!
+                                        .trim()
+                                        .split(' ')
+                                        .map((l) => l[0])
+                                        .take(2)
+                                        .join()
+                                        .toUpperCase()
+                                        .toString(),
+                                    style: const TextStyle(
+                                        letterSpacing: 4,
+                                        fontSize: 25.0,
+                                        color: Colors.white),
+                                  ),
                                 ),
                               ),
-                            ),
-                            addHorizantalSpace(15),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(userName ?? "",
-                                    style: const TextStyle(fontSize: 20.0)),
-                                addVerticalSpace(5),
-                                Text(userEmail ?? "",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontSize: 14.0)),
-                              ],
-                            )
-                          ],
-                        ),
-                      );
-                    },
+                              addHorizantalSpace(15),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(userName ?? "",
+                                      style: const TextStyle(fontSize: 20.0)),
+                                  addVerticalSpace(5),
+                                  Text(userEmail ?? "",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(fontSize: 14.0)),
+                                ],
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 )
               ],

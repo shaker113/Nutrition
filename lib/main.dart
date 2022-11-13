@@ -9,16 +9,16 @@ import 'firebase_options.dart';
 import 'models/models.dart';
 import 'screens/screens.dart';
 
-// profile pic
-// user info qustions                                      {{salh}}
+// profile pic                                              done
+// user info qustions                                      {{salh}} almost done
 // profile page shows user info                            {{malek}} Done
-// calculating base goal calories for users atomaticlly
+// calculating base goal calories for users atomaticlly    almost done
 // fat percentage calcuator ((if we have time))            {{rami}}
 // sorting system                                          {{shaker}} Done
 // recommandation system (filter)
 // clear all button in cart screen                         {{shaker}} almost Done {{scroll physics}} {{delete button still does not working as it should be}}
 // making details page scrollable                          {{shaker}}             {{scroll physics}}
-// splash screen
+// splash screen                                           done by salh
 // app icon    and name                                    done by malek
 // show dialog for sgin out                                done by malek
 // show dialog when the user add item to his cart
@@ -61,6 +61,6 @@ class MyApp extends StatelessWidget {
           // "birth": (context) => const Birth(),
           "H_W": (context) => const H_W(),
         },
-        home: isLogin == true ? const splash_screen() : const Welcome());
+        home: const splash_screen());
   }
 }

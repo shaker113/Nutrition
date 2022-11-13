@@ -7,16 +7,18 @@ import 'package:flutter/services.dart';
 
 class DailyNeedCalculator extends StatefulWidget {
   @override
-  State<DailyNeedCalculator> createState() => _DailyNeedCalculator();
+  State<DailyNeedCalculator> createState() => TestDailyNeedCalculator();
 }
 
-class _DailyNeedCalculator extends State<DailyNeedCalculator> {
+class TestDailyNeedCalculator extends State<DailyNeedCalculator> {
   TextEditingController weightController = TextEditingController();
   TextEditingController heightController = TextEditingController();
   @override
   void initState() {
-    weightController.text = userWeight.toString();
-    heightController.text = userHeight.toString();
+    weightController.text = (userWeight ?? 0).toString();
+    heightController.text = (userHeight ?? 0).toString();
+    plussMethod(double.parse(weightController.text),
+        double.parse(heightController.text), false);
     super.initState();
   }
 
@@ -34,12 +36,12 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
   int groupValue = 1;
 
   List<String> lst = ['To lose weight', 'Maintain my weight', 'To gain weight'];
-  int selectedIndex = 0;
+  int selectedIndex = 0; // variable
   bool animationtrue = false;
 
-  void plussMethod() {
-    double weight = double.parse(weightController.text);
-    double height = double.parse(heightController.text);
+  void plussMethod(double thisweight, double thisheight, bool isInProfile) {
+    double weight = thisweight;
+    double height = thisheight;
     calorieCal = (weight * 24 * 1.5);
     proteinCalcul = weight * 2.2;
 
@@ -87,16 +89,22 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
     calCarb = calUsingRadio - calProtienplusscalFat;
 
     carbCalcul = calCarb / 4;
-    setState(() {
-      calUsingRadio;
-      userCal = calUsingRadio;
-      proteinCalcul;
-      userProtein = proteinCalcul;
-      fat;
+    if (!isInProfile) {
+      setState(() {
+        calUsingRadio;
+        proteinCalcul;
+        fat;
+        carbCalcul;
+        animationtrue;
+        // userFat = fat;
+        // userProtein = proteinCalcul;
+        // userCal = calUsingRadio;
+      });
+    } else {
       userFat = fat;
-      carbCalcul;
-      animationtrue;
-    });
+      userProtein = proteinCalcul;
+      userCal = calUsingRadio;
+    }
   }
 
   void clearEverything() {
@@ -260,7 +268,10 @@ class _DailyNeedCalculator extends State<DailyNeedCalculator> {
                               theText: 'Calculate',
                               theFunction: () {
                                 if (myFormKey.currentState!.validate()) {
-                                  plussMethod();
+                                  plussMethod(
+                                      double.parse(weightController.text),
+                                      double.parse(heightController.text),
+                                      false);
                                 }
                               },
                             ),
