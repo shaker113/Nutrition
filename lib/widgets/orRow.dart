@@ -9,19 +9,18 @@ class OrRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
           height: 1.5,
-          width: screenWidth! * 0.33,
+          width: screenWidth! *0.33,
           color: customGrey,
         ),
         Container(
           padding: const EdgeInsets.all(2.5),
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.white.withOpacity(0.4))),
+              border: Border.all(color: Colors.white.withOpacity(0.3))),
           child: const Text(
             "OR",
             style: TextStyle(
@@ -30,7 +29,7 @@ class OrRow extends StatelessWidget {
         ),
         Container(
           height: 1.5,
-          width: screenHeigth! * 0.33,
+          width:screenWidth! *0.33,
           color: customGrey,
         ),
       ],
