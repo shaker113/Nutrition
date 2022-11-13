@@ -63,9 +63,7 @@ class _BirthState extends State<Birth> {
                 backgroundColor: backgrounColor,
                 shape: const StadiumBorder(),
               ),
-              onPressed: () {
-                Navigator.popAndPushNamed(context, 'homepage');
-              },
+              onPressed: () {Navigator.pushNamed(context, "homepage");},
               child: const Text("Next"),
             ),
           )

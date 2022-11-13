@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:fina/models/models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import '../data/data.dart';
@@ -22,6 +23,7 @@ TextEditingController password = TextEditingController();
 TextEditingController email = TextEditingController();
 
 class _LogInState extends State<LogIn> {
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +42,10 @@ class _LogInState extends State<LogIn> {
                   radius: 2,
                 ),
               ),
-              child: Lottie.asset(cleanVegetable, width: screenWidth),
+              child: Lottie.asset(cleanVegetable, width: screenHeigth),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth! * 0.07),
+              padding: EdgeInsets.symmetric(horizontal: screenHeigth! * 0.07),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: BackdropFilter(

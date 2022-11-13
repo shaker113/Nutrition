@@ -1,5 +1,6 @@
 import 'package:fina/data/colors.dart';
 import 'package:fina/screens/H_W.dart';
+import 'package:fina/screens/screens.dart';
 import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   IconButton(
                       onPressed: () {
                         if (currentIndex == 0) {
-                          return;
+                          return ;
                         }
                         userAnswers.removeLast();
                         pageController.jumpToPage(currentIndex - 1);
@@ -110,20 +111,23 @@ class _InfoScreenState extends State<InfoScreen> {
                           userAnswers.add(value);
                           value = "";
 
-                          if (currentIndex == questions.length - 1) {
+                          if (currentIndex == questions.length-1 ) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => H_W(),
                                 ));
                             setState(() {});
+                              print(userAnswers);
 
                             return;
                           }
                           pageController.jumpToPage(currentIndex + 1);
                           currentIndex++;
                           print(userAnswers);
+                          
                         },
+                        
                   child: const Text("Next"),
                 ),
               ),

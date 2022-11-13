@@ -9,6 +9,7 @@ class OrRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -29,7 +30,7 @@ class OrRow extends StatelessWidget {
         ),
         Container(
           height: 1.5,
-          width: screenWidth! * 0.33,
+          width: screenHeigth! * 0.33,
           color: customGrey,
         ),
       ],

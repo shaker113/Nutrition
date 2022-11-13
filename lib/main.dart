@@ -1,4 +1,7 @@
 import 'package:fina/screens/H_W.dart';
+import 'package:fina/screens/birth.dart';
+import 'package:fina/screens/homepage.dart';
+import 'package:fina/screens/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +61,6 @@ class MyApp extends StatelessWidget {
           // "birth": (context) => const Birth(),
           "H_W": (context) => const H_W(),
         },
-        home: isLogin == true ? const HomePage() : const Welcome());
+        home: isLogin == true ? const splash_screen() : const Welcome());
   }
 }
