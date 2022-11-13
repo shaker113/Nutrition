@@ -11,7 +11,7 @@ class LongButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(screenWidth! * 0.8, 50),
+        fixedSize: Size(screenHeigth! * 0.8, 50),
         backgroundColor: buttonsColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
