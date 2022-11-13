@@ -49,12 +49,6 @@ class _HomePageState extends State<HomePage> {
       // print("====================================");
 
       //   // to send notification on forground.
-
-      AwesomeDialog(
-              context: context,
-              title: "title",
-              body: Text("${event.notification?.body}"))
-          .show();
     });
 
     print(isAdmin);
