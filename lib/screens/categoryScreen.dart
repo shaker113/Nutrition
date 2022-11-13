@@ -34,7 +34,7 @@ class _Category_PageState extends State<Category_Page>
     sortController.dispose();
     super.dispose();
   }
-
+  String searchText = "";
   String sortBy = 'name';
   bool descending = false;
   @override
@@ -97,7 +97,9 @@ class _Category_PageState extends State<Category_Page>
               ),
             ),
             child: StreamBuilder(
-              stream: widget.theCollectionReference
+              stream: searchText.isNotEmpty? widget.theCollectionReference
+                  .orderBy(sortBy, descending: descending).where( 'name',isEqualTo: searchText )
+                  .snapshots():widget.theCollectionReference
                   .orderBy(sortBy, descending: descending)
                   .snapshots(),
               builder: (BuildContext context,
