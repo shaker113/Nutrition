@@ -1,10 +1,13 @@
 import 'package:fina/data/colors.dart';
+import 'package:fina/data/data.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../widgets/drawer.dart';
 import '../widgets/tableFatCalc.dart';
 import '../widgets/textFieldCalc.dart';
+import 'dart:ui';
 
 class bodyFatCal extends StatefulWidget {
   const bodyFatCal({super.key});
@@ -127,185 +130,254 @@ class _bodyFatCalState extends State<bodyFatCal> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(color: backgrounColor, child: backButton(context)),
-                const Padding(
-                  padding: EdgeInsets.only(top: 30.0),
-                  child: Text(
-                    "Calculate your body fat",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+    return SafeArea(
+      child: Scaffold(
+        body: Form(
+          key: _formKey,
+          child: Stack(alignment: Alignment.bottomCenter, children: [
+            Container(
+                alignment: Alignment.bottomCenter,
+                height: screenHeigth,
+                width: screenWidth,
+                decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                  colors: [backgrounColor, backgrounColor2],
+                  center: Alignment.bottomRight,
+                  radius: 4,
+                ))),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: screenWidth! * 0.1,
+                  horizontal: screenHeigth! * 0.01),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 4.0,
+                    sigmaY: 4.0,
                   ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color(0xFF21BFBD),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Colors.black.withOpacity(0.15),
+                          Colors.black.withOpacity(0.05),
+                        ],
+                      ),
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: Column(children: [
+                        Text(
+                          "Calculate your body fat",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: buttonsColor),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                const Text(
-                                  "Gender :",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                // const SizedBox(
-                                //   width: 20,
-                                // ),
-                                Radio(
-                                    activeColor: Colors.black,
-                                    value: "Male",
-                                    groupValue: gender,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        gender = value.toString();
-                                      });
-                                    }),
-                                const Text(
-                                  "Male",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                // const SizedBox(
-                                //   width: 20,
-                                // ),
-                                Radio(
-                                    activeColor: Colors.black,
-                                    value: "Female",
-                                    groupValue: gender,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        gender = value.toString();
-                                      });
-                                    }),
-                                const Text(
-                                  "Female",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
+                            const Text(
+                              "Gender :",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
-                              height: 30,
+                              width: 20,
                             ),
-                            Wrap(
-                              children: [
-                                const Text("Height :",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                    width: 90,
-                                    height: 60,
-                                    child: textField(
-                                      hint: "cm",
-                                      mycont: heightCont,
-                                    )),
-                                const SizedBox(
-                                  width: 50,
-                                ),
-                                const Text("Weight :",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                    width: 90,
-                                    height: 60,
-                                    child: textField(
-                                      hint: "kg",
-                                      mycont: weightCont,
-                                    )),
-                              ],
+                            Radio(
+                                activeColor: Colors.black,
+                                value: "Male",
+                                groupValue: gender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    gender = value.toString();
+                                  });
+                                }),
+                            const Text(
+                              "Male",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const SizedBox(
-                              height: 20,
+                              width: 20,
                             ),
-                            Row(
-                              children: [
-                                const Text("Age :",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                const SizedBox(
-                                  width: 32,
-                                ),
-                                Container(
-                                    width: 90,
-                                    height: 60,
-                                    child: textField(
-                                      hint: "",
-                                      mycont: ageCont,
-                                    )),
-                              ],
+                            Radio(
+                                activeColor: Colors.black,
+                                value: "Female",
+                                groupValue: gender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    gender = value.toString();
+                                  });
+                                }),
+                            const Text(
+                              "Female",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(15),
-                                    backgroundColor: Colors.black),
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    testmethod();
-                                    // heightCont.text = "";
-                                    // weightCont.text = "";
-                                    // ageCont.text = "";
-                                  }
-                                  if (gender == null || gender!.isEmpty) {
-                                    print("select gender");
-                                  }
-                                },
-                                child: const Text("Calculate",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ))),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            tableWidget(
-                              BMI: "${BMI ?? ' '}",
-                              bodyfat: "${finalFat ?? ' '} %",
-                              status: "${finalstatus ?? ' '}",
-                            )
                           ],
                         ),
-                      ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          children: [
+                            const Text("Height :",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            SizedBox(
+                                width: 60,
+                                height: 50,
+                                child: textField(
+                                  hint: "cm",
+                                  mycont: heightCont,
+                                )),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            const Text("Weight :",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            SizedBox(
+                                width: 60,
+                                height: 50,
+                                child: textField(
+                                  hint: "kg",
+                                  mycont: weightCont,
+                                )),
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            addVerticalSpace(100),
+                            const Text("Age :",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            const SizedBox(
+                              width: 32,
+                            ),
+                            Container(
+                                width: 60,
+                                height: 50,
+                                child: textField(
+                                  hint: "",
+                                  mycont: ageCont,
+                                )),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(15),
+                                backgroundColor: Colors.black),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                testmethod();
+                                // heightCont.text = "";
+                                // weightCont.text = "";
+                                // ageCont.text = "";
+                              }
+                              if (gender == null || gender!.isEmpty) {
+                                print("select gender");
+                              }
+                            },
+                            child: const Text("Calculate",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ))),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        tableWidget(
+                          BMI: "${BMI ?? ' '}",
+                          bodyfat: "${finalFat ?? ' '} %",
+                          status: "${finalstatus ?? ' '}",
+                        ),
+                        LottieBuilder.asset(
+                          lottieImage,
+                          fit: BoxFit.fill,
+                          height: 190,
+                          width: 190,
+                        )
+                      ]),
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            )
+          ]),
         ),
       ),
     );
   }
+
+//
+//                             ElevatedButton(
+//                                 style: ElevatedButton.styleFrom(
+//                                     padding: const EdgeInsets.all(15),
+//                                     backgroundColor: Colors.black),
+//                                 onPressed: () {
+//                                   if (_formKey.currentState!.validate()) {
+//                                     testmethod();
+//                                     // heightCont.text = "";
+//                                     // weightCont.text = "";
+//                                     // ageCont.text = "";
+//                                   }
+//                                   if (gender == null || gender!.isEmpty) {
+//                                     print("select gender");
+//                                   }
+//                                 },
+//                                 child: const Text("Calculate",
+//                                     style: TextStyle(
+//                                       fontSize: 20,
+//                                     ))),
+//                             const SizedBox(
+//                               height: 30,
+//                             ),
+//                             tableWidget(
+//                               BMI: "${BMI ?? ' '}",
+//                               bodyfat: "${finalFat ?? ' '} %",
+//                               status: "${finalstatus ?? ' '}",
+//                             )
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 }
