@@ -1,6 +1,8 @@
+import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../data/data.dart';
 import '../models/models.dart';
 
@@ -25,25 +27,34 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // intialMessage();
-    // fireMessging.getToken().then((value) {
-    //   // print("@@@@@@@@@@@@@@@@@@@");
-    //   // print(value);
-    //   // print("@@@@@@@@@@@@@@@@@@@@@");
-    //   //  to print the token
-    //   // the message will not show on forground, it will appear on background
-    // });
-    // FirebaseMessaging.onMessageOpenedApp.listen((event) {});
-    // FirebaseMessaging.onMessage.listen((event) {
-    //   //   // print("====================================");
-    //   //   // print("${event.notification}");
-    //   //   // print("====================================");
-    //   //   // to send notification on forground.
-    // });
-    setState(() {
-      userId = authInstance.currentUser?.uid;
-      userInfo = userCollection.doc(userId);
-      checkRole();
+    intialMessage();
+    fireMessging.getToken().then((value) {
+      // print("@@@@@@@@@@@@@@@@@@@");
+      // print(value);
+      // print("@@@@@@@@@@@@@@@@@@@@@");
+
+      //  to print the token
+      // the message will not show on forground, it will appear on background
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) {
+          return Water_Reminder();
+        },
+      ));
+    });
+    FirebaseMessaging.onMessage.listen((event) {
+      // print("====================================");
+      // print("${event.notification}");
+      // print("====================================");
+
+      //   // to send notification on forground.
+
+      AwesomeDialog(
+              context: context,
+              title: "title",
+              body: Text("${event.notification?.body}"))
+          .show();
     });
 
     print(isAdmin);

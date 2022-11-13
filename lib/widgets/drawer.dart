@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/data/data.dart';
 import 'package:flutter/material.dart';
 import '../models/models.dart';
@@ -180,7 +181,16 @@ class _MyDrawerState extends State<MyDrawer> {
           title: const Text("Exit"),
           onTap: () {},
         ),
-        const ListTileLogout()
+        ListTileLogout(),
+        IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return Water_Reminder();
+                },
+              ));
+            },
+            icon: Icon(Icons.water))
       ],
     );
   }
