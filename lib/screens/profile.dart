@@ -34,6 +34,7 @@ class _Profile_PageState extends State<Profile_Page> {
         true);
     TheStatOfbodyFatCalState().testmethod(double.parse(weightController.text),
         double.parse(heightController.text), userGender!, userAge!, true);
+
     super.initState();
   }
 
@@ -371,12 +372,8 @@ class _Profile_PageState extends State<Profile_Page> {
                               .ref("images/$random$imageName");
                           await storgeRef.putFile(image);
                           var imageUrl = await storgeRef.getDownloadURL();
-                          final user = FirebaseFirestore.instance
-                              .collection('user')
-                              .doc(userId);
-                          if (accountImage != null ||
-                              accountImage != "" ||
-                              accountImage != " ") {
+                          final user = userCollection.doc(userId);
+                          if (accountImage != "") {
                             FirebaseStorage.instance
                                 .refFromURL(accountImage!)
                                 .delete();

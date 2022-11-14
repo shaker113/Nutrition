@@ -22,7 +22,7 @@ class GoogleButton extends StatelessWidget {
         }
         AuthService().saveAcount(
             id: userId,
-            name: authInstance.currentUser?.displayName,
+            name: authInstance.currentUser?.displayName ?? "User",
             email: authInstance.currentUser?.email);
 
         checkRole();
