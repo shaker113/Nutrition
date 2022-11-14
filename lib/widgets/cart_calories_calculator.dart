@@ -21,7 +21,7 @@ class _cartCalculatorState extends State<cartCalculator> {
     return Container(
       padding: const EdgeInsets.only(left: 40, top: 10, right: 40),
       width: screenHeigth,
-      height: 200,
+      height: 180,
       color: Colors.transparent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

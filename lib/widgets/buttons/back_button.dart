@@ -6,8 +6,8 @@ IconButton backButton(BuildContext context) {
       Navigator.pop(context);
     },
     icon: const Icon(
-      Icons.arrow_back,
-      color: Colors.black,
+      Icons.arrow_back_ios,
+      color: Colors.white,
     ),
   );
 }

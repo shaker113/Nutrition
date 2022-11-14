@@ -5,6 +5,7 @@ import 'package:fina/screens/homepage.dart';
 import 'package:fina/screens/screens.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import 'login.dart';
 
 class splash_screen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _splash_screenState extends State<splash_screen> {
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(context, MaterialPageRoute<void>(
         builder: (BuildContext context) {
-          return const Welcome();
+          return isLogin == true ? const HomePage() : const Welcome();
         },
       ));
     });

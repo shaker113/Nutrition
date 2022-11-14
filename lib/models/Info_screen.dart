@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_emoji/flutter_emoji.dart';
-import 'package:unicons/unicons.dart';
-import 'package:emojis/emojis.dart';
-
 List questions = [
   {
     'q': 'What is your gender',

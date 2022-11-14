@@ -1,9 +1,10 @@
+import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../data/data.dart';
 import '../models/models.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,37 +27,36 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    userId = authInstance.currentUser?.uid;
+    checkRole();
+    getAccountInfo();
+
     intialMessage();
+
     fireMessging.getToken().then((value) {
       // print("@@@@@@@@@@@@@@@@@@@");
       // print(value);
       // print("@@@@@@@@@@@@@@@@@@@@@");
+
       //  to print the token
       // the message will not show on forground, it will appear on background
     });
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      AwesomeDialog(
-              context: context,
-              title: "title",
-              body: Text("${event.notification?.body}"))
-          .show();
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) {
+          return Water_Reminder();
+        },
+      ));
     });
     FirebaseMessaging.onMessage.listen((event) {
-      //   // print("====================================");
-      //   // print("${event.notification}");
-      //   // print("====================================");
-      //   // to send notification on forground.
+      // print("====================================");
+      // print("${event.notification}");
+      // print("====================================");
 
-      AwesomeDialog(
-              context: context,
-              title: "title",
-              body: Text("${event.notification?.body}"))
-          .show();
+      // to send notification on forground.
     });
 
-    checkRole();
-    userId = authInstance.currentUser?.uid;
-    userInfo = userCollection.doc(userId);
+    print(isAdmin);
     super.initState();
   }
 
@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     screenHeigth = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

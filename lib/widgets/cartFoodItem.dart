@@ -1,19 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fina/screens/details_Page.dart';
+import 'package:fina/screens/screens.dart';
 import 'package:flutter/material.dart';
-
 import '../data/data.dart';
 import '../models/models.dart';
 import 'widgets.dart';
 
 class CartFoodItem extends StatefulWidget {
-  String id, category, itemId;
+  String id, category;
   int itemCount;
   CartFoodItem({
     super.key,
     required this.category,
-    required this.itemId,
     required this.itemCount,
     required this.id,
   });
@@ -23,7 +21,6 @@ class CartFoodItem extends StatefulWidget {
 }
 
 class _CartFoodItemState extends State<CartFoodItem> {
-  static final cus = CacheManagerLogLevel;
   @override
   void initState() {
     getItemData();
@@ -173,6 +170,7 @@ class _CartFoodItemState extends State<CartFoodItem> {
     String itemId = mydoc.docs[0].id;
 
     userCartCollection.doc(itemId).delete();
+    setState(() {});
   }
 
   Future changeItemCount(bool theSign) async {

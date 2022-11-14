@@ -1,9 +1,12 @@
+import 'package:fina/data/data.dart';
+import 'package:fina/models/auth.dart';
+import 'package:fina/models/firestore_refrences.dart';
 import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
-import 'package:date_time_picker/date_time_picker.dart';
 
 import '../data/colors.dart';
+import 'screens.dart';
 
 class Birth extends StatefulWidget {
   const Birth({super.key});
@@ -13,63 +16,102 @@ class Birth extends StatefulWidget {
 }
 
 class _BirthState extends State<Birth> {
-  DateTime d = DateTime.now();
+  DateTime todayDate = DateTime.now();
+  DateTime userDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          addVerticalSpace(40),
-          Container(
-            height: 100.0,
-            alignment: Alignment.center,
-            child: Text(
-              "$d",
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+                )
+              ],
             ),
-          ),
-          Container(
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.only(right: 48),
-            child: TextButton(
-              onPressed: () {
-                setState(() {
-                  d = DateTime.now();
-                });
-              },
-              child: Text(
-                "TODAY",
-                style: TextStyle(color: Colors.red),
+            addVerticalSpace(40),
+            const Text(
+              "When is your brithday?",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            addVerticalSpace(10),
+            Text(
+              "We will use it to personalize\n your plan",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.w600, color: customGrey),
+            ),
+            addVerticalSpace(10),
+            todayDate.year - userDate.year > 14
+                ? const Text("العمر كله")
+                : Text(
+                    "you need to be at least 14 years old",
+                    style: TextStyle(
+                      color: customRed,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+            SizedBox(
+              height: 250,
+              child: ScrollDatePicker(
+                selectedDate: userDate,
+                onDateTimeChanged: (DateTime value) {
+                  setState(() {
+                    userDate = value;
+                  });
+                },
               ),
             ),
-          ),
-          SizedBox(
-            height: 250,
-            child: ScrollDatePicker(
-              selectedDate: d,
-              locale: Locale('en'),
-              onDateTimeChanged: (DateTime value) {
-                setState(() {
-                  d = value;
-                });
-              },
-            ),
-          ),
-          addVerticalSpace(300),
-          SizedBox(
-            height: 40,
-            width: 200,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: backgrounColor,
-                shape: const StadiumBorder(),
+            addVerticalSpace(260),
+            SizedBox(
+              height: 40,
+              width: 200,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: backgrounColor,
+                  shape: const StadiumBorder(),
+                ),
+                onPressed: todayDate.year - userDate.year > 14
+                    ? () {
+                        userAnswers.asMap()[5] == null
+                            ? null
+                            : userAnswers.removeAt(5);
+
+                        userAnswers.insert(5, todayDate.year - userDate.year);
+                        saveUserInfo();
+                        print(userAnswers);
+
+                        Navigator.popAndPushNamed(context, "homepage");
+                      }
+                    : null,
+                child: const Text("Personalize my plan"),
               ),
-              onPressed: () {Navigator.pushNamed(context, "homepage");},
-              child: const Text("Next"),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  saveUserInfo() {
+    userCollection.doc(userId).update({
+      'gender': userAnswers[0],
+      'mainGoal': userAnswers[1],
+      'height': double.parse(userAnswers[4].toString()),
+      'Weight': double.parse(userAnswers[3].toString()),
+      'diet': userAnswers[2],
+      'age': int.parse(userAnswers[5].toString())
+    });
   }
 }

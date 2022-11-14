@@ -1,12 +1,11 @@
-import 'package:fina/data/colors.dart';
-import 'package:fina/screens/bodyFatClaculator.dart';
-import 'package:fina/screens/profile.dart';
-import 'package:fina/widgets/spacing.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fina/screens/water_reminder.dart';
+import 'package:fina/data/data.dart';
 import 'package:flutter/material.dart';
-
 import '../models/models.dart';
 import '../screens/screens.dart';
-import 'logoutListTile.dart';
+import 'widgets.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -17,123 +16,194 @@ class MyDrawer extends StatefulWidget {
 
 class _MyDrawerState extends State<MyDrawer> {
   @override
+  void initState() {
+    // getAccountInfo();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          Container(
+    return Column(
+      children: [
+        Container(
+          height: 180,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: const Alignment(0.8, 1),
+              colors: [backgrounColor2, backgrounColor],
+            ),
+          ),
+          width: double.infinity,
+          alignment: Alignment.topLeft,
+          child: SafeArea(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  // decoration: BoxDecoration(
-                  //   image: DecorationImage(
-                  //     fit: BoxFit.cover,
-                  //     image: NetworkImage(
-                  //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzh5LSN6dk17RIhp1NKFP8zZ_XC7zulFcIUtg38MYQJg&s"),
-                  //   ),
-                  // ),
-                  width: double.infinity,
                   alignment: Alignment.topLeft,
-                  child: Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        padding:
-                            const EdgeInsets.only(left: 15, top: 15, right: 15),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
+                  padding: const EdgeInsets.only(
+                      left: 15, top: 15, right: 15, bottom: 1),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.arrow_back_ios,
+                          size: 20,
+                        ),
+                        Text(
+                          "Back",
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 115,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 20, right: 15, left: 10, bottom: 15),
+                    child: StreamBuilder<Object>(
+                      stream: userCollection
+                          .where('id', isEqualTo: userId)
+                          .snapshots(),
+                      builder:
+                          (BuildContext context, AsyncSnapshot streamSnapShot) {
+                        if (streamSnapShot.hasData) {
+                          final DocumentSnapshot documentSnapshot =
+                              streamSnapShot.data!.docs[0];
+                          userName = documentSnapshot['name'];
+                          userEmail = documentSnapshot['email'];
+                          userWeight = double.parse(
+                              documentSnapshot['Weight'].toString());
+                          userHeight = double.parse(
+                              documentSnapshot['height'].toString());
+                          userAge =
+                              int.parse(documentSnapshot['age'].toString());
+                          userGender = documentSnapshot['gender'];
+                          accountImage = documentSnapshot['image'];
+                        }
+                
+                        return Container(
+                          height: 80,
+                          alignment: Alignment.topLeft,
                           child: Row(
-                            children: const [
-                              Icon(
-                                Icons.arrow_back_ios,
-                                size: 20,
-                                color: Colors.grey,
+                            children: [
+                              Hero(
+                                tag: accountImage ?? "",
+                                child: CircleAvatar(
+                                  foregroundImage:
+                                      accountImage == null || accountImage == ""
+                                          ? null
+                                          : CachedNetworkImageProvider(
+                                              accountImage!),
+                                  backgroundColor: buttonsColor,
+                                  radius: 40,
+                                  child: Text(
+                                    (userName ?? "a a")
+                                        .trim()
+                                        .split(' ')
+                                        .map((l) => l[0])
+                                        .take(2)
+                                        .join()
+                                        .toUpperCase()
+                                        .toString(),
+                                    style: const TextStyle(
+                                        letterSpacing: 4,
+                                        fontSize: 25.0,
+                                        color: Colors.white),
+                                  ),
+                                ),
                               ),
-                              Text(
-                                "Back",
-                                style: TextStyle(fontSize: 15),
+                              addHorizantalSpace(15),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(userName ?? " ",
+                                      style: const TextStyle(fontSize: 20.0)),
+                                  addVerticalSpace(5),
+                                  Text(userEmail ?? " ",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(fontSize: 14.0)),
+                                ],
                               )
                             ],
                           ),
-                        ),
-                      ),
-                      Center(
-                        child: Column(
-                          children: const [
-                            CircleAvatar(
-                              radius: 50,
-                              backgroundColor: Color.fromARGB(255, 127, 162, 245),
-                              child: Text(
-                                "R",
-                                style: TextStyle(
-                                    fontSize: 40.0, color: Colors.white),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text("Username", style: TextStyle(fontSize: 20.0)),
-                            Text("User Email", style: TextStyle(fontSize: 15.0)),
-                          ],
-                        ),
-                      )
-                    ],
+                        );
+                      },
+                    ),
                   ),
-                ),
+                )
               ],
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text("Filters"),
-            onTap: () {
-              Navigator.pop(context);
-            },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.home,
+            color: backgrounColor,
           ),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text("Settings"),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.calculate),
-            title: const Text("Daily Need Calculator"),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DailyNeedCalculator(),
-                  ));
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.file_open),
-            title: const Text("Policies"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(Icons.exit_to_app),
-            title: const Text("Exit"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text("Log Out"),
-            onTap: () {
-              AuthService().signOut();
-              Navigator.popUntil(
+          title: const Text("Filters"),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.person, color: backgrounColor),
+          title: const Text("Profile"),
+          onTap: () {
+            Navigator.push(
                 context,
-                ModalRoute.withName(Navigator.defaultRouteName),
-              );
+                MaterialPageRoute(
+                  builder: (context) => Profile_Page(),
+                ));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.calculate, color: backgrounColor),
+          title: const Text("Daily Need Calculator"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DailyNeedCalculator(),
+                ));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.file_open, color: backgrounColor),
+          title: const Text("fat Calculator"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const bodyFatCal(),
+                ));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.exit_to_app, color: backgrounColor),
+          title: const Text("Exit"),
+          onTap: () {},
+        ),
+        ListTileLogout(),
+        IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return Water_Reminder();
+                },
+              ));
             },
-          ),
-        ],
-      ),
+            icon: Icon(Icons.water))
+      ],
     );
   }
 }

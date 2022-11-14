@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fina/data/data.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextfield extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextEditingController? theController;
   final TextInputType? inputType;
   final String label;
+  List<TextInputFormatter>? theFormater;
   final FocusNode? myFocusNode;
   bool? visbleText;
 
@@ -14,6 +16,7 @@ class CustomTextfield extends StatefulWidget {
       this.validator,
       this.inputType,
       this.visbleText,
+      this.theFormater,
       this.myFocusNode,
       required this.label,
       this.theController});
@@ -30,6 +33,8 @@ class _CustomTextfieldState extends State<CustomTextfield> {
     return TextFormField(
       focusNode: widget.myFocusNode,
       style: customTextStyle.labelSmall,
+      inputFormatters: widget.theFormater,
+      keyboardType: widget.inputType,
       controller: widget.theController,
       textInputAction: TextInputAction.next,
       validator: widget.validator,

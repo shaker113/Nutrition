@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'models.dart';
 
 final authInstance = FirebaseAuth.instance;
@@ -32,10 +31,11 @@ class AuthService {
         'email': email,
         'gender': '',
         'mainGoal': '',
-        'height': '',
-        'Weight': '',
+        'height': 0,
+        'Weight': 0,
         'diet': '',
-        'age': ''
+        'age': 0,
+        'image': ''
       }; //to Create doucumant
       await userInfo.set(json);
     }

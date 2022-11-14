@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import '../models/models.dart';
 
+List userAnswers = [""];
+
 class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
 
@@ -18,7 +20,6 @@ class _InfoScreenState extends State<InfoScreen> {
 
   int currentIndex = 0;
 
-  List userAnswers = [];
   Color g = Colors.grey;
   Color w = Colors.white;
   Color t = const Color.fromARGB(255, 155, 147, 147);
@@ -42,13 +43,13 @@ class _InfoScreenState extends State<InfoScreen> {
                   IconButton(
                       onPressed: () {
                         if (currentIndex == 0) {
-                          return ;
+                          Navigator.popAndPushNamed(context, "welcome");
                         }
                         userAnswers.removeLast();
                         pageController.jumpToPage(currentIndex - 1);
                         currentIndex--;
                       },
-                      icon: const Icon(Icons.arrow_back)),
+                      icon: const Icon(Icons.arrow_back_ios)),
                 ],
               ),
               addVerticalSpace(30),
@@ -108,26 +109,27 @@ class _InfoScreenState extends State<InfoScreen> {
                   onPressed: value.isEmpty
                       ? null
                       : () {
-                          userAnswers.add(value);
+                          userAnswers.asMap()[currentIndex] == null
+                              ? null
+                              : userAnswers.removeAt(currentIndex);
+                          userAnswers.insert(currentIndex, value);
                           value = "";
 
-                          if (currentIndex == questions.length-1 ) {
+                          if (currentIndex == questions.length - 1) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => H_W(),
                                 ));
                             setState(() {});
-                              print(userAnswers);
+                            print(userAnswers);
 
                             return;
                           }
                           pageController.jumpToPage(currentIndex + 1);
                           currentIndex++;
                           print(userAnswers);
-                          
                         },
-                        
                   child: const Text("Next"),
                 ),
               ),

@@ -134,7 +134,7 @@ class _Details_PageState extends State<Details_Page> {
                               style: TextStyle(fontSize: 20, color: customRed),
                             ),
                             const Text(
-                              "Cal",
+                              " Cal",
                               style: TextStyle(fontSize: 20),
                             ),
                           ],
@@ -164,6 +164,7 @@ class _Details_PageState extends State<Details_Page> {
                                       itemCount > 1 ? itemCount-- : null;
                                     });
                                   }
+                                  setState(() {});
                                 },
                                 child: Container(
                                   height: 25,

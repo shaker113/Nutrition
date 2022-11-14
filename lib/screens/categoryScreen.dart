@@ -44,7 +44,7 @@ class _Category_PageState extends State<Category_Page>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgrounColor,
-      body: ListView(
+      body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 10),
@@ -125,7 +125,7 @@ class _Category_PageState extends State<Category_Page>
           ),
           addVerticalSpace(40),
           Container(
-            height: screenHeigth! - 150,
+            height: screenHeigth! - 153,
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
