@@ -25,6 +25,19 @@ class _BirthState extends State<Birth> {
       body: SafeArea(
         child: Column(
           children: [
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+                )
+              ],
+            ),
             addVerticalSpace(40),
             const Text(
               "When is your brithday?",
@@ -60,7 +73,7 @@ class _BirthState extends State<Birth> {
                 },
               ),
             ),
-            addVerticalSpace(300),
+            addVerticalSpace(260),
             SizedBox(
               height: 40,
               width: 200,

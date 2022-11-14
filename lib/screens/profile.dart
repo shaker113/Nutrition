@@ -327,7 +327,9 @@ class _Profile_PageState extends State<Profile_Page> {
                   border: Border.all(
                       color: Colors.white.withOpacity(0.4), width: 1.5)),
               child: CircleAvatar(
-                foregroundImage: accountImage == null
+                foregroundImage: accountImage == null ||
+                        accountImage == "" ||
+                        accountImage == " "
                     ? null
                     : CachedNetworkImageProvider(accountImage!),
                 backgroundColor: buttonsColor,
@@ -354,11 +356,6 @@ class _Profile_PageState extends State<Profile_Page> {
                   child: GestureDetector(
                     onTap: () async {
                       try {
-                        if (accountImage != null) {
-                          FirebaseStorage.instance
-                              .refFromURL(accountImage!)
-                              .delete();
-                        }
                         int random = Random().nextInt(1000000000);
                         var imagepiked = await imagepiker.pickImage(
                             source: ImageSource.gallery);
@@ -377,9 +374,15 @@ class _Profile_PageState extends State<Profile_Page> {
                           final user = FirebaseFirestore.instance
                               .collection('user')
                               .doc(userId);
-                          final userinfo = {'image': imageUrl};
-                          await user.update(userinfo);
-                          // getAccountInfo();
+                          if (accountImage != null ||
+                              accountImage != "" ||
+                              accountImage != " ") {
+                            FirebaseStorage.instance
+                                .refFromURL(accountImage!)
+                                .delete();
+                          }
+
+                          await user.update({'image': imageUrl});
 
                           setState(() {});
                         }

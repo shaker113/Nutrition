@@ -20,7 +20,10 @@ class OrRow extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(2.5),
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.white.withOpacity(0.4))),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.4),
+            ),
+          ),
           child: const Text(
             "OR",
             style: TextStyle(
@@ -29,7 +32,7 @@ class OrRow extends StatelessWidget {
         ),
         Container(
           height: 1.5,
-          width: screenHeigth! * 0.3,
+          width: screenWidth! * 0.3,
           color: customGrey,
         ),
       ],
