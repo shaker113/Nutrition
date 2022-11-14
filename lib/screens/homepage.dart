@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisCount: 2,
         ),
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 5),
-        itemCount: 7,
+        itemCount: categories.length,
         itemBuilder: (BuildContext context, int index) {
           var myCateory = categories[index];
           return CategoryBox(
