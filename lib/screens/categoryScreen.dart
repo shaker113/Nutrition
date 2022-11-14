@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
+import 'package:fina/widgets/textFieldCalc.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../models/models.dart';
@@ -16,6 +17,7 @@ class Category_Page extends StatefulWidget {
   @override
   State<Category_Page> createState() => _Category_PageState();
 }
+  TextEditingController con = TextEditingController();
 
 class _Category_PageState extends State<Category_Page>
     with SingleTickerProviderStateMixin {
@@ -34,7 +36,8 @@ class _Category_PageState extends State<Category_Page>
     sortController.dispose();
     super.dispose();
   }
-  String searchText = "";
+
+  String searchText = '';
   String sortBy = 'name';
   bool descending = false;
   @override
@@ -83,6 +86,39 @@ class _Category_PageState extends State<Category_Page>
                     ],
                   ),
                 ),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {setState(() {
+                        
+                      });},
+                      icon: const Icon(Icons.search),
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                        width: 100,
+                        child: TextField(
+                          // controller:con ,
+                          style: TextStyle(color: Colors.white),
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white)),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                gapPadding: 20,
+                                borderSide: BorderSide(width: 50)),
+                            label: Text("search",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                )),
+                          ),
+                        ))
+                  ],
+                ),
                 isAdmin ?? false ? const AddButton() : const SizedBox()
               ],
             ),
@@ -97,11 +133,14 @@ class _Category_PageState extends State<Category_Page>
               ),
             ),
             child: StreamBuilder(
-              stream: searchText.isNotEmpty? widget.theCollectionReference
-                  .orderBy(sortBy, descending: descending).where( 'name',isEqualTo: searchText )
-                  .snapshots():widget.theCollectionReference
-                  .orderBy(sortBy, descending: descending)
-                  .snapshots(),
+              stream: searchText.isNotEmpty
+                  ? widget.theCollectionReference
+                      .orderBy(sortBy, descending: descending)
+                      .where('name', isEqualTo: searchText)
+                      .snapshots()
+                  : widget.theCollectionReference
+                      .orderBy(sortBy, descending: descending)
+                      .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> streamSnapShot) {
                 return ListView.builder(

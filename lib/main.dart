@@ -63,6 +63,6 @@ class MyApp extends StatelessWidget {
           // "birth": (context) => const Birth(),
           "H_W": (context) => const H_W(),
         },
-        home: isLogin == true ? const splash_screen() : const Welcome());
+        home: isLogin == true ? const HomePage() : const Welcome());
   }
 }
