@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../data/data.dart';
 import '../models/models.dart';
+import 'dailyNeedCalculator.dart';
+import 'screens.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,6 +32,22 @@ class _HomePageState extends State<HomePage> {
     userId = authInstance.currentUser?.uid;
     checkRole();
     getAccountInfo();
+    calculateUsercal() {
+      setState(() {
+        TheStatOfDailyNeedCalculator().plussMethod(
+            double.parse(userWeight!.toString()),
+            double.parse(userHeight!.toString()),
+            true,
+            userGoalIndex);
+        TheStatOfbodyFatCalState().testmethod(
+            double.parse(userWeight!.toString()),
+            double.parse(userHeight!.toString()),
+            userGender!,
+            userAge!,
+            true);
+      });
+      userCollection.doc(userId).update({'baseGoalCal': userCal});
+    }
 
     intialMessage();
 

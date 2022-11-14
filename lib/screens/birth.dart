@@ -90,7 +90,6 @@ class _BirthState extends State<Birth> {
 
                         userAnswers.insert(5, todayDate.year - userDate.year);
                         saveUserInfo();
-                        print(userAnswers);
 
                         Navigator.popAndPushNamed(context, "homepage");
                       }

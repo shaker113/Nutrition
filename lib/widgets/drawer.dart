@@ -87,9 +87,19 @@ class _MyDrawerState extends State<MyDrawer> {
                           userAge =
                               int.parse(documentSnapshot['age'].toString());
                           userGender = documentSnapshot['gender'];
+                          userGoal = documentSnapshot['mainGoal'];
                           accountImage = documentSnapshot['image'];
+                          userCal =
+                              double.parse(documentSnapshot['baseGoalCal'].toString());
+                          if (userGoal == 'Keep Fit') {
+                            userGoalIndex = 1;
+                          } else if (userGoal == 'Build Muscle') {
+                            userGoalIndex = 2;
+                          } else if (userGoal == 'Lose Weight') {
+                            userGoalIndex = 0;
+                          }
                         }
-                
+
                         return Container(
                           height: 80,
                           alignment: Alignment.topLeft,

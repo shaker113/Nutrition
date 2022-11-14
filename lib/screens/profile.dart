@@ -31,7 +31,8 @@ class _Profile_PageState extends State<Profile_Page> {
     TheStatOfDailyNeedCalculator().plussMethod(
         double.parse(weightController.text),
         double.parse(heightController.text),
-        true);
+        true,
+        userGoalIndex);
     TheStatOfbodyFatCalState().testmethod(double.parse(weightController.text),
         double.parse(heightController.text), userGender!, userAge!, true);
 
@@ -213,11 +214,6 @@ class _Profile_PageState extends State<Profile_Page> {
                     isEdditing = !isEdditing;
                   });
                   if (isEdditing == false) {
-                    userCollection.doc(userId).update({
-                      'name': nameController.text,
-                      'height': double.parse(heightController.text),
-                      'Weight': double.parse(weightController.text),
-                    });
                     setState(() {
                       userName = nameController.text;
                       userWeight = double.parse(weightController.text);
@@ -226,13 +222,20 @@ class _Profile_PageState extends State<Profile_Page> {
                     TheStatOfDailyNeedCalculator().plussMethod(
                         double.parse(weightController.text),
                         double.parse(heightController.text),
-                        true);
+                        true,
+                        userGoalIndex);
                     TheStatOfbodyFatCalState().testmethod(
                         double.parse(weightController.text),
                         double.parse(heightController.text),
                         userGender!,
                         userAge!,
                         true);
+                    userCollection.doc(userId).update({
+                      'name': nameController.text,
+                      'height': double.parse(heightController.text),
+                      'Weight': double.parse(weightController.text),
+                      'baseGoalCal': userCal
+                    });
                   }
                 },
                 theText: isEdditing ? "Save" : "Edit"),

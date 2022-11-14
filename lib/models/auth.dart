@@ -35,7 +35,8 @@ class AuthService {
         'Weight': 0,
         'diet': '',
         'age': 0,
-        'image': ''
+        'image': '',
+        'baseGoalCal': 0
       }; //to Create doucumant
       await userInfo.set(json);
     }

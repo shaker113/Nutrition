@@ -114,7 +114,7 @@ class _CartPageState extends State<CartPage> {
 
                 return cartCalculator(
                   theFoodCalories: calories,
-                  theGoalCalories: userCal,
+                  theGoalCalories: userCal ?? 0,
                 );
               })
         ],
