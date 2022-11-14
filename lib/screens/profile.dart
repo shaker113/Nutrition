@@ -134,7 +134,7 @@ class _Profile_PageState extends State<Profile_Page> {
                 children: [
                   infoOrtextfeild(
                     "Name",
-                    userName!,
+                    userName ?? " ",
                     nameController,
                     (p0) => nameValidator(p0),
                   ),

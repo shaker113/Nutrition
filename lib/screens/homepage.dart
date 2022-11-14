@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    checkRole();
     intialMessage();
     fireMessging.getToken().then((value) {
       // print("@@@@@@@@@@@@@@@@@@@");
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       // print("${event.notification}");
       // print("====================================");
 
-      //   // to send notification on forground.
+      // to send notification on forground.
     });
 
     print(isAdmin);
@@ -59,6 +60,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     screenHeigth = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

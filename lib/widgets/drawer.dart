@@ -102,7 +102,7 @@ class _MyDrawerState extends State<MyDrawer> {
                                   backgroundColor: buttonsColor,
                                   radius: 40,
                                   child: Text(
-                                    userName!
+                                    (userName ?? "a a")
                                         .trim()
                                         .split(' ')
                                         .map((l) => l[0])
@@ -122,10 +122,10 @@ class _MyDrawerState extends State<MyDrawer> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(userName ?? "",
+                                  Text(userName ?? " ",
                                       style: const TextStyle(fontSize: 20.0)),
                                   addVerticalSpace(5),
-                                  Text(userEmail ?? "",
+                                  Text(userEmail ?? " ",
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(fontSize: 14.0)),
                                 ],

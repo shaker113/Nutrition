@@ -31,10 +31,10 @@ class AuthService {
         'email': email,
         'gender': '',
         'mainGoal': '',
-        'height': '',
-        'Weight': '',
+        'height': 0,
+        'Weight': 0,
         'diet': '',
-        'age': ''
+        'age': 0
       }; //to Create doucumant
       await userInfo.set(json);
     }

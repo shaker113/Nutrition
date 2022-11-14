@@ -4,7 +4,6 @@ import 'package:fina/data/data.dart';
 import 'package:fina/screens/birth.dart';
 import 'package:fina/widgets/buttons/back_button.dart';
 import 'package:fina/widgets/spacing.dart';
-import 'package:fina/widgets/textFild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

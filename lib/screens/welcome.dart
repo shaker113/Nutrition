@@ -91,19 +91,19 @@ class _WelcomeState extends State<Welcome> {
             // //       ));
             // //     },
             // //     icon: Icon(Icons.skip_next)),
-            // GlassButton(
-            //   // isSelected: true,
-            //   theText: "Git started",
-            //   height: 50,
-            //   width: 222,
-            //   theFunction: () async {
-            //     Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => const InfoScreen(),
-            //         ));
-            //   },
-            // )
+            GlassButton(
+              // isSelected: true,
+              theText: "Git started",
+              height: 50,
+              width: 222,
+              theFunction: () async {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const InfoScreen(),
+                    ));
+              },
+            )
           ],
         ),
       ),
