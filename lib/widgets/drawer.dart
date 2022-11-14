@@ -80,13 +80,16 @@ class _MyDrawerState extends State<MyDrawer> {
                               streamSnapShot.data!.docs[0];
                           userName = documentSnapshot['name'];
                           userEmail = documentSnapshot['email'];
-                          userWeight = documentSnapshot['Weight'];
-                          userHeight = documentSnapshot['height'];
-                          accountImage = documentSnapshot['image'];
-                          userAge = documentSnapshot['age'];
+                          userWeight = double.parse(
+                              documentSnapshot['Weight'].toString());
+                          userHeight = double.parse(
+                              documentSnapshot['height'].toString());
+                          userAge =
+                              int.parse(documentSnapshot['age'].toString());
                           userGender = documentSnapshot['gender'];
+                          accountImage = documentSnapshot['image'];
                         }
-
+                
                         return Container(
                           height: 80,
                           alignment: Alignment.topLeft,
@@ -95,10 +98,11 @@ class _MyDrawerState extends State<MyDrawer> {
                               Hero(
                                 tag: accountImage ?? "",
                                 child: CircleAvatar(
-                                  foregroundImage: accountImage == null
-                                      ? null
-                                      : CachedNetworkImageProvider(
-                                          accountImage!),
+                                  foregroundImage:
+                                      accountImage == null || accountImage == ""
+                                          ? null
+                                          : CachedNetworkImageProvider(
+                                              accountImage!),
                                   backgroundColor: buttonsColor,
                                   radius: 40,
                                   child: Text(

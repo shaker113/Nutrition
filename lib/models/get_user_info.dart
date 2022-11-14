@@ -16,9 +16,9 @@ getAccountInfo() async {
 
   userName = userInfo['name'];
   userEmail = userInfo['email'];
-  userWeight = userInfo['Weight'];
-  userHeight = userInfo['height'];
+  userWeight = double.parse(userInfo['Weight'].toString());
+  userHeight = double.parse(userInfo['height'].toString());
   accountImage = userInfo['image'];
-  userAge = userInfo['age'];
+  userAge = int.parse(userInfo['age'].toString());
   userGender = userInfo['gender'];
 }

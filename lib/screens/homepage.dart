@@ -27,8 +27,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    userId = authInstance.currentUser?.uid;
     checkRole();
+    getAccountInfo();
+
     intialMessage();
+
     fireMessging.getToken().then((value) {
       // print("@@@@@@@@@@@@@@@@@@@");
       // print(value);

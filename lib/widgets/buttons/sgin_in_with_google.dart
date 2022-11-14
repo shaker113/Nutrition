@@ -15,13 +15,18 @@ class GoogleButton extends StatelessWidget {
         await signInWithGoogle();
         userId = authInstance.currentUser?.uid;
         userInfo = userCollection.doc(userId);
+        if (await AuthService().isNew(userId)) {
+          Navigator.pushNamed(context, "infoscreen");
+        } else {
+          Navigator.pushNamed(context, "homepage");
+        }
         AuthService().saveAcount(
             id: userId,
             name: authInstance.currentUser?.displayName,
             email: authInstance.currentUser?.email);
 
         checkRole();
-        Navigator.pushNamed(context, "homepage");
+
         CustomSnakBar("signed in successfully", context);
       },
       child: Container(

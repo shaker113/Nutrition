@@ -5,9 +5,9 @@ IconButton backButton(BuildContext context) {
     onPressed: () {
       Navigator.pop(context);
     },
-    icon: Icon(
+    icon: const Icon(
       Icons.arrow_back_ios,
-      color: Colors.black.withOpacity(0.5),
+      color: Colors.white,
     ),
   );
 }
