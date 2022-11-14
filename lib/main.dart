@@ -8,7 +8,7 @@ import 'screens/screens.dart';
 // profile pic                                              done
 // user info qustions                                      {{salh}} almost done
 // profile page shows user info                            {{malek}} Done
-// calculating base goal calories for users atomaticlly    almost done {{main goal || gender || age}}
+// calculating base goal calories for users atomaticlly     done 
 // fat percentage calcuator ((if we have time))            {{rami}}
 // sorting system                                          {{shaker}} Done
 // recommandation system (filter)

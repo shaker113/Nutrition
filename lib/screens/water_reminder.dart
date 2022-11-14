@@ -25,7 +25,7 @@ class _Water_ReminderState extends State<Water_Reminder>
   void initState() {
     super.initState();
     firstController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 1500));
 
     firstAnimation = Tween<double>(begin: 1.9, end: 2.1).animate(
         CurvedAnimation(parent: firstController, curve: Curves.easeInOut))
@@ -41,7 +41,7 @@ class _Water_ReminderState extends State<Water_Reminder>
       });
 
     secondController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 1500));
     secondAnimation = Tween<double>(begin: 1.8, end: 2.4).animate(
         CurvedAnimation(parent: secondController, curve: Curves.easeInOut))
       ..addListener(() {
@@ -56,7 +56,7 @@ class _Water_ReminderState extends State<Water_Reminder>
       });
 
     thirdController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 1500));
     thirdAnimation = Tween<double>(begin: 1.8, end: 2.4).animate(
         CurvedAnimation(parent: thirdController, curve: Curves.easeInOut))
       ..addListener(() {
@@ -71,7 +71,7 @@ class _Water_ReminderState extends State<Water_Reminder>
       });
 
     fourController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 1500));
     fourAnimation = Tween<double>(begin: 1.9, end: 2.1).animate(
         CurvedAnimation(parent: fourController, curve: Curves.easeInOut))
       ..addListener(() {
@@ -84,14 +84,14 @@ class _Water_ReminderState extends State<Water_Reminder>
           fourController.forward();
         }
       });
-    Timer(Duration(seconds: 2), (() {
+    Timer(const Duration(seconds: 2), (() {
       firstController.forward();
     }));
 
-    Timer(Duration(milliseconds: 1600), (() {
+    Timer(const Duration(milliseconds: 1600), (() {
       secondController.forward();
     }));
-    Timer(Duration(milliseconds: 800), (() {
+    Timer(const Duration(milliseconds: 800), (() {
       thirdController.forward();
     }));
     fourController.forward();
@@ -110,7 +110,7 @@ class _Water_ReminderState extends State<Water_Reminder>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 33, 191, 189),
+      backgroundColor: const Color.fromARGB(255, 33, 191, 189),
       body: Stack(children: [
         Center(
           child: Text(
@@ -146,7 +146,7 @@ class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = Color(0xff3B6ABA).withOpacity(0.8)
+      ..color = const Color(0xff3B6ABA).withOpacity(0.8)
       ..style = PaintingStyle.fill;
 
     var path = Path()

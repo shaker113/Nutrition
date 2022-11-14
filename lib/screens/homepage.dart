@@ -2,10 +2,8 @@ import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../data/data.dart';
 import '../models/models.dart';
-import 'dailyNeedCalculator.dart';
 import 'screens.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     var message = await FirebaseMessaging.instance.getInitialMessage();
     if (message != null) {
       return AlertDialog(
-        content: Text("welcom"),
+        content: Text("welcome"),
       );
       // it is work when the app closed
     }
@@ -46,7 +44,6 @@ class _HomePageState extends State<HomePage> {
             userAge!,
             true);
       });
-      userCollection.doc(userId).update({'baseGoalCal': userCal});
     }
 
     intialMessage();
