@@ -115,16 +115,18 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white),
             ),
             addVerticalSpace(20),
-            Container(
-              height: screenHeigth! - 151,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(45),
-                  topLeft: Radius.circular(45),
+            SingleChildScrollView(
+              child: Container(
+                height: screenHeigth! - 155,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(45),
+                    topLeft: Radius.circular(45),
+                  ),
                 ),
+                child: myGridView(),
               ),
-              child: myGridView(),
             )
           ]),
     );
@@ -135,7 +137,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisCount: 2,
         ),
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 5),
-        itemCount: 7,
+        itemCount: categories.length,
         itemBuilder: (BuildContext context, int index) {
           var myCateory = categories[index];
           return CategoryBox(

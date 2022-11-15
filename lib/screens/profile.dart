@@ -15,7 +15,7 @@ import '../models/models.dart';
 
 class Profile_Page extends StatefulWidget {
   // String accountImage, userName, userEmail, weight, height;
-  Profile_Page({
+  const Profile_Page({
     super.key,
   });
   @override

@@ -68,7 +68,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   height: 115,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        top: 20, right: 15, left: 10, bottom: 15),
+                        top: 20, right: 4, left: 10, bottom: 15),
                     child: StreamBuilder<Object>(
                       stream: userCollection
                           .where('id', isEqualTo: userId)
@@ -89,8 +89,8 @@ class _MyDrawerState extends State<MyDrawer> {
                           userGender = documentSnapshot['gender'];
                           userGoal = documentSnapshot['mainGoal'];
                           accountImage = documentSnapshot['image'];
-                          userCal =
-                              double.parse(documentSnapshot['baseGoalCal'].toString());
+                          userCal = double.parse(
+                              documentSnapshot['baseGoalCal'].toString());
                           if (userGoal == 'Keep Fit') {
                             userGoalIndex = 1;
                           } else if (userGoal == 'Build Muscle') {
@@ -188,7 +188,7 @@ class _MyDrawerState extends State<MyDrawer> {
           },
         ),
         ListTile(
-          leading: Icon(Icons.file_open, color: backgrounColor),
+          leading: Icon(Icons.fitness_center_rounded, color: backgrounColor),
           title: const Text("fat Calculator"),
           onTap: () {
             Navigator.push(

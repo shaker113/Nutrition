@@ -53,4 +53,9 @@ final List<Category> categories = [
       title: "Junk food",
       subtitle: "This category contains all the Junk food",
       theCollectionReference: junkFoodCollection),
+  Category(
+      imagURL: "assets/images/sweets.jpg",
+      title: "Sweets",
+      subtitle: "",
+      theCollectionReference: sweetCollection)
 ];
