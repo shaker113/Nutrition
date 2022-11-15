@@ -117,12 +117,12 @@ class _Water_ReminderState extends State<Water_Reminder>
       body: Stack(children: [
         Center(
           child: Text(
-            '3.7 Liter',
+            '$userWater Liter',
             style: TextStyle(
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w400,
                 wordSpacing: 3,
-                color: Colors.white.withOpacity(0.7)),
-            textScaleFactor: 7,
+                color: Colors.white.withOpacity(0.8)),
+            textScaleFactor: 6,
           ),
         ),
         CustomPaint(
@@ -146,23 +146,31 @@ class _Water_ReminderState extends State<Water_Reminder>
                   setState(
                     () {
                       userWater > 0 ? userWater = userWater - 0.25 : null;
-                      double calc2 = (userWater / 3.75) * 2 + 0.5;
-                      double calc = (userWater / 3.75) * 1.25 + 0.5;
-                      print(calc2);
+                      // double calc2 = (userWater / 3.75) * 2 + 0.5;
+                      double calc = pow((userWater / 3.75), 2) + 0.55;
+                      // print(calc2);
                       print(userWater);
-                      waterValue = userWater > 1 ? calc2 : calc;
+                      waterValue = calc;
                     },
                   );
                 },
                 child: Text("-"),
               ),
+              Padding(padding: EdgeInsets.all(15)),
+              // Text(
+              //   '$userWater Liter',
+              //   style: TextStyle(
+              //       fontWeight: FontWeight.w600,
+              //       wordSpacing: 2,
+              //       color: Colors.white.withOpacity(0.9)),
+              // ),
               ElevatedButton(
                 onPressed: () {
                   setState(
                     () {
                       userWater = userWater + 0.25;
                       // double calc2 = pow((userWater / 3.75), 2) + 0.5;
-                      double calc = pow((userWater / 3.75), 2) + 0.5;
+                      double calc = pow((userWater / 3.75), 2) + 0.55;
                       print(calc);
                       waterValue = calc;
                       print(waterValue);
