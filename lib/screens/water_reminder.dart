@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:fina/data/data.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +21,13 @@ class _Water_ReminderState extends State<Water_Reminder>
   late Animation thirdAnimation;
   late AnimationController fourController;
   late Animation fourAnimation;
+  late double waterValue;
+  double userWater = 0;
 
   @override
   void initState() {
     super.initState();
+    waterValue = .55;
     firstController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 1500));
 
@@ -108,7 +112,6 @@ class _Water_ReminderState extends State<Water_Reminder>
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 33, 191, 189),
       body: Stack(children: [
@@ -123,13 +126,54 @@ class _Water_ReminderState extends State<Water_Reminder>
           ),
         ),
         CustomPaint(
-          painter: MyPainter(firstAnimation.value, secondAnimation.value,
-              thirdAnimation.value, fourAnimation.value),
+          painter: MyPainter(
+              firstAnimation.value * waterValue,
+              secondAnimation.value * waterValue,
+              thirdAnimation.value * waterValue,
+              fourAnimation.value * waterValue),
           child: SizedBox(
-            height: size.height,
-            width: size.width,
+            height: screenHeigth,
+            width: screenWidth,
           ),
-        )
+        ),
+        Positioned(
+          top: 100,
+          right: 100,
+          child: Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  setState(
+                    () {
+                      userWater > 0 ? userWater = userWater - 0.25 : null;
+                      double calc2 = (userWater / 3.75) * 2 + 0.5;
+                      double calc = (userWater / 3.75) * 1.25 + 0.5;
+                      print(calc2);
+                      print(userWater);
+                      waterValue = userWater > 1 ? calc2 : calc;
+                    },
+                  );
+                },
+                child: Text("-"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(
+                    () {
+                      userWater = userWater + 0.25;
+                      // double calc2 = pow((userWater / 3.75), 2) + 0.5;
+                      double calc = pow((userWater / 3.75), 2) + 0.5;
+                      print(calc);
+                      waterValue = calc;
+                      print(waterValue);
+                    },
+                  );
+                },
+                child: Text("+"),
+              ),
+            ],
+          ),
+        ),
       ]),
     );
   }

@@ -6,14 +6,13 @@ import 'models/models.dart';
 import 'screens/screens.dart';
 
 // profile pic                                              done
-// user info qustions                                      {{salh}} almost done
+// user info qustions                                      {{salh}}  done
 // profile page shows user info                            {{malek}} Done
-// calculating base goal calories for users atomaticlly     done 
+// calculating base goal calories for users atomaticlly     done
 // fat percentage calcuator ((if we have time))            {{rami}}
 // sorting system                                          {{shaker}} Done
 // recommandation system (filter)
-// clear all button in cart screen                         {{shaker}} almost Done {{scroll physics}} {{delete button still does not working as it should be}}
-// making details page scrollable                          {{shaker}}             {{scroll physics}}
+// clear all button in cart                               {{shaker}} almost Done {{delete button still does not working as it should be}}
 // splash screen                                           done by salh
 // app icon    and name                                    done by malek
 // show dialog for sgin out                                done by malek
@@ -23,10 +22,10 @@ import 'screens/screens.dart';
 // show healht rleated news with api ((IF we have time))
 // water animation for water counter ((IF we have time))
 // cached network image                                    {{shaker}}  done
-// send email verification
-// add new Category bakers , soft drink , sweets
+// send email verification                                  done
+// add new Category bakers , soft drink , sweets           {{malek}}
 // add Home Page (image slider for categories)
-
+// change both calculators design to the same design
 bool? isLogin;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
