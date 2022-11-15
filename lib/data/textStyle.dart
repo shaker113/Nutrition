@@ -65,4 +65,9 @@ TextTheme customTextStyle = TextTheme(
     fontSize: 19,
     fontWeight: FontWeight.w500,
   ),
+  displayMedium: const TextStyle(
+    fontSize: 18.0,
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+  ),
 );

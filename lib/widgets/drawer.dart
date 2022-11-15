@@ -87,9 +87,19 @@ class _MyDrawerState extends State<MyDrawer> {
                           userAge =
                               int.parse(documentSnapshot['age'].toString());
                           userGender = documentSnapshot['gender'];
+                          userGoal = documentSnapshot['mainGoal'];
                           accountImage = documentSnapshot['image'];
+                          userCal = double.parse(
+                              documentSnapshot['baseGoalCal'].toString());
+                          if (userGoal == 'Keep Fit') {
+                            userGoalIndex = 1;
+                          } else if (userGoal == 'Build Muscle') {
+                            userGoalIndex = 2;
+                          } else if (userGoal == 'Lose Weight') {
+                            userGoalIndex = 0;
+                          }
                         }
-                
+
                         return Container(
                           height: 80,
                           alignment: Alignment.topLeft,
@@ -122,17 +132,21 @@ class _MyDrawerState extends State<MyDrawer> {
                                 ),
                               ),
                               addHorizantalSpace(15),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(userName ?? " ",
-                                      style: const TextStyle(fontSize: 20.0)),
-                                  addVerticalSpace(5),
-                                  Text(userEmail ?? " ",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(fontSize: 14.0)),
-                                ],
+                              SizedBox(
+                                width: 180,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(userName ?? " ",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(fontSize: 20.0)),
+                                    addVerticalSpace(5),
+                                    Text(userEmail ?? " ",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(fontSize: 14.0)),
+                                  ],
+                                ),
                               )
                             ],
                           ),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 import '../data/colors.dart';
+import '../models/models.dart';
 import 'screens.dart';
 
 class Birth extends StatefulWidget {
@@ -18,6 +19,21 @@ class Birth extends StatefulWidget {
 class _BirthState extends State<Birth> {
   DateTime todayDate = DateTime.now();
   DateTime userDate = DateTime.now();
+  @override
+  void initState() {
+    int goalindex = 0;
+    if (userAnswers[1] == 'Keep Fit') {
+      goalindex = 1;
+    } else if (userAnswers[1] == 'Build Muscle') {
+      goalindex = 2;
+    } else if (userAnswers[1] == 'Lose Weight') {
+      goalindex = 0;
+    }
+    TheStatOfDailyNeedCalculator().plussMethod(double.parse(userAnswers[3]),
+        double.parse(userAnswers[4]), true, goalindex);
+    userCollection.doc(userId).update({'baseGoalCal': userCal});
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +41,19 @@ class _BirthState extends State<Birth> {
       body: SafeArea(
         child: Column(
           children: [
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+                )
+              ],
+            ),
             addVerticalSpace(40),
             const Text(
               "When is your brithday?",
@@ -60,7 +89,7 @@ class _BirthState extends State<Birth> {
                 },
               ),
             ),
-            addVerticalSpace(300),
+            addVerticalSpace(260),
             SizedBox(
               height: 40,
               width: 200,
@@ -77,7 +106,6 @@ class _BirthState extends State<Birth> {
 
                         userAnswers.insert(5, todayDate.year - userDate.year);
                         saveUserInfo();
-                        print(userAnswers);
 
                         Navigator.popAndPushNamed(context, "homepage");
                       }

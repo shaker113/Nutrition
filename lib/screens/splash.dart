@@ -6,7 +6,7 @@ import 'package:fina/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
-import 'login.dart';
+import '../models/models.dart';
 
 class splash_screen extends StatefulWidget {
   const splash_screen({super.key});
@@ -19,6 +19,9 @@ class _splash_screenState extends State<splash_screen> {
   @override
   void initState() {
     super.initState();
+    userId = authInstance.currentUser?.uid;
+    isLogin == true ? checkRole() : null;
+    isLogin == true ? getAccountInfo() : null;
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(context, MaterialPageRoute<void>(
         builder: (BuildContext context) {

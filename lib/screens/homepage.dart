@@ -2,9 +2,9 @@ import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../data/data.dart';
 import '../models/models.dart';
+import 'screens.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     var message = await FirebaseMessaging.instance.getInitialMessage();
     if (message != null) {
       return AlertDialog(
-        content: Text("welcom"),
+        content: Text("welcome"),
       );
       // it is work when the app closed
     }
@@ -30,6 +30,21 @@ class _HomePageState extends State<HomePage> {
     userId = authInstance.currentUser?.uid;
     checkRole();
     getAccountInfo();
+    calculateUsercal() {
+      setState(() {
+        TheStatOfDailyNeedCalculator().plussMethod(
+            double.parse(userWeight!.toString()),
+            double.parse(userHeight!.toString()),
+            true,
+            userGoalIndex);
+        TheStatOfbodyFatCalState().testmethod(
+            double.parse(userWeight!.toString()),
+            double.parse(userHeight!.toString()),
+            userGender!,
+            userAge!,
+            true);
+      });
+    }
 
     intialMessage();
 
@@ -117,7 +132,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisCount: 2,
         ),
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 5),
-        itemCount: 7,
+        itemCount: categories.length,
         itemBuilder: (BuildContext context, int index) {
           var myCateory = categories[index];
           return CategoryBox(

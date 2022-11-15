@@ -30,7 +30,7 @@ List questions = [
         'subtitle': 'Drop extra pounds wrth ease',
         'image': const CircleAvatar(
           foregroundColor: Colors.transparent,
-          foregroundImage: AssetImage("assets/images/2.webp"),
+          foregroundImage: AssetImage("assets/images/2.png"),
         )
       },
       {
@@ -38,7 +38,7 @@ List questions = [
         'subtitle': 'Get lean and strong',
         'image': const CircleAvatar(
           foregroundColor: Colors.transparent,
-          foregroundImage: AssetImage("assets/images/muscl.jpg"),
+          foregroundImage: AssetImage("assets/images/muscl.png"),
         )
       },
       {

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/screens/bodyFatClaculator.dart';
@@ -31,9 +32,11 @@ class _Profile_PageState extends State<Profile_Page> {
     TheStatOfDailyNeedCalculator().plussMethod(
         double.parse(weightController.text),
         double.parse(heightController.text),
-        true);
+        true,
+        userGoalIndex);
     TheStatOfbodyFatCalState().testmethod(double.parse(weightController.text),
         double.parse(heightController.text), userGender!, userAge!, true);
+
     super.initState();
   }
 
@@ -139,15 +142,24 @@ class _Profile_PageState extends State<Profile_Page> {
                     (p0) => nameValidator(p0),
                   ),
                   addVerticalSpace(20),
-                  Text(
-                    userEmail ?? " ",
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  addVerticalSpace(40),
+                  Text(userEmail ?? " ", style: customTextStyle.displayMedium),
+                  addVerticalSpace(20),
+                  isEdditing
+                      ? FittedBox(child: CustomPopUpMenu())
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Main Goal: ",
+                              style: customTextStyle.displayMedium,
+                            ),
+                            Text(
+                              userGoal!,
+                              style: customTextStyle.displayMedium,
+                            ),
+                          ],
+                        ),
+                  addVerticalSpace(30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -212,11 +224,6 @@ class _Profile_PageState extends State<Profile_Page> {
                     isEdditing = !isEdditing;
                   });
                   if (isEdditing == false) {
-                    userCollection.doc(userId).update({
-                      'name': nameController.text,
-                      'height': double.parse(heightController.text),
-                      'Weight': double.parse(weightController.text),
-                    });
                     setState(() {
                       userName = nameController.text;
                       userWeight = double.parse(weightController.text);
@@ -225,13 +232,20 @@ class _Profile_PageState extends State<Profile_Page> {
                     TheStatOfDailyNeedCalculator().plussMethod(
                         double.parse(weightController.text),
                         double.parse(heightController.text),
-                        true);
+                        true,
+                        userGoalIndex);
                     TheStatOfbodyFatCalState().testmethod(
                         double.parse(weightController.text),
                         double.parse(heightController.text),
                         userGender!,
                         userAge!,
                         true);
+                    userCollection.doc(userId).update({
+                      'name': nameController.text,
+                      'height': double.parse(heightController.text),
+                      'Weight': double.parse(weightController.text),
+                      'baseGoalCal': userCal
+                    });
                   }
                 },
                 theText: isEdditing ? "Save" : "Edit"),
@@ -327,7 +341,9 @@ class _Profile_PageState extends State<Profile_Page> {
                   border: Border.all(
                       color: Colors.white.withOpacity(0.4), width: 1.5)),
               child: CircleAvatar(
-                foregroundImage: accountImage == null
+                foregroundImage: accountImage == null ||
+                        accountImage == "" ||
+                        accountImage == " "
                     ? null
                     : CachedNetworkImageProvider(accountImage!),
                 backgroundColor: buttonsColor,
@@ -349,16 +365,11 @@ class _Profile_PageState extends State<Profile_Page> {
           ),
           isEdditing
               ? Positioned(
-                  right: 0,
-                  bottom: 0,
+                  right: 5,
+                  bottom: 5,
                   child: GestureDetector(
                     onTap: () async {
                       try {
-                        if (accountImage != null) {
-                          FirebaseStorage.instance
-                              .refFromURL(accountImage!)
-                              .delete();
-                        }
                         int random = Random().nextInt(1000000000);
                         var imagepiked = await imagepiker.pickImage(
                             source: ImageSource.gallery);
@@ -374,12 +385,14 @@ class _Profile_PageState extends State<Profile_Page> {
                               .ref("images/$random$imageName");
                           await storgeRef.putFile(image);
                           var imageUrl = await storgeRef.getDownloadURL();
-                          final user = FirebaseFirestore.instance
-                              .collection('user')
-                              .doc(userId);
-                          final userinfo = {'image': imageUrl};
-                          await user.update(userinfo);
-                          // getAccountInfo();
+                          final user = userCollection.doc(userId);
+                          if (accountImage != "") {
+                            FirebaseStorage.instance
+                                .refFromURL(accountImage!)
+                                .delete();
+                          }
+
+                          await user.update({'image': imageUrl});
 
                           setState(() {});
                         }
@@ -401,5 +414,104 @@ class _Profile_PageState extends State<Profile_Page> {
         ],
       ),
     );
+  }
+
+  PopupMenuButton CustomPopUpMenu() {
+    return PopupMenuButton(
+      color: buttonsColor,
+      padding: const EdgeInsets.all(0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      onSelected: (value) => onSelectedGoal(this.context, value),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: Text(
+            "Main Goal:",
+            style: customTextStyle.displayMedium,
+          ),
+        ),
+        const PopupMenuDivider(),
+        ...MainGoalItems.MainGoalItemsList.map(
+          (e) => PopupMenuItem(
+            value: e,
+            child: SizedBox(
+              width: 170,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Image(
+                        image: AssetImage(e.imagURL),
+                        height: 30,
+                      ),
+                      addHorizantalSpace(13),
+                      Text(
+                        e.title,
+                        style: customTextStyle.displayMedium,
+                      ),
+                    ],
+                  ),
+                  userGoal == e.title
+                      ? const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        )
+                      : const SizedBox()
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        decoration: BoxDecoration(
+            color: buttonsColor, borderRadius: BorderRadius.circular(20)),
+        child: Row(
+          children: [
+            Text(
+              "Main Goal: ",
+              style: customTextStyle.displayMedium,
+            ),
+            Text(
+              userGoal!,
+              style: customTextStyle.displayMedium,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void onSelectedGoal(BuildContext context, item) {
+    switch (item) {
+      case MainGoalItems.keepFit:
+        setState(() {
+          userCollection
+              .doc(userId)
+              .update({'mainGoal': MainGoalItems.keepFit.title});
+          userGoal = MainGoalItems.keepFit.title;
+        });
+
+        break;
+      case MainGoalItems.buildMuscle:
+        setState(() {
+          userCollection
+              .doc(userId)
+              .update({'mainGoal': MainGoalItems.buildMuscle.title});
+          userGoal = MainGoalItems.buildMuscle.title;
+        });
+
+        break;
+
+      case MainGoalItems.loseWeight:
+        setState(() {
+          userCollection
+              .doc(userId)
+              .update({'mainGoal': MainGoalItems.loseWeight.title});
+          userGoal = MainGoalItems.loseWeight.title;
+        });
+        break;
+    }
   }
 }

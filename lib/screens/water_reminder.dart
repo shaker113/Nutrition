@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:fina/data/data.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +21,15 @@ class _Water_ReminderState extends State<Water_Reminder>
   late Animation thirdAnimation;
   late AnimationController fourController;
   late Animation fourAnimation;
+  late double waterValue;
+  double userWater = 0;
 
   @override
   void initState() {
     super.initState();
+    waterValue = .55;
     firstController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 1500));
 
     firstAnimation = Tween<double>(begin: 1.9, end: 2.1).animate(
         CurvedAnimation(parent: firstController, curve: Curves.easeInOut))
@@ -41,7 +45,7 @@ class _Water_ReminderState extends State<Water_Reminder>
       });
 
     secondController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 1500));
     secondAnimation = Tween<double>(begin: 1.8, end: 2.4).animate(
         CurvedAnimation(parent: secondController, curve: Curves.easeInOut))
       ..addListener(() {
@@ -56,7 +60,7 @@ class _Water_ReminderState extends State<Water_Reminder>
       });
 
     thirdController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 1500));
     thirdAnimation = Tween<double>(begin: 1.8, end: 2.4).animate(
         CurvedAnimation(parent: thirdController, curve: Curves.easeInOut))
       ..addListener(() {
@@ -71,7 +75,7 @@ class _Water_ReminderState extends State<Water_Reminder>
       });
 
     fourController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 1500));
     fourAnimation = Tween<double>(begin: 1.9, end: 2.1).animate(
         CurvedAnimation(parent: fourController, curve: Curves.easeInOut))
       ..addListener(() {
@@ -84,14 +88,14 @@ class _Water_ReminderState extends State<Water_Reminder>
           fourController.forward();
         }
       });
-    Timer(Duration(seconds: 2), (() {
+    Timer(const Duration(seconds: 2), (() {
       firstController.forward();
     }));
 
-    Timer(Duration(milliseconds: 1600), (() {
+    Timer(const Duration(milliseconds: 1600), (() {
       secondController.forward();
     }));
-    Timer(Duration(milliseconds: 800), (() {
+    Timer(const Duration(milliseconds: 800), (() {
       thirdController.forward();
     }));
     fourController.forward();
@@ -108,9 +112,8 @@ class _Water_ReminderState extends State<Water_Reminder>
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 33, 191, 189),
+      backgroundColor: const Color.fromARGB(255, 33, 191, 189),
       body: Stack(children: [
         Center(
           child: Text(
@@ -123,13 +126,54 @@ class _Water_ReminderState extends State<Water_Reminder>
           ),
         ),
         CustomPaint(
-          painter: MyPainter(firstAnimation.value, secondAnimation.value,
-              thirdAnimation.value, fourAnimation.value),
+          painter: MyPainter(
+              firstAnimation.value * waterValue,
+              secondAnimation.value * waterValue,
+              thirdAnimation.value * waterValue,
+              fourAnimation.value * waterValue),
           child: SizedBox(
-            height: size.height,
-            width: size.width,
+            height: screenHeigth,
+            width: screenWidth,
           ),
-        )
+        ),
+        Positioned(
+          top: 100,
+          right: 100,
+          child: Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  setState(
+                    () {
+                      userWater > 0 ? userWater = userWater - 0.25 : null;
+                      double calc2 = (userWater / 3.75) * 2 + 0.5;
+                      double calc = (userWater / 3.75) * 1.25 + 0.5;
+                      print(calc2);
+                      print(userWater);
+                      waterValue = userWater > 1 ? calc2 : calc;
+                    },
+                  );
+                },
+                child: Text("-"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(
+                    () {
+                      userWater = userWater + 0.25;
+                      // double calc2 = pow((userWater / 3.75), 2) + 0.5;
+                      double calc = pow((userWater / 3.75), 2) + 0.5;
+                      print(calc);
+                      waterValue = calc;
+                      print(waterValue);
+                    },
+                  );
+                },
+                child: Text("+"),
+              ),
+            ],
+          ),
+        ),
       ]),
     );
   }
@@ -146,7 +190,7 @@ class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = Color(0xff3B6ABA).withOpacity(0.8)
+      ..color = const Color(0xff3B6ABA).withOpacity(0.8)
       ..style = PaintingStyle.fill;
 
     var path = Path()

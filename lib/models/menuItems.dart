@@ -49,3 +49,24 @@ class MenuItems {
     title: "Suger",
   );
 }
+
+class MainGoalItems {
+  static const List<MenuItem> MainGoalItemsList = [
+    keepFit,
+    buildMuscle,
+    loseWeight,
+  ];
+  static const keepFit = MenuItem(
+    imagURL: "assets/images/fit.png",
+    title: 'Keep Fit',
+  );
+
+  static const buildMuscle = MenuItem(
+    imagURL: "assets/images/muscl.png",
+    title: 'Build Muscle',
+  );
+  static const loseWeight = MenuItem(
+    imagURL: "assets/images/2.png",
+    title: 'Lose Weight',
+  );
+}

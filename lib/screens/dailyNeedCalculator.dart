@@ -14,10 +14,12 @@ class TheStatOfDailyNeedCalculator extends State<DailyNeedCalculator> {
   TextEditingController heightController = TextEditingController();
   @override
   void initState() {
+    selectedIndex = userGoalIndex;
     weightController.text = (userWeight ?? 0).toString();
     heightController.text = (userHeight ?? 0).toString();
     plussMethod(double.parse(weightController.text),
-        double.parse(heightController.text), false);
+        double.parse(heightController.text), false, userGoalIndex);
+
     super.initState();
   }
 
@@ -35,10 +37,11 @@ class TheStatOfDailyNeedCalculator extends State<DailyNeedCalculator> {
   int groupValue = 1;
 
   List<String> lst = ['To lose weight', 'Maintain my weight', 'To gain weight'];
-  int selectedIndex = 0; // variable
+  int selectedIndex = 0;
   bool animationtrue = false;
 
-  void plussMethod(double thisweight, double thisheight, bool isInProfile) {
+  void plussMethod(double thisweight, double thisheight, bool isInProfile,
+      int theSelectedIndex) {
     double weight = thisweight;
     double height = thisheight;
     calorieCal = (weight * 24 * 1.5);
@@ -68,13 +71,13 @@ class TheStatOfDailyNeedCalculator extends State<DailyNeedCalculator> {
     if (184 < height && 189 >= height) {
       calHeight = calorieCal;
     }
-    if (selectedIndex == 0) {
+    if (theSelectedIndex == 0) {
       calUsingRadio = calHeight - 737;
     }
-    if (selectedIndex == 1) {
+    if (theSelectedIndex == 1) {
       calUsingRadio = calHeight - 314;
     }
-    if (selectedIndex == 2) {
+    if (theSelectedIndex == 2) {
       calUsingRadio = calHeight + 274;
     }
 
@@ -270,7 +273,8 @@ class TheStatOfDailyNeedCalculator extends State<DailyNeedCalculator> {
                                   plussMethod(
                                       double.parse(weightController.text),
                                       double.parse(heightController.text),
-                                      false);
+                                      false,
+                                      selectedIndex);
                                 }
                               },
                             ),
