@@ -20,6 +20,7 @@ class Category_Page extends StatefulWidget {
 class _Category_PageState extends State<Category_Page>
     with SingleTickerProviderStateMixin {
   late AnimationController sortController;
+  @override
   void initState() {
     super.initState();
     sortController = AnimationController(
@@ -186,7 +187,7 @@ class _Category_PageState extends State<Category_Page>
               (e) => PopupMenuItem(
                 value: e,
                 child: SizedBox(
-                  width: 105,
+                  width: 107,
                   child: Row(
                     children: [
                       Image(
