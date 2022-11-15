@@ -48,7 +48,8 @@ class _editItemButtonFunctionState extends State<editItemButtonFunction> {
     "Dairy",
     "Meat",
     "junk Food",
-    "White meat"
+    "White meat",
+    "Sweets"
   ];
   String chosenCategory = "Drinks";
 

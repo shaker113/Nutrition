@@ -69,7 +69,8 @@ class _AddingPageState extends State<AddingPage> {
     "Dairy",
     "Meat",
     "junk Food",
-    "White meat"
+    "White meat",
+    "Sweets"
   ];
   String chosenCategory = "Drinks";
   @override
@@ -394,6 +395,8 @@ class _AddingPageState extends State<AddingPage> {
       theCollectionReference = whiteMeatCollection;
     } else if (category == "Drinks") {
       theCollectionReference = drinksCollection;
+    } else if (category == "Sweets") {
+      theCollectionReference = sweetCollection;
     }
 
     final json = {

@@ -112,16 +112,18 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white),
             ),
             addVerticalSpace(20),
-            Container(
-              height: screenHeigth! - 151,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(45),
-                  topLeft: Radius.circular(45),
+            SingleChildScrollView(
+              child: Container(
+                height: screenHeigth! - 155,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(45),
+                    topLeft: Radius.circular(45),
+                  ),
                 ),
+                child: myGridView(),
               ),
-              child: myGridView(),
             )
           ]),
     );
