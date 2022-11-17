@@ -12,22 +12,26 @@ class GoogleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await signInWithGoogle();
-        userId = authInstance.currentUser?.uid;
-        userInfo = userCollection.doc(userId);
-        if (await AuthService().isNew(userId)) {
-          Navigator.pushNamed(context, "infoscreen");
-        } else {
-          Navigator.pushNamed(context, "homepage");
-        }
-        AuthService().saveAcount(
-            id: userId,
-            name: authInstance.currentUser?.displayName,
-            email: authInstance.currentUser?.email);
-
-        checkRole();
-
-        CustomSnakBar("signed in successfully", context);
+        try {
+  await signInWithGoogle();
+  userId = authInstance.currentUser?.uid;
+  userInfo = userCollection.doc(userId);
+  if (await AuthService().isNew(userId)) {
+    Navigator.pushNamed(context, "infoscreen");
+  } else {
+    Navigator.pushNamed(context, "homepage");
+  }
+  AuthService().saveAcount(
+      id: userId,
+      name: authInstance.currentUser?.displayName,
+      email: authInstance.currentUser?.email);
+  
+  checkRole();
+  
+  CustomSnakBar("signed in successfully", context);
+} on Exception catch (e) {
+ print(e);
+}
       },
       child: Container(
         alignment: Alignment.center,
