@@ -10,10 +10,10 @@ class DailyNeedsCalc extends StatefulWidget {
   const DailyNeedsCalc({super.key});
 
   @override
-  State<DailyNeedsCalc> createState() => _DailyNeedsCalcState();
+  State<DailyNeedsCalc> createState() => DailyNeedsCalcState();
 }
 
-class _DailyNeedsCalcState extends State<DailyNeedsCalc> {
+class DailyNeedsCalcState extends State<DailyNeedsCalc> {
   @override
   late double height, weight;
 

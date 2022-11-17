@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           "cartpage": (context) => const CartPage(),
           "password reset": (context) => const PasswordResetPage(),
           "infoscreen": (context) => const InfoScreen(),
-          // "birth": (context) => const Birth(),
+          "water reminder": (context) => const Water_Reminder(),
           "H_W": (context) => const H_W(),
         },
         home: const splash_screen());

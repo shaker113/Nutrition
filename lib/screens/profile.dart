@@ -1,10 +1,6 @@
 import 'dart:io';
 import 'dart:math';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fina/screens/bodyFatClaculator.dart';
-import 'package:fina/screens/dailyNeedCalculator.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fina/data/data.dart';
@@ -13,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:path/path.dart';
 import '../models/models.dart';
+import 'screens.dart';
 
 class Profile_Page extends StatefulWidget {
   // String accountImage, userName, userEmail, weight, height;
@@ -29,12 +26,9 @@ class _Profile_PageState extends State<Profile_Page> {
     getAccountInfo();
     heightController.text = userHeight!.toString();
     weightController.text = userWeight!.toString();
-    TheStatOfDailyNeedCalculator().plussMethod(
-        double.parse(weightController.text),
-        double.parse(heightController.text),
-        true,
-        userGoalIndex);
-    TheStatOfbodyFatCalState().testmethod(double.parse(weightController.text),
+    DailyNeedsCalcState().plussMethod(double.parse(weightController.text),
+        double.parse(heightController.text), true, userGoalIndex);
+    BodyFatCalcState().testmethod(double.parse(weightController.text),
         double.parse(heightController.text), userGender!, userAge!, true);
 
     super.initState();
@@ -185,7 +179,7 @@ class _Profile_PageState extends State<Profile_Page> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       infoContainer(
-                        thepage: DailyNeedCalculator(),
+                        thepage: DailyNeedsCalc(),
                         assetName1: caloriesIcon,
                         title1: (userCal ?? 0).toStringAsFixed(0),
                         subtitle1: "Cal",
@@ -197,7 +191,7 @@ class _Profile_PageState extends State<Profile_Page> {
                         subtitle3: "g",
                       ),
                       infoContainer(
-                        thepage: const bodyFatCal(),
+                        thepage: const BodyFatCalc(),
                         assetName1: bmiIcon,
                         title1: (userBmi ?? 0).toStringAsFixed(0),
                         subtitle1: "BMI",
@@ -229,12 +223,12 @@ class _Profile_PageState extends State<Profile_Page> {
                       userWeight = double.parse(weightController.text);
                       userHeight = double.parse(heightController.text);
                     });
-                    TheStatOfDailyNeedCalculator().plussMethod(
+                    DailyNeedsCalcState().plussMethod(
                         double.parse(weightController.text),
                         double.parse(heightController.text),
                         true,
                         userGoalIndex);
-                    TheStatOfbodyFatCalState().testmethod(
+                    BodyFatCalcState().testmethod(
                         double.parse(weightController.text),
                         double.parse(heightController.text),
                         userGender!,

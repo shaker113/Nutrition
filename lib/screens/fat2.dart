@@ -11,14 +11,15 @@ class BodyFatCalc extends StatefulWidget {
   const BodyFatCalc({super.key});
 
   @override
-  State<BodyFatCalc> createState() => _BodyFatCalcState();
+  State<BodyFatCalc> createState() => BodyFatCalcState();
 }
 
-class _BodyFatCalcState extends State<BodyFatCalc> {
+class BodyFatCalcState extends State<BodyFatCalc> {
   late double height, weight;
   late int age;
   String? gender, womanstatus, manstatus, finalstatus;
   double? fatWemon, BMI, fatWemonRounded, fatMen, fatMenRounded, finalFat;
+
   void testmethod(double thisweight, double thisheight, String thisGender,
       int thisAge, bool isInProfile) {
     int age = thisAge;
@@ -148,7 +149,13 @@ class _BodyFatCalcState extends State<BodyFatCalc> {
     height = userHeight ?? 110;
     age = userAge ?? 20;
     gender = userGender ?? "Male";
-
+    testmethod(
+      weight,
+      height,
+      gender ?? 'Male',
+      age,
+      false,
+    );
     super.initState();
   }
 
@@ -230,6 +237,7 @@ class _BodyFatCalcState extends State<BodyFatCalc> {
                       print(BMI);
                       print(finalFat);
                       print(finalstatus);
+                      print(gender);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

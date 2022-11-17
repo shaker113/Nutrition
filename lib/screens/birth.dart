@@ -29,7 +29,7 @@ class _BirthState extends State<Birth> {
     } else if (userAnswers[1] == 'Lose Weight') {
       goalindex = 0;
     }
-    TheStatOfDailyNeedCalculator().plussMethod(double.parse(userAnswers[3]),
+    DailyNeedsCalcState().plussMethod(double.parse(userAnswers[3]),
         double.parse(userAnswers[4]), true, goalindex);
     userCollection.doc(userId).update({'baseGoalCal': userCal});
     super.initState();

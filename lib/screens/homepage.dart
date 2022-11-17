@@ -32,12 +32,12 @@ class _HomePageState extends State<HomePage> {
     getAccountInfo();
     calculateUsercal() {
       setState(() {
-        TheStatOfDailyNeedCalculator().plussMethod(
+        DailyNeedsCalcState().plussMethod(
             double.parse(userWeight!.toString()),
             double.parse(userHeight!.toString()),
             true,
             userGoalIndex);
-        TheStatOfbodyFatCalState().testmethod(
+        BodyFatCalcState().testmethod(
             double.parse(userWeight!.toString()),
             double.parse(userHeight!.toString()),
             userGender!,
@@ -88,10 +88,16 @@ class _HomePageState extends State<HomePage> {
           isAdmin ?? false ? const AddButton() : const SizedBox(),
           IconButton(
             onPressed: () {
+              Navigator.pushNamed(context, "water reminder");
+            },
+            icon: const Icon(Icons.water_drop_outlined),
+          ),
+          IconButton(
+            onPressed: () {
               Navigator.pushNamed(context, "cartpage");
             },
             icon: const Icon(Icons.shopping_cart_outlined),
-          )
+          ),
         ],
       ),
       drawer: const Drawer(
