@@ -202,7 +202,7 @@ class TheStatOfDailyNeedCalculator extends State<DailyNeedCalculator> {
                                     child: CustomTextfieldBlue(
                                       theController: weightController,
                                       label: "",
-                                      validator: (p0) => WightValidator(p0),
+                                      validator: (p0) => wightValidator(p0),
                                       theFormater: [
                                         FilteringTextInputFormatter.allow(
                                           RegExp(r'^\d+\.?\d{0,2}'),
@@ -236,7 +236,7 @@ class TheStatOfDailyNeedCalculator extends State<DailyNeedCalculator> {
                                   child: CustomTextfieldBlue(
                                     theController: heightController,
                                     label: "",
-                                    validator: (p0) => WightValidator(p0),
+                                    validator: (p0) => heightValidator(p0),
                                     theFormater: [
                                       FilteringTextInputFormatter.allow(
                                         RegExp(r'^\d+\.?\d{0,2}'),

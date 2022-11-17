@@ -15,12 +15,12 @@ class bodyFatCal extends StatefulWidget {
 
 class TheStatOfbodyFatCalState extends State<bodyFatCal> {
   final _formKey = GlobalKey<FormState>();
-  double? fatWemon;
   double? weight;
   TextEditingController ageCont = TextEditingController();
   TextEditingController heightCont = TextEditingController();
   TextEditingController weightCont = TextEditingController();
 
+  double? fatWemon;
   double? BMI;
   double? fatWemonRounded;
   String? gender;
@@ -349,27 +349,30 @@ class TheStatOfbodyFatCalState extends State<bodyFatCal> {
                               ],
                             ),
                             ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(15),
-                                    backgroundColor: Colors.black),
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    testmethod(
-                                      double.parse(weightCont.text),
-                                      double.parse(heightCont.text),
-                                      gender ?? 'Male',
-                                      int.parse(ageCont.text),
-                                      false,
-                                    );
-                                  }
-                                  if (gender == null || gender!.isEmpty) {
-                                    print("select gender");
-                                  }
-                                },
-                                child: const Text("Calculate",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ))),
+                              style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.all(15),
+                                  backgroundColor: Colors.black),
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  testmethod(
+                                    double.parse(weightCont.text),
+                                    double.parse(heightCont.text),
+                                    gender ?? 'Male',
+                                    int.parse(ageCont.text),
+                                    false,
+                                  );
+                                }
+                                if (gender == null || gender!.isEmpty) {
+                                  print("select gender");
+                                }
+                              },
+                              child: const Text(
+                                "Calculate",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
                             const SizedBox(
                               height: 30,
                             ),

@@ -146,15 +146,23 @@ class _Water_ReminderState extends State<Water_Reminder>
                   setState(
                     () {
                       userWater > 0 ? userWater = userWater - 0.25 : null;
-                      double calc2 = (userWater / 3.75) * 2 + 0.5;
-                      double calc = (userWater / 3.75) * 1.25 + 0.5;
-                      print(calc2);
+                      // double calc2 = pow((userWater / 3.75), 2) + 0.5;
+                      double calc = pow((userWater / 3.75), 2) + 0.55;
+                      print(calc);
                       print(userWater);
-                      waterValue = userWater > 1 ? calc2 : calc;
+                      waterValue = calc;
                     },
                   );
                 },
                 child: Text("-"),
+              ),
+              Text(
+                '$userWater Liter',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    wordSpacing: 2,
+                    color: Colors.white.withOpacity(0.7)),
+                textScaleFactor: 2,
               ),
               ElevatedButton(
                 onPressed: () {
@@ -162,7 +170,7 @@ class _Water_ReminderState extends State<Water_Reminder>
                     () {
                       userWater = userWater + 0.25;
                       // double calc2 = pow((userWater / 3.75), 2) + 0.5;
-                      double calc = pow((userWater / 3.75), 2) + 0.5;
+                      double calc = pow((userWater / 3.75), 2) + 0.55;
                       print(calc);
                       waterValue = calc;
                       print(waterValue);

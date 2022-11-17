@@ -282,7 +282,7 @@ class _Details_PageState extends State<Details_Page> {
                               imagePath: fatsIcon),
                           addHorizantalSpace(15),
                           buildInfoCard(
-                              cardTiltle: 'SUGER',
+                              cardTiltle: 'SUGAR',
                               info: widget.isInCart
                                   ? (widget.suger * widget.itemCount)
                                       .toStringAsFixed(1)

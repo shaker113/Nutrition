@@ -12,7 +12,7 @@ import 'screens/screens.dart';
 // fat percentage calcuator ((if we have time))            {{rami}}
 // sorting system                                          {{shaker}} Done
 // recommandation system (filter)
-// clear all button in cart                               {{shaker}} almost Done {{delete button still does not working as it should be}}
+// clear all button in cart                                {{shaker}} almost Done {{delete button still does not working as it should be}}
 // splash screen                                           done by salh
 // app icon    and name                                    done by malek
 // show dialog for sgin out                                done by malek

@@ -52,6 +52,7 @@ dependencies:
   flutter_emoji: ^2.4.0
   emojis: ^0.9.9
   scroll_date_picker: ^3.6.0
+  syncfusion_flutter_gauges: ^20.3.57
 
 
 

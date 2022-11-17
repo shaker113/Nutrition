@@ -36,9 +36,20 @@ String? emailValidator(String? p0) {
   return null;
 }
 
-String? WightValidator(String? p0) {
+String? wightValidator(String? p0) {
   if (p0!.isEmpty) {
-    return "This field is required";
+    return "Invalid";
+  } else if (double.parse(p0) < 20) {
+    return "Invalid Wight";
+  }
+  return null;
+}
+
+String? heightValidator(String? p0) {
+  if (p0!.isEmpty) {
+    return "Invalid";
+  } else if (double.parse(p0) < 110) {
+    return "Invalid height";
   }
   return null;
 }

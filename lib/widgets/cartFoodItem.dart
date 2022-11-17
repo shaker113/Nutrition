@@ -68,18 +68,19 @@ class _CartFoodItemState extends State<CartFoodItem> {
             Row(
               children: [
                 Hero(
-                    tag: imageLink != null ? imageLink! : loadingIcon,
-                    child: CircleAvatar(
-                      foregroundImage: imageLink != null
-                          ? CachedNetworkImageProvider(imageLink!)
-                          : null,
-                      backgroundImage: const AssetImage(
-                        loadingIcon,
-                      ),
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.white,
-                      radius: 40,
-                    )),
+                  tag: imageLink != null ? imageLink! : loadingIcon,
+                  child: CircleAvatar(
+                    foregroundImage: imageLink != null
+                        ? CachedNetworkImageProvider(imageLink!)
+                        : null,
+                    backgroundImage: const AssetImage(
+                      loadingIcon,
+                    ),
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.white,
+                    radius: 40,
+                  ),
+                ),
                 addHorizantalSpace(10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,6 +187,7 @@ class _CartFoodItemState extends State<CartFoodItem> {
         : userCartCollection
             .doc(itemId)
             .update({'itemCount': savedItemCount - 1});
+    setState(() {});
   }
 
   Future getItemData() async {

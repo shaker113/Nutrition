@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fina/screens/daily2.dart';
+import 'package:fina/screens/fat2.dart';
 import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/data/data.dart';
 import 'package:flutter/material.dart';
@@ -192,14 +194,37 @@ class _MyDrawerState extends State<MyDrawer> {
           },
         ),
         ListTile(
+          leading: Icon(Icons.calculate, color: backgrounColor),
+          title: const Text("Daily2 Need Calculator"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DailyNeedsCalc(),
+                ));
+          },
+        ),
+        ListTile(
           leading: Icon(Icons.fitness_center_rounded, color: backgrounColor),
-          title: const Text("fat Calculator"),
+          title: const Text("BMI Calculator"),
           onTap: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const bodyFatCal(),
                 ));
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.fitness_center_rounded, color: backgrounColor),
+          title: const Text("BMI2 Calculator"),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BodyFatCalc(),
+              ),
+            );
           },
         ),
         ListTile(

@@ -56,6 +56,7 @@ class _H_WState extends State<H_W> {
                     SizedBox(
                         width: 100,
                         child: h_w_textfield(
+                          validator: (p0) => heightValidator(p0),
                           thisController: heightController,
                         )),
                     addHorizantalSpace(5),
@@ -78,6 +79,7 @@ class _H_WState extends State<H_W> {
                     SizedBox(
                         width: 100,
                         child: h_w_textfield(
+                          validator: (p0) => wightValidator(p0),
                           thisController: weightController,
                         )),
                     addHorizantalSpace(5),
@@ -93,8 +95,7 @@ class _H_WState extends State<H_W> {
                 Container(
                   // width: 400,
                   // height: 500,
-                  child:
-                      const Image(image: AssetImage("assets/images/20.jpeg")),
+                  child: const Image(image: AssetImage("assets/images/20.png")),
                 ),
                 // Positioned(
                 //   right: 260,
@@ -149,7 +150,9 @@ class _H_WState extends State<H_W> {
 
 class h_w_textfield extends StatelessWidget {
   TextEditingController thisController;
+  String? Function(String?)? validator;
   h_w_textfield({
+    required this.validator,
     required this.thisController,
     Key? key,
   }) : super(key: key);
@@ -157,7 +160,7 @@ class h_w_textfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (value) => WightValidator(value),
+      validator: validator,
       keyboardType: TextInputType.number,
       controller: thisController,
       inputFormatters: [
