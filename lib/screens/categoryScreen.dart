@@ -54,7 +54,7 @@ class _Category_PageState extends State<Category_Page>
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 15, left: 10),
+              padding: const EdgeInsets.only(top: 25, left: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

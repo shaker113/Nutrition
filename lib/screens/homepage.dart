@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
               addVerticalSpace(20),
               SingleChildScrollView(
                 child: Container(
-                    height: screenHeigth! - 151,
+                    height: screenHeigth! * 0.817,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(

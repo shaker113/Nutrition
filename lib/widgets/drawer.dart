@@ -28,7 +28,7 @@ class _MyDrawerState extends State<MyDrawer> {
     return Column(
       children: [
         Container(
-          height: 180,
+          height: 160,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -42,32 +42,32 @@ class _MyDrawerState extends State<MyDrawer> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.only(
-                      left: 15, top: 15, right: 15, bottom: 1),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Row(
-                      children: const [
-                        Icon(
-                          Icons.arrow_back_ios,
-                          size: 20,
-                        ),
-                        Text(
-                          "Back",
-                          style: TextStyle(
-                            fontSize: 15,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                // Container(
+                //   alignment: Alignment.topLeft,
+                //   padding: const EdgeInsets.only(
+                //       left: 15, top: 15, right: 15, bottom: 1),
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       Navigator.pop(context);
+                //     },
+                //     child: Row(
+                //       children: const [
+                //         Icon(
+                //           Icons.arrow_back_ios,
+                //           size: 20,
+                //         ),
+                //         Text(
+                //           "Back",
+                //           style: TextStyle(
+                //             fontSize: 15,
+                //           ),
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
-                  height: 115,
+                  height: 130,
                   child: Padding(
                     padding: const EdgeInsets.only(
                         top: 20, right: 4, left: 10, bottom: 15),
