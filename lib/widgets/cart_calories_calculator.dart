@@ -1,4 +1,5 @@
 import 'package:fina/data/data.dart';
+import 'package:fina/models/get_user_info.dart';
 import 'package:fina/widgets/circular_indicator.dart';
 import 'package:flutter/material.dart';
 

@@ -220,6 +220,9 @@ class _MyDrawerState extends State<MyDrawer> {
         //   title: const Text("Exit"),
         //   onTap: () {},
         // ),
+        // Divider(
+        //   height: 50,
+        // ),
         const ListTileLogout(),
       ],
     );
