@@ -27,7 +27,7 @@ final List<Category> categories = [
       subtitle: "This category contains all the meat food",
       theCollectionReference: meatCollection),
   Category(
-      imagURL: "assets/images/fruits.png",
+      imagURL: "assets/images/fruits.jpg",
       title: "Fruits",
       subtitle: "This category contains all the fruits food",
       theCollectionReference: fruitsCollecton),

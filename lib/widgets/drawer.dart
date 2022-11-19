@@ -102,55 +102,65 @@ class _MyDrawerState extends State<MyDrawer> {
                           }
                         }
 
-                        return Container(
-                          height: 80,
-                          alignment: Alignment.topLeft,
-                          child: Row(
-                            children: [
-                              Hero(
-                                tag: accountImage ?? "",
-                                child: CircleAvatar(
-                                  foregroundImage:
-                                      accountImage == null || accountImage == ""
-                                          ? null
-                                          : CachedNetworkImageProvider(
-                                              accountImage!),
-                                  backgroundColor: buttonsColor,
-                                  radius: 40,
-                                  child: Text(
-                                    (userName ?? "a a")
-                                        .trim()
-                                        .split(' ')
-                                        .map((l) => l[0])
-                                        .take(2)
-                                        .join()
-                                        .toUpperCase()
-                                        .toString(),
-                                    style: const TextStyle(
-                                        letterSpacing: 4,
-                                        fontSize: 25.0,
-                                        color: Colors.white),
+                        return GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Profile_Page(),
+                              )),
+                          child: Container(
+                            height: 80,
+                            alignment: Alignment.topLeft,
+                            child: Row(
+                              children: [
+                                Hero(
+                                  tag: accountImage ?? "",
+                                  child: CircleAvatar(
+                                    foregroundImage: accountImage == null ||
+                                            accountImage == ""
+                                        ? null
+                                        : CachedNetworkImageProvider(
+                                            accountImage!),
+                                    backgroundColor: buttonsColor,
+                                    radius: 40,
+                                    child: Text(
+                                      (userName ?? "a a")
+                                          .trim()
+                                          .split(' ')
+                                          .map((l) => l[0])
+                                          .take(2)
+                                          .join()
+                                          .toUpperCase()
+                                          .toString(),
+                                      style: const TextStyle(
+                                          letterSpacing: 4,
+                                          fontSize: 25.0,
+                                          color: Colors.white),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              addHorizantalSpace(15),
-                              SizedBox(
-                                width: 180,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(userName ?? " ",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(fontSize: 20.0)),
-                                    addVerticalSpace(5),
-                                    Text(userEmail ?? " ",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(fontSize: 14.0)),
-                                  ],
-                                ),
-                              )
-                            ],
+                                addHorizantalSpace(15),
+                                SizedBox(
+                                  width: 180,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(userName ?? " ",
+                                          overflow: TextOverflow.ellipsis,
+                                          style:
+                                              const TextStyle(fontSize: 20.0)),
+                                      addVerticalSpace(5),
+                                      Text(userEmail ?? " ",
+                                          overflow: TextOverflow.ellipsis,
+                                          style:
+                                              const TextStyle(fontSize: 14.0)),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -178,11 +188,10 @@ class _MyDrawerState extends State<MyDrawer> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Profile_Page(),
+                  builder: (context) => const Profile_Page(),
                 ));
           },
         ),
-
         ListTile(
           leading: Icon(Icons.calculate, color: backgrounColor),
           title: const Text("Daily Need Calculator"),
@@ -190,11 +199,10 @@ class _MyDrawerState extends State<MyDrawer> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DailyNeedsCalc(),
+                  builder: (context) => const DailyNeedsCalc(),
                 ));
           },
         ),
-  
         ListTile(
           leading: Icon(Icons.fitness_center_rounded, color: backgrounColor),
           title: const Text("BMI Calculator"),
@@ -202,7 +210,7 @@ class _MyDrawerState extends State<MyDrawer> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => BodyFatCalc(),
+                builder: (context) => const BodyFatCalc(),
               ),
             );
           },
@@ -212,7 +220,7 @@ class _MyDrawerState extends State<MyDrawer> {
           title: const Text("Exit"),
           onTap: () {},
         ),
-        ListTileLogout(),
+        const ListTileLogout(),
       ],
     );
   }
