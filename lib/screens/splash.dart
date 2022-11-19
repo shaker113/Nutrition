@@ -25,7 +25,7 @@ class _splash_screenState extends State<splash_screen> {
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(context, MaterialPageRoute<void>(
         builder: (BuildContext context) {
-          return isLogin == true ? const HomePage() : const Welcome();
+          return isLogin == true ? const Welcome() : const Welcome();
         },
       ));
     });

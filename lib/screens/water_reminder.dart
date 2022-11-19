@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:fina/data/data.dart';
+import 'package:fina/widgets/buttons/back_button.dart';
 import 'package:flutter/material.dart';
 
 class Water_Reminder extends StatefulWidget {
@@ -118,12 +119,12 @@ class _Water_ReminderState extends State<Water_Reminder>
       body: Stack(children: [
         Center(
           child: Text(
-            '3.7 Liter',
+            '$userWater Liter',
             style: TextStyle(
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w400,
                 wordSpacing: 3,
-                color: Colors.white.withOpacity(0.7)),
-            textScaleFactor: 7,
+                color: Colors.white.withOpacity(0.8)),
+            textScaleFactor: 6,
           ),
         ),
         CustomPaint(
@@ -142,51 +143,77 @@ class _Water_ReminderState extends State<Water_Reminder>
           right: 100,
           child: Row(
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  setState(
-                    () {
-                      userWater > 0 ? userWater = userWater - 0.25 : null;
-                      // double calc2 = pow((userWater / 3.75), 2) + 0.5;
-                      double calc = pow((userWater / 3.75), 2) + 0.55;
-                      // print(calc);
-                      // print(userWater);
-                      waterValue = calc;
-                      userWaterTemp = userWater;
-                      print(userWaterTemp);
-                    },
-                  );
-                },
-                child: const Text("-"),
+              ConstrainedBox(
+                constraints: BoxConstraints.tightFor(height: 75, width: 75),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blueAccent,
+                      textStyle:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      elevation: 25,
+                      shadowColor: Colors.white,
+                      side: BorderSide(color: Colors.black, width: 2),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                  onPressed: () {
+                    setState(
+                      () {
+                        userWater > 0 ? userWater = userWater - 0.25 : null;
+
+                        // double calc2 = (userWater / 3.75) * 2 + 0.5;
+                        double calc = pow((userWater / 3.75), 2) + 0.55;
+                        // print(calc2);
+                        print(userWater);
+                        waterValue = calc;
+                      },
+                    );
+                  },
+                  child: Text("-"),
+                ),
               ),
-              Text(
-                '$userWater Liter',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    wordSpacing: 2,
-                    color: Colors.white.withOpacity(0.7)),
-                textScaleFactor: 2,
+              SizedBox(
+                width: 30,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(
-                    () {
-                      userWater = userWater + 0.25;
-                      // double calc2 = pow((userWater / 3.75), 2) + 0.5;
-                      double calc = pow((userWater / 3.75), 2) + 0.55;
-                      // print(calc);
-                      waterValue = calc;
-                      // print(waterValue);
-                      userWaterTemp = userWater;
-                      print(userWaterTemp);
-                    },
-                  );
-                },
-                child: const Text("+"),
+              // Text(
+              //   '$userWater Liter',
+              //   style: TextStyle(
+              //       fontWeight: FontWeight.w600,
+              //       wordSpacing: 2,
+              //       color: Colors.white.withOpacity(0.9)),
+              // ),
+
+              ConstrainedBox(
+                constraints: BoxConstraints.tightFor(height: 75, width: 75),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blueAccent,
+                      textStyle:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      elevation: 25,
+                      shadowColor: Colors.white,
+                      side: BorderSide(color: Colors.black, width: 2),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                  onPressed: () {
+                    setState(
+                      () {
+                        userWater = userWater + 0.25;
+
+                        // double calc2 = pow((userWater / 3.75), 2) + 0.5;
+                        double calc = pow((userWater / 3.75), 2) + 0.55;
+                        print(calc);
+                        waterValue = calc;
+                        print(waterValue);
+                      },
+                    );
+                  },
+                  child: Text("+"),
+                ),
               ),
             ],
           ),
         ),
+        SafeArea(child: backButton(context)),
       ]),
     );
   }
