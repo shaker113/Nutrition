@@ -20,12 +20,12 @@ import 'screens/screens.dart';
 // send notifications                                      {{mohammad}} almost done
 // show info about nutritions  {{with api}}
 // show healht rleated news with api ((IF we have time))
-// water animation for water counter ((IF we have time))
+// water animation for water counter ((IF we have time))    done
 // cached network image                                    {{shaker}}  done
 // send email verification                                  done
 // add new Category bakers , soft drink , sweets           {{malek}}
-// add Home Page (image slider for categories)
-// change both calculators design to the same design
+// add Home Page (image slider for categories)              done
+// change both calculators design to the same design        done
 bool? isLogin;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        // theme: ThemeData(fontFamily: ),
         debugShowCheckedModeBanner: false,
         routes: {
           "sgin in": (context) => const LogIn(),

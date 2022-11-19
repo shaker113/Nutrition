@@ -9,7 +9,8 @@ double? userWeight,
     userProtein,
     userFat,
     userBmi,
-    userFatPercentage;
+    userFatPercentage,
+    userWater;
 int? userAge;
 int userGoalIndex = 0;
 
@@ -24,5 +25,6 @@ getAccountInfo() async {
   userAge = int.parse(userInfo['age'].toString());
   userGender = userInfo['gender'];
   userGoal = userInfo['mainGoal'];
+  userWater = userInfo['water'];
   userCal = double.parse(userInfo['baseGoalCal'].toString());
 }

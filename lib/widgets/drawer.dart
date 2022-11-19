@@ -182,17 +182,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 ));
           },
         ),
-        // ListTile(
-        //   leading: Icon(Icons.calculate, color: backgrounColor),
-        //   title: const Text("Daily Need Calculator"),
-        //   onTap: () {
-        //     Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => DailyNeedCalculator(),
-        //         ));
-        //   },
-        // ),
+
         ListTile(
           leading: Icon(Icons.calculate, color: backgrounColor),
           title: const Text("Daily Need Calculator"),
@@ -204,17 +194,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 ));
           },
         ),
-        // ListTile(
-        //   leading: Icon(Icons.fitness_center_rounded, color: backgrounColor),
-        //   title: const Text("BMI Calculator"),
-        //   onTap: () {
-        //     Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => const bodyFatCal(),
-        //         ));
-        //   },
-        // ),
+  
         ListTile(
           leading: Icon(Icons.fitness_center_rounded, color: backgrounColor),
           title: const Text("BMI Calculator"),

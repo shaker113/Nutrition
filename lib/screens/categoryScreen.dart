@@ -58,56 +58,17 @@ class _Category_PageState extends State<Category_Page>
               child: Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      )),
-                       Container(padding: EdgeInsets.only(right: 10,left: 5),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              v = !v;
-                            });
-                          },
-                          icon: const Icon(Icons.search),
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: 70,
-                          child: v
-                              ? TextField(
-                                  autofocus: true,
-                                  controller: searchController,
-                                  style: const TextStyle(color: Colors.white),
-                                  cursorColor: Colors.white,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      searchText = value.toCapitalized();
-                                    });
-                                  },
-                                  decoration: const InputDecoration(
-                                    focusedBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white)),
-                                  ),
-                                )
-                              : Container(),
-                        ),
-                      ],
-                    ),
-                  ),
+                  backButton(context),
+                  
                   SizedBox(
                     width: 185,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [addHorizantalSpace(50),
-                        CustomPopUpMenu(), sortButton()],
+                      children: [
+                        addHorizantalSpace(50),
+                        CustomPopUpMenu(),
+                        sortButton()
+                      ],
                     ),
                   ),
                 ],
@@ -131,7 +92,6 @@ class _Category_PageState extends State<Category_Page>
                       ],
                     ),
                   ),
-                 
                   isAdmin ?? false ? const AddButton() : const SizedBox()
                 ],
               ),
