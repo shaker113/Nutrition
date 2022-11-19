@@ -137,7 +137,7 @@ class _Category_PageState extends State<Category_Page>
 
             addVerticalSpace(25),
             Container(
-              height: screenHeigth! - 153,
+              height: screenHeigth! - 138,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
