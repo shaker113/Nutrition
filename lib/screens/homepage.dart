@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.pushNamed(context, "cartpage");
             },
-            icon: const Icon(Icons.shopping_bag),
+            icon: const Icon(Icons.shopping_basket_sharp),
           ),
           IconButton(
               onPressed: () {
