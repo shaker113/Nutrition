@@ -152,67 +152,61 @@ class _Water_ReminderState extends State<Water_Reminder>
           right: 100,
           child: Row(
             children: [
-              ConstrainedBox(
-                constraints:
-                    const BoxConstraints.tightFor(height: 75, width: 75),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
-                      textStyle: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                      elevation: 25,
-                      shadowColor: Colors.white,
-                      side: const BorderSide(color: Colors.black, width: 2),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                  onPressed: () {
-                    setState(
-                      () {
-                        tempWater > 0 ? tempWater = tempWater - 0.25 : null;
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(75, 75),
+                    backgroundColor: Colors.blueAccent,
+                    textStyle: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                    elevation: 10,
+                    shadowColor: Colors.white,
+                    side: const BorderSide(color: Colors.black, width: 1.5),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
+                onPressed: () {
+                  setState(
+                    () {
+                      tempWater > 0 ? tempWater = tempWater - 0.25 : null;
 
-                        double calc = pow((tempWater / 3.75), 2) + 0.55;
-                        waterValue = calc;
-                        userCollection.doc(userId).update({'water': tempWater});
-                      },
-                    );
-                    getAccountInfo();
-                  },
-                  child: const Text("-"),
-                ),
+                      double calc = pow((tempWater / 3.75), 2) + 0.55;
+                      waterValue = calc;
+                      userCollection.doc(userId).update({'water': tempWater});
+                    },
+                  );
+                  getAccountInfo();
+                },
+                child: const Text("-"),
               ),
               const SizedBox(
                 width: 30,
               ),
-              ConstrainedBox(
-                constraints:
-                    const BoxConstraints.tightFor(height: 75, width: 75),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
-                    textStyle: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
-                    elevation: 25,
-                    shadowColor: Colors.white,
-                    side: const BorderSide(color: Colors.black, width: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(75, 75),
+                  backgroundColor: Colors.blueAccent,
+                  textStyle: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                  elevation: 10,
+                  shadowColor: Colors.white,
+                  side: const BorderSide(color: Colors.black, width: 1.5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  onPressed: () {
-                    setState(
-                      () {
-                        tempWater = tempWater + 0.25;
-
-                        // double calc2 = pow((userWater / 3.75), 2) + 0.5;
-                        double calc = pow((tempWater / 3.75), 2) + 0.55;
-                        waterValue = calc;
-                        userCollection.doc(userId).update({'water': tempWater});
-                      },
-                    );
-                    getAccountInfo();
-                  },
-                  child: const Text("+"),
                 ),
+                onPressed: () {
+                  setState(
+                    () {
+                      tempWater = tempWater + 0.25;
+
+                      // double calc2 = pow((userWater / 3.75), 2) + 0.5;
+                      double calc = pow((tempWater / 3.75), 2) + 0.55;
+                      waterValue = calc;
+                      userCollection.doc(userId).update({'water': tempWater});
+                    },
+                  );
+                  getAccountInfo();
+                },
+                child: const Text("+"),
               ),
             ],
           ),

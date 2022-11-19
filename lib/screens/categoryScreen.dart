@@ -56,10 +56,48 @@ class _Category_PageState extends State<Category_Page>
             Padding(
               padding: const EdgeInsets.only(top: 15, left: 10),
               child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   backButton(context),
-                  
+                  SizedBox(
+                    height: 35,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              v = !v;
+                            });
+                          },
+                          icon: const Icon(Icons.search),
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 80,
+                          child: v
+                              ? TextField(
+                                  autofocus: true,
+                                  controller: searchController,
+                                  style: const TextStyle(color: Colors.white),
+                                  cursorColor: Colors.white,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      searchText = value.toCapitalized();
+                                    });
+                                  },
+                                  decoration: const InputDecoration(
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
+                                      enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.white70))),
+                                )
+                              : Container(),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
                     width: 185,
                     child: Row(
@@ -74,7 +112,7 @@ class _Category_PageState extends State<Category_Page>
                 ],
               ),
             ),
-            addVerticalSpace(10),
+            // addVerticalSpace(0),
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Row(
@@ -96,6 +134,7 @@ class _Category_PageState extends State<Category_Page>
                 ],
               ),
             ),
+
             addVerticalSpace(25),
             Container(
               height: screenHeigth! - 153,

@@ -23,7 +23,7 @@ class _F_M_ButtonState extends State<F_M_Button> {
     return AnimatedContainer(
       height: 70,
       width: 100,
-      duration: const Duration(microseconds: 220),
+      duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -39,21 +39,22 @@ class _F_M_ButtonState extends State<F_M_Button> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              shadowColor: Colors.transparent,
-              backgroundColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              elevation: 0),
-          onPressed: widget.theFunction,
-          child: Text(
-            widget.theText,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: widget.isSelected ? Colors.white : Colors.black),
-          )),
+        style: ElevatedButton.styleFrom(
+            shadowColor: Colors.transparent,
+            backgroundColor: Colors.transparent,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            elevation: 0),
+        onPressed: widget.theFunction,
+        child: Text(
+          widget.theText,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: widget.isSelected ? Colors.white : Colors.black),
+        ),
+      ),
     );
   }
 }
