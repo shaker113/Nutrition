@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../data/data.dart';
 import '../models/models.dart';
 import 'screens.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var fireMessging = FirebaseMessaging.instance;
+
+  get theCollectionReference => null;
   intialMessage() async {
     var message = await FirebaseMessaging.instance.getInitialMessage();
     if (message != null) {
@@ -91,7 +94,16 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushNamed(context, "cartpage");
             },
             icon: const Icon(Icons.shopping_cart_outlined),
-          )
+          ),
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Water_Reminder();
+                  },
+                ));
+              },
+              icon: Icon(Icons.water_drop_outlined))
         ],
       ),
       drawer: const Drawer(
@@ -114,34 +126,54 @@ class _HomePageState extends State<HomePage> {
             addVerticalSpace(20),
             SingleChildScrollView(
               child: Container(
-                height: screenHeigth! - 155,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(45),
-                    topLeft: Radius.circular(45),
+                  height: screenHeigth! - 155,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(45),
+                      topLeft: Radius.circular(45),
+                    ),
                   ),
-                ),
-                child: myGridView(),
-              ),
-            )
+                  child: CarouselSlider.builder(
+                      options: CarouselOptions(
+                          disableCenter: true,
+                          viewportFraction: 0.4,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enlargeCenterPage: true,
+                          scrollDirection: Axis.vertical),
+                      itemCount: categories.length,
+                      itemBuilder: ((context, index, realIndex) {
+                        var myCateory = categories[index];
+                        return CategoryBox(
+                            imagURL: myCateory.imagURL,
+                            title: myCateory.title,
+                            subtitle: myCateory.subtitle,
+                            theCollectionReference:
+                                myCateory.theCollectionReference);
+                      }))
+                  // myGridView(),
+                  ),
+            ),
           ]),
     );
   }
 
-  Widget myGridView() => GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 5),
-        itemCount: categories.length,
-        itemBuilder: (BuildContext context, int index) {
-          var myCateory = categories[index];
-          return CategoryBox(
-              imagURL: myCateory.imagURL,
-              title: myCateory.title,
-              subtitle: myCateory.subtitle,
-              theCollectionReference: myCateory.theCollectionReference);
-        },
-      );
+  // Widget myGridView() => GridView.builder(
+  //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+  //         crossAxisCount: 2,
+  //       ),
+  //       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 5),
+  //       itemCount: categories.length,
+  //       itemBuilder: (BuildContext context, int index) {
+  //         var myCateory = categories[index];
+  //         return CategoryBox(
+  //             imagURL: myCateory.imagURL,
+  //             title: myCateory.title,
+  //             subtitle: myCateory.subtitle,
+  //             theCollectionReference: myCateory.theCollectionReference);
+  //       },
+  //     );
 }

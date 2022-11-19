@@ -208,15 +208,6 @@ class _MyDrawerState extends State<MyDrawer> {
           onTap: () {},
         ),
         ListTileLogout(),
-        IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return Water_Reminder();
-                },
-              ));
-            },
-            icon: Icon(Icons.water))
       ],
     );
   }

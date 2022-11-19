@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:fina/data/data.dart';
+import 'package:fina/widgets/buttons/back_button.dart';
 import 'package:flutter/material.dart';
 
 class Water_Reminder extends StatefulWidget {
@@ -141,22 +142,37 @@ class _Water_ReminderState extends State<Water_Reminder>
           right: 100,
           child: Row(
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  setState(
-                    () {
-                      userWater > 0 ? userWater = userWater - 0.25 : null;
-                      // double calc2 = (userWater / 3.75) * 2 + 0.5;
-                      double calc = pow((userWater / 3.75), 2) + 0.55;
-                      // print(calc2);
-                      print(userWater);
-                      waterValue = calc;
-                    },
-                  );
-                },
-                child: Text("-"),
+              ConstrainedBox(
+                constraints: BoxConstraints.tightFor(height: 75, width: 75),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blueAccent,
+                      textStyle:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      elevation: 25,
+                      shadowColor: Colors.white,
+                      side: BorderSide(color: Colors.black, width: 2),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                  onPressed: () {
+                    setState(
+                      () {
+                        userWater > 0 ? userWater = userWater - 0.25 : null;
+
+                        // double calc2 = (userWater / 3.75) * 2 + 0.5;
+                        double calc = pow((userWater / 3.75), 2) + 0.55;
+                        // print(calc2);
+                        print(userWater);
+                        waterValue = calc;
+                      },
+                    );
+                  },
+                  child: Text("-"),
+                ),
               ),
-              Padding(padding: EdgeInsets.all(15)),
+              SizedBox(
+                width: 30,
+              ),
               // Text(
               //   '$userWater Liter',
               //   style: TextStyle(
@@ -164,24 +180,39 @@ class _Water_ReminderState extends State<Water_Reminder>
               //       wordSpacing: 2,
               //       color: Colors.white.withOpacity(0.9)),
               // ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(
-                    () {
-                      userWater = userWater + 0.25;
-                      // double calc2 = pow((userWater / 3.75), 2) + 0.5;
-                      double calc = pow((userWater / 3.75), 2) + 0.55;
-                      print(calc);
-                      waterValue = calc;
-                      print(waterValue);
-                    },
-                  );
-                },
-                child: Text("+"),
+
+              ConstrainedBox(
+                constraints: BoxConstraints.tightFor(height: 75, width: 75),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blueAccent,
+                      textStyle:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      elevation: 25,
+                      shadowColor: Colors.white,
+                      side: BorderSide(color: Colors.black, width: 2),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                  onPressed: () {
+                    setState(
+                      () {
+                        userWater = userWater + 0.25;
+
+                        // double calc2 = pow((userWater / 3.75), 2) + 0.5;
+                        double calc = pow((userWater / 3.75), 2) + 0.55;
+                        print(calc);
+                        waterValue = calc;
+                        print(waterValue);
+                      },
+                    );
+                  },
+                  child: Text("+"),
+                ),
               ),
             ],
           ),
         ),
+        SafeArea(child: backButton(context)),
       ]),
     );
   }
