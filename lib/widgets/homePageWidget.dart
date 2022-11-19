@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
-import 'package:fina/models/firestore_refrences.dart';
 import 'package:fina/screens/screens.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +47,7 @@ class CategoryBox extends StatelessWidget {
           ),
         ),
 
-        height: 250,
+        height: screenHeigth! * 0.1,
         width: screenWidth! * 0.4,
         child: Column(
           children: [

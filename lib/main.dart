@@ -26,7 +26,6 @@ import 'screens/screens.dart';
 // add new Category bakers , soft drink , sweets           {{malek}}
 // add Home Page (image slider for categories)              done
 // change both calculators design to the same design        done
-
 bool? isLogin;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

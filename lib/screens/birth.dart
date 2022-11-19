@@ -106,8 +106,8 @@ class _BirthState extends State<Birth> {
 
                         userAnswers.insert(5, todayDate.year - userDate.year);
                         saveUserInfo();
-
-                        Navigator.popAndPushNamed(context, "homepage");
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            "homepage", (Route<dynamic> route) => false);
                       }
                     : null,
                 child: const Text("Personalize my plan"),
