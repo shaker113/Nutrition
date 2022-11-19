@@ -23,10 +23,11 @@ class _Water_ReminderState extends State<Water_Reminder>
   late Animation fourAnimation;
   late double waterValue;
   double userWater = 0;
-
+  double? userWaterTemp;
   @override
   void initState() {
     super.initState();
+    userWater = userWaterTemp ?? 0;
     waterValue = .55;
     firstController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 1500));
@@ -148,13 +149,15 @@ class _Water_ReminderState extends State<Water_Reminder>
                       userWater > 0 ? userWater = userWater - 0.25 : null;
                       // double calc2 = pow((userWater / 3.75), 2) + 0.5;
                       double calc = pow((userWater / 3.75), 2) + 0.55;
-                      print(calc);
-                      print(userWater);
+                      // print(calc);
+                      // print(userWater);
                       waterValue = calc;
+                      userWaterTemp = userWater;
+                      print(userWaterTemp);
                     },
                   );
                 },
-                child: Text("-"),
+                child: const Text("-"),
               ),
               Text(
                 '$userWater Liter',
@@ -171,13 +174,15 @@ class _Water_ReminderState extends State<Water_Reminder>
                       userWater = userWater + 0.25;
                       // double calc2 = pow((userWater / 3.75), 2) + 0.5;
                       double calc = pow((userWater / 3.75), 2) + 0.55;
-                      print(calc);
+                      // print(calc);
                       waterValue = calc;
-                      print(waterValue);
+                      // print(waterValue);
+                      userWaterTemp = userWater;
+                      print(userWaterTemp);
                     },
                   );
                 },
-                child: Text("+"),
+                child: const Text("+"),
               ),
             ],
           ),
