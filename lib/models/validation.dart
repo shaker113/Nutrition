@@ -39,7 +39,7 @@ String? emailValidator(String? p0) {
 String? wightValidator(String? p0) {
   if (p0!.isEmpty) {
     return "Invalid";
-  } else if (double.parse(p0) < 20) {
+  } else if (double.parse(p0) < 20 || double.parse(p0) > 180) {
     return "Invalid Wight";
   }
   return null;
@@ -48,7 +48,7 @@ String? wightValidator(String? p0) {
 String? heightValidator(String? p0) {
   if (p0!.isEmpty) {
     return "Invalid";
-  } else if (double.parse(p0) < 110) {
+  } else if (double.parse(p0) < 110 || double.parse(p0) > 250) {
     return "Invalid height";
   }
   return null;
