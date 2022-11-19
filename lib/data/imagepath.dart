@@ -21,3 +21,5 @@ const String mountains2Image = "assets/images/mountains2.png";
 const String bmiStatusIcon = "assets/images/bmi.png";
 const String bmiIcon = "assets/images/body-mass-index.png";
 const String bodyFatIcon = "assets/images/body-fat.png";
+const String waterIcon = "assets/images/water.png";
+const String listIcon = "assets/images/meal.png";

@@ -171,16 +171,16 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
         ),
-        ListTile(
-          leading: Icon(
-            Icons.home,
-            color: backgrounColor,
-          ),
-          title: const Text("Filters"),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
+        // ListTile(
+        //   leading: Icon(
+        //     Icons.home,
+        //     color: backgrounColor,
+        //   ),
+        //   title: const Text("Filters"),
+        //   onTap: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
         ListTile(
           leading: Icon(Icons.person, color: backgrounColor),
           title: const Text("Profile"),
@@ -215,11 +215,11 @@ class _MyDrawerState extends State<MyDrawer> {
             );
           },
         ),
-        ListTile(
-          leading: Icon(Icons.exit_to_app, color: backgrounColor),
-          title: const Text("Exit"),
-          onTap: () {},
-        ),
+        // ListTile(
+        //   leading: Icon(Icons.exit_to_app, color: backgrounColor),
+        //   title: const Text("Exit"),
+        //   onTap: () {},
+        // ),
         const ListTileLogout(),
       ],
     );
