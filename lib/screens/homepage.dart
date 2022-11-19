@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../data/data.dart';
 import '../models/models.dart';
 import 'screens.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,10 +16,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var fireMessging = FirebaseMessaging.instance;
+
+  get theCollectionReference => null;
   intialMessage() async {
     var message = await FirebaseMessaging.instance.getInitialMessage();
     if (message != null) {
-      return AlertDialog(
+      return const AlertDialog(
         content: Text("welcome"),
       );
       // it is work when the app closed
@@ -32,17 +35,10 @@ class _HomePageState extends State<HomePage> {
     getAccountInfo();
     calculateUsercal() {
       setState(() {
-        DailyNeedsCalcState().plussMethod(
-            double.parse(userWeight!.toString()),
-            double.parse(userHeight!.toString()),
-            true,
-            userGoalIndex);
-        BodyFatCalcState().testmethod(
-            double.parse(userWeight!.toString()),
-            double.parse(userHeight!.toString()),
-            userGender!,
-            userAge!,
-            true);
+        DailyNeedsCalcState().plussMethod(double.parse(userWeight!.toString()),
+            double.parse(userHeight!.toString()), true, userGoalIndex);
+        BodyFatCalcState().testmethod(double.parse(userWeight!.toString()),
+            double.parse(userHeight!.toString()), userGender!, userAge!, true);
       });
     }
 
@@ -59,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       Navigator.push(context, MaterialPageRoute(
         builder: (context) {
-          return Water_Reminder();
+          return const Water_Reminder();
         },
       ));
     });
@@ -88,66 +84,80 @@ class _HomePageState extends State<HomePage> {
           isAdmin ?? false ? const AddButton() : const SizedBox(),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, "water reminder");
+              Navigator.pushNamed(context, "cartpage");
             },
-            icon: const Icon(Icons.water_drop_outlined),
+            icon: Image.asset(
+              listIcon,
+              // height: 40,
+            ),
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, "cartpage");
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return const Water_Reminder();
+                },
+              ));
             },
-            icon: const Icon(Icons.shopping_cart_outlined),
-          ),
+            icon: Image.asset(
+              waterIcon,
+              // height: 40,
+            ),
+          )
         ],
       ),
       drawer: const Drawer(
         child: MyDrawer(),
       ),
-      // appBar: AppBar(elevation: 0, backgroundColor: Color(0xFF21BFBD)),
       backgroundColor: backgrounColor,
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              "Categories",
-              style: TextStyle(
-                  fontSize: 25,
-                  height: 2,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            addVerticalSpace(20),
-            SingleChildScrollView(
-              child: Container(
-                height: screenHeigth! - 155,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            "Categories",
+            style: TextStyle(
+                fontSize: 25,
+                height: 2,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
+          ),
+          addVerticalSpace(20),
+          SingleChildScrollView(
+            child: Container(
+                height: screenHeigth! - 151,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(45),
-                    topLeft: Radius.circular(45),
+                    topRight: Radius.circular(42),
+                    topLeft: Radius.circular(42),
                   ),
                 ),
-                child: myGridView(),
-              ),
-            )
-          ]),
+                child: CarouselSlider.builder(
+                  options: CarouselOptions(
+                      autoPlay: true,
+                      disableCenter: true,
+                      viewportFraction: 0.4,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.vertical),
+                  itemCount: categories.length,
+                  itemBuilder: ((context, index, realIndex) {
+                    var myCateory = categories[index];
+                    return CategoryBox(
+                        imagURL: myCateory.imagURL,
+                        title: myCateory.title,
+                        subtitle: myCateory.subtitle,
+                        theCollectionReference:
+                            myCateory.theCollectionReference);
+                  }),
+                )),
+          ),
+        ],
+      ),
     );
   }
-
-  Widget myGridView() => GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 5),
-        itemCount: categories.length,
-        itemBuilder: (BuildContext context, int index) {
-          var myCateory = categories[index];
-          return CategoryBox(
-              imagURL: myCateory.imagURL,
-              title: myCateory.title,
-              subtitle: myCateory.subtitle,
-              theCollectionReference: myCateory.theCollectionReference);
-        },
-      );
 }

@@ -52,6 +52,7 @@ class _LogInState extends State<LogIn> {
                     sigmaY: 4.0,
                   ),
                   child: Container(
+                 
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,

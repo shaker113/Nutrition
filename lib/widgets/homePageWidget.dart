@@ -48,12 +48,12 @@ class CategoryBox extends StatelessWidget {
           ),
         ),
 
-        height: 235,
+        height: 250,
         width: screenWidth! * 0.4,
         child: Column(
           children: [
             Container(
-              height: 120,
+              height: 200,
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),

@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
+import 'package:fina/widgets/textFieldCalc.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../models/models.dart';
@@ -30,114 +33,166 @@ class _Category_PageState extends State<Category_Page>
     );
   }
 
+  TextEditingController searchController = TextEditingController();
+  Color g = const Color.fromARGB(255, 33, 191, 189);
+  bool v = false;
   @override
   void dispose() {
     sortController.dispose();
     super.dispose();
   }
 
+  String searchText = '';
   String sortBy = 'name';
   bool descending = false;
   @override
   Widget build(BuildContext context) {
+    print(searchText);
     return Scaffold(
       backgroundColor: backgrounColor,
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 15, left: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    )),
-                SizedBox(
-                  width: 125,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [CustomPopUpMenu(), sortButton()],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 15, left: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  backButton(context),
+                  SizedBox(
+                    height: 35,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              v = !v;
+                            });
+                          },
+                          icon: const Icon(Icons.search),
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 80,
+                          child: v
+                              ? TextField(
+                                  autofocus: true,
+                                  controller: searchController,
+                                  style: const TextStyle(color: Colors.white),
+                                  cursorColor: Colors.white,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      searchText = value.toCapitalized();
+                                    });
+                                  },
+                                  decoration: const InputDecoration(
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white)),
+                                      enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.white70))),
+                                )
+                              : Container(),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    text: widget.theTitle,
-                    style: customTextStyle.headlineLarge,
-                    children: [
-                      TextSpan(
-                        text: " ",
-                        style: customTextStyle.titleLarge,
-                      )
-                    ],
+                  SizedBox(
+                    width: 185,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        addHorizantalSpace(50),
+                        CustomPopUpMenu(),
+                        sortButton()
+                      ],
+                    ),
                   ),
-                ),
-                isAdmin ?? false ? const AddButton() : const SizedBox()
-              ],
-            ),
-          ),
-          addVerticalSpace(40),
-          Container(
-            height: screenHeigth! - 153,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(45),
+                ],
               ),
             ),
-            child: StreamBuilder(
-              stream: widget.theCollectionReference
-                  .orderBy(sortBy, descending: descending)
-                  .snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> streamSnapShot) {
-                return ListView.builder(
-                  padding: const EdgeInsets.only(
-                      left: 30, top: 20, bottom: 20, right: 0),
-                  itemCount: streamSnapShot.data == null
-                      ? 0
-                      : streamSnapShot.data!.docs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final DocumentSnapshot documentSnapshot =
-                        streamSnapShot.data!.docs[index];
-                    return buildFoodItem(
-                      id: documentSnapshot.id,
-                      imageLink: documentSnapshot['imageLink'],
-                      name: documentSnapshot['name'],
-                      calories: documentSnapshot['calories'],
-                      carbs: documentSnapshot['carbs'],
-                      fibers: documentSnapshot['fibers'],
-                      protein: documentSnapshot['protein'],
-                      vitamins: documentSnapshot['vitamins'],
-                      weight: documentSnapshot['weight'],
-                      fat: documentSnapshot['fat'],
-                      suger: documentSnapshot['suger'],
-                      description: documentSnapshot['description'],
-                      category: documentSnapshot['category'],
-                      isHighCrbs: documentSnapshot['isHighcarbs'],
-                      isHighIron: documentSnapshot['isHighIron'],
-                      isHighProtein: documentSnapshot['isHighprotine'],
-                      isSugerFree: documentSnapshot['isSugerFree'],
-                      theCollectionReference: widget.theCollectionReference,
-                    );
-                  },
-                );
-              },
+            // addVerticalSpace(0),
+            Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: widget.theTitle,
+                      style: customTextStyle.headlineLarge,
+                      children: [
+                        TextSpan(
+                          text: " ",
+                          style: customTextStyle.titleLarge,
+                        )
+                      ],
+                    ),
+                  ),
+                  isAdmin ?? false ? const AddButton() : const SizedBox()
+                ],
+              ),
             ),
-          )
-        ],
+
+            addVerticalSpace(25),
+            Container(
+              height: screenHeigth! - 138,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(45),
+                ),
+              ),
+              child: StreamBuilder(
+                stream: searchText.isNotEmpty
+                    ? widget.theCollectionReference
+                        .orderBy('name', descending: false)
+                        .startAt([searchText]).endAt(['$searchText\uf8ff'])
+                        // .orderBy(sortBy, descending: false)
+                        .snapshots()
+                    : widget.theCollectionReference
+                        .orderBy(sortBy, descending: descending)
+                        .snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> streamSnapShot) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.only(
+                        left: 30, top: 20, bottom: 20, right: 0),
+                    itemCount: streamSnapShot.data == null
+                        ? 0
+                        : streamSnapShot.data!.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final DocumentSnapshot documentSnapshot =
+                          streamSnapShot.data!.docs[index];
+                      return buildFoodItem(
+                        id: documentSnapshot.id,
+                        imageLink: documentSnapshot['imageLink'],
+                        name: documentSnapshot['name'],
+                        calories: documentSnapshot['calories'],
+                        carbs: documentSnapshot['carbs'],
+                        fibers: documentSnapshot['fibers'],
+                        protein: documentSnapshot['protein'],
+                        vitamins: documentSnapshot['vitamins'],
+                        weight: documentSnapshot['weight'],
+                        fat: documentSnapshot['fat'],
+                        suger: documentSnapshot['suger'],
+                        description: documentSnapshot['description'],
+                        category: documentSnapshot['category'],
+                        isHighCrbs: documentSnapshot['isHighcarbs'],
+                        isHighIron: documentSnapshot['isHighIron'],
+                        isHighProtein: documentSnapshot['isHighprotine'],
+                        isSugerFree: documentSnapshot['isSugerFree'],
+                        theCollectionReference: widget.theCollectionReference,
+                      );
+                    },
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -259,4 +314,13 @@ class _Category_PageState extends State<Category_Page>
         break;
     }
   }
+}
+
+extension StringCasingExtension on String {
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
 }
