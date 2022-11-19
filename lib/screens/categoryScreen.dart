@@ -147,15 +147,15 @@ class _Category_PageState extends State<Category_Page>
               child: StreamBuilder(
                 stream: searchText.isNotEmpty
                     ? widget.theCollectionReference
-                        .orderBy(sortBy, descending: descending)
-                        .startAt([searchText]).endAt(
-                            [searchText + '\uf8ff']).snapshots()
+                        .orderBy('name', descending: false)
+                        .startAt([searchText]).endAt(['$searchText\uf8ff'])
+                        // .orderBy(sortBy, descending: false)
+                        .snapshots()
                     : widget.theCollectionReference
                         .orderBy(sortBy, descending: descending)
                         .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> streamSnapShot) {
-                  print(widget.theCollectionReference);
                   return ListView.builder(
                     shrinkWrap: true,
                     padding: const EdgeInsets.only(
