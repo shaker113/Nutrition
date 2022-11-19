@@ -86,17 +86,24 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.pushNamed(context, "cartpage");
             },
-            icon: const Icon(Icons.shopping_bag),
+            icon: Image.asset(
+              listIcon,
+              // height: 40,
+            ),
           ),
           IconButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return const Water_Reminder();
-                  },
-                ));
-              },
-              icon: const Icon(Icons.water_drop_outlined))
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return const Water_Reminder();
+                },
+              ));
+            },
+            icon: Image.asset(
+              waterIcon,
+              // height: 40,
+            ),
+          )
         ],
       ),
       drawer: const Drawer(
