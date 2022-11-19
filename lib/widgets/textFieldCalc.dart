@@ -21,7 +21,7 @@ class textField extends StatelessWidget {
         controller: mycont,
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: TextStyle(color: Colors.black),
+          hintStyle: const TextStyle(color: Colors.black),
           focusedBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(15.0),

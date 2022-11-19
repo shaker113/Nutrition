@@ -80,7 +80,7 @@ class _CartPageState extends State<CartPage> {
                 calories = 0;
                 return ListView.builder(
                   padding: const EdgeInsets.only(
-                      left: 15, top: 20, bottom: 20, right: 5),
+                      left: 15, top: 20, bottom: 20, right: 0),
                   itemCount: streamSnapShot.data == null
                       ? 0
                       : streamSnapShot.data!.docs.length,
