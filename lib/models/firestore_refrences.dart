@@ -28,3 +28,4 @@ final junkFoodCollection =
 
 final drinksCollection = categoryCollection.doc("drinks").collection('items');
 final sweetCollection = categoryCollection.doc("sweets").collection("items");
+final bakeryCollection = categoryCollection.doc("bakery").collection("items");
