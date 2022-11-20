@@ -47,7 +47,7 @@ class _ListTileLogoutState extends State<ListTileLogout> {
                                 AuthService().signOut();
                                 Navigator.popAndPushNamed(context, "welcome");
                               },
-                              child: const Text("Yes")),
+                              child: const Text("Logout")),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.all(15),
@@ -56,7 +56,7 @@ class _ListTileLogoutState extends State<ListTileLogout> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text("No"))
+                              child: const Text("Back"))
                         ],
                       )
                     ],

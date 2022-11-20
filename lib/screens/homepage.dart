@@ -76,83 +76,90 @@ class _HomePageState extends State<HomePage> {
     screenHeigth = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: backgrounColor,
-        actions: [
-          isAdmin ?? false ? const AddButton() : const SizedBox(),
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, "cartpage");
-            },
-            icon: const Icon(Icons.shopping_bag),
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: backgrounColor,
+            actions: [
+              isAdmin ?? false ? const AddButton() : const SizedBox(),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "cartpage");
+                },
+                icon: Image.asset(
+                  listIcon,
+                  // height: 40,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const Water_Reminder();
+                    },
+                  ));
+                },
+                icon: Image.asset(
+                  waterIcon,
+                  // height: 40,
+                ),
+              )
+            ],
           ),
-          IconButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return const Water_Reminder();
-                  },
-                ));
-              },
-              icon: const Icon(Icons.water_drop_outlined))
-        ],
-      ),
-      drawer: const Drawer(
-        child: MyDrawer(),
-      ),
-      backgroundColor: backgrounColor,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              "Categories",
-              style: TextStyle(
-                  fontSize: 25,
-                  height: 2,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            addVerticalSpace(20),
-            SingleChildScrollView(
-              child: Container(
-                  height: screenHeigth! - 151,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(42),
-                      topLeft: Radius.circular(42),
+          drawer: const Drawer(
+            child: MyDrawer(),
+          ),
+          backgroundColor: backgrounColor,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                "Categories",
+                style: TextStyle(
+                    fontSize: 25,
+                    height: 2,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              addVerticalSpace(20),
+              SingleChildScrollView(
+                child: Container(
+                    height: screenHeigth! - 151,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(42),
+                        topLeft: Radius.circular(42),
+                      ),
                     ),
-                  ),
-                  child: CarouselSlider.builder(
-                    options: CarouselOptions(
-                        autoPlay: true,
-                        disableCenter: true,
-                        viewportFraction: 0.4,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        reverse: false,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enlargeCenterPage: true,
-                        scrollDirection: Axis.vertical),
-                    itemCount: categories.length,
-                    itemBuilder: ((context, index, realIndex) {
-                      var myCateory = categories[index];
-                      return CategoryBox(
-                          imagURL: myCateory.imagURL,
-                          title: myCateory.title,
-                          subtitle: myCateory.subtitle,
-                          theCollectionReference:
-                              myCateory.theCollectionReference);
-                    }),
-                  )),
-            ),
-          ],
-        ),
-      ),
-    );
+                    child: CarouselSlider.builder(
+                      options: CarouselOptions(
+                          autoPlay: true,
+                          disableCenter: true,
+                          viewportFraction: 0.4,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enlargeCenterPage: true,
+                          scrollDirection: Axis.vertical),
+                      itemCount: categories.length,
+                      itemBuilder: ((context, index, realIndex) {
+                        var myCateory = categories[index];
+                        return CategoryBox(
+                            imagURL: myCateory.imagURL,
+                            title: myCateory.title,
+                            subtitle: myCateory.subtitle,
+                            theCollectionReference:
+                                myCateory.theCollectionReference);
+                      }),
+                    )),
+              ),
+            ],
+          ),
+        ));
   }
 }

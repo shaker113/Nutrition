@@ -42,11 +42,11 @@ class _CartPageState extends State<CartPage> {
               children: [
                 RichText(
                   text: TextSpan(
-                    text: "Cart",
+                    text: "Daily",
                     style: customTextStyle.headlineLarge,
                     children: [
                       TextSpan(
-                        text: " Food",
+                        text: " Food List",
                         style: customTextStyle.titleLarge,
                       )
                     ],

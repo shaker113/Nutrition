@@ -207,6 +207,8 @@ class _CartFoodItemState extends State<CartFoodItem> {
       theCollectionReference = whiteMeatCollection;
     } else if (widget.category == "Drinks") {
       theCollectionReference = drinksCollection;
+    } else if (widget.category == "Sweets") {
+      theCollectionReference = sweetCollection;
     }
     DocumentSnapshot mydoc = await theCollectionReference!.doc(widget.id).get();
     setState(() {

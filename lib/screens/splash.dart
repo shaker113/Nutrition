@@ -2,9 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:fina/data/data.dart';
-import 'package:fina/screens/homepage.dart';
 import 'package:fina/screens/screens.dart';
-import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
