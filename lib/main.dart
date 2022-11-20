@@ -26,7 +26,6 @@ import 'screens/screens.dart';
 // add new Category bakers , soft drink , sweets           {{malek}}
 // add Home Page (image slider for categories)              done
 // change both calculators design to the same design        done
-
 bool? isLogin;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +56,7 @@ class MyApp extends StatelessWidget {
           "infoscreen": (context) => const InfoScreen(),
           "water reminder": (context) => const Water_Reminder(),
           "H_W": (context) => const H_W(),
+          "splash":(context) => const splash_screen()
         },
         home: const splash_screen());
   }
