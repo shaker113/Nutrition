@@ -21,7 +21,6 @@ class ShadowButoon extends StatelessWidget {
     return GestureDetector(
       onLongPressStart: onlongpress,
       onLongPressEnd: onlongpressends,
-      // onTapCancel: onCancel,
       child: ElevatedButton(
         onPressed: theFunction,
         style: ElevatedButton.styleFrom(

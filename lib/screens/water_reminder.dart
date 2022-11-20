@@ -128,12 +128,32 @@ class _Water_ReminderState extends State<Water_Reminder>
       body: Stack(children: [
         Center(
           child: Text(
-            '$tempWater Liter',
+            "$tempWater Litre",
             style: TextStyle(
                 fontWeight: FontWeight.w400,
                 wordSpacing: 3,
                 color: Colors.white.withOpacity(0.8)),
             textScaleFactor: 6,
+          ),
+        ),
+        Positioned(
+          left: 10,
+          right: 10,
+          bottom: screenHeigth! * 0.35,
+          child: Center(
+            child: Text(
+              textAlign: TextAlign.center,
+              tempWater == 3.75
+                  ? "You have reached your goal"
+                  : "${-1 * (tempWater - 3.75)} Litre to reach your goal",
+              style: TextStyle(
+                fontSize: 5,
+                fontWeight: FontWeight.w400,
+                wordSpacing: 3,
+                color: Colors.white.withOpacity(0.8),
+              ),
+              textScaleFactor: 6,
+            ),
           ),
         ),
         CustomPaint(
@@ -196,12 +216,14 @@ class _Water_ReminderState extends State<Water_Reminder>
                 onPressed: () {
                   setState(
                     () {
-                      tempWater = tempWater + 0.25;
+                      if (tempWater < 3.75) {
+                        tempWater = tempWater + 0.25;
 
-                      // double calc2 = pow((userWater / 3.75), 2) + 0.5;
-                      double calc = pow((tempWater / 3.75), 2) + 0.55;
-                      waterValue = calc;
-                      userCollection.doc(userId).update({'water': tempWater});
+                        // double calc2 = pow((userWater / 3.75), 2) + 0.5;
+                        double calc = pow((tempWater / 3.75), 2) + 0.55;
+                        waterValue = calc;
+                        userCollection.doc(userId).update({'water': tempWater});
+                      }
                     },
                   );
                   getAccountInfo();
