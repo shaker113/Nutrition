@@ -1,13 +1,18 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/screens/daily2.dart';
 import 'package:fina/screens/fat2.dart';
 import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/data/data.dart';
+import 'package:fina/widgets/textFieldCalc.dart';
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 import '../screens/screens.dart';
+import 'package:fina/models/url.dart';
 import 'widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -28,7 +33,7 @@ class _MyDrawerState extends State<MyDrawer> {
     return Column(
       children: [
         Container(
-          height: 180,
+          height: 160,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -42,32 +47,32 @@ class _MyDrawerState extends State<MyDrawer> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.only(
-                      left: 15, top: 15, right: 15, bottom: 1),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Row(
-                      children: const [
-                        Icon(
-                          Icons.arrow_back_ios,
-                          size: 20,
-                        ),
-                        Text(
-                          "Back",
-                          style: TextStyle(
-                            fontSize: 15,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                // Container(
+                //   alignment: Alignment.topLeft,
+                //   padding: const EdgeInsets.only(
+                //       left: 15, top: 15, right: 15, bottom: 1),
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       Navigator.pop(context);
+                //     },
+                //     child: Row(
+                //       children: const [
+                //         Icon(
+                //           Icons.arrow_back_ios,
+                //           size: 20,
+                //         ),
+                //         Text(
+                //           "Back",
+                //           style: TextStyle(
+                //             fontSize: 15,
+                //           ),
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
-                  height: 115,
+                  height: 130,
                   child: Padding(
                     padding: const EdgeInsets.only(
                         top: 20, right: 4, left: 10, bottom: 15),
@@ -171,16 +176,6 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
         ),
-        // ListTile(
-        //   leading: Icon(
-        //     Icons.home,
-        //     color: backgrounColor,
-        //   ),
-        //   title: const Text("Filters"),
-        //   onTap: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
         ListTile(
           leading: Icon(Icons.person, color: backgrounColor),
           title: const Text("Profile"),
@@ -215,12 +210,29 @@ class _MyDrawerState extends State<MyDrawer> {
             );
           },
         ),
-        // ListTile(
-        //   leading: Icon(Icons.exit_to_app, color: backgrounColor),
-        //   title: const Text("Exit"),
-        //   onTap: () {},
-        // ),
         const ListTileLogout(),
+        addVerticalSpace(screenHeigth! * 0.32),
+        Divider(
+          height: 20,
+          color: backgrounColor,
+        ),
+        urlClass(
+            myfunction: Insta_function,
+            myplatformicon: (FontAwesomeIcons.instagram),
+            myplatformsubtitle: "Contact US",
+            myplatformtitle: "Instagram profile"),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            "if you need any further information please contact us via this email \nnutrution1@gmail.com ",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 17,
+                overflow: TextOverflow.clip,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.normal),
+          ),
+        )
       ],
     );
   }

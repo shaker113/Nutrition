@@ -76,7 +76,7 @@ class _SginUpState extends State<SginUp> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "SGIN UP",
+                                  "SIGN UP",
                                   style: customTextStyle.labelMedium,
                                 ),
                                 backButton(context),
@@ -118,7 +118,7 @@ class _SginUpState extends State<SginUp> {
                                     sginUpWithEmail();
                                   }
                                 },
-                                theText: "Sgin up"),
+                                theText: "Sign up"),
                             addVerticalSpace(15),
                             const OrRow(),
                             addVerticalSpace(15),

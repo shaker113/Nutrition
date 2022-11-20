@@ -57,5 +57,10 @@ final List<Category> categories = [
       imagURL: "assets/images/sweets.jpg",
       title: "Sweets",
       subtitle: "",
-      theCollectionReference: sweetCollection)
+      theCollectionReference: sweetCollection),
+  Category(
+      imagURL: "assets/images/bakery.jpg",
+      title: "Bakery",
+      subtitle: "",
+      theCollectionReference: bakeryCollection)
 ];
