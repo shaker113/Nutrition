@@ -42,16 +42,16 @@ class editItemButtonFunction extends StatefulWidget {
 
 class _editItemButtonFunctionState extends State<editItemButtonFunction> {
   List category = [
+    "Sweets",
     "Drinks",
     "Fruits",
     "Vegetables",
     "Dairy",
     "Meat",
     "junk Food",
-    "White meat",
-    "Sweets"
+    "White meat"
   ];
-  String chosenCategory = "Drinks";
+  String chosenCategory = "Sweets";
 
   @override
   Widget build(BuildContext context) {

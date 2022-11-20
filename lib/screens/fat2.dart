@@ -325,7 +325,7 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                         (timer) {
                       if (age < 80) {
                         setState(() {
-                          age++;
+                          age += 1;
                         });
                       }
                     });

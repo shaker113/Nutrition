@@ -70,9 +70,10 @@ class _AddingPageState extends State<AddingPage> {
     "Meat",
     "junk Food",
     "White meat",
-    "Sweets"
+    "Sweets",
+    "Bakery"
   ];
-  String chosenCategory = "Drinks";
+  String chosenCategory = "Bakery";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -396,6 +397,8 @@ class _AddingPageState extends State<AddingPage> {
     } else if (category == "Drinks") {
       theCollectionReference = drinksCollection;
     } else if (category == "Sweets") {
+      theCollectionReference = sweetCollection;
+    } else if (category == "bakery") {
       theCollectionReference = sweetCollection;
     }
 
