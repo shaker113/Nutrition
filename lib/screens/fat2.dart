@@ -159,6 +159,8 @@ class BodyFatCalcState extends State<BodyFatCalc> {
     super.initState();
   }
 
+  Timer? theTimer;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -260,8 +262,6 @@ class BodyFatCalcState extends State<BodyFatCalc> {
   }
 
   Positioned AgeBox() {
-    Timer? theTimer;
-
     return Positioned(
       right: 20,
       bottom: screenHeigth! * .45,
@@ -275,15 +275,42 @@ class BodyFatCalcState extends State<BodyFatCalc> {
               "AGE",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
-            Text(
-              age.toStringAsFixed(0),
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+            RichText(
+              text: TextSpan(
+                text: age.toStringAsFixed(0),
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500),
+                children: [
+                  TextSpan(
+                    text: " Years",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey.shade700),
+                  )
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ShadowButoon(
                     theText: "-",
+                    onlongpress: (p) {
+                      theTimer = Timer.periodic(
+                          const Duration(milliseconds: 120), (timer) {
+                        if (age > 14) {
+                          setState(() {
+                            age--;
+                          });
+                        }
+                      });
+                    },
+                    onlongpressends: (p) {
+                      theTimer?.cancel();
+                    },
                     theFunction: () {
                       setState(() {
                         if (age > 14) {
@@ -292,24 +319,28 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                       });
                     }),
                 ShadowButoon(
-                    theText: "+",
-                    onlongpress: (p) {
-                      theTimer = Timer.periodic(
-                          const Duration(milliseconds: 150), (timer) {
+                  theText: "+",
+                  onlongpress: (p) {
+                    theTimer = Timer.periodic(const Duration(milliseconds: 120),
+                        (timer) {
+                      if (age < 80) {
                         setState(() {
                           age++;
                         });
-                        print(theTimer);
-                      });
-                    },
-                    onlongpressends: (p) {
-                      theTimer!.cancel();
-                    },
-                    theFunction: () {
+                      }
+                    });
+                  },
+                  onlongpressends: (p) {
+                    theTimer?.cancel();
+                  },
+                  theFunction: () {
+                    if (age < 80) {
                       setState(() {
                         age++;
                       });
-                    }),
+                    }
+                  },
+                ),
               ],
             )
           ],
@@ -332,16 +363,42 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                 "WEIGHT",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-              Text(
-                weight.toStringAsFixed(1),
-                style:
-                    const TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+              RichText(
+                text: TextSpan(
+                  text: weight.toStringAsFixed(1),
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500),
+                  children: [
+                    TextSpan(
+                      text: " Kg",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade700),
+                    )
+                  ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ShadowButoon(
                       theText: "-",
+                      onlongpress: (p) {
+                        theTimer = Timer.periodic(
+                            const Duration(milliseconds: 120), (timer) {
+                          if (weight > 20) {
+                            setState(() {
+                              weight = weight - 1;
+                            });
+                          }
+                        });
+                      },
+                      onlongpressends: (p) {
+                        theTimer?.cancel();
+                      },
                       theFunction: () {
                         setState(() {
                           if (weight > 20) {
@@ -351,10 +408,25 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                       }),
                   ShadowButoon(
                       theText: "+",
-                      theFunction: () {
-                        setState(() {
-                          weight = weight + .5;
+                      onlongpress: (p) {
+                        theTimer = Timer.periodic(
+                            const Duration(milliseconds: 120), (timer) {
+                          if (weight < 180) {
+                            setState(() {
+                              weight = weight + 1;
+                            });
+                          }
                         });
+                      },
+                      onlongpressends: (p) {
+                        theTimer?.cancel();
+                      },
+                      theFunction: () {
+                        if (weight < 180) {
+                          setState(() {
+                            weight = weight + .5;
+                          });
+                        }
                       }),
                 ],
               )
@@ -376,11 +448,23 @@ class BodyFatCalcState extends State<BodyFatCalc> {
             children: [
               addVerticalSpace(5),
               Center(
-                child: Text(
-                  "HEIGHT\n${height.round()} cm",
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500),
-                  textAlign: TextAlign.center,
+                child: RichText(
+                  text: TextSpan(
+                    text: "HEIGHT\n${height.round()}",
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                    children: [
+                      TextSpan(
+                        text: " cm",
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey.shade700),
+                      )
+                    ],
+                  ),
                 ),
               ),
               SizedBox(

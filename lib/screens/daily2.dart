@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fina/screens/Daily_results.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -125,6 +127,8 @@ class DailyNeedsCalcState extends State<DailyNeedsCalc> {
     );
   }
 
+  Timer? theTimer;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,10 +160,7 @@ class DailyNeedsCalcState extends State<DailyNeedsCalc> {
                 child: LongButton(
                     theFunction: () {
                       plussMethod(weight, height, false, selectedIndex);
-                      print(weight);
-                      print(height);
-                      print(selectedIndex);
-                      print(calUsingRadio);
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -246,16 +247,42 @@ class DailyNeedsCalcState extends State<DailyNeedsCalc> {
                 "WEIGHT",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-              Text(
-                weight.toStringAsFixed(1),
-                style:
-                    const TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+              RichText(
+                text: TextSpan(
+                  text: weight.toStringAsFixed(1),
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500),
+                  children: [
+                    TextSpan(
+                      text: " Kg",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade700),
+                    )
+                  ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ShadowButoon(
                       theText: "-",
+                      onlongpress: (p) {
+                        theTimer = Timer.periodic(
+                            const Duration(milliseconds: 120), (timer) {
+                          if (weight > 20) {
+                            setState(() {
+                              weight = weight - 1;
+                            });
+                          }
+                        });
+                      },
+                      onlongpressends: (p) {
+                        theTimer?.cancel();
+                      },
                       theFunction: () {
                         setState(() {
                           if (weight > 20) {
@@ -265,10 +292,25 @@ class DailyNeedsCalcState extends State<DailyNeedsCalc> {
                       }),
                   ShadowButoon(
                       theText: "+",
-                      theFunction: () {
-                        setState(() {
-                          weight = weight + .5;
+                      onlongpress: (p) {
+                        theTimer = Timer.periodic(
+                            const Duration(milliseconds: 120), (timer) {
+                          if (weight < 180) {
+                            setState(() {
+                              weight = weight + 1;
+                            });
+                          }
                         });
+                      },
+                      onlongpressends: (p) {
+                        theTimer?.cancel();
+                      },
+                      theFunction: () {
+                        if (weight < 180) {
+                          setState(() {
+                            weight = weight + .5;
+                          });
+                        }
                       }),
                 ],
               )
@@ -290,11 +332,23 @@ class DailyNeedsCalcState extends State<DailyNeedsCalc> {
             children: [
               addVerticalSpace(5),
               Center(
-                child: Text(
-                  "HEIGHT\n${height.round()} cm",
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500),
-                  textAlign: TextAlign.center,
+                child: RichText(
+                  text: TextSpan(
+                    text: "HEIGHT\n${height.round()}",
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                    children: [
+                      TextSpan(
+                        text: " cm",
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey.shade700),
+                      )
+                    ],
+                  ),
                 ),
               ),
               SizedBox(

@@ -48,7 +48,7 @@ String? wightValidator(String? p0) {
 String? heightValidator(String? p0) {
   if (p0!.isEmpty) {
     return "Invalid";
-  } else if (double.parse(p0) < 110 || double.parse(p0) > 250) {
+  } else if (double.parse(p0) < 110 || double.parse(p0) > 230) {
     return "Invalid height";
   }
   return null;
