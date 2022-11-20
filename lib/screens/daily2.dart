@@ -275,7 +275,7 @@ class DailyNeedsCalcState extends State<DailyNeedsCalc> {
                             const Duration(milliseconds: 120), (timer) {
                           if (weight > 20) {
                             setState(() {
-                              weight = weight - 1;
+                              weight -= 1;
                             });
                           }
                         });
@@ -286,7 +286,7 @@ class DailyNeedsCalcState extends State<DailyNeedsCalc> {
                       theFunction: () {
                         setState(() {
                           if (weight > 20) {
-                            weight = weight - .5;
+                            weight -= .5;
                           }
                         });
                       }),
@@ -297,7 +297,7 @@ class DailyNeedsCalcState extends State<DailyNeedsCalc> {
                             const Duration(milliseconds: 120), (timer) {
                           if (weight < 180) {
                             setState(() {
-                              weight = weight + 1;
+                              weight += 1;
                             });
                           }
                         });
@@ -308,7 +308,7 @@ class DailyNeedsCalcState extends State<DailyNeedsCalc> {
                       theFunction: () {
                         if (weight < 180) {
                           setState(() {
-                            weight = weight + .5;
+                            weight += .5;
                           });
                         }
                       }),

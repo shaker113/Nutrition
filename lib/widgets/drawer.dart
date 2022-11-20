@@ -6,6 +6,7 @@ import 'package:fina/screens/daily2.dart';
 import 'package:fina/screens/fat2.dart';
 import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/data/data.dart';
+import 'package:fina/widgets/textFieldCalc.dart';
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 import '../screens/screens.dart';
@@ -175,16 +176,6 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
         ),
-        // ListTile(
-        //   leading: Icon(
-        //     Icons.home,
-        //     color: backgrounColor,
-        //   ),
-        //   title: const Text("Filters"),
-        //   onTap: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
         ListTile(
           leading: Icon(Icons.person, color: backgrounColor),
           title: const Text("Profile"),
@@ -219,37 +210,25 @@ class _MyDrawerState extends State<MyDrawer> {
             );
           },
         ),
+        const ListTileLogout(),
+        addVerticalSpace(screenHeigth! * 0.32),
+        Divider(
+          height: 20,
+          color: backgrounColor,
+        ),
         urlClass(
             myfunction: Insta_function,
             myplatformicon: (FontAwesomeIcons.instagram),
             myplatformsubtitle: "Contact US",
             myplatformtitle: "Instagram profile"),
-
-        // urlClass(
-        //     myfunction: Email_function,
-        //     myplatformicon: FontAwesomeIcons.mailchimp,
-        //     myplatformsubtitle: "contact US",
-        //     myplatformtitle: ":)"),
-
-        // ListTile(
-        //   leading: Icon(Icons.exit_to_app, color: backgrounColor),
-        //   title: const Text("Exit"),
-        //   onTap: () {},
-        // ),
-        // Divider(
-        //   height: 50,
-        // ),
-        const ListTileLogout(),
-        Divider(
-          height: 20,
-          color: backgrounColor,
-        ),
         const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
             "if you need any further information please contact us via this email \nnutrution1@gmail.com ",
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 17,
+                overflow: TextOverflow.clip,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.normal),
           ),

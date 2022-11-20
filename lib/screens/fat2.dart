@@ -236,10 +236,7 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                         age,
                         false,
                       );
-                      print(BMI);
-                      print(finalFat);
-                      print(finalstatus);
-                      print(gender);
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -391,7 +388,7 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                             const Duration(milliseconds: 120), (timer) {
                           if (weight > 20) {
                             setState(() {
-                              weight = weight - 1;
+                              weight -= 1;
                             });
                           }
                         });
@@ -402,7 +399,7 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                       theFunction: () {
                         setState(() {
                           if (weight > 20) {
-                            weight = weight - .5;
+                            weight -= .5;
                           }
                         });
                       }),
@@ -413,7 +410,7 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                             const Duration(milliseconds: 120), (timer) {
                           if (weight < 180) {
                             setState(() {
-                              weight = weight + 1;
+                              weight += 1;
                             });
                           }
                         });
@@ -424,7 +421,7 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                       theFunction: () {
                         if (weight < 180) {
                           setState(() {
-                            weight = weight + .5;
+                            weight += .5;
                           });
                         }
                       }),
