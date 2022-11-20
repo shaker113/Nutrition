@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                 child: CarouselSlider.builder(
                   options: CarouselOptions(
                       autoPlay: true,
-                      disableCenter: true,
+                      disableCenter: false,
                       viewportFraction: 0.4,
                       initialPage: 0,
                       enableInfiniteScroll: true,
