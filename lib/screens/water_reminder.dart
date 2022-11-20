@@ -183,6 +183,16 @@ class _Water_ReminderState extends State<Water_Reminder>
                     side: const BorderSide(color: Colors.black, width: 1.5),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20))),
+                onLongPress: () {
+                  setState(
+                    () {
+                      tempWater = 0;
+                      waterValue = .55;
+                      userCollection.doc(userId).update({'water': tempWater});
+                    },
+                  );
+                  getAccountInfo();
+                },
                 onPressed: () {
                   setState(
                     () {

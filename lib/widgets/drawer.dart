@@ -229,7 +229,7 @@ class _MyDrawerState extends State<MyDrawer> {
             style: TextStyle(
                 fontSize: 17,
                 overflow: TextOverflow.clip,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.normal),
           ),
         )

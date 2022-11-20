@@ -170,8 +170,9 @@ class _CartFoodItemState extends State<CartFoodItem> {
         await userCartCollection.where('id', isEqualTo: widget.id).get();
     String itemId = mydoc.docs[0].id;
 
-    userCartCollection.doc(itemId).delete();
-    setState(() {});
+    setState(() {
+      userCartCollection.doc(itemId).delete();
+    });
   }
 
   Future changeItemCount(bool theSign) async {
@@ -187,7 +188,6 @@ class _CartFoodItemState extends State<CartFoodItem> {
         : userCartCollection
             .doc(itemId)
             .update({'itemCount': savedItemCount - 1});
-    setState(() {});
   }
 
   Future getItemData() async {
