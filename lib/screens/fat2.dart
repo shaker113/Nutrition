@@ -295,10 +295,11 @@ class BodyFatCalcState extends State<BodyFatCalc> {
                     theText: "+",
                     onlongpress: (p) {
                       theTimer = Timer.periodic(
-                          const Duration(milliseconds: 150), (timer) {
+                          const Duration(milliseconds: 150), (c) {
                         setState(() {
-                          age++;
+                          age += 1;
                         });
+
                         print(theTimer);
                       });
                     },

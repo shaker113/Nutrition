@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/screens/daily2.dart';
@@ -7,7 +9,9 @@ import 'package:fina/data/data.dart';
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 import '../screens/screens.dart';
+import 'package:fina/models/url.dart';
 import 'widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -215,6 +219,18 @@ class _MyDrawerState extends State<MyDrawer> {
             );
           },
         ),
+        urlClass(
+            myfunction: Insta_function,
+            myplatformicon: (FontAwesomeIcons.instagram),
+            myplatformsubtitle: "Contact US",
+            myplatformtitle: "Instagram profile"),
+
+        // urlClass(
+        //     myfunction: Email_function,
+        //     myplatformicon: FontAwesomeIcons.mailchimp,
+        //     myplatformsubtitle: "contact US",
+        //     myplatformtitle: ":)"),
+
         // ListTile(
         //   leading: Icon(Icons.exit_to_app, color: backgrounColor),
         //   title: const Text("Exit"),
@@ -224,6 +240,20 @@ class _MyDrawerState extends State<MyDrawer> {
         //   height: 50,
         // ),
         const ListTileLogout(),
+        Divider(
+          height: 20,
+          color: backgrounColor,
+        ),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            "if you need any further information please contact us via this email \nnutrution1@gmail.com ",
+            style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.normal),
+          ),
+        )
       ],
     );
   }

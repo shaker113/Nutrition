@@ -54,6 +54,8 @@ dependencies:
   scroll_date_picker: ^3.6.0
   syncfusion_flutter_gauges: ^20.3.57
   carousel_slider: ^4.1.1
+  url_launcher: ^6.1.6
+  font_awesome_flutter: ^10.2.1
   
 
 
