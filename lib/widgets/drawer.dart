@@ -219,7 +219,7 @@ class _MyDrawerState extends State<MyDrawer> {
         urlClass(
             myfunction: Insta_function,
             myplatformicon: (FontAwesomeIcons.instagram),
-            myplatformsubtitle: "Contact US",
+            myplatformsubtitle: "Follow US",
             myplatformtitle: "Instagram profile"),
         const Padding(
           padding: EdgeInsets.all(8.0),
