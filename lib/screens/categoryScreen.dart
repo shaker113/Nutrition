@@ -34,7 +34,7 @@ class _Category_PageState extends State<Category_Page>
   }
 
   TextEditingController searchController = TextEditingController();
-  Color g = const Color.fromARGB(255, 33, 191, 189);
+  // Color g = const Color.fromARGB(255, 33, 191, 189);
   bool v = false;
   @override
   void dispose() {
@@ -47,7 +47,6 @@ class _Category_PageState extends State<Category_Page>
   bool descending = false;
   @override
   Widget build(BuildContext context) {
-    print(searchText);
     return Scaffold(
       backgroundColor: backgrounColor,
       body: SingleChildScrollView(
@@ -112,7 +111,6 @@ class _Category_PageState extends State<Category_Page>
                 ],
               ),
             ),
-            // addVerticalSpace(0),
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Row(
