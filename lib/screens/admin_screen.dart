@@ -12,7 +12,11 @@ class AdminScreen extends StatefulWidget {
 
 class _AdminScreenState extends State<AdminScreen> {
   TextEditingController searchController = TextEditingController();
-  late List<_ChartData> _heightChartData;
+  // late List<_ChartData> _heightChartData;
+  List<ChartData1> histogramData = <ChartData1>[
+    ChartData1(0),
+  ];
+  double avrageHeight = 0;
   String searchText = '';
   @override
   void initState() {
@@ -24,242 +28,47 @@ class _AdminScreenState extends State<AdminScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: [
-          userList(),
-          SfCartesianChart(
-            plotAreaBorderWidth: 0,
-            title: ChartTitle(text: "avrage height"),
-            primaryXAxis: NumericAxis(
-              title: AxisTitle(text: "height in cm"),
-              minimum: 110,
-              maximum: 230,
-              interval: 5,
-              axisLine: const AxisLine(width: 0),
-              majorTickLines: const MajorTickLines(color: Colors.transparent),
-              majorGridLines: const MajorGridLines(width: 0),
-            ),
-            primaryYAxis: NumericAxis(
-              // title: AxisTitle(text: "height in cm"),
-              minimum: 0,
-              maximum: 100,
-              interval: 20,
-              axisLine: const AxisLine(width: 0),
-              majorTickLines: const MajorTickLines(color: Colors.transparent),
-            ),
-            series: <ChartSeries>[
-              HistogramSeries<ChartData1, double>(
-                enableTooltip: true,
-                dataSource: histogramData,
-                showNormalDistributionCurve: true,
-                curveColor: const Color.fromRGBO(192, 108, 132, 1),
-                binInterval: 20,
-                // borderWidth: 2,
-                width: 0.2,
-                // markerSettings: const MarkerSettings(
-                //     height: 10, width: 10, isVisible: true),
-                yValueMapper: (ChartData1 data, _) => data.y,
-              )
-            ],
-          )
-        ],
+        children: [userList(), agrageHeightChart()],
       ),
     );
   }
 
-  final List<ChartData1> histogramData = <ChartData1>[
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(110),
-    ChartData1(180),
-    ChartData1(180),
-    ChartData1(180),
-    ChartData1(180),
-    ChartData1(180),
-    ChartData1(180),
-    ChartData1(180),
-    ChartData1(180),
-    ChartData1(180),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(125),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(120),
-    ChartData1(180),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(180),
-    ChartData1(180),
-    ChartData1(160),
-    ChartData1(160),
-    ChartData1(160),
-    ChartData1(160),
-    ChartData1(160),
-    ChartData1(160),
-    ChartData1(160),
-    ChartData1(160),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(186),
-    ChartData1(160),
-  ];
-
-  List<_ChartData> getChartData() {
-    final List<_ChartData> heightChartData = [
-      _ChartData(170, 100),
-      _ChartData(180, 90),
-      _ChartData(190, 90),
-      _ChartData(160, 80),
-      _ChartData(115, 50),
-    ];
-    return heightChartData;
+  SfCartesianChart agrageHeightChart() {
+    return SfCartesianChart(
+      plotAreaBorderWidth: 0,
+      title: ChartTitle(text: "avrage height"),
+      primaryXAxis: NumericAxis(
+        title: AxisTitle(text: "height in cm"),
+        minimum: 110,
+        maximum: 230,
+        interval: 5,
+        axisLine: const AxisLine(width: 0),
+        majorTickLines: const MajorTickLines(color: Colors.transparent),
+        majorGridLines: const MajorGridLines(width: 0),
+      ),
+      primaryYAxis: NumericAxis(
+        // title: AxisTitle(text: "height in cm"),
+        minimum: 0,
+        maximum: 20,
+        interval: 5,
+        axisLine: const AxisLine(width: 0),
+        majorTickLines: const MajorTickLines(color: Colors.transparent),
+      ),
+      series: <ChartSeries>[
+        HistogramSeries<ChartData1, double>(
+          enableTooltip: true,
+          dataSource: histogramData,
+          showNormalDistributionCurve: true,
+          curveColor: const Color.fromRGBO(192, 108, 132, 1),
+          binInterval: 5,
+          // borderWidth: 2,
+          width: 0.5,
+          // markerSettings: const MarkerSettings(
+          //     height: 10, width: 10, isVisible: true),
+          yValueMapper: (ChartData1 data, _) => data.y,
+        )
+      ],
+    );
   }
 
   Container userList() {
@@ -268,6 +77,7 @@ class _AdminScreenState extends State<AdminScreen> {
       height: 400,
       child: Column(
         children: [
+          Text("User List"),
           TextField(
             controller: searchController,
             style: const TextStyle(color: Colors.black),
@@ -278,16 +88,16 @@ class _AdminScreenState extends State<AdminScreen> {
               });
             },
             decoration: const InputDecoration(
-                focusedBorder: UnderlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black)),
-                enabledBorder: UnderlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black))),
           ),
           SizedBox(
-            height: 350,
+            height: 325,
             child: StreamBuilder(
               stream: searchText.isNotEmpty
-                  ? userCollection.orderBy('name').startAt([searchText]).endAt(
+                  ? userCollection.orderBy('email').startAt([searchText]).endAt(
                       ['$searchText\uf8ff']).snapshots()
                   : userCollection.snapshots(),
               builder: (BuildContext context,
@@ -348,11 +158,11 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 }
 
-class _ChartData {
-  _ChartData(this.x, this.y);
-  final double x;
-  final int y;
-}
+// class _ChartData {
+//   _ChartData(this.x, this.y);
+//   final double x;
+//   final int y;
+// }
 
 class ChartData1 {
   ChartData1(this.y);
