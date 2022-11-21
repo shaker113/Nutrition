@@ -84,6 +84,18 @@ class _HomePageState extends State<HomePage> {
             elevation: 0,
             backgroundColor: backgrounColor,
             actions: [
+              isAdmin ?? false
+                  ? IconButton(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return const AdminScreen();
+                          },
+                        ));
+                      },
+                      icon: const Icon(Icons.admin_panel_settings),
+                    )
+                  : const SizedBox(),
               isAdmin ?? false ? const AddButton() : const SizedBox(),
               IconButton(
                 onPressed: () {
@@ -107,15 +119,6 @@ class _HomePageState extends State<HomePage> {
                   // height: 40,
                 ),
               ),
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return const AdminScreen();
-                      },
-                    ));
-                  },
-                  icon: const Icon(Icons.admin_panel_settings))
             ],
           ),
           drawer: const Drawer(
