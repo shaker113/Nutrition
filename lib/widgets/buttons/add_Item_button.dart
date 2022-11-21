@@ -399,7 +399,7 @@ class _AddingPageState extends State<AddingPage> {
     } else if (category == "Sweets") {
       theCollectionReference = sweetCollection;
     } else if (category == "bakery") {
-      theCollectionReference = sweetCollection;
+      theCollectionReference = bakeryCollection;
     }
 
     final json = {
