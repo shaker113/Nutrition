@@ -1,3 +1,4 @@
+import 'package:fina/screens/admin_screen.dart';
 import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -83,6 +84,18 @@ class _HomePageState extends State<HomePage> {
             elevation: 0,
             backgroundColor: backgrounColor,
             actions: [
+              isAdmin ?? false
+                  ? IconButton(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return const AdminScreen();
+                          },
+                        ));
+                      },
+                      icon: const Icon(Icons.admin_panel_settings),
+                    )
+                  : const SizedBox(),
               isAdmin ?? false ? const AddButton() : const SizedBox(),
               IconButton(
                 onPressed: () {
@@ -105,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                   waterIcon,
                   // height: 40,
                 ),
-              )
+              ),
             ],
           ),
           drawer: const Drawer(
@@ -127,36 +140,37 @@ class _HomePageState extends State<HomePage> {
               addVerticalSpace(20),
               SingleChildScrollView(
                 child: Container(
-                    height: screenHeigth! - 151,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(42),
-                        topLeft: Radius.circular(42),
-                      ),
+                  height: screenHeigth! - 151,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(42),
+                      topLeft: Radius.circular(42),
                     ),
-                    child: CarouselSlider.builder(
-                      options: CarouselOptions(
-                          autoPlay: true,
-                          disableCenter: true,
-                          viewportFraction: 0.4,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enlargeCenterPage: true,
-                          scrollDirection: Axis.vertical),
-                      itemCount: categories.length,
-                      itemBuilder: ((context, index, realIndex) {
-                        var myCateory = categories[index];
-                        return CategoryBox(
-                            imagURL: myCateory.imagURL,
-                            title: myCateory.title,
-                            subtitle: myCateory.subtitle,
-                            theCollectionReference:
-                                myCateory.theCollectionReference);
-                      }),
-                    )),
+                  ),
+                  child: CarouselSlider.builder(
+                    options: CarouselOptions(
+                        autoPlay: true,
+                        disableCenter: true,
+                        viewportFraction: 0.4,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enlargeCenterPage: true,
+                        scrollDirection: Axis.vertical),
+                    itemCount: categories.length,
+                    itemBuilder: ((context, index, realIndex) {
+                      var myCateory = categories[index];
+                      return CategoryBox(
+                          imagURL: myCateory.imagURL,
+                          title: myCateory.title,
+                          subtitle: myCateory.subtitle,
+                          theCollectionReference:
+                              myCateory.theCollectionReference);
+                    }),
+                  ),
+                ),
               ),
             ],
           ),

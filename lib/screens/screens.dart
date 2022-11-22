@@ -13,3 +13,5 @@ export 'H_W.dart';
 export 'water_reminder.dart';
 export 'daily2.dart';
 export 'fat2.dart';
+export 'admin_screen.dart';
+export 'dataAnalysis.dart';

@@ -141,13 +141,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.8"
-  emojis:
-    dependency: "direct main"
-    description:
-      name: emojis
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.9"
   fake_async:
     dependency: transitive
     description:
@@ -272,13 +265,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
-  flutter_emoji:
-    dependency: "direct main"
-    description:
-      name: flutter_emoji
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.4.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -644,6 +630,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "20.3.57"
   syncfusion_flutter_core:
     dependency: transitive
     description:

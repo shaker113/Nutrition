@@ -61,8 +61,10 @@ class FatResults extends StatelessWidget {
               ),
               addVerticalSpace(screenHeigth! * 0.04),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
@@ -79,6 +81,15 @@ class FatResults extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
+                    const Text(
+                      "Body fat percentage",
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    addVerticalSpace(10),
                     fatRanges(gender, age),
                     Text(
                       '${fat.toStringAsFixed(1)} %',
