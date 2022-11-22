@@ -197,6 +197,19 @@ class _AdminScreenState extends State<AdminScreen> {
         });
       },
       decoration: InputDecoration(
+        suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                searchController.clear();
+                searchText = "";
+                FocusManager.instance.primaryFocus?.unfocus();
+              });
+            },
+            icon: Icon(
+              Icons.clear,
+              color: searchText.isNotEmpty ? backgrounColor : Colors.grey,
+            )),
+        suffixIconColor: backgrounColor,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
