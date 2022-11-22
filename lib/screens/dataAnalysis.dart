@@ -1,10 +1,9 @@
-import 'package:fina/screens/admin_screen.dart';
-import 'package:fina/widgets/buttons/back_button.dart';
-import 'package:fina/widgets/spacing.dart';
+import 'package:fina/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../data/data.dart';
+import '../models/models.dart';
+import '../widgets/widgets.dart';
 
 class DataAnalysis extends StatefulWidget {
   List<ChartData> histogramDataHeight;
@@ -29,6 +28,34 @@ class DataAnalysis extends StatefulWidget {
 }
 
 class _DataAnalysisState extends State<DataAnalysis> {
+  List<ChartData> histogramDataHeight = <ChartData>[];
+  List<ChartData> histogramDataWeight = <ChartData>[];
+  List<ChartData> histogramDataAge = <ChartData>[];
+  int maleNumber = 0;
+  int femaleNumber = 0;
+  int keepFitNumber = 0, gainWeightNumber = 0, loseWeightNumber = 0;
+  void getAllUsersData() async {
+    await userCollection.get().then((value) {
+      value.docs.forEach((element) {
+        histogramDataHeight.add(ChartData(double.parse(
+          element.data()['height'].toString(),
+        )));
+        histogramDataWeight.add(ChartData(double.parse(
+          element.data()['Weight'].toString(),
+        )));
+        histogramDataAge.add(ChartData(double.parse(
+          element.data()['age'].toString(),
+        )));
+        element.data()['gender'] == "Male" ? maleNumber++ : femaleNumber++;
+        element.data()['mainGoal'] == "Lose Weight"
+            ? loseWeightNumber++
+            : element.data()['mainGoal'] == "Build Muscle"
+                ? gainWeightNumber++
+                : keepFitNumber++;
+      });
+    });
+  }
+
   double allUsersHeight = 0;
   double heightAverage = 0;
   double allUsersWeight = 0;
@@ -40,6 +67,8 @@ class _DataAnalysisState extends State<DataAnalysis> {
 
   @override
   void initState() {
+    getAllUsersData();
+
     for (var i = 0; i < widget.histogramDataHeight.length; i++) {
       allUsersHeight += widget.histogramDataHeight[i].y;
       setState(() {
@@ -187,7 +216,6 @@ class _DataAnalysisState extends State<DataAnalysis> {
           xValueMapper: (pieChartdata data, _) => data.xValue,
           yValueMapper: (pieChartdata data, _) => data.yValue,
           dataLabelMapper: (pieChartdata data, _) => data.title,
-          
           startAngle: 90,
           endAngle: 90,
           dataLabelSettings: const DataLabelSettings(isVisible: true)),

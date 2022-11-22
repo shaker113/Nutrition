@@ -28,7 +28,7 @@ class AuthService {
         'role': "user",
         'id': id,
         'name': name,
-        'email': email,
+        'email': email!.toLowerCase(),
         'gender': '',
         'mainGoal': '',
         'height': 0,
