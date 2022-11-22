@@ -113,7 +113,7 @@ class _DataAnalysisState extends State<DataAnalysis> {
       appBar: AppBar(
         leading: backButton(context),
         backgroundColor: backgrounColor,
-        title: const Text("Statics"),
+        title: const Text("Statistics"),
         centerTitle: true,
         elevation: 0,
       ),
