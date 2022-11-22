@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           "infoscreen": (context) => const InfoScreen(),
           "water reminder": (context) => const Water_Reminder(),
           "H_W": (context) => const H_W(),
-          "splash":(context) => const splash_screen()
+          "splash": (context) => const splash_screen()
         },
         home: const splash_screen());
   }

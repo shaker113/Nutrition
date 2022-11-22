@@ -1,3 +1,4 @@
+import 'package:fina/screens/admin_screen.dart';
 import 'package:fina/screens/water_reminder.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -83,6 +84,18 @@ class _HomePageState extends State<HomePage> {
             elevation: 0,
             backgroundColor: backgrounColor,
             actions: [
+              isAdmin ?? false
+                  ? IconButton(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return const AdminScreen();
+                          },
+                        ));
+                      },
+                      icon: const Icon(Icons.admin_panel_settings),
+                    )
+                  : const SizedBox(),
               isAdmin ?? false ? const AddButton() : const SizedBox(),
               IconButton(
                 onPressed: () {
@@ -105,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                   waterIcon,
                   // height: 40,
                 ),
-              )
+              ),
             ],
           ),
           drawer: const Drawer(
