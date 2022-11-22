@@ -1,12 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fina/data/data.dart';
-import 'package:fina/data/screensize.dart';
 import 'package:fina/models/firestore_refrences.dart';
 import 'package:fina/screens/dataAnalysis.dart';
-import 'package:fina/widgets/buttons/gradiantButton.dart';
 import 'package:fina/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -27,16 +24,33 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [userList()],
+      backgroundColor: backgrounColor,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              backButton(context),
+              userList(),
+            ],
+          ),
+        ),
       ),
     );
   }
 
   Container userList() {
     return Container(
-      margin: const EdgeInsets.all(10),
-      // height: 450,
+      // margin: const EdgeInsets.symmetric(horizontal: 10),
+      height: screenHeigth! - 73,
+      padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+      ),
       child: Column(
         children: [
           Text(
@@ -44,7 +58,8 @@ class _AdminScreenState extends State<AdminScreen> {
             style: customTextStyle.displayLarge,
           ),
           addVerticalSpace(10),
-          searchTextField(),
+          SizedBox(
+              height: 50, width: screenWidth! * 0.8, child: searchTextField()),
           StreamBuilder(
             stream: searchText.isNotEmpty
                 ? userCollection.orderBy('email').startAt([searchText]).endAt(
@@ -55,7 +70,7 @@ class _AdminScreenState extends State<AdminScreen> {
               return Column(
                 children: [
                   SizedBox(
-                    height: screenHeigth! - 200,
+                    height: screenHeigth! - 240,
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: streamSnapShot.data?.docs.length ?? 0,
@@ -96,6 +111,7 @@ class _AdminScreenState extends State<AdminScreen> {
                         if (streamSnapShot.hasData) {
                           return ListTile(
                             leading: Text((index + 1).toString()),
+                            minLeadingWidth: 10,
                             title: Text(
                               "Email: ${streamSnapShot.data?.docs[index]['email']}",
                               style: const TextStyle(
@@ -138,19 +154,20 @@ class _AdminScreenState extends State<AdminScreen> {
                       },
                     ),
                   ),
-                  addVerticalSpace(30),
-                  GradientButton(
+                  addVerticalSpace(15),
+                  LongButton(
                       theFunction: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DataAnalysis(
-                                  histogramDataAge: histogramDataAge,
-                                  histogramDataHeight: histogramDataHeight,
-                                  histogramDataWeight: histogramDataWeight,
-                                  femaleNumber: femaleNumber,
-                                  maleNumber: maleNumber),
-                            ));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DataAnalysis(
+                                histogramDataAge: histogramDataAge,
+                                histogramDataHeight: histogramDataHeight,
+                                histogramDataWeight: histogramDataWeight,
+                                femaleNumber: femaleNumber,
+                                maleNumber: maleNumber),
+                          ),
+                        );
                       },
                       theText: "Data Analysis")
                 ],
@@ -180,6 +197,7 @@ class _AdminScreenState extends State<AdminScreen> {
             color: backgrounColor,
           ),
         ),
+        hintText: "Search by email",
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(

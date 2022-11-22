@@ -8,37 +8,37 @@ class textField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp("[0-9,.]")),
-        ],
-        keyboardType: TextInputType.number,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Required...';
-          }
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[0-9,.]")),
+      ],
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Required...';
+        }
 
-          return null;
-        },
-        controller: mycont,
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: const TextStyle(color: Colors.black),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15.0),
-            ),
-            borderSide: BorderSide(width: 2, color: Colors.black),
+        return null;
+      },
+      controller: mycont,
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: const TextStyle(color: Colors.black),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(15.0),
           ),
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15.0),
-            ),
-            borderSide: BorderSide(
-              width: 5,
-              style: BorderStyle.none,
-              
-            ),
+          borderSide: BorderSide(width: 2, color: Colors.black),
+        ),
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(15.0),
           ),
-        ));
+          borderSide: BorderSide(
+            width: 5,
+            style: BorderStyle.none,
+          ),
+        ),
+      ),
+    );
   }
 }
