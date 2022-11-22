@@ -1,4 +1,6 @@
 import 'package:fina/screens/admin_screen.dart';
+import 'package:fina/widgets/buttons/back_button.dart';
+import 'package:fina/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -10,13 +12,17 @@ class DataAnalysis extends StatefulWidget {
   List<ChartData> histogramDataAge;
   int maleNumber;
   int femaleNumber;
+  int keepFitNumber, gainWeightNumber, loseWeightNumber;
   DataAnalysis(
       {super.key,
       required this.histogramDataHeight,
       required this.histogramDataWeight,
       required this.histogramDataAge,
       required this.femaleNumber,
-      required this.maleNumber});
+      required this.maleNumber,
+      required this.gainWeightNumber,
+      required this.keepFitNumber,
+      required this.loseWeightNumber});
 
   @override
   State<DataAnalysis> createState() => _DataAnalysisState();
@@ -30,6 +36,7 @@ class _DataAnalysisState extends State<DataAnalysis> {
   double allUsersage = 0;
   double ageAverage = 0;
   double averageGender = 0;
+  double averageGain = 0, averageLose = 0, averageFit = 0;
 
   @override
   void initState() {
@@ -53,12 +60,34 @@ class _DataAnalysisState extends State<DataAnalysis> {
     }
     averageGender =
         widget.maleNumber / (widget.maleNumber + widget.femaleNumber) * 100;
+    averageGain = widget.gainWeightNumber /
+        (widget.gainWeightNumber +
+            widget.loseWeightNumber +
+            widget.keepFitNumber) *
+        100;
+    averageLose = widget.loseWeightNumber /
+        (widget.gainWeightNumber +
+            widget.loseWeightNumber +
+            widget.keepFitNumber) *
+        100;
+    averageFit = widget.keepFitNumber /
+        (widget.gainWeightNumber +
+            widget.loseWeightNumber +
+            widget.keepFitNumber) *
+        100;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: backButton(context),
+        backgroundColor: backgrounColor,
+        title: const Text("Statics"),
+        centerTitle: true,
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -96,81 +125,73 @@ class _DataAnalysisState extends State<DataAnalysis> {
                   2,
                   2,
                   widget.histogramDataAge),
-              Text(
-                  "${averageGender.round()}% Male \n${100 - averageGender.round()}% Female"),
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: "Gender ratio\n",
-                  style: customTextStyle.headlineSmall,
-                  children: [
-                    TextSpan(
-                      text: "${averageGender.round()}% Male",
-                    ),
-                    TextSpan(
-                      text: " ${100 - averageGender.round()}% Female",
-                    ),
-                  ],
-                ),
+              SfCircularChart(
+                title: ChartTitle(text: 'Goal Ratio'),
+                legend: Legend(isVisible: true),
+                series: goalRatioSeries(),
               ),
-              SizedBox(
-                height: 200,
-                width: 300,
-                child: Table(
-                  textDirection: TextDirection.ltr,
-                  border: TableBorder.all(
-                      width: 1.5, borderRadius: BorderRadius.circular(10)),
-                  children: [
-                    TableRow(children: [
-                      tableText("Gender ratio"),
-                      const SizedBox(),
-                      const SizedBox(),
-                    ]),
-                    TableRow(children: [
-                      tableText("Gender"),
-                      tableText("Male"),
-                      tableText("Female")
-                    ]),
-                    TableRow(children: [
-                      tableText("Percentage"),
-                      tableText("${averageGender.round()}%"),
-                      tableText("${100 - averageGender.round()}%")
-                    ])
-                  ],
-                ),
+              addVerticalSpace(10),
+              SfCircularChart(
+                title: ChartTitle(text: 'Gender Ratio'),
+                legend: Legend(isVisible: false),
+                series: genderRatioSeries(),
               ),
-              SizedBox(
-                height: 200,
-                width: 300,
-                child: Table(
-                  textDirection: TextDirection.ltr,
-                  border: TableBorder.all(
-                      width: 1.5, borderRadius: BorderRadius.circular(10)),
-                  children: [
-                    TableRow(children: [
-                      tableText("Goal ratio"),
-                      const SizedBox(),
-                    ]),
-                    TableRow(children: [
-                      tableText("lose weight"),
-                      tableText("to do"),
-                    ]),
-                    TableRow(children: [
-                      tableText("Gain weight"),
-                      tableText("to do"),
-                    ]),
-                    TableRow(children: [
-                      tableText("keep fit"),
-                      tableText("to do"),
-                    ])
-                  ],
-                ),
-              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  List<PieSeries<pieChartdata, String>> goalRatioSeries() {
+    return <PieSeries<pieChartdata, String>>[
+      PieSeries<pieChartdata, String>(
+          explode: true,
+          explodeIndex: 0,
+          explodeOffset: '5%',
+          dataSource: <pieChartdata>[
+            pieChartdata(averageFit,
+                "Keep Fit\n${averageFit.toStringAsFixed(2)} %", "Keep Fit"),
+            pieChartdata(
+                averageGain,
+                "Gain Weight\n${averageGain.toStringAsFixed(2)} %",
+                "Gain Weight"),
+            pieChartdata(
+                averageLose,
+                "Loss Weight\n${averageLose.toStringAsFixed(2)} %",
+                "Loss Weight"),
+          ],
+          xValueMapper: (pieChartdata data, _) => data.xValue,
+          yValueMapper: (pieChartdata data, _) => data.yValue,
+          dataLabelMapper: (pieChartdata data, _) => data.title,
+          startAngle: 90,
+          endAngle: 90,
+          dataLabelSettings: const DataLabelSettings(isVisible: true)),
+    ];
+  }
+
+  List<PieSeries<pieChartdata, String>> genderRatioSeries() {
+    return <PieSeries<pieChartdata, String>>[
+      PieSeries<pieChartdata, String>(
+          explode: true,
+          explodeIndex: 0,
+          explodeOffset: '5%',
+          dataSource: <pieChartdata>[
+            pieChartdata(
+                averageGender, "Male\n${averageGender.round()} %", "Male"),
+            pieChartdata(
+                (100 - averageGender),
+                "Female\n${(100 - averageGender).toStringAsFixed(2)} %",
+                "Female"),
+          ],
+          xValueMapper: (pieChartdata data, _) => data.xValue,
+          yValueMapper: (pieChartdata data, _) => data.yValue,
+          dataLabelMapper: (pieChartdata data, _) => data.title,
+          
+          startAngle: 90,
+          endAngle: 90,
+          dataLabelSettings: const DataLabelSettings(isVisible: true)),
+    ];
   }
 
   Container tableText(String theText) {
@@ -236,4 +257,10 @@ class _DataAnalysisState extends State<DataAnalysis> {
       ],
     );
   }
+}
+
+class pieChartdata {
+  final double yValue;
+  final String title, xValue;
+  pieChartdata(this.yValue, this.title, this.xValue);
 }

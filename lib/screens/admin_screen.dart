@@ -19,6 +19,7 @@ class _AdminScreenState extends State<AdminScreen> {
   List<ChartData> histogramDataAge = <ChartData>[];
   int maleNumber = 0;
   int femaleNumber = 0;
+  int keepFitNumber = 0, gainWeightNumber = 0, loseWeightNumber = 0;
   String searchText = '';
 
   @override
@@ -105,6 +106,13 @@ class _AdminScreenState extends State<AdminScreen> {
                         streamSnapShot.data!.docs[index]['gender'] == "Male"
                             ? maleNumber++
                             : femaleNumber++;
+                        streamSnapShot.data!.docs[index]['mainGoal'] ==
+                                "Lose Weight"
+                            ? loseWeightNumber++
+                            : streamSnapShot.data!.docs[index]['mainGoal'] ==
+                                    "Build Muscle"
+                                ? gainWeightNumber++
+                                : keepFitNumber++;
                         List role = ["admin", "user"];
                         String userRole =
                             streamSnapShot.data!.docs[index]['role'];
@@ -165,7 +173,10 @@ class _AdminScreenState extends State<AdminScreen> {
                                 histogramDataHeight: histogramDataHeight,
                                 histogramDataWeight: histogramDataWeight,
                                 femaleNumber: femaleNumber,
-                                maleNumber: maleNumber),
+                                maleNumber: maleNumber,
+                                gainWeightNumber: gainWeightNumber,
+                                keepFitNumber: keepFitNumber,
+                                loseWeightNumber: loseWeightNumber),
                           ),
                         );
                       },
