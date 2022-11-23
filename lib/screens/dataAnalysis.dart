@@ -12,8 +12,10 @@ class DataAnalysis extends StatefulWidget {
   int maleNumber;
   int femaleNumber;
   int keepFitNumber, gainWeightNumber, loseWeightNumber;
+  int userNumber;
   DataAnalysis(
       {super.key,
+      required this.userNumber,
       required this.histogramDataHeight,
       required this.histogramDataWeight,
       required this.histogramDataAge,
@@ -34,6 +36,7 @@ class _DataAnalysisState extends State<DataAnalysis> {
   int maleNumber = 0;
   int femaleNumber = 0;
   int keepFitNumber = 0, gainWeightNumber = 0, loseWeightNumber = 0;
+
   void getAllUsersData() async {
     await userCollection.get().then((value) {
       value.docs.forEach((element) {
@@ -61,7 +64,6 @@ class _DataAnalysisState extends State<DataAnalysis> {
   double ageAverage = 0;
   double averageGender = 0;
   double averageGain = 0, averageLose = 0, averageFit = 0;
-
   @override
   void initState() {
     getAllUsersData();
@@ -144,7 +146,7 @@ class _DataAnalysisState extends State<DataAnalysis> {
                           ),
                         ),
                         child: Text(
-                          "User Number: ${histogramDataHeight.length}",
+                          "User Number: ${widget.userNumber}",
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.9),
                             fontSize: 18,

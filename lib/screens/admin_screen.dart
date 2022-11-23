@@ -168,6 +168,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => DataAnalysis(
+                          userNumber: histogramDataAge.length,
                           histogramDataAge: histogramDataAge,
                           histogramDataHeight: histogramDataHeight,
                           histogramDataWeight: histogramDataWeight,
