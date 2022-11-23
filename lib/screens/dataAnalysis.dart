@@ -37,15 +37,12 @@ class _DataAnalysisState extends State<DataAnalysis> {
   void getAllUsersData() async {
     await userCollection.get().then((value) {
       value.docs.forEach((element) {
-        histogramDataHeight.add(ChartData(double.parse(
-          element.data()['height'].toString(),
-        )));
-        histogramDataWeight.add(ChartData(double.parse(
-          element.data()['Weight'].toString(),
-        )));
-        histogramDataAge.add(ChartData(double.parse(
-          element.data()['age'].toString(),
-        )));
+        histogramDataHeight
+            .add(ChartData(double.parse(element.data()['height'].toString())));
+        histogramDataWeight
+            .add(ChartData(double.parse(element.data()['Weight'].toString())));
+        histogramDataAge
+            .add(ChartData(double.parse(element.data()['age'].toString())));
         element.data()['gender'] == "Male" ? maleNumber++ : femaleNumber++;
         element.data()['mainGoal'] == "Lose Weight"
             ? loseWeightNumber++
@@ -104,70 +101,148 @@ class _DataAnalysisState extends State<DataAnalysis> {
             widget.loseWeightNumber +
             widget.keepFitNumber) *
         100;
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: backButton(context),
-        backgroundColor: backgrounColor,
-        title: const Text("Statistics"),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              agrChart(
-                  "Average height =${heightAverage.toStringAsFixed(2)} cm",
-                  "height in cm",
-                  "cm",
-                  110,
-                  230,
-                  5,
-                  0,
-                  2,
-                  5,
-                  widget.histogramDataHeight),
-              agrChart(
-                  "Average weight=${weightAverage.toStringAsFixed(2)} kg",
-                  "Weight in kg",
-                  "Kg",
-                  20,
-                  180,
-                  10,
-                  0,
-                  2,
-                  5,
-                  widget.histogramDataWeight),
-              agrChart(
-                  "Average age=${ageAverage.toStringAsFixed(2)} years",
-                  "age in years",
-                  "years",
-                  14,
-                  80,
-                  5,
-                  0,
-                  2,
-                  2,
-                  widget.histogramDataAge),
-              SfCircularChart(
-                title: ChartTitle(text: 'Goal Ratio'),
-                legend: Legend(isVisible: true),
-                series: goalRatioSeries(),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: RadialGradient(
+                focal: Alignment.bottomLeft,
+                radius: 2.7,
+                colors: [backgrounColor, backgrounColor2],
               ),
-              addVerticalSpace(10),
-              SfCircularChart(
-                title: ChartTitle(text: 'Gender Ratio'),
-                legend: Legend(isVisible: false),
-                series: genderRatioSeries(),
-              ),
-            ],
+            ),
           ),
-        ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  backButton(context),
+                  addVerticalSpace(10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Statistics",
+                        style: customTextStyle.headlineLarge,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.9),
+                          ),
+                        ),
+                        child: Text(
+                          "User Number: ${histogramDataHeight.length}",
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.9),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  addVerticalSpace(20),
+                  shadowBox(
+                    height: 300,
+                    width: screenWidth!,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: agrChart(
+                          "Average height =${heightAverage.toStringAsFixed(2)} cm",
+                          "Height in cm",
+                          "cm",
+                          110,
+                          230,
+                          5,
+                          0,
+                          2,
+                          5,
+                          widget.histogramDataHeight),
+                    ),
+                  ),
+                  addVerticalSpace(20),
+                  shadowBox(
+                    height: 300,
+                    width: screenWidth!,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: agrChart(
+                          "Average weight=${weightAverage.toStringAsFixed(2)} kg",
+                          "Weight in kg",
+                          "Kg",
+                          20,
+                          180,
+                          10,
+                          0,
+                          2,
+                          5,
+                          widget.histogramDataWeight),
+                    ),
+                  ),
+                  addVerticalSpace(20),
+                  shadowBox(
+                    height: 300,
+                    width: screenWidth!,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: agrChart(
+                          "Average age=${ageAverage.toStringAsFixed(2)} years",
+                          "Age in years",
+                          "years",
+                          14,
+                          80,
+                          5,
+                          0,
+                          2,
+                          2,
+                          widget.histogramDataAge),
+                    ),
+                  ),
+                  addVerticalSpace(20),
+                  shadowBox(
+                    height: 300,
+                    width: screenWidth!,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: SfCircularChart(
+                        title: ChartTitle(text: 'Goal Ratio'),
+                        legend: Legend(isVisible: true),
+                        series: goalRatioSeries(),
+                      ),
+                    ),
+                  ),
+                  addVerticalSpace(20),
+                  shadowBox(
+                    height: 300,
+                    width: screenWidth!,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: SfCircularChart(
+                        title: ChartTitle(text: 'Gender Ratio'),
+                        legend: Legend(isVisible: true),
+                        series: genderRatioSeries(),
+                      ),
+                    ),
+                  ),
+                  addVerticalSpace(20),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -253,15 +328,17 @@ class _DataAnalysisState extends State<DataAnalysis> {
         minimum: xmin,
         maximum: xmax,
         interval: xint,
-        axisLine: const AxisLine(width: 0),
-        majorTickLines: const MajorTickLines(color: Colors.transparent),
+        axisLine: const AxisLine(width: 1),
+        majorTickLines: const MajorTickLines(),
         majorGridLines: const MajorGridLines(width: 0),
       ),
       primaryYAxis: NumericAxis(
+        title: AxisTitle(text: "Number of Users"),
         minimum: ymin,
         interval: yint,
-        axisLine: const AxisLine(width: 0),
-        majorTickLines: const MajorTickLines(color: Colors.transparent),
+        axisLine: const AxisLine(width: 1),
+        majorTickLines: const MajorTickLines(),
+        majorGridLines: const MajorGridLines(width: 1.5),
       ),
       tooltipBehavior: TooltipBehavior(
           enable: true,
